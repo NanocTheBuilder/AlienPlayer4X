@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/move_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="Move: 1"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tactics_text"
+        app:layout_constraintEnd_toStartOf="@+id/attack_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/attack_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attack : 0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/fighters_text"
+        app:layout_constraintEnd_toStartOf="@+id/defense_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/move_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/defense_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Defense: 0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/point_defense_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/attack_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tactics_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tactics: 0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/mine_sweep_text"
+        app:layout_constraintEnd_toStartOf="@+id/fighters_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/move_text" />
+
+    <TextView
+        android:id="@+id/fighters_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fighters: 0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cloaking_text"
+        app:layout_constraintEnd_toStartOf="@+id/point_defense_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tactics_text"
+        app:layout_constraintTop_toBottomOf="@+id/attack_text" />
+
+    <TextView
+        android:id="@+id/point_defense_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Point Defense: 0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/scanner_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fighters_text"
+        app:layout_constraintTop_toBottomOf="@+id/defense_text" />
+
+    <TextView
+        android:id="@+id/mine_sweep_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mine Sweep: 0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/fleets_text"
+        app:layout_constraintEnd_toStartOf="@+id/cloaking_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tactics_text" />
+
+    <TextView
+        android:id="@+id/cloaking_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cloaking: 0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/fleets_text"
+        app:layout_constraintEnd_toStartOf="@+id/scanner_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mine_sweep_text"
+        app:layout_constraintTop_toBottomOf="@+id/fighters_text" />
+
+    <TextView
+        android:id="@+id/scanner_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scanners: 0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/fleets_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cloaking_text"
+        app:layout_constraintTop_toBottomOf="@+id/point_defense_text" />
+
+    <TextView
+        android:id="@+id/fleets_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[]"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cloaking_text" />
+</android.support.constraint.ConstraintLayout>

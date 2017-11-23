@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="PlayerView">
+        <attr name="the_text" format="string" />
+        <attr name="android:ems" />
+    </declare-styleable>
+</resources>
