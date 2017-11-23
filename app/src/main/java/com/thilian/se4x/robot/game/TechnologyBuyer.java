@@ -1,5 +1,7 @@
 package com.thilian.se4x.robot.game;
 
+import android.util.Log;
+
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
@@ -162,6 +164,7 @@ public class TechnologyBuyer {
 			int cost = technology.getCost(nextLevel);
 			ap.setLevel(technology, nextLevel);
 			ap.getEconomicSheet().techCP -= cost;
+			Log.d(this.getClass().toString(), String.format("[%s] new tech %s %d (%d CP)", ap.getColor(), technology, nextLevel, cost));
 		}
 	}
 

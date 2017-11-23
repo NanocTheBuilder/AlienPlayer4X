@@ -12,29 +12,37 @@
         android:layout_height="wrap_content"
         android:text="@string/buildDefense"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/fleets"
+        app:layout_constraintBottom_toTopOf="@+id/scroll_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
     />
 
-    <LinearLayout
-        android:id="@+id/fleets"
+    <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/close_fleets_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/build_defense_button"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/build_defense_button">
+
+        <LinearLayout
+            android:id="@+id/fleets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/close_fleets_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@android:string/ok"
-        app:layout_constraintTop_toBottomOf="@+id/fleets"
+        app:layout_constraintTop_toBottomOf="@+id/scroll_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
