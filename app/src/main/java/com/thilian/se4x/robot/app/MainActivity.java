@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setButtonText(SE4XApplication app, Button econButton) {
         econButton.setText(getString(R.string.econPhase, app.getGame().currentTurn));
-        if(app.getGame().currentTurn >= 20)
+        if(app.getGame().currentTurn > 20)
             econButton.setEnabled(false);
     }
 
