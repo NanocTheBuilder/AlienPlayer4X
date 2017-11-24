@@ -3,10 +3,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_main">MainActivity</string>
-    <string name="econPhase">Economy Phase (Turn %d)</string>
+    <string name="econPhase">Economic Phase %d</string>
     <string name="buildDefense">Build Defense Fleet</string>
     <string name="newFleets">New Fleets</string>
     <string name="areYouSure">Are You Sure?</string>
+    <string name="gameOver">...</string>
 
     <string name="REGULAR_FLEET">Regular Fleet %s</string>
     <string name="RAIDER_FLEET">Raider Fleet %s</string>

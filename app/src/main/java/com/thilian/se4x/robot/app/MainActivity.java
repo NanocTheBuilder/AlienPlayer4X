@@ -2,7 +2,6 @@ package com.thilian.se4x.robot.app;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         final Button econButton = (Button) findViewById(R.id.econPhase);
-        setButtonText(app, econButton);
+        econButton.setText(getString(R.string.econPhase, app.getGame().currentTurn));
         econButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +53,12 @@ public class MainActivity extends AppCompatActivity {
                         ((PlayerView) players.getChildAt(i)).update();
                     }
                 }
-                setButtonText(app, econButton);
+                if(app.getGame().currentTurn  <= 20)
+                    econButton.setText(getString(R.string.econPhase, app.getGame().currentTurn));
+                else {
+                    econButton.setText(getString(R.string.gameOver));
+                    econButton.setEnabled(false);
+                }
             }});
 
         Button setSeenLevelButton = findViewById(R.id.set_seen_levels_button);
@@ -67,12 +71,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    private void setButtonText(SE4XApplication app, Button econButton) {
-        econButton.setText(getString(R.string.econPhase, app.getGame().currentTurn));
-        if(app.getGame().currentTurn > 20)
-            econButton.setEnabled(false);
-    }
 
     @Override
     protected void onResume() {
