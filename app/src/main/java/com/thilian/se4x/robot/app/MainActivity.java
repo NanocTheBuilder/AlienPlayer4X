@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         final SE4XApplication app = (SE4XApplication) getApplication();
         for (int i = 0; i < app.getGame().aliens.size(); i++) {
             AlienPlayer ap = app.getGame().aliens.get(i);
-            PlayerView playerView = new PlayerView(this, ap);
+            PlayerView playerView = new PlayerView(this, app.getGame(), ap);
             final int finalI = i;
             playerView.setOnClickListener(new View.OnClickListener() {
                 @Override

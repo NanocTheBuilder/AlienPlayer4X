@@ -1,5 +1,6 @@
 package com.thilian.se4x.robot.game;
 
+import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -62,25 +63,25 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 
 	@Test
 	public void buyOptionalScan() {
-		ap.setSeenLevel(Technology.CLOAKING, 1);
+		ap.setSeenLevel(CLOAKING, 1);
 		roller.mockRoll(4);
 		assertBuyScanner(1);
 		assertDontBuyScanner(2);
 		
-		ap.setSeenLevel(Technology.CLOAKING, 2);
+		ap.setSeenLevel(CLOAKING, 2);
 		roller.mockRoll(5);
 		assertDontBuyScanner(2);
 		
 		roller.mockRoll(4);
 		assertBuyScanner(2);
 		
-		ap.setSeenLevel(Technology.CLOAKING, 2);
+		ap.setSeenLevel(CLOAKING, 2);
 		ap.setLevel(Technology.SCANNER, 0);
 		roller.mockRoll(4);
 		assertOptionalBuy(
 				Technology.SCANNER, 
 				2, 
-				100 - Technology.SCANNER.getCost(1) - Technology.SCANNER.getCost(2),
+				60,
 				new BuyAction(){
 					@Override
 					void buy(AlienPlayer ap) {
@@ -188,14 +189,14 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		fleet.setFleetType(FleetType.RAIDER_FLEET);;
 		assertDontBuyCloaking(1);
 		
-		ap.setLevel(Technology.CLOAKING, 1);
+		ap.setLevel(CLOAKING, 1);
 		roller.mockRoll(7);
 		assertDontBuyCloaking(2);
 		
 		roller.mockRoll(6);
 		assertBuyCloaking(2);
 
-		ap.setLevel(Technology.CLOAKING, 1);
+		ap.setLevel(CLOAKING, 1);
 		fleet.setFleetType(FleetType.REGULAR_FLEET);
 		assertDontBuyCloaking(2);
 	}
@@ -203,14 +204,14 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 	private void assertBuyCloaking(int expectedLevel) {
 		sheet.techCP = 100;
 		game.techBuyer.buyCloakingIfNeeded(fleet);
-		assertLevel(Technology.CLOAKING, expectedLevel);
-		assertEquals(100 - Technology.CLOAKING.getCost(expectedLevel), sheet.techCP);
+		assertLevel(CLOAKING, expectedLevel);
+		assertEquals(100 - game.technologyPrices.getCost(CLOAKING, expectedLevel), sheet.techCP);
 	}
 	
 	private void assertDontBuyCloaking(int expectedLevel) {
 		sheet.techCP = 100;
 		game.techBuyer.buyCloakingIfNeeded(fleet);
-		assertLevel(Technology.CLOAKING, expectedLevel - 1);
+		assertLevel(CLOAKING, expectedLevel - 1);
 		assertEquals(100, sheet.techCP);
 	}
 
@@ -218,7 +219,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		assertOptionalBuy(
 				technology, 
 				expectedLevel, 
-				100 - technology.getCost(expectedLevel),
+				100 -  game.technologyPrices.getCost(technology, expectedLevel),
 				buyAction);
 	}
 

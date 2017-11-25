@@ -30,7 +30,7 @@ public class TechnologyPurchaseBase {
 		game.resetSeenLevels();
 		ap = new AlienPlayer(sheet, game, null);
 		for(Technology t : Technology.values()){
-			assertLevel(t, t.getStartingLevel());
+			assertLevel(t, game.technologyPrices.getStartingLevel(t));
 		}
 		buildFleet();
 	}

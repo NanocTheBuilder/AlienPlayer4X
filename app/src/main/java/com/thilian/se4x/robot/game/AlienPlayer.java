@@ -23,19 +23,17 @@ public class AlienPlayer {
 	private PlayerColor color;
 	private Map<Technology, Integer> technologyLevels = new HashMap<>();
 
-	{
-		for (Technology technology : Technology.values()) {
-			int startingLevel = technology.getStartingLevel();
-			technologyLevels.put(technology, startingLevel);
-		}
-	}
-
 	private boolean purchasedCloakThisTurn = false;
 
 	public AlienPlayer(AlienEconomicSheet sheet, Game game, PlayerColor color) {
 		this.economicSheet = sheet;
 		this.game = game;
 		this.color = color;
+
+		for (Technology technology : Technology.values()) {
+			int startingLevel = game.technologyPrices.getStartingLevel(technology);
+			technologyLevels.put(technology, startingLevel);
+		}
 	}
 
 	public AlienEconomicSheet getEconomicSheet() {
@@ -45,12 +43,9 @@ public class AlienPlayer {
 	public Fleet makeEconRoll(int turn) {
 		for (int i = 0; i < economicSheet.getEconRolls(turn) + economicSheet.getExtraEcon(turn); i++)
 			economicSheet.applyRoll(turn, game.roller.roll());
-		Log.d(this.getClass().toString(), String.format("[%s] econRoll fleetCP: %d, techCP: %d, defenseCP: %d", getColor(), economicSheet.fleetCP, economicSheet.techCP, economicSheet.defCP));
 		Fleet fleet = rollFleetLaunch(turn);
 		if (fleet != null){
-			Log.d(this.getClass().toString(),String.format("[%s] new fleet %s, %d CP", getColor(), fleet.getFleetType(), fleet.getFleetCP()));
 			buyNextMoveLevel();
-			Log.d(this.getClass().toString(),String.format("[%s] after new fleetCP: %d, techCP: %d, defenseCP: %d", getColor(), economicSheet.fleetCP, economicSheet.techCP, economicSheet.defCP));
 		}
 	return fleet;
 	}
@@ -58,14 +53,12 @@ public class AlienPlayer {
 	void buyTechs(Fleet fleet) {
 		setJustPurchasedCloaking(false);
 		game.techBuyer.buyTechs(fleet);
-		Log.d(this.getClass().toString(),String.format("[%s] after buy techs fleetCP: %d, techCP: %d, defenseCP: %d", getColor(), economicSheet.fleetCP, economicSheet.techCP, economicSheet.defCP));
 	}
 
 	public void buildFleet(Fleet fleet) {
 		buyTechs(fleet);
 		game.fleetBuilder.buildFleet(fleet);
 		economicSheet.fleetCP += fleet.getFleetCP() - fleet.getBuildCost();
-		Log.d(this.getClass().toString(),String.format("[%s] after build fleet fleetCP: %d, techCP: %d, defenseCP: %d", getColor(), economicSheet.fleetCP, economicSheet.techCP, economicSheet.defCP));
 	}
 
 	public void destroyFleet(Fleet fleet) {
@@ -107,7 +100,6 @@ public class AlienPlayer {
 			economicSheet.defCP -= fleet.getBuildCost();
 			newFleets.add(fleet);
 		}
-		Log.d(this.getClass().toString(), String.format("[%s] after build defense fleetCP: %d, techCP: %d, defenseCP: %d", getColor(), economicSheet.fleetCP, economicSheet.techCP, economicSheet.defCP));
 		return newFleets;
 	}
 

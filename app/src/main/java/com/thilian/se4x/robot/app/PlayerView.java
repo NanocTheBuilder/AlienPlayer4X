@@ -8,17 +8,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
+import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 /**
  * TODO: document your custom view class.
  */
 public class PlayerView extends LinearLayout {
+    private Game game;
     private AlienPlayer alienPlayer;
     private ViewGroup layout;
 
-    public PlayerView(Context context, AlienPlayer alienPlayer) {
+    public PlayerView(Context context, Game game, AlienPlayer alienPlayer) {
         super(context);
+        this.game = game;
         this.alienPlayer = alienPlayer;
 
         String service = Context.LAYOUT_INFLATER_SERVICE;
@@ -39,7 +42,7 @@ public class PlayerView extends LinearLayout {
                 sid = getResources().getIdentifier(technology.toString(), "string", getContext().getPackageName());
                 int level = alienPlayer.getLevel(technology);
                 textView.setText(getResources().getString(sid, level));
-                if(level != technology.getStartingLevel()){
+                if(level != game.technologyPrices.getStartingLevel(technology)){
                     textView.setTypeface(textView.getTypeface(), 1);
                 }
             }
