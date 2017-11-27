@@ -1,5 +1,5 @@
 <resources>
-    <declare-styleable name="PlayerView">
+    <declare-styleable name="PlayerFragment">
         <attr name="the_text" format="string" />
         <attr name="android:ems" />
     </declare-styleable>

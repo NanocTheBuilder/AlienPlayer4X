@@ -1,10 +1,8 @@
 package com.thilian.se4x.robot.app;
 
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,14 +13,13 @@ import com.thilian.se4x.robot.game.Fleet;
 
 import java.util.List;
 
-public class FleetsActivity extends AppCompatActivity {
+public class FleetsActivity extends Activity implements FleetView.FleetBuildListener{
     private AlienPlayer alienPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fleets);
-
 
         Button okButton = findViewById(R.id.close_fleets_button);
         okButton.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +36,7 @@ public class FleetsActivity extends AppCompatActivity {
                 buildDefenseButtonClicked();
             }
         });
+
     }
 
     @Override
@@ -49,11 +47,15 @@ public class FleetsActivity extends AppCompatActivity {
         SE4XApplication app = (SE4XApplication) this.getApplication();
         alienPlayer = app.getGame().aliens.get(index);
 
+        PlayerFragment playerFragment = (PlayerFragment) getFragmentManager().findFragmentById(R.id.player_fragment);
+        playerFragment.setAlienPlayer(alienPlayer);
+        playerFragment.setGame(app.getGame());
+
         LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
         fleets.setBackgroundColor(Color.parseColor(alienPlayer.getColor().toString()));
         fleets.removeAllViews();
         for(Fleet fleet : alienPlayer.getFleets()){
-            fleets.addView(new FleetView(this, fleet));
+            fleets.addView(new FleetView(this, fleet, this));
         }
     }
 
@@ -64,9 +66,17 @@ public class FleetsActivity extends AppCompatActivity {
             SE4XApplication app = (SE4XApplication) this.getApplication();
             app.showNewFleets(this, newFleets);
             for (Fleet fleet : newFleets) {
-                fleets.addView(new FleetView(this, fleet));
+                fleets.addView(new FleetView(this, fleet, this));
             }
         }
+
+        PlayerFragment playerFragment = (PlayerFragment) getFragmentManager().findFragmentById(R.id.player_fragment);
+        playerFragment.update();
     }
 
+    @Override
+    public void fleetBuilt(Fleet fleet) {
+        PlayerFragment playerFragment = (PlayerFragment) getFragmentManager().findFragmentById(R.id.player_fragment);
+        playerFragment.update();
+    }
 }

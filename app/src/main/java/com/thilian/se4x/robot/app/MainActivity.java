@@ -21,22 +21,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState != null) {
+            return;
+        }
+
         LinearLayout players = (LinearLayout) findViewById(R.id.players);
 
         final SE4XApplication app = (SE4XApplication) getApplication();
         for (int i = 0; i < app.getGame().aliens.size(); i++) {
             AlienPlayer ap = app.getGame().aliens.get(i);
-            PlayerView playerView = new PlayerView(this, app.getGame(), ap);
-            final int finalI = i;
-            playerView.setOnClickListener(new View.OnClickListener() {
+            PlayerFragment playerFragment = new PlayerFragment();
+            playerFragment.setAlienPlayer(ap);
+            playerFragment.setGame(app.getGame());
+            final int playerIndex = i;
+            playerFragment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, FleetsActivity.class);
-                    intent.putExtra(Intent.EXTRA_INDEX, finalI);
+                    intent.putExtra(Intent.EXTRA_INDEX, playerIndex);
                     startActivity(intent);
                 }
             });
-            players.addView(playerView);
+            getFragmentManager().beginTransaction().add(R.id.players, playerFragment, String.valueOf(playerIndex)).commit();
         }
 
         final Button econButton = (Button) findViewById(R.id.econPhase);
@@ -50,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     app.showNewFleets(MainActivity.this, newFleets);
                     LinearLayout players = (LinearLayout) findViewById(R.id.players);
                     for (int i = 0; i < players.getChildCount(); i++) {
-                        ((PlayerView) players.getChildAt(i)).update();
+                        ((PlayerFragment) getFragmentManager().findFragmentByTag(String.valueOf(i))).update();
                     }
                 }
                 if(app.getGame().currentTurn  <= 20)
@@ -76,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         LinearLayout players = (LinearLayout) findViewById(R.id.players);
-        PlayerView view;
+        PlayerFragment view;
         for(int i = 0; i < players.getChildCount(); i++){
-            view = (PlayerView) players.getChildAt(i);
+            view = (PlayerFragment) getFragmentManager().findFragmentByTag(String.valueOf(i));
             view.update();
         }
     }

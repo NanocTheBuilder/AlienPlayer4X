@@ -26,10 +26,12 @@ import com.thilian.se4x.robot.game.Group;
 public class FleetView extends RelativeLayout{
 
     private Fleet fleet;
+    private FleetBuildListener fleetBuildListener;
 
-    public FleetView(final Context context, final Fleet fleet){
+    public FleetView(final FleetsActivity context, final Fleet fleet, final FleetBuildListener fleetBuildListener){
         super(context);
         this.fleet = fleet;
+        this.fleetBuildListener = fleetBuildListener;
 
         String service = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(service);
@@ -41,6 +43,7 @@ public class FleetView extends RelativeLayout{
             public void onClick(View view) {
                 fleet.getAp().buildFleet(fleet);
                 update();
+                fleetBuildListener.fleetBuilt(fleet);
             }
         });
 
@@ -76,5 +79,9 @@ public class FleetView extends RelativeLayout{
 
         Button removeFleetButton = findViewById(R.id.remove_fleet_button);
         removeFleetButton.setVisibility(fleet.isBuilt() ? VISIBLE : INVISIBLE);
+    }
+
+    public interface FleetBuildListener{
+        public void fleetBuilt(Fleet fleet);
     }
 }
