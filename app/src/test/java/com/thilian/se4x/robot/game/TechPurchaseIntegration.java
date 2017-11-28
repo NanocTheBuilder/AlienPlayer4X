@@ -9,11 +9,6 @@ import com.thilian.se4x.robot.game.enums.Technology;
 
 public class TechPurchaseIntegration extends TechnologyPurchaseBase{
 
-	@Override
-	protected void buildFleet() {
-		fleet = new Fleet(ap, FleetType.REGULAR_FLEET, -1);
-	}
-	
 	@Test
 	public void integration() {
 		sheet.techCP = 120;
@@ -25,7 +20,7 @@ public class TechPurchaseIntegration extends TechnologyPurchaseBase{
 		roller.mockRoll(10); // no ship shize
 		roller.mockRoll(3); // buys fighter
 		roller.mockRoll(5, 5, 6);
-		ap.buyTechs(fleet);
+		ap.buyTechs(FleetType.REGULAR_FLEET);
 		assertLevel(Technology.DEFENSE, 2);
 		assertLevel(Technology.TACTICS, 1);
 		assertLevel(Technology.CLOAKING, 1);

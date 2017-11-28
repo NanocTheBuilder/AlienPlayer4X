@@ -1,7 +1,5 @@
 package com.thilian.se4x.robot.game;
 
-import android.util.Log;
-
 import static com.thilian.se4x.robot.game.enums.FleetType.DEFENSE_FLEET;
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.Technology.*;
@@ -42,22 +40,20 @@ public class TechnologyBuyer {
 		this.game = game;
 	}
 
-	public void buyTechs(Fleet fleet) {
-		AlienPlayer ap = fleet.getAp();
+	public void buyTechs(AlienPlayer ap, FleetType fleetType) {
 		buyPointDefenseIfNeeded(ap);
 		buyMineSweepIfNeeded(ap);
 		buyScannerIfNeeded(ap);
 		buyShipSizeIfRolled(ap);
 		buyFightersIfNeeded(ap);
-		buyCloakingIfNeeded(fleet);
+		buyCloakingIfNeeded(ap, fleetType);
 
-		spendRemainingTechCP(fleet);
+		spendRemainingTechCP(ap, fleetType);
 	}
 
-	void spendRemainingTechCP(Fleet fleet) {
-		AlienPlayer ap = fleet.getAp();
+	void spendRemainingTechCP(AlienPlayer ap, FleetType fleetType) {
 		while (true) {
-			List<Integer> buyable = findBuyableTechs(fleet);
+			List<Integer> buyable = findBuyableTechs(ap, fleetType);
 			if(buyable.isEmpty())
 				break;
 			int roll = game.roller.roll(buyable.size());
@@ -98,10 +94,10 @@ public class TechnologyBuyer {
 		}
 	}
 
-	private List<Integer> findBuyableTechs(Fleet fleet) {
+	private List<Integer> findBuyableTechs(AlienPlayer ap, FleetType fleetType) {
 		List<Integer> buyable = new ArrayList<>();
 		for (Technology technology : TECHNOLOGY_ROLL_TABLE.keySet()) {
-			if (canBuyNextLevel(fleet, technology)) {
+			if (canBuyNextLevel(ap, fleetType, technology)) {
 				buyable.addAll(Arrays.asList(TECHNOLOGY_ROLL_TABLE.get(technology)));
 			}
 		}
@@ -109,9 +105,8 @@ public class TechnologyBuyer {
 		return buyable;
 	}
 
-	void buyCloakingIfNeeded(Fleet fleet) {
-		AlienPlayer ap = fleet.getAp();
-		if (fleet.getFleetType().equals(RAIDER_FLEET) && ap.getLevel(CLOAKING) != 0) {
+	void buyCloakingIfNeeded(AlienPlayer ap, FleetType fleetType) {
+		if (fleetType.equals(RAIDER_FLEET) && ap.getLevel(CLOAKING) != 0) {
 			if (game.roller.roll() <= 6)
 				buyNextLevel(ap, CLOAKING);
 		}
@@ -177,10 +172,10 @@ public class TechnologyBuyer {
 				&& ap.getEconomicSheet().techCP >= game.technologyPrices.getCost(technology,currentLevel + 1);
 	}
 
-	boolean canBuyNextLevel(Fleet fleet, Technology technology) {
-		if(fleet.getFleetType().equals(DEFENSE_FLEET) && technology.equals(MINE_SWEEP))
+	boolean canBuyNextLevel(AlienPlayer ap, FleetType fleetType, Technology technology) {
+		if(fleetType.equals(DEFENSE_FLEET) && technology.equals(MINE_SWEEP))
 			return false;
 		else
-			return canBuyNextLevel(fleet.getAp(), technology);
+			return canBuyNextLevel(ap, technology);
 	}
 }
