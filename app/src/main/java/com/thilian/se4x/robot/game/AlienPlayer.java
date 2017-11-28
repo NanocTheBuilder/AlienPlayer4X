@@ -97,6 +97,9 @@ public class AlienPlayer {
 
 		if (economicSheet.defCP >= ShipType.MINE.getCost()) {
 			Fleet fleet = game.defenseBuilder.buildDefense(this);
+			if(newFleets.isEmpty()){
+				buyTechs(fleet); //TODO unitTest this
+			}
 			economicSheet.defCP -= fleet.getBuildCost();
 			newFleets.add(fleet);
 		}
