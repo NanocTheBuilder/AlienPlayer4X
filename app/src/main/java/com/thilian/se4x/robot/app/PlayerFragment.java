@@ -1,68 +1,51 @@
 package com.thilian.se4x.robot.app;
 
-import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
-import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 /**
  * TODO: document your custom view class.
  */
-public class PlayerFragment extends Fragment {
-    private Game game;
+public class PlayerView extends LinearLayout {
     private AlienPlayer alienPlayer;
-    private View.OnClickListener onClickListener;
+    private ViewGroup layout;
 
-    public void setGame(Game game){
-        this.game = game;
-    }
-
-    public void setAlienPlayer(AlienPlayer alienPlayer){
+    public PlayerView(Context context, AlienPlayer alienPlayer) {
+        super(context);
         this.alienPlayer = alienPlayer;
-    }
 
-    public void setOnClickListener(View.OnClickListener onClickListener){
-        this.onClickListener = onClickListener;
-    }
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.player_layout, container, false);
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        getView().setBackgroundColor(Color.parseColor(alienPlayer.getColor().toString()));
-        if(onClickListener != null)
-            getView().setOnClickListener(onClickListener);
+        String service = Context.LAYOUT_INFLATER_SERVICE;
+        LayoutInflater li = (LayoutInflater) getContext().getSystemService(service);
+        layout = (ViewGroup) li.inflate(R.layout.player_layout, this, true);
+        layout.setBackgroundColor(Color.parseColor(alienPlayer.getColor().toString()));
         update();
     }
+
 
     public void update(){
         TextView textView;
         int id,sid;
         for(Technology technology : Technology.values()){
-            id = getResources().getIdentifier(technology.toString().toLowerCase() + "_text", "id", getActivity().getPackageName());
+            id = getResources().getIdentifier(technology.toString().toLowerCase() + "_text", "id", getContext().getPackageName());
             if(id != 0){
-                textView = getView().findViewById(id);
-                sid = getResources().getIdentifier(technology.toString(), "string", getActivity().getPackageName());
+                textView = layout.findViewById(id);
+                sid = getResources().getIdentifier(technology.toString(), "string", getContext().getPackageName());
                 int level = alienPlayer.getLevel(technology);
                 textView.setText(getResources().getString(sid, level));
-                if(level != game.technologyPrices.getStartingLevel(technology)){
+                if(level != technology.getStartingLevel()){
                     textView.setTypeface(textView.getTypeface(), 1);
                 }
             }
         }
 
-        TextView fleets = getView().findViewById(R.id.fleets_text);
+        TextView fleets = layout.findViewById(R.id.fleets_text);
         fleets.setText(String.format("%d fleets.", alienPlayer.getFleets().size()));
     }
 }

@@ -11,7 +11,6 @@ import com.thilian.se4x.robot.game.enums.Technology;
 
 public class Game {
 	public DiceRoller roller;
-	public TechnologyPrices technologyPrices = new TechnologyPrices();
 	public FleetBuilder fleetBuilder = new FleetBuilder(this);
 	public TechnologyBuyer techBuyer = new TechnologyBuyer(this);
 	public DefenseBuilder defenseBuilder = new DefenseBuilder(this);
@@ -33,7 +32,7 @@ public class Game {
 	protected void resetSeenLevels() {
 		seenLevels = new HashMap<>();
 		for (Technology technology : Technology.values()) {
-			int startingLevel = technologyPrices.getStartingLevel(technology);
+			int startingLevel = technology.getStartingLevel();
 			seenLevels.put(technology, startingLevel);
 		}
 	}

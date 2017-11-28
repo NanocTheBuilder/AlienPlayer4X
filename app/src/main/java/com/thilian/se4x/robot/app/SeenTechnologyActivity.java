@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.thilian.se4x.robot.game.TechnologyPrices;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 import java.util.ArrayList;
@@ -72,11 +71,9 @@ public class SeenTechnologyActivity extends AppCompatActivity {
     }
 
     private void createAdapter(int id, Technology technology) {
-        final SE4XApplication app = (SE4XApplication) this.getApplication();
-        TechnologyPrices technologyPrices = app.getGame().technologyPrices;
         Spinner spinner = (Spinner) findViewById(id);
         List<Integer> values = new ArrayList<>();
-        for(int i = 0; i <= technologyPrices.getMaxLevel(technology); i++)
+        for(int i = 0; i <= technology.getMaxLevel(); i++)
             values.add(i);
         spinner.setAdapter(new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, values.toArray(new Integer[values.size()])));
     }
