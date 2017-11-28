@@ -186,29 +186,31 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 	
 	@Test
 	public void buyOptionalCloak() {
-		assertDontBuyCloaking(FleetType.RAIDER_FLEET, 1);
+		fleet.setFleetType(FleetType.RAIDER_FLEET);;
+		assertDontBuyCloaking(1);
 		
 		ap.setLevel(CLOAKING, 1);
 		roller.mockRoll(7);
-		assertDontBuyCloaking(FleetType.RAIDER_FLEET, 2);
+		assertDontBuyCloaking(2);
 		
 		roller.mockRoll(6);
-		assertBuyCloaking(FleetType.RAIDER_FLEET, 2);
+		assertBuyCloaking(2);
 
 		ap.setLevel(CLOAKING, 1);
-		assertDontBuyCloaking(FleetType.REGULAR_FLEET, 2);
+		fleet.setFleetType(FleetType.REGULAR_FLEET);
+		assertDontBuyCloaking(2);
 	}
 
-	private void assertBuyCloaking(FleetType fleetType, int expectedLevel) {
+	private void assertBuyCloaking(int expectedLevel) {
 		sheet.techCP = 100;
-		game.techBuyer.buyCloakingIfNeeded(ap, fleetType);
+		game.techBuyer.buyCloakingIfNeeded(fleet);
 		assertLevel(CLOAKING, expectedLevel);
 		assertEquals(100 - game.technologyPrices.getCost(CLOAKING, expectedLevel), sheet.techCP);
 	}
 	
-	private void assertDontBuyCloaking(FleetType fleetType, int expectedLevel) {
+	private void assertDontBuyCloaking(int expectedLevel) {
 		sheet.techCP = 100;
-		game.techBuyer.buyCloakingIfNeeded(ap, fleetType);
+		game.techBuyer.buyCloakingIfNeeded(fleet);
 		assertLevel(CLOAKING, expectedLevel - 1);
 		assertEquals(100, sheet.techCP);
 	}

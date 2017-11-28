@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 
 import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class TechnologyPurchaseBase {
@@ -14,6 +15,7 @@ public class TechnologyPurchaseBase {
 	protected Game game;
 	protected MockRoller roller;
 	protected AlienPlayer ap;
+	protected Fleet fleet;
 
 	public TechnologyPurchaseBase() {
 		super();
@@ -30,6 +32,11 @@ public class TechnologyPurchaseBase {
 		for(Technology t : Technology.values()){
 			assertLevel(t, game.technologyPrices.getStartingLevel(t));
 		}
+		buildFleet();
+	}
+
+	protected void buildFleet() {
+		fleet = new Fleet(ap, FleetType.REGULAR_FLEET, -1);
 	}
 
 	@After

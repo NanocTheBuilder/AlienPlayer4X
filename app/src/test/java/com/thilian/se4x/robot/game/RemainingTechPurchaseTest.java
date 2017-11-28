@@ -118,8 +118,9 @@ public class RemainingTechPurchaseTest extends TechnologyPurchaseBase {
 	@Test
 	public void dontBuyMineSweepForDefenseFleet() {
 		sheet.techCP = 100;
-		assertEquals(true, game.techBuyer.canBuyNextLevel(ap, FleetType.REGULAR_FLEET, Technology.MINE_SWEEP));
-		assertEquals(false, game.techBuyer.canBuyNextLevel(ap, FleetType.DEFENSE_FLEET, Technology.MINE_SWEEP));
+		assertEquals(true, game.techBuyer.canBuyNextLevel(fleet, Technology.MINE_SWEEP));
+		fleet.setFleetType(FleetType.DEFENSE_FLEET);
+		assertEquals(false, game.techBuyer.canBuyNextLevel(fleet, Technology.MINE_SWEEP));
 	}
 	
 	private void assertBuysRemaining(Technology technology, int rollNeeded) {
@@ -146,7 +147,7 @@ public class RemainingTechPurchaseTest extends TechnologyPurchaseBase {
 	}
 
 	private void buyTech() {
-		game.techBuyer.spendRemainingTechCP(ap, FleetType.REGULAR_FLEET);
+		game.techBuyer.spendRemainingTechCP(fleet);
 	}
 
 }
