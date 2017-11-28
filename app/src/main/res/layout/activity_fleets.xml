@@ -6,12 +6,22 @@
     android:layout_height="match_parent"
     tools:context="com.thilian.se4x.robot.app.FleetsActivity">
 
+    <com.thilian.se4x.robot.app.PlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/build_defense_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/build_defense_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/buildDefense"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player_view"
         app:layout_constraintBottom_toTopOf="@+id/scroll_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

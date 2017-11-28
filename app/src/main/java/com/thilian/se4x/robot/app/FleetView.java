@@ -1,17 +1,8 @@
 package com.thilian.se4x.robot.app;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,10 +17,12 @@ import com.thilian.se4x.robot.game.Group;
 public class FleetView extends RelativeLayout{
 
     private Fleet fleet;
+    private FleetRevealListener fleetRevealListener;
 
-    public FleetView(final Context context, final Fleet fleet){
+    public FleetView(final Context context, final Fleet fleet, final FleetRevealListener fleetRevealListener){
         super(context);
         this.fleet = fleet;
+        this.fleetRevealListener = fleetRevealListener;
 
         String service = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(service);
@@ -41,6 +34,7 @@ public class FleetView extends RelativeLayout{
             public void onClick(View view) {
                 fleet.getAp().buildFleet(fleet);
                 update();
+                fleetRevealListener.onFleetRevealed(fleet);
             }
         });
 
@@ -76,5 +70,9 @@ public class FleetView extends RelativeLayout{
 
         Button removeFleetButton = findViewById(R.id.remove_fleet_button);
         removeFleetButton.setVisibility(fleet.isBuilt() ? VISIBLE : INVISIBLE);
+    }
+
+    public interface FleetRevealListener{
+        public void onFleetRevealed(Fleet fleet);
     }
 }

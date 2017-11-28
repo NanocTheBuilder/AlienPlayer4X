@@ -1,9 +1,9 @@
 package com.thilian.se4x.robot.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;

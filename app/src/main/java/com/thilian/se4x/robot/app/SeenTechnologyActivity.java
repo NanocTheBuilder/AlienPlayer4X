@@ -1,6 +1,6 @@
 package com.thilian.se4x.robot.app;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,7 +13,7 @@ import com.thilian.se4x.robot.game.enums.Technology;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeenTechnologyActivity extends AppCompatActivity {
+public class SeenTechnologyActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
