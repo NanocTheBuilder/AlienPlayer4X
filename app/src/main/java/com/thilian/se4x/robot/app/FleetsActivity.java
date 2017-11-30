@@ -69,6 +69,7 @@ public class FleetsActivity extends Activity implements FleetView.FleetRevealLis
             for (Fleet fleet : newFleets) {
                 fleets.addView(new FleetView(this, fleet, this));
             }
+            onFleetRevealed(null);
         }
     }
 

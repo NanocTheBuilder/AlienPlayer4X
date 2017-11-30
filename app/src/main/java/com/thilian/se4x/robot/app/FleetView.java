@@ -46,6 +46,7 @@ public class FleetView extends RelativeLayout{
                 FleetsActivity activity = (FleetsActivity) getContext();
                 LinearLayout layout = activity.findViewById(R.id.fleets);
                 layout.removeView(FleetView.this);
+                fleetRevealListener.onFleetRevealed(null);
             }
         });
 
