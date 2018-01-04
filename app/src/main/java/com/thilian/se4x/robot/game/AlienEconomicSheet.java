@@ -37,9 +37,9 @@ public class AlienEconomicSheet {
 	private static int[] fleetLaunch = new int[] {-99, -99, 10, 10, 5, 3, 4, 4, 4, 5, 5, 3, 3, 3, 10, 3, 10, 3, 10, 3, 10}; 
 	
 	private Difficulty difficulty;
-	int fleetCP = 0;
-	int techCP = 0;
-	int defCP = 0;
+	private int fleetCP = 0;
+	private int techCP = 0;
+	private int defCP = 0;
 	int[] extraEcon = new int[21];
 
 	public AlienEconomicSheet(Difficulty difficulty) {
@@ -75,8 +75,33 @@ public class AlienEconomicSheet {
 		fleetCP -= ammount;
 	}
 
+	public void addFleetCP(int ammount) {fleetCP += ammount;}
+
+	public void spendTechCP(int ammount) { techCP -= ammount; }
+
+	public void spendDefCP(int ammount) { defCP -= ammount; }
+
 	public int getTechCP(){
 		return techCP;
 	}
 
+	public int getDefCP() {
+		return defCP;
+	}
+
+	public int getFleetCP() {
+		return fleetCP;
+	}
+
+	public void setDefCP(int defCP) {
+		this.defCP = defCP;
+	}
+
+	public void setFleetCP(int fleetCP) {
+		this.fleetCP = fleetCP;
+	}
+
+	public void setTechCP(int techCP) {
+		this.techCP = techCP;
+	}
 }

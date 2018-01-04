@@ -12,7 +12,7 @@ public class DefenseBuilder {
 	}
 
 	public Fleet buildDefense(AlienPlayer ap) {
-		Fleet fleet = new Fleet(ap, FleetType.DEFENSE_FLEET, ap.getEconomicSheet().defCP);
+		Fleet fleet = new Fleet(ap, FleetType.DEFENSE_FLEET, ap.getEconomicSheet().getDefCP());
 		int roll = game.roller.roll();
 		if (roll < 4) {
 			addGroup(fleet, ShipType.MINE);

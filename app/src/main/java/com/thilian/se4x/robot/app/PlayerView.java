@@ -49,7 +49,7 @@ public class PlayerView extends LinearLayout {
     public void update(){
         TextView textView;
         int id,sid;
-        for(Technology technology : Technology.values()){
+        for(Technology technology : game.technologyPrices.getAvailableTechs()){
             id = getResources().getIdentifier(technology.toString().toLowerCase() + "_text", "id", getContext().getPackageName());
             if(id != 0){
                 textView = findViewById(id);

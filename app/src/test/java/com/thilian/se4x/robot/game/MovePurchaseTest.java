@@ -45,19 +45,19 @@ public class MovePurchaseTest {
 	@Test
 	public void dontBuyMoveIfRollFails() {
 		ap.setLevel(Technology.MOVE, 3);
-		sheet.techCP = 10;
+		sheet.setTechCP(10);
 		roller.mockRoll(5);
 		ap.buyNextMoveLevel();
 		assertEquals(3, ap.getLevel(Technology.MOVE));
-		assertEquals(10, sheet.techCP);
+		assertEquals(10, sheet.getTechCP());
 	}
 
 	private void assertMovePuchase(int level, int techCP, int newLevel, int newTechCP) {
 		ap.setLevel(Technology.MOVE, level);
-		sheet.techCP = techCP;
+		sheet.setTechCP(techCP);
 		roller.mockRoll(1);
 		ap.buyNextMoveLevel();
 		assertEquals(newLevel, ap.getLevel(Technology.MOVE));
-		assertEquals(newTechCP, sheet.techCP);
+		assertEquals(newTechCP, sheet.getTechCP());
 	}
 }

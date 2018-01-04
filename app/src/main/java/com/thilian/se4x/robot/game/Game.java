@@ -5,20 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.thilian.se4x.robot.game.basegame.BaseGameTechnologyBuyer;
+import com.thilian.se4x.robot.game.basegame.BaseGameTechnologyPrices;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class Game {
 	public DiceRoller roller;
-	public TechnologyPrices technologyPrices = new TechnologyPrices();
+	public TechnologyPrices technologyPrices = new BaseGameTechnologyPrices();
 	public FleetBuilder fleetBuilder = new FleetBuilder(this);
-	public TechnologyBuyer techBuyer = new TechnologyBuyer(this);
+	public TechnologyBuyer techBuyer = new BaseGameTechnologyBuyer(this);
 	public DefenseBuilder defenseBuilder = new DefenseBuilder(this);
 	public List<AlienPlayer> aliens;
 	public Map<Technology, Integer> seenLevels;
 	public int currentTurn;
-	
+
 	public void createGame(Difficulty difficulty) {
 		aliens = new ArrayList<>();
 		for(int i = 0; i < difficulty.getNumberOfAlienPlayers(); i++) {
@@ -30,9 +32,9 @@ public class Game {
 		currentTurn = 1;
 	}
 
-	protected void resetSeenLevels() {
+	public void resetSeenLevels() {
 		seenLevels = new HashMap<>();
-		for (Technology technology : Technology.values()) {
+		for (Technology technology : technologyPrices.getAvailableTechs()) {
 			int startingLevel = technologyPrices.getStartingLevel(technology);
 			seenLevels.put(technology, startingLevel);
 		}

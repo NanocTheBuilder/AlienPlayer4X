@@ -24,7 +24,7 @@ public class FleetLaunchTest {
 		game.roller = roller;
 		game.resetSeenLevels();
 		sheet = new AlienEconomicSheet(null);
-		sheet.fleetCP = 500;
+		sheet.setFleetCP(500);
 		ap = new AlienPlayer(sheet, game, null);
 		roll = 7;
 		turn = 4;
@@ -39,7 +39,7 @@ public class FleetLaunchTest {
 
 	@Test
 	public void noLaunchUnder6() {
-		sheet.fleetCP = 5;
+		sheet.setFleetCP(5);
 		turn = 2;
 		roll = 1;
 		assertFleetDoesNotLaunch();
@@ -73,12 +73,12 @@ public class FleetLaunchTest {
 	@Test
 	public void testRaiderFleetLaunch() {
 		ap.setLevel(Technology.CLOAKING, 1);
-		sheet.fleetCP = 13;
+		sheet.setFleetCP(13);
 		roller.mockRoll(roll);
 		roller.mockRoll(10); // buy move tech
 		ap.rollFleetLaunch(turn);
 		Fleet fleet = ap.getFleets().get(0);
-		assertEquals(1, sheet.fleetCP);
+		assertEquals(1, sheet.getFleetCP());
 		assertEquals(FleetType.RAIDER_FLEET, fleet.getFleetType());
 		assertEquals(13, fleet.getFleetCP());
 		assertEquals(12, fleet.getBuildCost());
@@ -95,12 +95,12 @@ public class FleetLaunchTest {
 	@Test
 	public void testNoRaiderUnder12() {
 		ap.setLevel(Technology.CLOAKING, 1);
-		sheet.fleetCP = 11;
+		sheet.setFleetCP(11);
 		roller.mockRoll(3);
 		roller.mockRoll(10); // buy move tech
 		ap.rollFleetLaunch(turn);
 		Fleet fleet = ap.getFleets().get(0);
-		assertEquals(0, sheet.fleetCP);
+		assertEquals(0, sheet.getFleetCP());
 		assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
 		assertEquals(11, fleet.getFleetCP());
 		assertEquals(0, fleet.getBuildCost());
@@ -108,21 +108,21 @@ public class FleetLaunchTest {
 	}
 	
 	private void assertFleetLaunches() {
-		int fleetCP = sheet.fleetCP;
+		int fleetCP = sheet.getFleetCP();
 		roller.mockRoll(roll);
 		roller.mockRoll(10); // buy move tech
 		ap.rollFleetLaunch(turn);
-		assertEquals(0, sheet.fleetCP);
+		assertEquals(0, sheet.getFleetCP());
 		assertEquals(fleetCP, ap.getFleets().get(0).getFleetCP());
 		assertEquals(false, ap.getFleets().get(0).isBuilt());
 	}
 
 	private void assertFleetDoesNotLaunch() {
-		int fleetCP = sheet.fleetCP;
+		int fleetCP = sheet.getFleetCP();
 		roller.mockRoll(roll);
 		roller.mockRoll(10); // buy move tech
 		ap.rollFleetLaunch(turn);
-		assertEquals(fleetCP, sheet.fleetCP);
+		assertEquals(fleetCP, sheet.getFleetCP());
 		assertTrue(ap.getFleets().isEmpty());
 	}
 

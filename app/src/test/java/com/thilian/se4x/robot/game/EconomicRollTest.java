@@ -100,7 +100,7 @@ public class EconomicRollTest {
 	private void assertIsFleet(int turn, Difficulty diff, int result) {
 		AlienEconomicSheet sheet = new AlienEconomicSheet(diff);
 		sheet.applyRoll(turn, result);
-		assertEquals(String.format("turn %d roll %d is not Fleet" ,turn, result), diff.getCPPerEcon(), sheet.fleetCP);
+		assertEquals(String.format("turn %d roll %d is not Fleet" ,turn, result), diff.getCPPerEcon(), sheet.getFleetCP());
 	}
 
 	private List<Integer> getTechRange(int turn) {
@@ -110,7 +110,7 @@ public class EconomicRollTest {
 	private void assertIsTech(int turn, Difficulty diff, int result) {
 		AlienEconomicSheet sheet = new AlienEconomicSheet(diff);
 		sheet.applyRoll(turn, result);
-		assertEquals(diff.getCPPerEcon(), sheet.techCP);
+		assertEquals(diff.getCPPerEcon(), sheet.getTechCP());
 	}
 
 	private List<Integer> getDefRange(int turn) {
@@ -120,7 +120,7 @@ public class EconomicRollTest {
 	private void assertIsDef(int turn, Difficulty diff, int result) {
 		AlienEconomicSheet sheet = new AlienEconomicSheet(diff);
 		sheet.applyRoll(turn, result);
-		assertEquals(2 * diff.getCPPerEcon(), sheet.defCP);
+		assertEquals(2 * diff.getCPPerEcon(), sheet.getDefCP());
 	}
 	
 	private List<Integer> getRange(int turn, int index) {

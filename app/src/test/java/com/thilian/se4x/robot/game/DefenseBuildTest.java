@@ -63,7 +63,7 @@ public class DefenseBuildTest {
 	}
 	
 	private void assertBuiltGroups(int defCP, int roll, Group... expectedGroups) {
-		sheet.defCP = defCP;
+		sheet.setDefCP(defCP);
 		roller.mockRoll(roll);
 		Fleet fleet = builder.buildDefense(ap);
 		int expectedCost = 0;

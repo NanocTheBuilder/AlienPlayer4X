@@ -30,7 +30,7 @@ public class AlienPlayer {
 		this.game = game;
 		this.color = color;
 
-		for (Technology technology : Technology.values()) {
+		for (Technology technology : game.technologyPrices.getAvailableTechs()) {
 			int startingLevel = game.technologyPrices.getStartingLevel(technology);
 			technologyLevels.put(technology, startingLevel);
 		}
@@ -58,7 +58,7 @@ public class AlienPlayer {
 	public void buildFleet(Fleet fleet) {
 		buyTechs(fleet);
 		game.fleetBuilder.buildFleet(fleet);
-		economicSheet.fleetCP += fleet.getFleetCP() - fleet.getBuildCost();
+		economicSheet.addFleetCP(fleet.getFleetCP() - fleet.getBuildCost());
 	}
 
 	public void destroyFleet(Fleet fleet) {
@@ -66,7 +66,7 @@ public class AlienPlayer {
 	}
 
 	Fleet rollFleetLaunch(int turn) {
-		int currentFleetCP = economicSheet.fleetCP;
+		int currentFleetCP = economicSheet.getFleetCP();
 		if (currentFleetCP >= ShipType.SCOUT.getCost()) {
 			int roll = getFleetLaunchRoll(currentFleetCP);
 			if (roll <= economicSheet.getFleetLaunch(turn)) {
@@ -85,7 +85,7 @@ public class AlienPlayer {
 
 	public List<Fleet> buildDefense() {
 		List<Fleet> newFleets = new ArrayList<>();
-		int currentFleetCP = economicSheet.fleetCP;
+		int currentFleetCP = economicSheet.getFleetCP();
 		if (currentFleetCP >= ShipType.SCOUT.getCost()) {
 			Fleet fleet = new Fleet(this, DEFENSE_FLEET, currentFleetCP);
 			buyTechs(fleet);
@@ -95,12 +95,12 @@ public class AlienPlayer {
 			newFleets.add(fleet);
 		}
 
-		if (economicSheet.defCP >= ShipType.MINE.getCost()) {
+		if (economicSheet.getDefCP() >= ShipType.MINE.getCost()) {
 			Fleet fleet = game.defenseBuilder.buildDefense(this);
 			if(newFleets.isEmpty()){
 				buyTechs(fleet); //TODO unitTest this
 			}
-			economicSheet.defCP -= fleet.getBuildCost();
+			economicSheet.spendDefCP(fleet.getBuildCost());
 			newFleets.add(fleet);
 		}
 		return newFleets;

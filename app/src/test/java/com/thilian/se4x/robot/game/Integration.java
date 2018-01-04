@@ -124,9 +124,9 @@ public class Integration {
 	}
 
 	public void assertCPs(int fleetCP, int techCP, int defCP) {
-		assertEquals(fleetCP, sheet.fleetCP);
-		assertEquals(techCP, sheet.techCP);
-		assertEquals(defCP, sheet.defCP);
+		assertEquals(fleetCP, sheet.getFleetCP());
+		assertEquals(techCP, sheet.getTechCP());
+		assertEquals(defCP, sheet.getDefCP());
 	}
 
 	public void assertGroups(Fleet fleet, Group... expectedGroups) {

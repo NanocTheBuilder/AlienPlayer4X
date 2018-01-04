@@ -2,36 +2,22 @@ package com.thilian.se4x.robot.game;
 
 import com.thilian.se4x.robot.game.enums.Technology;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.thilian.se4x.robot.game.enums.Technology.*;
-
 /**
- * Created by thili on 2017. 11. 25..
+ * Created by thili on 2017. 12. 06..
  */
 
 public class TechnologyPrices {
+    private Collection<Technology> availableTechs = new ArrayList<>();
     private Map<Technology, int[]> map = new HashMap<>();
 
-    public TechnologyPrices(){
-        init(MOVE, 1, 0, 0, 20, 25, 25, 25, 20, 20);
-        init(SHIP_SIZE, 1, 0, 0, 10, 15, 20, 20, 20);
-        init(MINES,0, 0, 20);
-
-        init(ATTACK,0, 0, 20, 30, 25);
-        init(DEFENSE, 0, 0, 20, 30, 25);
-        init(TACTICS,0, 0, 15, 15, 15);
-        init(CLOAKING, 0, 0, 30, 30);
-        init(SCANNER, 0, 0, 20, 20);
-        init(FIGHTERS, 0, 0, 25, 25, 25);
-        init(POINT_DEFENSE, 0, 0, 20, 20, 20);
-        init(MINE_SWEEP, 0, 0, 10, 15);
-
-    }
-
-    private void init(Technology technology, int... ints) {
+    protected void init(Technology technology, int... ints) {
         map.put(technology, ints);
+        availableTechs.add(technology);
     }
 
     public int getStartingLevel(Technology technology) {
@@ -45,5 +31,8 @@ public class TechnologyPrices {
     public int getMaxLevel(Technology technology) {
         return map.get(technology).length - 2;
     }
-}
 
+    public Collection<Technology> getAvailableTechs() {
+        return availableTechs;
+    }
+}

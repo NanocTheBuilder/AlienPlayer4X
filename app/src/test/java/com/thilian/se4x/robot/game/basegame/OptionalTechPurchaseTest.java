@@ -1,14 +1,16 @@
-package com.thilian.se4x.robot.game;
+package com.thilian.se4x.robot.game.basegame;
 
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.thilian.se4x.robot.game.AlienPlayer;
+import com.thilian.se4x.robot.game.TechnologyPurchaseBase;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
-public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
+public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase {
 	@Test
 	public void buyOptionalPontDefense() {
 		assertDontBuyPD(1);
@@ -21,7 +23,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		assertBuyOptional(expectedLevel, Technology.POINT_DEFENSE, new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyPointDefenseIfNeeded(ap);
+				techBuyer.buyPointDefenseIfNeeded(ap);
 			}
 		});
 	}
@@ -30,7 +32,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		assertDontBuyOptional(expectedLevel, Technology.POINT_DEFENSE, new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyPointDefenseIfNeeded(ap);
+				techBuyer.buyPointDefenseIfNeeded(ap);
 			}
 		});
 	}
@@ -44,19 +46,19 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 	}
 	
 	private void assertBuyMS(int expectedLevel) {
-		assertBuyOptional(expectedLevel, Technology.MINE_SWEEP, new BuyAction(){
+		assertBuyOptional(expectedLevel, Technology.MINE_SWEEPER, new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyMineSweepIfNeeded(ap);
+				techBuyer.buyMineSweepIfNeeded(ap);
 			}
 		});
 	}
 	
 	private void assertDontBuyMS(int expectedLevel) {
-		assertDontBuyOptional(expectedLevel, Technology.MINE_SWEEP,  new BuyAction(){
+		assertDontBuyOptional(expectedLevel, Technology.MINE_SWEEPER,  new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyMineSweepIfNeeded(ap);
+				techBuyer.buyMineSweepIfNeeded(ap);
 			}
 		});
 	}
@@ -85,7 +87,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 				new BuyAction(){
 					@Override
 					void buy(AlienPlayer ap) {
-						game.techBuyer.buyScannerIfNeeded(ap);
+						techBuyer.buyScannerIfNeeded(ap);
 					}
 				});
 	}
@@ -94,7 +96,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		assertBuyOptional(expectedLevel, Technology.SCANNER, new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyScannerIfNeeded(ap);
+				techBuyer.buyScannerIfNeeded(ap);
 			}
 		});
 	}
@@ -103,7 +105,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		assertDontBuyOptional(expectedLevel, Technology.SCANNER, new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyScannerIfNeeded(ap);
+				techBuyer.buyScannerIfNeeded(ap);
 			}
 		});
 	}
@@ -132,7 +134,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		assertBuyOptional(expectedLevel, Technology.SHIP_SIZE, new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyShipSizeIfRolled(ap);
+				techBuyer.buyShipSizeIfRolled(ap);
 			}
 		});
 	}
@@ -141,7 +143,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		assertDontBuyOptional(expectedLevel, Technology.SHIP_SIZE, new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyShipSizeIfRolled(ap);
+				techBuyer.buyShipSizeIfRolled(ap);
 			}
 		});
 	}
@@ -170,7 +172,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		assertBuyOptional(expectedLevel, Technology.FIGHTERS, new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyFightersIfNeeded(ap);
+				techBuyer.buyFightersIfNeeded(ap);
 			}
 		});
 	}
@@ -179,7 +181,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 		assertDontBuyOptional(expectedLevel, Technology.FIGHTERS, new BuyAction(){
 			@Override
 			void buy(AlienPlayer ap) {
-				game.techBuyer.buyFightersIfNeeded(ap);
+				techBuyer.buyFightersIfNeeded(ap);
 			}
 		});
 	}
@@ -202,17 +204,17 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 	}
 
 	private void assertBuyCloaking(int expectedLevel) {
-		sheet.techCP = 100;
-		game.techBuyer.buyCloakingIfNeeded(fleet);
+		sheet.setTechCP(100);
+		techBuyer.buyCloakingIfNeeded(fleet);
 		assertLevel(CLOAKING, expectedLevel);
-		assertEquals(100 - game.technologyPrices.getCost(CLOAKING, expectedLevel), sheet.techCP);
+		assertEquals(100 - game.technologyPrices.getCost(CLOAKING, expectedLevel), sheet.getTechCP());
 	}
 	
 	private void assertDontBuyCloaking(int expectedLevel) {
-		sheet.techCP = 100;
-		game.techBuyer.buyCloakingIfNeeded(fleet);
+		sheet.setTechCP(100);
+		techBuyer.buyCloakingIfNeeded(fleet);
 		assertLevel(CLOAKING, expectedLevel - 1);
-		assertEquals(100, sheet.techCP);
+		assertEquals(100, sheet.getTechCP());
 	}
 
 	private void assertBuyOptional(int expectedLevel, Technology technology, BuyAction buyAction) {
@@ -233,10 +235,10 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase{
 
 	private void assertOptionalBuy(Technology technology, int newLevel, int remainingCP, 
 			BuyAction buyAction) {
-		sheet.techCP = 100;
+		sheet.setTechCP(100);
 		buyAction.buy(ap);
 		assertLevel(technology, newLevel);
-		assertEquals(remainingCP, sheet.techCP);
+		assertEquals(remainingCP, sheet.getTechCP());
 	}
 
 	abstract class BuyAction {

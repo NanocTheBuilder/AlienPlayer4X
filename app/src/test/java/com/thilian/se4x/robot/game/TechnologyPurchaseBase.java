@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 
+import com.thilian.se4x.robot.game.basegame.BaseGameTechnologyBuyer;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -16,6 +17,7 @@ public class TechnologyPurchaseBase {
 	protected MockRoller roller;
 	protected AlienPlayer ap;
 	protected Fleet fleet;
+	protected BaseGameTechnologyBuyer techBuyer;
 
 	public TechnologyPurchaseBase() {
 		super();
@@ -26,10 +28,12 @@ public class TechnologyPurchaseBase {
 		sheet = new AlienEconomicSheet(Difficulty.NORMAL);
 		roller = new MockRoller();
 		game = new Game();
+		techBuyer = new BaseGameTechnologyBuyer(game);
+		game.techBuyer = techBuyer;
 		game.roller = roller;
 		game.resetSeenLevels();
 		ap = new AlienPlayer(sheet, game, null);
-		for(Technology t : Technology.values()){
+		for(Technology t : game.technologyPrices.getAvailableTechs()){
 			assertLevel(t, game.technologyPrices.getStartingLevel(t));
 		}
 		buildFleet();

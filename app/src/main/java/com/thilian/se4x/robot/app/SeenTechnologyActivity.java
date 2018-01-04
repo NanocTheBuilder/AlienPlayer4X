@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.thilian.se4x.robot.game.TechnologyPrices;
+import com.thilian.se4x.robot.game.basegame.BaseGameTechnologyPrices;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 import java.util.ArrayList;
