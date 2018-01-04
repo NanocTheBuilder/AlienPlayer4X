@@ -46,7 +46,7 @@ public class FleetBuilder {
 		if (fleet.canBuyMoreShips()) {
 			AlienPlayer ap = fleet.getAp();
 			int fleetCompositionRoll = game.roller.roll();
-			boolean canUsePD = ap.getLevel(Technology.POINT_DEFENSE) > 0 && ap.getSeenLevel(Technology.FIGHTERS) > 0;
+			boolean canUsePD = ap.getLevel(Technology.POINT_DEFENSE) > 0 && game.getSeenLevel(Technology.FIGHTERS) > 0;
 			if (canUsePD)
 				fleetCompositionRoll -= 2;
 
@@ -101,7 +101,7 @@ public class FleetBuilder {
 		if (fleet.getRemainigCP() >= 9) {
 			AlienPlayer ap = fleet.getAp();
 			if (ShipType.canBuild(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE), DESTROYER)
-					&& ap.getSeenLevel(CLOAKING) <= ap.getLevel(SCANNER) && fleet.findGroup(DESTROYER) == null)
+					&& game.getSeenLevel(CLOAKING) <= ap.getLevel(SCANNER) && fleet.findGroup(DESTROYER) == null)
 				fleet.addGroup(new Group(DESTROYER, 1));
 		}
 	}
@@ -120,7 +120,7 @@ public class FleetBuilder {
 
 	private boolean shouldBuildCarrierFleet(Fleet fleet) {
 		return fleet.getFleetCP() >= 27 && fleet.getAp().getLevel(FIGHTERS) > 0
-				&& (fleet.getAp().getSeenLevel(POINT_DEFENSE) == 0 || game.roller.roll() < 5);
+				&& (game.getSeenLevel(POINT_DEFENSE) == 0 || game.roller.roll() < 5);
 	}
 
 	private boolean shouldBuildRaiderFleet(Fleet fleet) {
@@ -131,7 +131,7 @@ public class FleetBuilder {
 		return fleet.getGroups().size() == 0 && 
 				fleet.getFleetCP() >= RAIDER.getCost() && 
 				ap.isJustPurchasedCloaking() && 
-				ap.getLevel(CLOAKING) > ap.getSeenLevel(SCANNER);
+				ap.getLevel(CLOAKING) > game.getSeenLevel(SCANNER);
 	}
 
 	private void buildRemaining(Fleet fleet, ShipType shipType) {

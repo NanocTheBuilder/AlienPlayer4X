@@ -41,7 +41,7 @@ public abstract class TechnologyBuyer {
                 return canBuyNextLevel(ap, ATTACK) | canBuyNextLevel(ap, DEFENSE);
             }
         }
-        if (technology.equals(CLOAKING) && ap.getSeenLevel(SCANNER) == game.technologyPrices.getMaxLevel(SCANNER)) {
+        if (technology.equals(CLOAKING) && game.getSeenLevel(SCANNER) == game.technologyPrices.getMaxLevel(SCANNER)) {
             return false;
         }
 

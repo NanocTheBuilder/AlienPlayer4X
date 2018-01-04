@@ -55,7 +55,6 @@ public class SeenTechnologyActivity extends Activity {
         readSpinner(R.id.mines_spinner, Technology.MINES);
 
         final SE4XApplication app = (SE4XApplication) getApplication();
-        System.out.println(String.format("seenlevels = %s", app.getGame().seenLevels.toString()));
 
         onBackPressed();
     }
@@ -63,13 +62,13 @@ public class SeenTechnologyActivity extends Activity {
     private void readSpinner(int id, Technology technology) {
         final SE4XApplication app = (SE4XApplication) getApplication();
         Spinner spinner = (Spinner) findViewById(id);
-        app.getGame().seenLevels.put(technology, (Integer) spinner.getSelectedItem());
+        app.getGame().setSeenLevel(technology, (Integer) spinner.getSelectedItem());
     }
 
     private void initSpinner(int id, Technology technology) {
         final SE4XApplication app = (SE4XApplication) getApplication();
         Spinner spinner = (Spinner) findViewById(id);
-        spinner.setSelection(app.getGame().seenLevels.get(technology));
+        spinner.setSelection(app.getGame().getSeenLevel(technology));
     }
 
     private void createAdapter(int id, Technology technology) {

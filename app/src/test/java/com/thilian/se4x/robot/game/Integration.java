@@ -103,8 +103,8 @@ public class Integration {
 		assertEquals(null, fleet);
 		assertCPs(22, 20, 20);
 		assertEquals(0, roller.rolls.size());
-		
-		ap.setSeenLevel(Technology.CLOAKING, 1);
+
+		game.setSeenLevel(Technology.CLOAKING, 1);
 		roller.mockRoll(1); //Scanners
 		roller.mockRoll(9); // ShipSize (Ignored)
 		roller.mockRoll(1); //Max number of ships

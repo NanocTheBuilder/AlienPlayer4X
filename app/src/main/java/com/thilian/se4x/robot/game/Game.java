@@ -18,7 +18,7 @@ public class Game {
 	public TechnologyBuyer techBuyer = new BaseGameTechnologyBuyer(this);
 	public DefenseBuilder defenseBuilder = new DefenseBuilder(this);
 	public List<AlienPlayer> aliens;
-	public Map<Technology, Integer> seenLevels;
+	private Map<Technology, Integer> seenLevels;
 	public int currentTurn;
 
 	public void createGame(Difficulty difficulty) {
@@ -49,5 +49,13 @@ public class Game {
 		}
 		currentTurn++;
 		return newFleets;
+	}
+
+	public Integer getSeenLevel(Technology technology){
+		return seenLevels.get(technology);
+	}
+
+	public void setSeenLevel(Technology technology, Integer level){
+		seenLevels.put(technology, level);
 	}
 }

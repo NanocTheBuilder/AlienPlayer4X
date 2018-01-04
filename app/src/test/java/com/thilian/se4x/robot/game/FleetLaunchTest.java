@@ -66,7 +66,7 @@ public class FleetLaunchTest {
 	@Test
 	public void onlySubstract2ForFightersIfPDNotSeen() {
 		ap.setLevel(Technology.FIGHTERS, 1);
-		ap.setSeenLevel(Technology.POINT_DEFENSE, 1);
+		game.setSeenLevel(Technology.POINT_DEFENSE, 1);
 		assertFleetDoesNotLaunch();
 	}
 
@@ -88,7 +88,7 @@ public class FleetLaunchTest {
 	@Test
 	public void onlySubstract2ForCloakingIfScannerNotSeen() {
 		ap.setLevel(Technology.FIGHTERS, 1);
-		ap.setSeenLevel(Technology.POINT_DEFENSE, 1);
+		game.setSeenLevel(Technology.POINT_DEFENSE, 1);
 		assertFleetDoesNotLaunch();
 	}
 

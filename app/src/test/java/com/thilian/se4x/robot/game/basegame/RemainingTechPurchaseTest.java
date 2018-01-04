@@ -111,7 +111,7 @@ public class RemainingTechPurchaseTest extends TechnologyPurchaseBase {
 
     @Test
     public void cantBuyCloakingIfSeenScanner2() {
-        ap.setSeenLevel(Technology.SCANNER, 2);
+        game.setSeenLevel(Technology.SCANNER, 2);
         sheet.setTechCP(100);
         assertEquals(false, techBuyer.canBuyNextLevel(ap, Technology.CLOAKING));
     }

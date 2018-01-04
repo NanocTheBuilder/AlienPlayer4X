@@ -37,7 +37,7 @@ public class TechnologyBuyerTest {
     @Test
     public void buyOptionalSecurity() {
         assertDontBuySecurity(1);
-        ap.setSeenLevel(Technology.BOARDING, 1);
+        game.setSeenLevel(Technology.BOARDING, 1);
         assertBuySecurity(1);
         assertDontBuySecurity(2);
     }

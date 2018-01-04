@@ -19,7 +19,7 @@ public class TechPurchaseIntegration extends TechnologyPurchaseBase {
     public void integration() {
         sheet.setTechCP(120);
         ap.setLevel(Technology.SHIP_SIZE, 3);
-        ap.setSeenLevel(Technology.MINES, 1);
+        game.setSeenLevel(Technology.MINES, 1);
         ap.setLevel(Technology.FIGHTERS, 1);
         ap.setLevel(Technology.ATTACK, 2);
         ap.setLevel(Technology.DEFENSE, 1);

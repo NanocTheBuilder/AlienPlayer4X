@@ -8,13 +8,14 @@ import org.junit.Test;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.TechnologyPurchaseBase;
 import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase {
 	@Test
 	public void buyOptionalPontDefense() {
 		assertDontBuyPD(1);
-		ap.setSeenLevel(Technology.FIGHTERS, 1);
+		game.setSeenLevel(Technology.FIGHTERS, 1);
 		assertBuyPD(1);
 		assertDontBuyPD(2);
 	}
@@ -40,7 +41,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase {
 	@Test
 	public void buyOptionalMineSweep() {
 		assertDontBuyMS(1);
-		ap.setSeenLevel(Technology.MINES, 1);
+		game.setSeenLevel(Technology.MINES, 1);
 		assertBuyMS(1);
 		assertDontBuyMS(2);
 	}
@@ -65,19 +66,19 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase {
 
 	@Test
 	public void buyOptionalScan() {
-		ap.setSeenLevel(CLOAKING, 1);
+		game.setSeenLevel(CLOAKING, 1);
 		roller.mockRoll(4);
 		assertBuyScanner(1);
 		assertDontBuyScanner(2);
 		
-		ap.setSeenLevel(CLOAKING, 2);
+		game.setSeenLevel(CLOAKING, 2);
 		roller.mockRoll(5);
 		assertDontBuyScanner(2);
 		
 		roller.mockRoll(4);
 		assertBuyScanner(2);
 		
-		ap.setSeenLevel(CLOAKING, 2);
+		game.setSeenLevel(CLOAKING, 2);
 		ap.setLevel(Technology.SCANNER, 0);
 		roller.mockRoll(4);
 		assertOptionalBuy(
@@ -150,17 +151,17 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase {
 
 	@Test
 	public void buyOptionalFighterLevel() {
-		ap.setSeenLevel(Technology.POINT_DEFENSE, 0);
+		game.setSeenLevel(Technology.POINT_DEFENSE, 0);
 		assertDontBuyFighters(1);
 
 		ap.setLevel(Technology.FIGHTERS, 1);
 		roller.mockRoll(6);
 		assertBuyFighters(2);
-		
-		ap.setSeenLevel(Technology.POINT_DEFENSE, 1);
+
+		game.setSeenLevel(Technology.POINT_DEFENSE, 1);
 		assertDontBuyFighters(3);
-		
-		ap.setSeenLevel(Technology.POINT_DEFENSE, 0);
+
+		game.setSeenLevel(Technology.POINT_DEFENSE, 0);
 		roller.mockRoll(7);
 		assertDontBuyFighters(3);
 

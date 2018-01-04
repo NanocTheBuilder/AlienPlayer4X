@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
+import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -115,14 +116,14 @@ public class AlienPlayer {
 	private int getFleetLaunchRoll(int currentFleetCP) {
 		int roll = game.roller.roll();
 		if ((currentFleetCP >= 25
-				&& technologyLevels.get(Technology.FIGHTERS) > game.seenLevels.get(Technology.POINT_DEFENSE))
+				&& technologyLevels.get(Technology.FIGHTERS) > game.getSeenLevel(Technology.POINT_DEFENSE))
 				|| shouldBuildRaiderFleet(currentFleetCP))
 			roll -= 2;
 		return roll;
 	}
 
 	private boolean shouldBuildRaiderFleet(int currentFleetCP) {
-		return currentFleetCP >= 12 && technologyLevels.get(Technology.CLOAKING) > game.seenLevels.get(Technology.SCANNER);
+		return currentFleetCP >= 12 && technologyLevels.get(Technology.CLOAKING) > game.getSeenLevel(Technology.SCANNER);
 	}
 
 	public List<Fleet> getFleets() {
@@ -141,16 +142,8 @@ public class AlienPlayer {
 		return technologyLevels.get(technology);
 	}
 
-	public int getSeenLevel(Technology technology) {
-		return game.seenLevels.get(technology);
-	}
-
 	public void setLevel(Technology technology, int level) {
 		technologyLevels.put(technology, level);
-	}
-
-	public void setSeenLevel(Technology technology, int level) {
-		game.seenLevels.put(technology, level);
 	}
 
 	public PlayerColor getColor() {

@@ -21,7 +21,7 @@ class Scenario4TechnologyBuyer extends TechnologyBuyer {
     }
 
     public void buySecurityIfNeeded(AlienPlayer ap) {
-        if(game.seenLevels.get(Technology.BOARDING) != 0 && ap.getLevel(Technology.SECURITY_FORCES) == 0)
+        if(game.getSeenLevel(Technology.BOARDING) != 0 && ap.getLevel(Technology.SECURITY_FORCES) == 0)
             buyNextLevel(ap, Technology.SECURITY_FORCES);
     }
 

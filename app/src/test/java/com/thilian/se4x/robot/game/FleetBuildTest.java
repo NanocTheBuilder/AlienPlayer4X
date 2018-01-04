@@ -31,6 +31,7 @@ import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class FleetBuildTest {
+	private Game game;
 	private AlienPlayer ap;
 	private FleetBuilder builder;
 	private MockRoller roller;
@@ -38,7 +39,7 @@ public class FleetBuildTest {
 	@Before
 	public void setUp() {
 		roller = new MockRoller();
-		Game game = new Game();
+		game = new Game();
 		game.roller = roller;
 		game.resetSeenLevels();
 		builder = new FleetBuilder(game);
@@ -83,7 +84,7 @@ public class FleetBuildTest {
 	@Test
 	public void dontBuildCarrierFleetIfSeenPDAndFailedRoll() {
 		ap.setLevel(FIGHTERS, 1);
-		ap.setSeenLevel(POINT_DEFENSE, 1);
+		game.setSeenLevel(POINT_DEFENSE, 1);
 		roller.mockRoll(5);
 		assertBuiltFleet(1, 27, new Group(SCOUT, 4));
 	}
@@ -91,7 +92,7 @@ public class FleetBuildTest {
 	@Test
 	public void buildCarrierFleetIfSeenPDAndPassedRoll() {
 		ap.setLevel(FIGHTERS, 1);
-		ap.setSeenLevel(POINT_DEFENSE, 1);
+		game.setSeenLevel(POINT_DEFENSE, 1);
 		roller.mockRoll(4);
 		Fleet fleet = new Fleet(ap, REGULAR_FLEET, 27);
 		assertBuiltGroups(fleet, new Group(CARRIER, 1), new Group(FIGHTER, 3));
@@ -105,7 +106,7 @@ public class FleetBuildTest {
 		assertBuiltGroups(fleet, new Group(RAIDER, 1));
 		assertEquals(RAIDER_FLEET, fleet.getFleetType());
 
-		ap.setSeenLevel(SCANNER, 1);
+		game.setSeenLevel(SCANNER, 1);
 		assertBuiltFleet(1, 12, new Group(SCOUT, 2));
 	}
 
@@ -147,7 +148,7 @@ public class FleetBuildTest {
 		ap.setLevel(SHIP_SIZE, 3);
 		assertBuiltFleet(1, 30, new Group(CRUISER, 1), new Group(DESTROYER, 2));
 
-		ap.setSeenLevel(CLOAKING, 1);
+		game.setSeenLevel(CLOAKING, 1);
 		assertBuiltFleet(1, 30, new Group(CRUISER, 1), new Group(SCOUT, 3));
 
 		ap.setLevel(SCANNER, 1);
@@ -156,7 +157,7 @@ public class FleetBuildTest {
 
 	@Test
 	public void buildLargestFleet() {
-		ap.setSeenLevel(CLOAKING, 1); // NO Possible DD
+		game.setSeenLevel(CLOAKING, 1); // NO Possible DD
 
 		ap.setLevel(SHIP_SIZE, 2);
 		assertBuiltFleet(1, 18, new Group(DESTROYER, 2));
@@ -171,7 +172,7 @@ public class FleetBuildTest {
 
 	@Test
 	public void buildLargestShips() {
-		ap.setSeenLevel(CLOAKING, 1); // NO Possible DD
+		game.setSeenLevel(CLOAKING, 1); // NO Possible DD
 
 		ap.setLevel(SHIP_SIZE, 2);
 		assertBuiltFleet(7, 21, new Group(DESTROYER, 2));
@@ -186,7 +187,7 @@ public class FleetBuildTest {
 
 	@Test
 	public void buildBalancedFleet() {
-		ap.setSeenLevel(CLOAKING, 1); // NO Possible DD
+		game.setSeenLevel(CLOAKING, 1); // NO Possible DD
 
 		ap.setLevel(SHIP_SIZE, 5);
 		assertBuiltFleet(4, 44, new Group(BATTLESHIP, 1), new Group(SCOUT, 4));
@@ -211,9 +212,9 @@ public class FleetBuildTest {
 
 	@Test
 	public void substractTwoIfHasPDAndSeenFighters() {
-		ap.setSeenLevel(CLOAKING, 1); // No Possible DD
+		game.setSeenLevel(CLOAKING, 1); // No Possible DD
 		ap.setLevel(Technology.POINT_DEFENSE, 1);
-		ap.setSeenLevel(Technology.FIGHTERS, 1);
+		game.setSeenLevel(Technology.FIGHTERS, 1);
 
 		ap.setLevel(SHIP_SIZE, 3);
 		assertBuiltFleet(5, 27, new Group(CRUISER, 1), new Group(DESTROYER, 1), new Group(SCOUT, 1));
@@ -221,9 +222,9 @@ public class FleetBuildTest {
 
 	@Test
 	public void substractTwoIfHasPDAndSeenFightersAndBuy2SC() {
-		ap.setSeenLevel(CLOAKING, 1); // No Possible DD
+		game.setSeenLevel(CLOAKING, 1); // No Possible DD
 		ap.setLevel(Technology.POINT_DEFENSE, 1);
-		ap.setSeenLevel(Technology.FIGHTERS, 1);
+		game.setSeenLevel(Technology.FIGHTERS, 1);
 
 		ap.setLevel(SHIP_SIZE, 5);
 		ap.setLevel(ATTACK, 2);
@@ -238,10 +239,10 @@ public class FleetBuildTest {
 
 	@Test
 	public void substractTwoIfHasPDAndSeenFightersAndDontBuy2SCIfHasFullCarrier() {
-		ap.setSeenLevel(CLOAKING, 1); // No Possible DD
+		game.setSeenLevel(CLOAKING, 1); // No Possible DD
 		ap.setLevel(FIGHTERS, 1);
 		ap.setLevel(Technology.POINT_DEFENSE, 1);
-		ap.setSeenLevel(Technology.FIGHTERS, 1);
+		game.setSeenLevel(Technology.FIGHTERS, 1);
 
 		ap.setLevel(SHIP_SIZE, 3);
 		ap.setLevel(ATTACK, 2);

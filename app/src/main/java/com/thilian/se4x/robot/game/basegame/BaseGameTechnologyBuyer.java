@@ -119,7 +119,7 @@ public class BaseGameTechnologyBuyer extends TechnologyBuyer {
     }
 
     void buyFightersIfNeeded(AlienPlayer ap) {
-        if (ap.getSeenLevel(POINT_DEFENSE) == 0 && ap.getLevel(FIGHTERS) != 0)
+        if (game.getSeenLevel(POINT_DEFENSE) == 0 && ap.getLevel(FIGHTERS) != 0)
             if (game.roller.roll() <= 6)
                 buyNextLevel(ap, FIGHTERS);
     }
@@ -131,9 +131,9 @@ public class BaseGameTechnologyBuyer extends TechnologyBuyer {
     }
 
     void buyScannerIfNeeded(AlienPlayer ap) {
-        if (ap.getSeenLevel(CLOAKING) > ap.getLevel(SCANNER)) {
+        if (game.getSeenLevel(CLOAKING) > ap.getLevel(SCANNER)) {
             if (game.roller.roll() <= 4) {
-                int levelsNeeded = ap.getSeenLevel(CLOAKING) - ap.getLevel(SCANNER);
+                int levelsNeeded = game.getSeenLevel(CLOAKING) - ap.getLevel(SCANNER);
                 for (int i = 0; i < levelsNeeded; i++)
                     buyNextLevel(ap, SCANNER);
             }
@@ -141,13 +141,13 @@ public class BaseGameTechnologyBuyer extends TechnologyBuyer {
     }
 
     void buyMineSweepIfNeeded(AlienPlayer ap) {
-        if (ap.getSeenLevel(MINES) > 0 && ap.getLevel(MINE_SWEEPER) == 0) {
+        if (game.getSeenLevel(MINES) > 0 && ap.getLevel(MINE_SWEEPER) == 0) {
             buyNextLevel(ap, MINE_SWEEPER);
         }
     }
 
     void buyPointDefenseIfNeeded(AlienPlayer ap) {
-        if (ap.getSeenLevel(FIGHTERS) > 0 && ap.getLevel(POINT_DEFENSE) == 0) {
+        if (game.getSeenLevel(FIGHTERS) > 0 && ap.getLevel(POINT_DEFENSE) == 0) {
             buyNextLevel(ap, POINT_DEFENSE);
         }
     }
