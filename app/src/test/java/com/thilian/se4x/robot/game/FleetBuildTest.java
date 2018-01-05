@@ -27,6 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -214,7 +215,7 @@ public class FleetBuildTest {
 	public void substractTwoIfHasPDAndSeenFighters() {
 		game.setSeenLevel(CLOAKING, 1); // No Possible DD
 		ap.setLevel(Technology.POINT_DEFENSE, 1);
-		game.setSeenLevel(Technology.FIGHTERS, 1);
+		game.addSeenThing(Seeable.FIGHTERS);
 
 		ap.setLevel(SHIP_SIZE, 3);
 		assertBuiltFleet(5, 27, new Group(CRUISER, 1), new Group(DESTROYER, 1), new Group(SCOUT, 1));
@@ -224,7 +225,7 @@ public class FleetBuildTest {
 	public void substractTwoIfHasPDAndSeenFightersAndBuy2SC() {
 		game.setSeenLevel(CLOAKING, 1); // No Possible DD
 		ap.setLevel(Technology.POINT_DEFENSE, 1);
-		game.setSeenLevel(Technology.FIGHTERS, 1);
+		game.addSeenThing(Seeable.FIGHTERS);
 
 		ap.setLevel(SHIP_SIZE, 5);
 		ap.setLevel(ATTACK, 2);
@@ -242,7 +243,7 @@ public class FleetBuildTest {
 		game.setSeenLevel(CLOAKING, 1); // No Possible DD
 		ap.setLevel(FIGHTERS, 1);
 		ap.setLevel(Technology.POINT_DEFENSE, 1);
-		game.setSeenLevel(Technology.FIGHTERS, 1);
+		game.addSeenThing(Seeable.FIGHTERS);
 
 		ap.setLevel(SHIP_SIZE, 3);
 		ap.setLevel(ATTACK, 2);

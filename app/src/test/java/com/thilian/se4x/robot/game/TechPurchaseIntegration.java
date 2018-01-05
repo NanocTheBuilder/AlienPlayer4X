@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class TechPurchaseIntegration extends TechnologyPurchaseBase {
@@ -19,7 +20,7 @@ public class TechPurchaseIntegration extends TechnologyPurchaseBase {
     public void integration() {
         sheet.setTechCP(120);
         ap.setLevel(Technology.SHIP_SIZE, 3);
-        game.setSeenLevel(Technology.MINES, 1);
+        game.addSeenThing(Seeable.MINES);
         ap.setLevel(Technology.FIGHTERS, 1);
         ap.setLevel(Technology.ATTACK, 2);
         ap.setLevel(Technology.DEFENSE, 1);
@@ -27,6 +28,7 @@ public class TechPurchaseIntegration extends TechnologyPurchaseBase {
         roller.mockRoll(3); // buys fighter
         roller.mockRoll(5, 5, 6);
         ap.buyTechs(fleet);
+        assertLevel(Technology.FIGHTERS, 2);
         assertLevel(Technology.DEFENSE, 2);
         assertLevel(Technology.TACTICS, 1);
         assertLevel(Technology.CLOAKING, 1);

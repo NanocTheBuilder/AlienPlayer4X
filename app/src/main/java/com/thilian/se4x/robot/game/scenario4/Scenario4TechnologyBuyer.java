@@ -4,6 +4,7 @@ import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.TechnologyBuyer;
+import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 /**
@@ -21,7 +22,7 @@ class Scenario4TechnologyBuyer extends TechnologyBuyer {
     }
 
     public void buySecurityIfNeeded(AlienPlayer ap) {
-        if(game.getSeenLevel(Technology.BOARDING) != 0 && ap.getLevel(Technology.SECURITY_FORCES) == 0)
+        if(game.isSeenThing(Seeable.BOARDING_SHIPS)&& ap.getLevel(Technology.SECURITY_FORCES) == 0)
             buyNextLevel(ap, Technology.SECURITY_FORCES);
     }
 
@@ -30,6 +31,15 @@ class Scenario4TechnologyBuyer extends TechnologyBuyer {
             buyNextLevel(ap, Technology.GROUND_COMBAT);
     }
 
-    public void buyMilitaryAcademyIfNeeded() {
+    public void buyMilitaryAcademyIfNeeded(AlienPlayer ap) {
+        if(game.isSeenThing(Seeable.VETERANS))
+            if(game.roller.roll() <= 6)
+                buyNextLevel(ap, Technology.MILITARY_ACADEMY);
+    }
+
+    public void buyBoardingIfNeeded(AlienPlayer ap) {
+        if(game.isSeenThing(Seeable.SIZE_3_SHIPS) && ap.getLevel(Technology.BOARDING) == 0)
+            if(game.roller.roll() <= 4)
+                buyNextLevel(ap, Technology.BOARDING);
     }
 }

@@ -5,5 +5,10 @@ package com.thilian.se4x.robot.game.enums;
  */
 
 public enum Seeable {
-    ENEMY_FIGHTERS,
+    //POINT_DEFENSE, SCANNERS, CLOAKING must remain seenLevel
+    FIGHTERS,
+    MINES,
+    BOARDING_SHIPS,
+    VETERANS,
+    SIZE_3_SHIPS,
 }

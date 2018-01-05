@@ -2,13 +2,16 @@ package com.thilian.se4x.robot.game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.thilian.se4x.robot.game.basegame.BaseGameTechnologyBuyer;
 import com.thilian.se4x.robot.game.basegame.BaseGameTechnologyPrices;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
+import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class Game {
@@ -19,6 +22,7 @@ public class Game {
 	public DefenseBuilder defenseBuilder = new DefenseBuilder(this);
 	public List<AlienPlayer> aliens;
 	private Map<Technology, Integer> seenLevels;
+	private Set<Seeable> seenThings;
 	public int currentTurn;
 
 	public void createGame(Difficulty difficulty) {
@@ -33,6 +37,7 @@ public class Game {
 	}
 
 	public void resetSeenLevels() {
+		seenThings = new HashSet<>();
 		seenLevels = new HashMap<>();
 		for (Technology technology : technologyPrices.getAvailableTechs()) {
 			int startingLevel = technologyPrices.getStartingLevel(technology);
@@ -57,5 +62,13 @@ public class Game {
 
 	public void setSeenLevel(Technology technology, Integer level){
 		seenLevels.put(technology, level);
+	}
+
+	public void addSeenThing(Seeable seeable){
+		seenThings.add(seeable);
+	}
+
+	public boolean isSeenThing(Seeable seeable){
+		return seenThings.contains(seeable);
 	}
 }

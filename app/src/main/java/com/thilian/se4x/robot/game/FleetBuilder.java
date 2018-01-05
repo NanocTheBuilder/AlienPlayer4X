@@ -13,6 +13,7 @@ import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 
+import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -46,7 +47,7 @@ public class FleetBuilder {
 		if (fleet.canBuyMoreShips()) {
 			AlienPlayer ap = fleet.getAp();
 			int fleetCompositionRoll = game.roller.roll();
-			boolean canUsePD = ap.getLevel(Technology.POINT_DEFENSE) > 0 && game.getSeenLevel(Technology.FIGHTERS) > 0;
+			boolean canUsePD = ap.getLevel(Technology.POINT_DEFENSE) > 0 && game.isSeenThing(Seeable.FIGHTERS);
 			if (canUsePD)
 				fleetCompositionRoll -= 2;
 

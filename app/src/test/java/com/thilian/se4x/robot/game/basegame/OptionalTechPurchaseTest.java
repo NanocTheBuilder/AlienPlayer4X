@@ -15,7 +15,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase {
 	@Test
 	public void buyOptionalPontDefense() {
 		assertDontBuyPD(1);
-		game.setSeenLevel(Technology.FIGHTERS, 1);
+		game.addSeenThing(Seeable.FIGHTERS);
 		assertBuyPD(1);
 		assertDontBuyPD(2);
 	}
@@ -41,7 +41,7 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase {
 	@Test
 	public void buyOptionalMineSweep() {
 		assertDontBuyMS(1);
-		game.setSeenLevel(Technology.MINES, 1);
+		game.addSeenThing(Seeable.MINES);
 		assertBuyMS(1);
 		assertDontBuyMS(2);
 	}
@@ -190,8 +190,6 @@ public class OptionalTechPurchaseTest  extends TechnologyPurchaseBase {
 	@Test
 	public void buyOptionalCloak() {
 		fleet.setFleetType(FleetType.RAIDER_FLEET);;
-		assertDontBuyCloaking(1);
-		
 		ap.setLevel(CLOAKING, 1);
 		roller.mockRoll(7);
 		assertDontBuyCloaking(2);

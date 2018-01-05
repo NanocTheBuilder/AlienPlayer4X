@@ -1,6 +1,5 @@
 package com.thilian.se4x.robot.game.basegame;
 
-import static com.thilian.se4x.robot.game.enums.FleetType.DEFENSE_FLEET;
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.Technology.*;
 
@@ -15,6 +14,7 @@ import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.TechnologyBuyer;
+import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class BaseGameTechnologyBuyer extends TechnologyBuyer {
@@ -141,13 +141,13 @@ public class BaseGameTechnologyBuyer extends TechnologyBuyer {
     }
 
     void buyMineSweepIfNeeded(AlienPlayer ap) {
-        if (game.getSeenLevel(MINES) > 0 && ap.getLevel(MINE_SWEEPER) == 0) {
+        if (game.isSeenThing(Seeable.MINES) && ap.getLevel(MINE_SWEEPER) == 0) {
             buyNextLevel(ap, MINE_SWEEPER);
         }
     }
 
     void buyPointDefenseIfNeeded(AlienPlayer ap) {
-        if (game.getSeenLevel(FIGHTERS) > 0 && ap.getLevel(POINT_DEFENSE) == 0) {
+        if (game.isSeenThing(Seeable.FIGHTERS) && ap.getLevel(POINT_DEFENSE) == 0) {
             buyNextLevel(ap, POINT_DEFENSE);
         }
     }
