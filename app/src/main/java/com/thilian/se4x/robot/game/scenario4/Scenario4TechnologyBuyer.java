@@ -12,34 +12,25 @@ import com.thilian.se4x.robot.game.enums.Technology;
  */
 
 class Scenario4TechnologyBuyer extends TechnologyBuyer {
+    private static int[] SHIP_SIZE_ROLL_TABLE = new int[]{0, 10, 7, 6, 5, 3, 6};
+
     public Scenario4TechnologyBuyer(Game game){
         super(game);
     }
 
+
     @Override
-    public void buyTechs(Fleet fleet) {
+    protected int[] getShipSizeRollTable() {
+        return SHIP_SIZE_ROLL_TABLE;
+    }
+
+    @Override
+    public void buyOptionalTechs(Fleet fleet) {
 
     }
 
-    public void buySecurityIfNeeded(AlienPlayer ap) {
-        if(game.isSeenThing(Seeable.BOARDING_SHIPS)&& ap.getLevel(Technology.SECURITY_FORCES) == 0)
-            buyNextLevel(ap, Technology.SECURITY_FORCES);
-    }
+    @Override
+    public void spendRemainingTechCP(Fleet fleet) {
 
-    public void buyGroundCombatIfNeeded(AlienPlayer ap, boolean combatIsAbovePlanet) {
-        if(combatIsAbovePlanet)
-            buyNextLevel(ap, Technology.GROUND_COMBAT);
-    }
-
-    public void buyMilitaryAcademyIfNeeded(AlienPlayer ap) {
-        if(game.isSeenThing(Seeable.VETERANS))
-            if(game.roller.roll() <= 6)
-                buyNextLevel(ap, Technology.MILITARY_ACADEMY);
-    }
-
-    public void buyBoardingIfNeeded(AlienPlayer ap) {
-        if(game.isSeenThing(Seeable.SIZE_3_SHIPS) && ap.getLevel(Technology.BOARDING) == 0)
-            if(game.roller.roll() <= 4)
-                buyNextLevel(ap, Technology.BOARDING);
     }
 }

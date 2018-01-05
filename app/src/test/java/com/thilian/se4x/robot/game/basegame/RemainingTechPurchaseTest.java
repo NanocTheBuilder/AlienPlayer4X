@@ -7,11 +7,11 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.thilian.se4x.robot.game.TechnologyPurchaseBase;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
-public class RemainingTechPurchaseTest extends TechnologyPurchaseBase {
+public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
+
     @Test
     public void baseTechnologiesOnly(){
         assertNotAvailabe(Technology.SECURITY_FORCES);

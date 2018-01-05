@@ -43,7 +43,12 @@ public class BaseGameTechnologyBuyer extends TechnologyBuyer {
     }
 
     @Override
-    public void buyTechs(Fleet fleet) {
+    protected int[] getShipSizeRollTable() {
+        return SHIP_SIZE_ROLL_TABLE;
+    }
+
+    @Override
+    public void buyOptionalTechs(Fleet fleet) {
         AlienPlayer ap = fleet.getAp();
         buyPointDefenseIfNeeded(ap);
         buyMineSweepIfNeeded(ap);
@@ -51,11 +56,10 @@ public class BaseGameTechnologyBuyer extends TechnologyBuyer {
         buyShipSizeIfRolled(ap);
         buyFightersIfNeeded(ap);
         buyCloakingIfNeeded(fleet);
-
-        spendRemainingTechCP(fleet);
     }
 
-    void spendRemainingTechCP(Fleet fleet) {
+    @Override
+    public void spendRemainingTechCP(Fleet fleet) {
         AlienPlayer ap = fleet.getAp();
         while (true) {
             List<Integer> buyable = findBuyableTechs(fleet);
@@ -108,48 +112,6 @@ public class BaseGameTechnologyBuyer extends TechnologyBuyer {
         }
         Collections.sort(buyable);
         return buyable;
-    }
-
-    void buyCloakingIfNeeded(Fleet fleet) {
-        AlienPlayer ap = fleet.getAp();
-        if (fleet.getFleetType().equals(RAIDER_FLEET) && ap.getLevel(CLOAKING) != 0) {
-            if (game.roller.roll() <= 6)
-                buyNextLevel(ap, CLOAKING);
-        }
-    }
-
-    void buyFightersIfNeeded(AlienPlayer ap) {
-        if (game.getSeenLevel(POINT_DEFENSE) == 0 && ap.getLevel(FIGHTERS) != 0)
-            if (game.roller.roll() <= 6)
-                buyNextLevel(ap, FIGHTERS);
-    }
-
-    void buyShipSizeIfRolled(AlienPlayer ap) {
-        if (ap.getLevel(SHIP_SIZE) < game.technologyPrices.getMaxLevel(SHIP_SIZE))
-            if (game.roller.roll() <= SHIP_SIZE_ROLL_TABLE[ap.getLevel(SHIP_SIZE)])
-                buyNextLevel(ap, SHIP_SIZE);
-    }
-
-    void buyScannerIfNeeded(AlienPlayer ap) {
-        if (game.getSeenLevel(CLOAKING) > ap.getLevel(SCANNER)) {
-            if (game.roller.roll() <= 4) {
-                int levelsNeeded = game.getSeenLevel(CLOAKING) - ap.getLevel(SCANNER);
-                for (int i = 0; i < levelsNeeded; i++)
-                    buyNextLevel(ap, SCANNER);
-            }
-        }
-    }
-
-    void buyMineSweepIfNeeded(AlienPlayer ap) {
-        if (game.isSeenThing(Seeable.MINES) && ap.getLevel(MINE_SWEEPER) == 0) {
-            buyNextLevel(ap, MINE_SWEEPER);
-        }
-    }
-
-    void buyPointDefenseIfNeeded(AlienPlayer ap) {
-        if (game.isSeenThing(Seeable.FIGHTERS) && ap.getLevel(POINT_DEFENSE) == 0) {
-            buyNextLevel(ap, POINT_DEFENSE);
-        }
     }
 
 }

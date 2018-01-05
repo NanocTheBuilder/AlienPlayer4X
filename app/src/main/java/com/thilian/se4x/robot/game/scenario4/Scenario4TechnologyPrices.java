@@ -26,7 +26,7 @@ public class Scenario4TechnologyPrices extends TechnologyPrices {
 
     public Scenario4TechnologyPrices(){
         init(MOVE, 1, 0, 0, 20, 25, 25, 25, 20, 20);
-        init(SHIP_SIZE, 1, 0, 0, 10, 15, 20, 20, 20);
+        init(SHIP_SIZE, 1, 0, 0, 10, 15, 20, 20, 20, 30);
         init(MINES,0, 0, 20);
 
         init(ATTACK,0, 0, 20, 30, 25);
