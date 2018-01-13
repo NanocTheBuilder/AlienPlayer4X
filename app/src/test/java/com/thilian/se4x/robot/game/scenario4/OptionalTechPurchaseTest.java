@@ -57,31 +57,31 @@ public class OptionalTechPurchaseTest extends TechnologyBuyerTestBase {
 
     @Test
     public void buyOptionalGroundCombat(){
-        assertDontBuyGroundCombat(2);
-        assertBuyGroundCombat(2);
-        assertBuyGroundCombat(3);
-        assertDontBuyGroundCombat(4);
+        assertDontBuyGroundCombat(2, false);
+        assertBuyGroundCombat(2, true);
+        assertBuyGroundCombat(3, true);
+        assertDontBuyGroundCombat(4, true);
     }
 
-    private void assertBuyGroundCombat(int level) {
+    private void assertBuyGroundCombat(int level, final boolean combatIsAbovePlanet) {
         assertBuyOptional(level, Technology.GROUND_COMBAT, new BuyAction(){
             @Override
-            protected void buy(AlienPlayer ap) { techBuyer.buyGroundCombatIfNeeded(ap, true);}
+            protected void buy(AlienPlayer ap) { techBuyer.buyGroundCombatIfNeeded(ap, combatIsAbovePlanet);}
         });
     }
 
-    private void assertDontBuyGroundCombat(int level) {
+    private void assertDontBuyGroundCombat(int level, final boolean combatIsAbovePlanet) {
         assertDontBuyOptional(level, Technology.GROUND_COMBAT, new BuyAction(){
             @Override
-            protected void buy(AlienPlayer ap) { techBuyer.buyGroundCombatIfNeeded(ap, false);}
+            protected void buy(AlienPlayer ap) { techBuyer.buyGroundCombatIfNeeded(ap, combatIsAbovePlanet);}
         });
     }
 
     @Test
     public void buyOptionalMilitaryAcademy(){
         assertDontBuyMilitaryAcademy(1);
-        game.addSeenThing(Seeable.VETERANS);
 
+        game.addSeenThing(Seeable.VETERANS);
         roller.mockRoll(7);
         assertDontBuyMilitaryAcademy(1);
         roller.mockRoll(6);
