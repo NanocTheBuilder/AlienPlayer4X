@@ -17,17 +17,7 @@ import static org.junit.Assert.fail;
  * Created by thili on 2017. 12. 05..
  */
 
-public class OptionalTechPurchaseTest extends TechnologyBuyerTestBase {
-
-    @Override
-    protected TechnologyBuyer getTechBuyer(Game game) {
-        return new Scenario4TechnologyBuyer(game);
-    }
-
-    @Override
-    protected TechnologyPrices getTechProces() {
-        return new Scenario4TechnologyPrices();
-    }
+public class OptionalTechPurchaseTest extends Scenario4TechnologyBuyerTestBase {
 
     @Test
     public void buyOptionalSecurity() {

@@ -1,7 +1,7 @@
 package com.thilian.se4x.robot.game;
 
-import android.support.annotation.Nullable;
-import android.util.Log;
+//import android.support.annotation.Nullable;
+//import android.util.Log;
 
 import static com.thilian.se4x.robot.game.enums.FleetType.*;
 
@@ -159,7 +159,7 @@ public class AlienPlayer {
 		return "?";
 	}
 
-	@Nullable
+//	@Nullable
 	private Fleet findFleetByName(String name, FleetType fleetType) {
 		for(Fleet fleet : fleets){
 			if(fleet.getName().equals(name) && fleet.getFleetType().equals(fleetType))

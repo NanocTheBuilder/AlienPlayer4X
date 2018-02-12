@@ -25,11 +25,11 @@ public class TechnologyPrices {
     }
 
     public int getCost(Technology technology, int level) {
-        return map.get(technology)[level + 1];
+        return map.get(technology)[level];
     }
 
     public int getMaxLevel(Technology technology) {
-        return map.get(technology).length - 2;
+        return map.get(technology).length - 1;
     }
 
     public Collection<Technology> getAvailableTechs() {

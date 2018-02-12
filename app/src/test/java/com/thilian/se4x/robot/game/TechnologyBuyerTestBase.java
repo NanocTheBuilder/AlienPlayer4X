@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 
-import com.thilian.se4x.robot.game.basegame.BaseGameTechnologyBuyer;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -26,7 +25,7 @@ public abstract class TechnologyBuyerTestBase {
 		game = new Game();
 		techBuyer = getTechBuyer(game);
 		game.techBuyer = techBuyer;
-		game.technologyPrices = getTechProces();
+		game.technologyPrices = getTechPrices();
 		game.roller = roller;
 		game.resetSeenLevels();
 		ap = new AlienPlayer(sheet, game, null);
@@ -43,7 +42,7 @@ public abstract class TechnologyBuyerTestBase {
 
 	protected abstract TechnologyBuyer getTechBuyer(Game game);
 
-	protected abstract TechnologyPrices getTechProces();
+	protected abstract TechnologyPrices getTechPrices();
 
 	protected void buildFleet() {
 		fleet = new Fleet(ap, FleetType.REGULAR_FLEET, -1);

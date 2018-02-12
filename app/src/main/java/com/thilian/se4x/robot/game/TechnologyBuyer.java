@@ -15,6 +15,12 @@ import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by thili on 2017. 12. 05..
  */
@@ -22,8 +28,11 @@ import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 public abstract class TechnologyBuyer {
     protected Game game;
 
+    protected Map<Technology, Integer> TECHNOLOGY_ROLL_TABLE = new HashMap<>();
+
     protected TechnologyBuyer(Game game){
         this.game = game;
+        initRollTable();
     }
 
     public void buyTechs(Fleet fleet){
@@ -31,10 +40,46 @@ public abstract class TechnologyBuyer {
         spendRemainingTechCP(fleet);
     }
 
+    protected abstract void initRollTable();
+    
+    protected void addToRollTable(Technology technology, Integer values) {
+        TECHNOLOGY_ROLL_TABLE.put(technology, values);
+    }
+
+
     public abstract void buyOptionalTechs(Fleet fleet);
 
-    public abstract void spendRemainingTechCP(Fleet fleet);
+    public void spendRemainingTechCP(Fleet fleet) {
+        AlienPlayer ap = fleet.getAp();
+        while (true) {
+            List<Technology> buyable = findBuyableTechs(fleet);
+            if (buyable.isEmpty())
+                break;
+            int roll = game.roller.roll(buyable.size());
+            buyRolledTech(ap, buyable.get(roll - 1));
+        }
+    }
 
+	protected void buyRolledTech(AlienPlayer ap, Technology technology) {
+		switch (technology) {
+			case TACTICS:
+				if (ap.getLevel(ATTACK) < 2 && canBuyNextLevel(ap, ATTACK))
+					buyNextLevel(ap, ATTACK);
+				else if (ap.getLevel(DEFENSE) < 2 && canBuyNextLevel(ap, DEFENSE))
+					buyNextLevel(ap, DEFENSE);
+				else
+					buyNextLevel(ap, TACTICS);
+				break;
+			case CLOAKING:
+				buyNextLevel(ap, CLOAKING);
+				ap.setJustPurchasedCloaking(true);
+				break;
+			default:
+				buyNextLevel(ap, technology);
+				break;
+		}
+	}
+    
     protected abstract int[] getShipSizeRollTable();
 
     public void buyNextLevel(AlienPlayer ap, Technology technology) {
@@ -70,6 +115,18 @@ public abstract class TechnologyBuyer {
             return canBuyNextLevel(fleet.getAp(), technology);
     }
 
+    protected List<Technology> findBuyableTechs(Fleet fleet) {
+        List<Technology> buyable = new ArrayList<>();
+        for (Technology technology : TECHNOLOGY_ROLL_TABLE.keySet()) {
+            if (canBuyNextLevel(fleet, technology)) {
+            	for(int i = 0; i < TECHNOLOGY_ROLL_TABLE.get(technology); i++)
+            		buyable.add(technology);
+            }
+        }
+        Collections.sort(buyable);
+        return buyable;
+    }
+    
     public void buyCloakingIfNeeded(Fleet fleet) {
         AlienPlayer ap = fleet.getAp();
         if (fleet.getFleetType().equals(RAIDER_FLEET) && ap.getLevel(CLOAKING) != 0) {
