@@ -1,6 +1,19 @@
 package com.thilian.se4x.robot.game.scenario4;
 
-import static com.thilian.se4x.robot.game.enums.Technology.*;
+import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
+import static com.thilian.se4x.robot.game.enums.Technology.BOARDING;
+import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
+import static com.thilian.se4x.robot.game.enums.Technology.DEFENSE;
+import static com.thilian.se4x.robot.game.enums.Technology.FIGHTERS;
+import static com.thilian.se4x.robot.game.enums.Technology.MILITARY_ACADEMY;
+import static com.thilian.se4x.robot.game.enums.Technology.MINE_SWEEPER;
+import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
+import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
+import static com.thilian.se4x.robot.game.enums.Technology.SECURITY_FORCES;
+import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
+import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
+
+import java.util.Arrays;
 
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
@@ -19,6 +32,7 @@ class Scenario4TechnologyBuyer extends TechnologyBuyer {
 
 	@Override
 	protected void initRollTable() {
+		addToRollTable(SHIP_SIZE, 16);
 		addToRollTable(ATTACK, 20);
 		addToRollTable(DEFENSE, 20);
 		addToRollTable(TACTICS, 12);
@@ -29,6 +43,7 @@ class Scenario4TechnologyBuyer extends TechnologyBuyer {
 		addToRollTable(MINE_SWEEPER, 5);
 		addToRollTable(SECURITY_FORCES, 3);
 		addToRollTable(MILITARY_ACADEMY, 4);
+		addToRollTable(BOARDING, 4);
 	}
 
 	@Override

@@ -38,10 +38,10 @@ public class Scenario4TechnologyPrices extends TechnologyPrices {
         init(POINT_DEFENSE, 0, 20, 20, 20);
         init(MINE_SWEEPER, 0, 10, 15, 20);
 
-        init(BOARDING, 0, 20, 25);
         init(SECURITY_FORCES, 0, 15, 15);
-        init(GROUND_COMBAT, 1, 0, 10, 15);
         init(MILITARY_ACADEMY, 0, 10, 20);
+        init(BOARDING, 0, 20, 25);
+        init(GROUND_COMBAT, 1, 0, 10, 15);
     }
 
 }

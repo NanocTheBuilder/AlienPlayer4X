@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by thili on 2017. 12. 05..
@@ -28,7 +29,7 @@ import java.util.Map;
 public abstract class TechnologyBuyer {
     protected Game game;
 
-    protected Map<Technology, Integer> TECHNOLOGY_ROLL_TABLE = new HashMap<>();
+    protected Map<Technology, Integer> TECHNOLOGY_ROLL_TABLE = new TreeMap<>();
 
     protected TechnologyBuyer(Game game){
         this.game = game;
@@ -123,7 +124,6 @@ public abstract class TechnologyBuyer {
             		buyable.add(technology);
             }
         }
-        Collections.sort(buyable);
         return buyable;
     }
     
