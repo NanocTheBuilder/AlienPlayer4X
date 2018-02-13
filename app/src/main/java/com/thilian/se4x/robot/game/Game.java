@@ -16,9 +16,12 @@ import com.thilian.se4x.robot.game.enums.Technology;
 
 public class Game {
 	public DiceRoller roller;
+	//TODO Inject correct Technology Prices
 	public TechnologyPrices technologyPrices = new BaseGameTechnologyPrices();
 	public FleetBuilder fleetBuilder = new FleetBuilder(this);
+	//TODO Inject correct Technology Buyer
 	public TechnologyBuyer techBuyer = new BaseGameTechnologyBuyer(this);
+	//TODO Inject correct Defense Builder
 	public DefenseBuilder defenseBuilder = new DefenseBuilder(this);
 	public List<AlienPlayer> aliens;
 	private Map<Technology, Integer> seenLevels;

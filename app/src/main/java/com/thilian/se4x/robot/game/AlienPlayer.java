@@ -1,7 +1,7 @@
 package com.thilian.se4x.robot.game;
 
-import android.support.annotation.Nullable;
-import android.util.Log;
+//import android.support.annotation.Nullable;
+//import android.util.Log;
 
 import static com.thilian.se4x.robot.game.enums.FleetType.*;
 
@@ -51,13 +51,13 @@ public class AlienPlayer {
 	return fleet;
 	}
 
-	void buyTechs(Fleet fleet) {
+	void buyTechs(Fleet fleet, Map<String, Object> params) {
 		setJustPurchasedCloaking(false);
-		game.techBuyer.buyTechs(fleet);
+		game.techBuyer.buyTechs(fleet, params);
 	}
 
-	public void buildFleet(Fleet fleet) {
-		buyTechs(fleet);
+	public void buildFleet(Fleet fleet, Map<String, Object> params) {
+		buyTechs(fleet, params);
 		game.fleetBuilder.buildFleet(fleet);
 		economicSheet.addFleetCP(fleet.getFleetCP() - fleet.getBuildCost());
 	}
@@ -84,12 +84,12 @@ public class AlienPlayer {
 		return null;
 	}
 
-	public List<Fleet> buildDefense() {
+	public List<Fleet> buildDefense(Map<String, Object> params) {
 		List<Fleet> newFleets = new ArrayList<>();
 		int currentFleetCP = economicSheet.getFleetCP();
 		if (currentFleetCP >= ShipType.SCOUT.getCost()) {
 			Fleet fleet = new Fleet(this, DEFENSE_FLEET, currentFleetCP);
-			buyTechs(fleet);
+			buyTechs(fleet, params);
 			game.fleetBuilder.buildFleet(fleet);
 			fleet.setFleetType(REGULAR_FLEET);
 			economicSheet.spendFleetCP(fleet.getBuildCost());
@@ -99,7 +99,7 @@ public class AlienPlayer {
 		if (economicSheet.getDefCP() >= ShipType.MINE.getCost()) {
 			Fleet fleet = game.defenseBuilder.buildDefense(this);
 			if(newFleets.isEmpty()){
-				buyTechs(fleet); //TODO unitTest this
+				buyTechs(fleet, params); //TODO unitTest this
 			}
 			economicSheet.spendDefCP(fleet.getBuildCost());
 			newFleets.add(fleet);
@@ -159,7 +159,7 @@ public class AlienPlayer {
 		return "?";
 	}
 
-	@Nullable
+//	@Nullable
 	private Fleet findFleetByName(String name, FleetType fleetType) {
 		for(Fleet fleet : fleets){
 			if(fleet.getName().equals(name) && fleet.getFleetType().equals(fleetType))

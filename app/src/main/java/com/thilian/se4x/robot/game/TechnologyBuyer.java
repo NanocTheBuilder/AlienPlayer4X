@@ -27,7 +27,9 @@ import java.util.TreeMap;
  */
 
 public abstract class TechnologyBuyer {
-    protected Game game;
+	public static final String COMBAT_IS_ABOVE_PLANET = "COMBAT_IS_ABOVE_PLANET";
+
+	protected Game game;
 
     protected Map<Technology, Integer> TECHNOLOGY_ROLL_TABLE = new TreeMap<>();
 
@@ -36,8 +38,8 @@ public abstract class TechnologyBuyer {
         initRollTable();
     }
 
-    public void buyTechs(Fleet fleet){
-        buyOptionalTechs(fleet);
+    public void buyTechs(Fleet fleet, Map<String, Object> params){
+        buyOptionalTechs(fleet, params);
         spendRemainingTechCP(fleet);
     }
 
@@ -48,7 +50,7 @@ public abstract class TechnologyBuyer {
     }
 
 
-    public abstract void buyOptionalTechs(Fleet fleet);
+    public abstract void buyOptionalTechs(Fleet fleet, Map<String, Object> params);
 
     public void spendRemainingTechCP(Fleet fleet) {
         AlienPlayer ap = fleet.getAp();

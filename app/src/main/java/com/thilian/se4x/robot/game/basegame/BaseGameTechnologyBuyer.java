@@ -9,6 +9,8 @@ import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
 import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 
+import java.util.Map;
+
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
@@ -40,7 +42,7 @@ public class BaseGameTechnologyBuyer extends TechnologyBuyer {
     }
 
     @Override
-    public void buyOptionalTechs(Fleet fleet) {
+    public void buyOptionalTechs(Fleet fleet, Map<String, Object> params) {
         AlienPlayer ap = fleet.getAp();
         buyPointDefenseIfNeeded(ap);
         buyMineSweepIfNeeded(ap);
