@@ -109,7 +109,7 @@ public class Integration {
 		roller.mockRoll(9); // ShipSize (Ignored)
 		roller.mockRoll(1); //Max number of ships
 		roller.mockRoll(10); //Max bases
-		ap.buildDefense(null);
+		ap.buildHomeDefense(null);
 		assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
 		assertEquals(1, ap.getLevel(Technology.SCANNER));
 		assertGroups(ap.getFleets().get(1), new Group(ShipType.DESTROYER, 1), new Group(ShipType.SCOUT, 2));

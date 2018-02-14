@@ -16,7 +16,11 @@ public enum ShipType {
 	CRUISER(12, 2, 3),
 	BATTLECRUISER(15, 2, 4), 
 	BATTLESHIP(20, 3, 5), 
-	DREADNAUGHT(24, 3, 6);
+	DREADNAUGHT(24, 3, 6),
+	
+	GRAV_ARMOR(4, 99, 99),
+	HEAVY_INFANTRY(3, 99, 99),
+	;
 	
 	private int cost;
 	private int hullSize;
@@ -37,7 +41,6 @@ public enum ShipType {
 	}
 
 	public static ShipType findCheapest(int minHullSize) {
-		List<ShipType> types = new ArrayList<>();
 		for(ShipType type : ShipType.values()){
 			if(type.requiredShipSize != 99 && type.hullSize >= minHullSize){
 				return type;

@@ -84,7 +84,7 @@ public class AlienPlayer {
 		return null;
 	}
 
-	public List<Fleet> buildDefense(Map<String, Object> params) {
+	public List<Fleet> buildHomeDefense(Map<String, Object> params) {
 		List<Fleet> newFleets = new ArrayList<>();
 		int currentFleetCP = economicSheet.getFleetCP();
 		if (currentFleetCP >= ShipType.SCOUT.getCost()) {
@@ -97,10 +97,10 @@ public class AlienPlayer {
 		}
 
 		if (economicSheet.getDefCP() >= ShipType.MINE.getCost()) {
-			Fleet fleet = game.defenseBuilder.buildDefense(this);
-			if(newFleets.isEmpty()){
-				buyTechs(fleet, params); //TODO unitTest this
-			}
+			Fleet fleet = game.defenseBuilder.buildHomeDefense(this);
+//			if(newFleets.isEmpty()){
+//				buyTechs(fleet, params); //TODO unitTest this
+//			}
 			economicSheet.spendDefCP(fleet.getBuildCost());
 			newFleets.add(fleet);
 		}

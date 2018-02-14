@@ -26,6 +26,7 @@ public class DefenseBuildTest {
 		sheet = new AlienEconomicSheet(Difficulty.NORMAL);
 		ap = new AlienPlayer(sheet, game, null);
 	}
+	
 	@Test
 	public void spendNoDefenseCPBuildNothings() {
 		assertBuiltGroups(0, 1);
@@ -65,7 +66,7 @@ public class DefenseBuildTest {
 	private void assertBuiltGroups(int defCP, int roll, Group... expectedGroups) {
 		sheet.setDefCP(defCP);
 		roller.mockRoll(roll);
-		Fleet fleet = builder.buildDefense(ap);
+		Fleet fleet = builder.buildHomeDefense(ap);
 		int expectedCost = 0;
 		for (Group g : expectedGroups) {
 			expectedCost += g.getShipType().getCost() * g.getSize();

@@ -5,14 +5,19 @@ import com.thilian.se4x.robot.game.enums.ShipType;
 
 public class DefenseBuilder {
 
-	private Game game;
+	protected Game game;
 
 	public DefenseBuilder(Game game) {
 		this.game = game;
 	}
 
-	public Fleet buildDefense(AlienPlayer ap) {
+	public Fleet buildHomeDefense(AlienPlayer ap) {
 		Fleet fleet = new Fleet(ap, FleetType.DEFENSE_FLEET, ap.getEconomicSheet().getDefCP());
+		buyHomeDefenseUnits(fleet);
+		return fleet;
+	}
+
+	protected void buyHomeDefenseUnits(Fleet fleet) {
 		int roll = game.roller.roll();
 		if (roll < 4) {
 			addGroup(fleet, ShipType.MINE);
@@ -27,7 +32,6 @@ public class DefenseBuilder {
 			addGroup(fleet, ShipType.BASE);
 			addGroup(fleet, ShipType.MINE);
 		}
-		return fleet;
 	}
 
 	private void addGroup(Fleet fleet, ShipType shipType) {
