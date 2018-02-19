@@ -12,6 +12,7 @@ public class Fleet {
 	private FleetType fleetType;
 
 	private List<Group> groups = new ArrayList<>();
+	private List<Group> freeGroups = new ArrayList<>();
 	private AlienPlayer ap;
 	private String name;
 
@@ -23,9 +24,21 @@ public class Fleet {
 		ap.getFleets().add(this);
 	}
 
-	public int getBuildCost() {
+	public int getBuildCost(){
+		return getAllGroupCost() - getFreeGroupCost();
+	}
+	
+	public int getAllGroupCost() {
 		int sum = 0;
 		for(Group group : groups){
+			sum += group.getSize() * group.getShipType().getCost();
+		}
+		return sum;
+	}
+
+	public int getFreeGroupCost() {
+		int sum = 0;
+		for(Group group : freeGroups){
 			sum += group.getSize() * group.getShipType().getCost();
 		}
 		return sum;
@@ -60,6 +73,11 @@ public class Fleet {
 		return groups;
 	}
 
+	public void addFreeGroup(Group group){
+		addGroup(group);
+		freeGroups.add(group);
+	}
+	
 	public void addGroup(Group group) {
 		if (group.getSize() > 0) {
 			Group existingGroup = findGroup(group.getShipType());

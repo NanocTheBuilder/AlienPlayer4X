@@ -7,7 +7,7 @@ import java.util.Queue;
 
 public class MockRoller implements DiceRoller {
 
-	Queue<Integer> rolls = new LinkedList<>();
+	public Queue<Integer> rolls = new LinkedList<>();
 
 	public void mockRoll(int... roll) {
 		for(int i : roll)

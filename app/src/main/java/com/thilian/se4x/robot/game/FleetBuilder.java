@@ -19,7 +19,7 @@ import com.thilian.se4x.robot.game.enums.Technology;
 
 public class FleetBuilder {
 
-	private Game game;
+	protected Game game;
 
 	public FleetBuilder(Game game) {
 		this.game = game;
@@ -35,7 +35,7 @@ public class FleetBuilder {
 			if (shouldBuildRaiderFleet(fleet)) {
 				buildRaiderFleet(fleet);
 			} else {
-				buildFlaship(fleet);
+				buildFlagship(fleet);
 				buildPossibleDD(fleet);
 				buildRemainderFleet(fleet);
 			}
@@ -43,7 +43,7 @@ public class FleetBuilder {
 
 	}
 
-	private void buildRemainderFleet(Fleet fleet) {
+	protected void buildRemainderFleet(Fleet fleet) {
 		if (fleet.canBuyMoreShips()) {
 			AlienPlayer ap = fleet.getAp();
 			int fleetCompositionRoll = game.roller.roll();
@@ -72,7 +72,7 @@ public class FleetBuilder {
 		}
 	}
 
-	private void buildCarrierFleet(Fleet fleet) {
+	protected void buildCarrierFleet(Fleet fleet) {
 		int fleetCP = fleet.getFleetCP();
 		int cost = CARRIER.getCost() + FIGHTER.getCost() * 3;
 		int shipsToBuild = fleetCP / cost;
@@ -98,7 +98,7 @@ public class FleetBuilder {
 		}
 	}
 
-	private void buildPossibleDD(Fleet fleet) {
+	protected void buildPossibleDD(Fleet fleet) {
 		if (fleet.getRemainigCP() >= 9) {
 			AlienPlayer ap = fleet.getAp();
 			if (ShipType.canBuild(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE), DESTROYER)
@@ -107,24 +107,24 @@ public class FleetBuilder {
 		}
 	}
 
-	private void buildRaiderFleet(Fleet fleet) {
+	protected void buildRaiderFleet(Fleet fleet) {
 		fleet.setFleetType(RAIDER_FLEET);
 		buildRemaining(fleet, RAIDER);
 	}
 
-	private void buildFlaship(Fleet fleet) {
+	protected void buildFlagship(Fleet fleet) {
 		if (fleet.canBuyMoreShips()) {
 			ShipType shipType = ShipType.findBiggest(fleet.getRemainigCP(), fleet.getAp().getLevel(SHIP_SIZE));
 			fleet.addGroup(new Group(shipType, 1));
 		}
 	}
 
-	private boolean shouldBuildCarrierFleet(Fleet fleet) {
+	protected boolean shouldBuildCarrierFleet(Fleet fleet) {
 		return fleet.getFleetCP() >= 27 && fleet.getAp().getLevel(FIGHTERS) > 0
 				&& (game.getSeenLevel(POINT_DEFENSE) == 0 || game.roller.roll() < 5);
 	}
 
-	private boolean shouldBuildRaiderFleet(Fleet fleet) {
+	protected boolean shouldBuildRaiderFleet(Fleet fleet) {
 		// TODO more test for this. Especially the resetting of isPurchasedThisTurn
 		if(fleet.getFleetType().equals(DEFENSE_FLEET))
 			return false;

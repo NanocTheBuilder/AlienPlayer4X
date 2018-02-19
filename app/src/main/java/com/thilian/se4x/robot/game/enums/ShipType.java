@@ -18,8 +18,12 @@ public enum ShipType {
 	BATTLESHIP(20, 3, 5), 
 	DREADNAUGHT(24, 3, 6),
 	
-	GRAV_ARMOR(4, 99, 99),
-	HEAVY_INFANTRY(3, 99, 99),
+	TRANSPORT(6, 1, 99),
+	INFANTRY(2, 1, 99),
+	MARINE(3, 2, 99),
+	HEAVY_INFANTRY(3, 2, 99),
+	GRAV_ARMOR(4, 2, 99),
+	BOARDING_SHIP(12, 2, 99)
 	;
 	
 	private int cost;
