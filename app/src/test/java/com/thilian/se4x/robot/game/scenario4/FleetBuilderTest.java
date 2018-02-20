@@ -1,9 +1,8 @@
 package com.thilian.se4x.robot.game.scenario4;
 
-import static com.thilian.se4x.robot.game.enums.FleetType.REGULAR_FLEET;
-import static com.thilian.se4x.robot.game.enums.ShipType.CARRIER;
-import static com.thilian.se4x.robot.game.enums.ShipType.FIGHTER;
-import static com.thilian.se4x.robot.game.enums.Technology.FIGHTERS;
+import static com.thilian.se4x.robot.game.enums.ShipType.*;
+import static com.thilian.se4x.robot.game.enums.FleetType.*;
+import static com.thilian.se4x.robot.game.enums.Technology.*;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.MockRoller;
-import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -41,7 +39,7 @@ public class FleetBuilderTest {
 		game.resetSeenLevels();
 		builder = new FleetBuilder(game);
 		ap = new AlienPlayer(null, game, null);
-		ap.setLevel(Technology.GROUND_COMBAT, 1);
+		ap.setLevel(GROUND_COMBAT, 1);
 	}
 
 	@After
@@ -53,110 +51,246 @@ public class FleetBuilderTest {
 	
 	@Test
 	public void raiderFleetBuysOnlyRaiders(){
-		Fleet fleet = new Fleet(ap , FleetType.RAIDER_FLEET, 36);
-		assertBuiltRaiderGroups(fleet, new Group(ShipType.RAIDER, 3));
+		Fleet fleet = new Fleet(ap , RAIDER_FLEET, 36);
+		assertBuiltRaiderGroups(fleet, new Group(RAIDER, 3));
 	}
 	
 	@Test
 	public void buildRaiderFleet(){
-		ap.setLevel(Technology.CLOAKING, 2);
+		ap.setLevel(CLOAKING, 2);
 		ap.setJustPurchasedCloaking(true);
-		game.setSeenLevel(Technology.SCANNER, 1);
-		Fleet fleet = new Fleet(ap , FleetType.REGULAR_FLEET, 36);
-		assertBuiltRaiderGroups(fleet, new Group(ShipType.RAIDER, 3));
+		game.setSeenLevel(SCANNER, 1);
+		Fleet fleet = new Fleet(ap , REGULAR_FLEET, 36);
+		assertBuiltRaiderGroups(fleet, new Group(RAIDER, 3));
 	}
 
 	@Test
 	public void buildFullyLoadedTransport(){
-		ap.setLevel(Technology.GROUND_COMBAT, 1);
-		Fleet fleet = new Fleet(ap , FleetType.REGULAR_FLEET, 0);
-		assertBuiltFreeGroups(fleet, new Group(ShipType.TRANSPORT, 1), new Group(ShipType.INFANTRY, 6));
+		ap.setLevel(GROUND_COMBAT, 1);
+		Fleet fleet = new Fleet(ap , REGULAR_FLEET, 0);
+		assertBuiltFreeGroups(fleet, new Group(TRANSPORT, 1), new Group(INFANTRY, 6));
 	}
 
 	@Test
 	public void buildGC2FullyLoadedTransport(){
-		ap.setLevel(Technology.GROUND_COMBAT, 2);
-		Fleet fleet = new Fleet(ap , FleetType.REGULAR_FLEET, 0);
+		ap.setLevel(GROUND_COMBAT, 2);
+		Fleet fleet = new Fleet(ap , REGULAR_FLEET, 0);
 		assertBuiltFreeGroups(fleet, 
-				new Group(ShipType.TRANSPORT, 1), 
-				new Group(ShipType.MARINE, 5), 
-				new Group(ShipType.HEAVY_INFANTRY, 1));
+				new Group(TRANSPORT, 1), 
+				new Group(MARINE, 5), 
+				new Group(HEAVY_INFANTRY, 1));
 	}
 
 	@Test
 	public void buildGC3FullyLoadedTransport(){
-		ap.setLevel(Technology.GROUND_COMBAT, 3);
-		Fleet fleet = new Fleet(ap , FleetType.REGULAR_FLEET, 0);
+		ap.setLevel(GROUND_COMBAT, 3);
+		Fleet fleet = new Fleet(ap , REGULAR_FLEET, 0);
 		assertBuiltFreeGroups(fleet, 
-				new Group(ShipType.TRANSPORT, 1), 
-				new Group(ShipType.MARINE, 4), 
-				new Group(ShipType.HEAVY_INFANTRY, 1),
-				new Group(ShipType.GRAV_ARMOR, 1));
+				new Group(TRANSPORT, 1), 
+				new Group(MARINE, 4), 
+				new Group(HEAVY_INFANTRY, 1),
+				new Group(GRAV_ARMOR, 1));
 	}
 
 	@Test
 	public void boarding1Builds1BDs(){
-		Fleet fleet = new Fleet(ap , FleetType.REGULAR_FLEET, 12);
-		ap.setLevel(Technology.BOARDING, 1);
-		assertBuiltGroups(fleet, new Group(ShipType.BOARDING_SHIP, 1));
+		ap.setLevel(BOARDING, 1);
+		assertBuiltFleet(12, new Group(BOARDING_SHIP, 1));
 	}
 
 	@Test
 	public void boarding1Builds2BDs(){
-		Fleet fleet = new Fleet(ap , FleetType.REGULAR_FLEET, 24);
-		ap.setLevel(Technology.BOARDING, 1);
-		assertBuiltGroups(fleet, new Group(ShipType.BOARDING_SHIP, 2));
+		ap.setLevel(BOARDING, 1);
+		assertBuiltFleet(24, new Group(BOARDING_SHIP, 2));
 	}
 
 	@Test
 	public void boarding1BuildsOnly2BDs(){
-		Fleet fleet = new Fleet(ap , FleetType.REGULAR_FLEET, 36);
-		ap.setLevel(Technology.BOARDING, 1);
-		assertBuiltGroups(fleet, new Group(ShipType.BOARDING_SHIP, 2));
+		ap.setLevel(BOARDING, 1);
+		ap.setLevel(SHIP_SIZE, 2); //spend 9 CP on optional DD
+		assertBuiltFleet(36, new Group(BOARDING_SHIP, 2), new Group(DESTROYER, 1));
 	}
 
 	@Test
 	public void boarding2BuildsOnly2BDs(){
-		Fleet fleet = new Fleet(ap , FleetType.REGULAR_FLEET, 36);
-		ap.setLevel(Technology.BOARDING, 2);
-		assertBuiltGroups(fleet, new Group(ShipType.BOARDING_SHIP, 2));
+		ap.setLevel(BOARDING, 2);
+		ap.setLevel(SHIP_SIZE, 3); //spend 12 CP on optional CRUISER
+		assertBuiltFleet(36, new Group(BOARDING_SHIP, 2), new Group(CRUISER, 1));
 	}
 
 	@Test
 	public void dontBuildsBDsIfNotEnoughCP(){
-		Fleet fleet = new Fleet(ap , FleetType.REGULAR_FLEET, 11);
-		ap.setLevel(Technology.BOARDING, 2);
-		assertBuiltGroups(fleet);
+		ap.setLevel(BOARDING, 2);
+		assertBuiltFleet(5);
 	}
 
 	@Test
 	public void buy1SCIfSeenMines(){
-		Fleet fleet = new Fleet(ap, FleetType.REGULAR_FLEET, 6);
 		game.addSeenThing(Seeable.MINES);
-		assertBuiltGroups(fleet, new Group(ShipType.SCOUT, 1));
+		assertBuiltFleet(6, new Group(SCOUT, 1));
 	}
 	
 	@Test
 	public void buy2SCIfSeenMines(){
-		Fleet fleet = new Fleet(ap, FleetType.REGULAR_FLEET, 12);
 		game.addSeenThing(Seeable.MINES);
-		assertBuiltGroups(fleet, new Group(ShipType.SCOUT, 2));
+		assertBuiltFleet(12, new Group(SCOUT, 2));
 	}
 	
 	@Test
 	public void buildCarrierFleet() {
 		ap.setLevel(FIGHTERS, 1);
-		Fleet fleet = new Fleet(ap, REGULAR_FLEET, 27);
-		assertBuiltGroups(fleet, new Group(CARRIER, 1), new Group(FIGHTER, 3));
+		assertBuiltFleet(27, new Group(CARRIER, 1), new Group(FIGHTER, 3));
+		assertBuiltFleet(54, new Group(CARRIER, 2), new Group(FIGHTER, 6));
+	}
+	
+	@Test
+	public void buyFlagshipFirst() {
+		assertBuiltFlagship(1, 6, SCOUT);
+		assertBuiltFlagship(2, 9, DESTROYER);
+		assertBuiltFlagship(3, 12, CRUISER);
+		assertBuiltFlagship(4, 15, BATTLECRUISER);
+		assertBuiltFlagship(5, 20, BATTLESHIP);
+		assertBuiltFlagship(6, 24, DREADNAUGHT);
+		assertBuiltFlagship(7, 32, TITAN);
+	}
 
-		fleet = new Fleet(ap, REGULAR_FLEET, 54);
-		assertBuiltGroups(fleet, new Group(CARRIER, 2), new Group(FIGHTER, 6));
+	// COPY PASTE START
+	@Test
+	public void buyOneDD() {
+		ap.setLevel(SHIP_SIZE, 2);
+		assertBuiltFleet(1, 27, new Group(DESTROYER, 1), new Group(SCOUT, 3));
+
+		ap.setLevel(SHIP_SIZE, 3);
+		assertBuiltFleet(1, 30, new Group(CRUISER, 1), new Group(DESTROYER, 2));
+
+		game.setSeenLevel(CLOAKING, 1);
+		assertBuiltFleet(1, 30, new Group(CRUISER, 1), new Group(SCOUT, 3));
+
+		ap.setLevel(SCANNER, 1);
+		assertBuiltFleet(1, 30, new Group(CRUISER, 1), new Group(DESTROYER, 2));
+	}
+
+	@Test
+	public void buildLargestFleet() {
+		game.setSeenLevel(CLOAKING, 1); // NO Possible DD
+
+		ap.setLevel(SHIP_SIZE, 2);
+		assertBuiltFleet(1, 18, new Group(DESTROYER, 2));
+
+		assertBuiltFleet(1, 27, new Group(DESTROYER, 1), new Group(SCOUT, 3));
+
+		ap.setLevel(SHIP_SIZE, 3);
+		assertBuiltFleet(1, 30, new Group(CRUISER, 1), new Group(SCOUT, 3));
+		assertBuiltFleet(1, 33, new Group(CRUISER, 1), new Group(DESTROYER, 1), new Group(SCOUT, 2));
+		assertBuiltFleet(1, 87, new Group(CRUISER, 1), new Group(DESTROYER, 1), new Group(SCOUT, 11));
+	}
+
+	@Test
+	public void buildLargestShips() {
+		game.setSeenLevel(CLOAKING, 1); // NO Possible DD
+
+		ap.setLevel(SHIP_SIZE, 2);
+		assertBuiltFleet(7, 21, new Group(DESTROYER, 2));
+		assertBuiltFleet(7, 27, new Group(DESTROYER, 3));
+
+		ap.setLevel(SHIP_SIZE, 3);
+		assertBuiltFleet(7, 30, new Group(CRUISER, 2), new Group(SCOUT, 1));
+
+		ap.setLevel(SHIP_SIZE, 6);
+		assertBuiltFleet(7, 30, new Group(DREADNAUGHT, 1), new Group(SCOUT, 1));
+
+		ap.setLevel(SHIP_SIZE, 7);
+		assertBuiltFleet(7, 56, new Group(TITAN, 1), new Group(DREADNAUGHT, 1));
+	}
+
+	@Test
+	public void buildBalancedFleet() {
+		game.setSeenLevel(CLOAKING, 1); // NO Possible DD
+
+		ap.setLevel(SHIP_SIZE, 5);
+		assertBuiltFleet(4, 44, new Group(BATTLESHIP, 1), new Group(SCOUT, 4));
+
+		ap.setLevel(ATTACK, 2);
+		assertBuiltFleet(4, 44, new Group(BATTLESHIP, 1), new Group(CRUISER, 2));
+
+		ap.setLevel(ATTACK, 0);
+		ap.setLevel(DEFENSE, 2);
+		assertBuiltFleet(4, 44, new Group(BATTLESHIP, 1), new Group(CRUISER, 2));
+		assertBuiltFleet(4, 47, new Group(BATTLESHIP, 1), new Group(BATTLECRUISER, 1), new Group(CRUISER, 1));
+		assertBuiltFleet(4, 50, new Group(BATTLESHIP, 1), new Group(BATTLECRUISER, 2));
+		assertBuiltFleet(4, 52, new Group(BATTLESHIP, 2), new Group(CRUISER, 1));
+		assertBuiltFleet(4, 56, new Group(BATTLESHIP, 1), new Group(CRUISER, 3));
+
+		ap.setLevel(SHIP_SIZE, 2);
+		assertBuiltFleet(4, 44, new Group(DESTROYER, 2), new Group(SCOUT, 4));
+
+		ap.setLevel(SHIP_SIZE, 3);
+		assertBuiltFleet(4, 26, new Group(CRUISER, 2));
+	}
+	
+	@Test
+	public void substractTwoIfHasPDAndSeenFighters() {
+		game.setSeenLevel(CLOAKING, 1); // No Possible DD
+		ap.setLevel(Technology.POINT_DEFENSE, 1);
+		game.addSeenThing(Seeable.FIGHTERS);
+
+		ap.setLevel(SHIP_SIZE, 3);
+		assertBuiltFleet(5, 27, new Group(CRUISER, 1), new Group(DESTROYER, 1), new Group(SCOUT, 1));
+	}
+
+	@Test
+	public void substractTwoIfHasPDAndSeenFightersAndBuy2SC() {
+		game.setSeenLevel(CLOAKING, 1); // No Possible DD
+		ap.setLevel(Technology.POINT_DEFENSE, 1);
+		game.addSeenThing(Seeable.FIGHTERS);
+
+		ap.setLevel(SHIP_SIZE, 5);
+		ap.setLevel(ATTACK, 2);
+		assertBuiltFleet(6, 44, new Group(BATTLESHIP, 1), new Group(SCOUT, 2), new Group(CRUISER, 1));
+
+		ap.setLevel(SHIP_SIZE, 3);
+		assertBuiltFleet(6, 26, new Group(CRUISER, 1), new Group(SCOUT, 2));
+
+		ap.setLevel(SHIP_SIZE, 2);
+		assertBuiltFleet(9, 21, new Group(DESTROYER, 1), new Group(SCOUT, 2));
+	}
+
+	@Test
+	public void substractTwoIfHasPDAndSeenFightersAndDontBuy2SCIfHasFullCarrier() {
+		game.setSeenLevel(CLOAKING, 1); // No Possible DD
+		ap.setLevel(FIGHTERS, 1);
+		ap.setLevel(Technology.POINT_DEFENSE, 1);
+		game.addSeenThing(Seeable.FIGHTERS);
+
+		ap.setLevel(SHIP_SIZE, 3);
+		ap.setLevel(ATTACK, 2);
+		assertBuiltFleet(6, 27 + 26, new Group(CARRIER, 1), new Group(FIGHTER, 3), new Group(CRUISER, 2));
+
+		ap.setLevel(SHIP_SIZE, 2);
+		assertBuiltFleet(9, 27 + 21, new Group(CARRIER, 1), new Group(FIGHTER, 3), new Group(DESTROYER, 2));
+	}
+	
+	//COPY PASTE END
+	
+	private void assertBuiltFlagship(int shipSize, int fleetCP, ShipType shipType) {
+		ap.setLevel(SHIP_SIZE, shipSize);
+		assertBuiltFleet(fleetCP, new Group(shipType, 1));
+	}
+	
+	private void assertBuiltFleet(int fleetTypeRoll, int fleetCP, Group... expectedGroups) {
+		roller.mockRoll(fleetTypeRoll);
+		assertBuiltFleet(fleetCP, expectedGroups);
+	}
+	
+	private void assertBuiltFleet(int fleetCP, Group... expectedGroups) {
+		Fleet fleet = new Fleet(ap, REGULAR_FLEET, fleetCP);
+		assertBuiltGroups(fleet, expectedGroups);
 	}
 	
 	private void assertBuiltGroups(Fleet fleet, Group... expectedGroups) {
 		List<Group> fleetGroups = new ArrayList<>(); 
-		fleetGroups.add(new Group(ShipType.TRANSPORT, 1));		
-		fleetGroups.add(new Group(ShipType.INFANTRY, 6));
+		fleetGroups.add(new Group(TRANSPORT, 1));		
+		fleetGroups.add(new Group(INFANTRY, 6));
 		
 		builder.buildFleet(fleet);
 		int expectedCost = 0;
@@ -166,7 +300,7 @@ public class FleetBuilderTest {
 		fleetGroups.addAll(Arrays.asList(expectedGroups));
 		assertEquals(fleetGroups, fleet.getGroups());
 		assertEquals(expectedCost, fleet.getBuildCost());
-		assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
+		assertEquals(REGULAR_FLEET, fleet.getFleetType());
 	}
 
 	private void assertBuiltRaiderGroups(Fleet fleet, Group... expectedGroups) {
@@ -177,7 +311,7 @@ public class FleetBuilderTest {
 		}
 		assertEquals(Arrays.asList(expectedGroups), fleet.getGroups());
 		assertEquals(expectedCost, fleet.getBuildCost());
-		assertEquals(FleetType.RAIDER_FLEET, fleet.getFleetType());
+		assertEquals(RAIDER_FLEET, fleet.getFleetType());
 	}
 	
 	private void assertBuiltFreeGroups(Fleet fleet, Group... expectedGroups) {
@@ -185,7 +319,7 @@ public class FleetBuilderTest {
 		int expectedCost = 0;
 		assertEquals(Arrays.asList(expectedGroups), fleet.getGroups());
 		assertEquals(expectedCost, fleet.getBuildCost());
-		assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
+		assertEquals(REGULAR_FLEET, fleet.getFleetType());
 	}
 	
 }

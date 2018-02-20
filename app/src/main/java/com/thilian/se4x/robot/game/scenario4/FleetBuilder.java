@@ -56,7 +56,7 @@ public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
 	private void buildOneFullyLoadedTransport(Fleet fleet) {
 		fleet.addFreeGroup(new Group(ShipType.TRANSPORT, 1));
 		switch (fleet.getAp().getLevel(Technology.GROUND_COMBAT)) {
-			case 1:
+			default:
 				fleet.addFreeGroup(new Group(ShipType.INFANTRY, 6));
 				break;
 			case 2:

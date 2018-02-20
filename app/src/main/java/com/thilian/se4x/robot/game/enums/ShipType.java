@@ -17,6 +17,7 @@ public enum ShipType {
 	BATTLECRUISER(15, 2, 4), 
 	BATTLESHIP(20, 3, 5), 
 	DREADNAUGHT(24, 3, 6),
+	TITAN(32, 5, 7),
 	
 	TRANSPORT(6, 1, 99),
 	INFANTRY(2, 1, 99),
@@ -70,6 +71,8 @@ public enum ShipType {
 	}
 	
 	public static ShipType findBiggest(int availableCP, int shipSizeLevel) {
+		if(canBuild(availableCP, shipSizeLevel, TITAN))
+			return TITAN;
 		if(canBuild(availableCP, shipSizeLevel, DREADNAUGHT))
 			return DREADNAUGHT;
 		if(canBuild(availableCP, shipSizeLevel, BATTLESHIP))
