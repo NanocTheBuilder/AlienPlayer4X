@@ -62,7 +62,7 @@ public class FleetsActivity extends Activity implements FleetView.FleetRevealLis
 
     private void buildDefenseButtonClicked(){
         LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
-        List<Fleet> newFleets = alienPlayer.buildDefense();
+        List<Fleet> newFleets = alienPlayer.buildHomeDefense(null);
         if(newFleets.size() != 0) {
             SE4XApplication app = (SE4XApplication) this.getApplication();
             app.showNewFleets(this, newFleets);

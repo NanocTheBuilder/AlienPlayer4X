@@ -61,9 +61,6 @@ public class HomeDefenseBuildTest {
 		ap.setLevel(Technology.GROUND_COMBAT, 3);
 		roller.mockRoll(2);
 		assertBuiltGroups(38, 5, new Group(ShipType.GRAV_ARMOR, 2), new Group(ShipType.HEAVY_INFANTRY, 2), new Group(ShipType.BASE, 1), new Group(ShipType.MINE, 2));
-
-		roller.mockRoll(2);
-		assertBuiltGroups(7, 5, new Group(ShipType.GRAV_ARMOR, 1), new Group(ShipType.HEAVY_INFANTRY, 1));
 }
 	
 	private void assertBuiltGroups(int defCP, int roll, Group... expectedGroups) {

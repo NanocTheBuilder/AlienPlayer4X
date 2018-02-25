@@ -32,7 +32,7 @@ public class FleetView extends RelativeLayout{
         revealFleetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                fleet.getAp().buildFleet(fleet);
+                fleet.getAp().buildFleet(fleet,null);
                 update();
                 fleetRevealListener.onFleetRevealed(fleet);
             }
