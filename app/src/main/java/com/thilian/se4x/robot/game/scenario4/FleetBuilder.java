@@ -47,12 +47,6 @@ public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
 		}
 	}
 
-	private void addGroup(Fleet fleet, ShipType shipType, int maxToBuy) {
-		int shipToBuy = fleet.getFleetCP() / shipType.getCost();
-		shipToBuy = shipToBuy > maxToBuy ? maxToBuy : shipToBuy;
-		fleet.addGroup(new Group(shipType, shipToBuy));
-	}
-
 	private void buildOneFullyLoadedTransport(Fleet fleet) {
 		fleet.addFreeGroup(new Group(ShipType.TRANSPORT, 1));
 		switch (fleet.getAp().getLevel(Technology.GROUND_COMBAT)) {

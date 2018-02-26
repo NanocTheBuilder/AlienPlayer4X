@@ -17,7 +17,7 @@ import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
-public class FleetBuilder {
+public class FleetBuilder extends GroupBuilder{
 
 	protected Game game;
 
@@ -93,7 +93,7 @@ public class FleetBuilder {
 						fleet.addGroup(new Group(biggerType, shipType2ToBuy));
 					}
 				}
-				buildRemaining(fleet, cheapestType);
+				addGroup(fleet, cheapestType);
 			}
 		}
 	}
@@ -109,7 +109,7 @@ public class FleetBuilder {
 
 	protected void buildRaiderFleet(Fleet fleet) {
 		fleet.setFleetType(RAIDER_FLEET);
-		buildRemaining(fleet, RAIDER);
+		addGroup(fleet, RAIDER);
 	}
 
 	protected void buildFlagship(Fleet fleet) {
@@ -133,13 +133,6 @@ public class FleetBuilder {
 				fleet.getFleetCP() >= RAIDER.getCost() && 
 				ap.isJustPurchasedCloaking() && 
 				ap.getLevel(CLOAKING) > game.getSeenLevel(SCANNER);
-	}
-
-	private void buildRemaining(Fleet fleet, ShipType shipType) {
-		int shipsToBuild = fleet.getRemainigCP() / shipType.getCost();
-		if (shipsToBuild > 0) {
-			fleet.addGroup(new Group(shipType, shipsToBuild));
-		}
 	}
 
 }

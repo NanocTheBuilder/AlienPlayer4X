@@ -3,7 +3,7 @@ package com.thilian.se4x.robot.game;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.ShipType;
 
-public class DefenseBuilder {
+public class DefenseBuilder extends GroupBuilder{
 
     protected Game game;
 
@@ -33,10 +33,4 @@ public class DefenseBuilder {
             addGroup(fleet, ShipType.MINE);
         }
     }
-
-    protected void addGroup(Fleet fleet, ShipType shipType) {
-        int shipToBuild = fleet.getRemainigCP() / shipType.getCost();
-        fleet.addGroup(new Group(shipType, shipToBuild));
-    }
-
 }

@@ -61,11 +61,4 @@ public class DefenseBuilder extends com.thilian.se4x.robot.game.DefenseBuilder {
         else
             addGroup(fleet, MINE, 2);
     }
-
-    //TODO copy pasted from FleetBuilder
-    private void addGroup(Fleet fleet, ShipType shipType, int maxToBuy) {
-        int shipToBuy = fleet.getFleetCP() / shipType.getCost();
-        shipToBuy = shipToBuy > maxToBuy ? maxToBuy : shipToBuy;
-        fleet.addGroup(new Group(shipType, shipToBuy));
-    }
 }
