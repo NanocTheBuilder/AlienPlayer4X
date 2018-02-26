@@ -1,8 +1,5 @@
 package com.thilian.se4x.robot.game;
 
-import com.thilian.se4x.robot.game.enums.Seeable;
-import com.thilian.se4x.robot.game.enums.Technology;
-
 import static com.thilian.se4x.robot.game.enums.FleetType.DEFENSE_FLEET;
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
@@ -16,39 +13,39 @@ import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import com.thilian.se4x.robot.game.enums.Seeable;
+import com.thilian.se4x.robot.game.enums.Technology;
 
 /**
  * Created by thili on 2017. 12. 05..
  */
 
 public abstract class TechnologyBuyer {
-	public static final String COMBAT_IS_ABOVE_PLANET = "COMBAT_IS_ABOVE_PLANET";
+    public static final String COMBAT_IS_ABOVE_PLANET = "COMBAT_IS_ABOVE_PLANET";
 
-	protected Game game;
+    protected Game game;
 
     protected Map<Technology, Integer> TECHNOLOGY_ROLL_TABLE = new TreeMap<>();
 
-    protected TechnologyBuyer(Game game){
+    protected TechnologyBuyer(Game game) {
         this.game = game;
         initRollTable();
     }
 
-    public void buyTechs(Fleet fleet, Map<String, Object> params){
+    public void buyTechs(Fleet fleet, Map<String, Object> params) {
         buyOptionalTechs(fleet, params);
         spendRemainingTechCP(fleet);
     }
 
     protected abstract void initRollTable();
-    
+
     protected void addToRollTable(Technology technology, Integer values) {
         TECHNOLOGY_ROLL_TABLE.put(technology, values);
     }
-
 
     public abstract void buyOptionalTechs(Fleet fleet, Map<String, Object> params);
 
@@ -63,37 +60,37 @@ public abstract class TechnologyBuyer {
         }
     }
 
-	protected void buyRolledTech(AlienPlayer ap, Technology technology) {
-		switch (technology) {
-			case TACTICS:
-				if (ap.getLevel(ATTACK) < 2 && canBuyNextLevel(ap, ATTACK))
-					buyNextLevel(ap, ATTACK);
-				else if (ap.getLevel(DEFENSE) < 2 && canBuyNextLevel(ap, DEFENSE))
-					buyNextLevel(ap, DEFENSE);
-				else
-					buyNextLevel(ap, TACTICS);
-				break;
-			case CLOAKING:
-				buyNextLevel(ap, CLOAKING);
-				ap.setJustPurchasedCloaking(true);
-				break;
-			default:
-				buyNextLevel(ap, technology);
-				break;
-		}
-	}
-    
+    protected void buyRolledTech(AlienPlayer ap, Technology technology) {
+        switch (technology) {
+        case TACTICS:
+            if (ap.getLevel(ATTACK) < 2 && canBuyNextLevel(ap, ATTACK))
+                buyNextLevel(ap, ATTACK);
+            else if (ap.getLevel(DEFENSE) < 2 && canBuyNextLevel(ap, DEFENSE))
+                buyNextLevel(ap, DEFENSE);
+            else
+                buyNextLevel(ap, TACTICS);
+            break;
+        case CLOAKING:
+            buyNextLevel(ap, CLOAKING);
+            ap.setJustPurchasedCloaking(true);
+            break;
+        default:
+            buyNextLevel(ap, technology);
+            break;
+        }
+    }
+
     protected abstract int[] getShipSizeRollTable();
 
     public void buyNextLevel(AlienPlayer ap, Technology technology) {
-       int currentLevel = ap.getLevel(technology);
-       if (canBuyNextLevel(ap, technology)) {
-           int nextLevel = currentLevel + 1;
-           int cost = game.technologyPrices.getCost(technology, nextLevel);
-           ap.setLevel(technology, nextLevel);
-           ap.getEconomicSheet().spendTechCP(cost);
-       }
-   }
+        int currentLevel = ap.getLevel(technology);
+        if (canBuyNextLevel(ap, technology)) {
+            int nextLevel = currentLevel + 1;
+            int cost = game.technologyPrices.getCost(technology, nextLevel);
+            ap.setLevel(technology, nextLevel);
+            ap.getEconomicSheet().spendTechCP(cost);
+        }
+    }
 
     public boolean canBuyNextLevel(AlienPlayer ap, Technology technology) {
         int currentLevel = ap.getLevel(technology);
@@ -122,13 +119,13 @@ public abstract class TechnologyBuyer {
         List<Technology> buyable = new ArrayList<>();
         for (Technology technology : TECHNOLOGY_ROLL_TABLE.keySet()) {
             if (canBuyNextLevel(fleet, technology)) {
-            	for(int i = 0; i < TECHNOLOGY_ROLL_TABLE.get(technology); i++)
-            		buyable.add(technology);
+                for (int i = 0; i < TECHNOLOGY_ROLL_TABLE.get(technology); i++)
+                    buyable.add(technology);
             }
         }
         return buyable;
     }
-    
+
     public void buyCloakingIfNeeded(Fleet fleet) {
         AlienPlayer ap = fleet.getAp();
         if (fleet.getFleetType().equals(RAIDER_FLEET) && ap.getLevel(CLOAKING) != 0) {
@@ -172,24 +169,24 @@ public abstract class TechnologyBuyer {
     }
 
     public void buySecurityIfNeeded(AlienPlayer ap) {
-        if(game.isSeenThing(Seeable.BOARDING_SHIPS)&& ap.getLevel(Technology.SECURITY_FORCES) == 0)
+        if (game.isSeenThing(Seeable.BOARDING_SHIPS) && ap.getLevel(Technology.SECURITY_FORCES) == 0)
             buyNextLevel(ap, Technology.SECURITY_FORCES);
     }
 
     public void buyGroundCombatIfNeeded(AlienPlayer ap, boolean combatIsAbovePlanet) {
-        if(combatIsAbovePlanet)
+        if (combatIsAbovePlanet)
             buyNextLevel(ap, Technology.GROUND_COMBAT);
     }
 
     public void buyMilitaryAcademyIfNeeded(AlienPlayer ap) {
-        if(game.isSeenThing(Seeable.VETERANS))
-            if(game.roller.roll() <= 6)
+        if (game.isSeenThing(Seeable.VETERANS))
+            if (game.roller.roll() <= 6)
                 buyNextLevel(ap, Technology.MILITARY_ACADEMY);
     }
 
     public void buyBoardingIfNeeded(AlienPlayer ap) {
-        if(game.isSeenThing(Seeable.SIZE_3_SHIPS) && ap.getLevel(Technology.BOARDING) == 0)
-            if(game.roller.roll() <= 4)
+        if (game.isSeenThing(Seeable.SIZE_3_SHIPS) && ap.getLevel(Technology.BOARDING) == 0)
+            if (game.roller.roll() <= 4)
                 buyNextLevel(ap, Technology.BOARDING);
     }
 

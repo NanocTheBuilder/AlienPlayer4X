@@ -53,8 +53,7 @@ public class FleetBuilder extends GroupBuilder {
                 buildBallanced(fleet, 1);
             } else {
                 if (canUsePD && fleet.findGroup(CARRIER) == null) {
-                    int scoutsToBuild = Math.min(2, fleet.getRemainigCP() / SCOUT.getCost());
-                    fleet.addGroup(new Group(SCOUT, scoutsToBuild));
+                    addGroup(fleet, SCOUT, 2);
                 }
                 if (fleetCompositionRoll <= 6) {
                     if (fleet.canBuyMoreShips())

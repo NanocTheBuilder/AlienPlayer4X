@@ -1,14 +1,18 @@
 package com.thilian.se4x.robot.game.basegame;
 
+import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
+import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
+import static com.thilian.se4x.robot.game.enums.Technology.DEFENSE;
+import static com.thilian.se4x.robot.game.enums.Technology.FIGHTERS;
+import static com.thilian.se4x.robot.game.enums.Technology.MINES;
+import static com.thilian.se4x.robot.game.enums.Technology.MINE_SWEEPER;
+import static com.thilian.se4x.robot.game.enums.Technology.MOVE;
+import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
+import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
+import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
+import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
+
 import com.thilian.se4x.robot.game.TechnologyPrices;
-import com.thilian.se4x.robot.game.enums.Technology;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.thilian.se4x.robot.game.enums.Technology.*;
 
 /**
  * Created by thili on 2017. 11. 25..

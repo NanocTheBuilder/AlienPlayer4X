@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by thili on 2017. 12. 06..
  */
 
-public class TechnologyPrices {
+public abstract class TechnologyPrices {
     private Collection<Technology> availableTechs = new ArrayList<>();
     private Map<Technology, int[]> map = new HashMap<>();
 

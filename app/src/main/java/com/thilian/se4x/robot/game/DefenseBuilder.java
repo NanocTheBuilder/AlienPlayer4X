@@ -22,15 +22,23 @@ public class DefenseBuilder extends GroupBuilder{
         if (roll < 4) {
             addGroup(fleet, ShipType.MINE);
         } else if (roll < 8) {
-            while (fleet.getRemainigCP() >= ShipType.MINE.getCost()) {
-                if (fleet.getRemainigCP() >= ShipType.BASE.getCost())
+            while (canBuyMine(fleet)) {
+                if (canBuyBase(fleet))
                     fleet.addGroup(new Group(ShipType.BASE, 1));
-                if (fleet.getRemainigCP() >= ShipType.MINE.getCost())
+                if (canBuyMine(fleet))
                     fleet.addGroup(new Group(ShipType.MINE, 1));
             }
         } else {
             addGroup(fleet, ShipType.BASE);
             addGroup(fleet, ShipType.MINE);
         }
+    }
+
+    private boolean canBuyBase(Fleet fleet) {
+        return fleet.getRemainigCP() >= ShipType.BASE.getCost();
+    }
+
+    private boolean canBuyMine(Fleet fleet) {
+        return fleet.getRemainigCP() >= ShipType.MINE.getCost();
     }
 }
