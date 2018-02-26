@@ -1,13 +1,16 @@
 package com.thilian.se4x.robot.game.scenario4;
 
-import static com.thilian.se4x.robot.game.enums.ShipType.*;
+import static com.thilian.se4x.robot.game.enums.ShipType.BASE;
+import static com.thilian.se4x.robot.game.enums.ShipType.GRAV_ARMOR;
+import static com.thilian.se4x.robot.game.enums.ShipType.HEAVY_INFANTRY;
+import static com.thilian.se4x.robot.game.enums.ShipType.INFANTRY;
+import static com.thilian.se4x.robot.game.enums.ShipType.MINE;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.FleetType;
-import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class DefenseBuilder extends com.thilian.se4x.robot.game.DefenseBuilder {
