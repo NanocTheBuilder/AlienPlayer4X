@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -36,8 +37,8 @@ public abstract class TechnologyBuyer {
         initRollTable();
     }
 
-    public void buyTechs(Fleet fleet, Map<String, Object> params) {
-        buyOptionalTechs(fleet, params);
+    public void buyTechs(Fleet fleet, FleetBuildOptions... options) {
+        buyOptionalTechs(fleet, options);
         spendRemainingTechCP(fleet);
     }
 
@@ -47,7 +48,7 @@ public abstract class TechnologyBuyer {
         TECHNOLOGY_ROLL_TABLE.put(technology, values);
     }
 
-    public abstract void buyOptionalTechs(Fleet fleet, Map<String, Object> params);
+    public abstract void buyOptionalTechs(Fleet fleet, FleetBuildOptions... options);
 
     public void spendRemainingTechCP(Fleet fleet) {
         AlienPlayer ap = fleet.getAp();

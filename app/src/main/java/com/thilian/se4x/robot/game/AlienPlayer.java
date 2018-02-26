@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.ShipType;
@@ -51,13 +52,13 @@ public class AlienPlayer {
         return fleet;
     }
 
-    void buyTechs(Fleet fleet, Map<String, Object> params) {
+    void buyTechs(Fleet fleet, FleetBuildOptions... options) {
         setJustPurchasedCloaking(false);
-        game.techBuyer.buyTechs(fleet, params);
+        game.techBuyer.buyTechs(fleet, options);
     }
 
-    public void buildFleet(Fleet fleet, Map<String, Object> params) {
-        buyTechs(fleet, params);
+    public void buildFleet(Fleet fleet, FleetBuildOptions... options) {
+        buyTechs(fleet, options);
         game.fleetBuilder.buildFleet(fleet);
         economicSheet.addFleetCP(fleet.getFleetCP() - fleet.getBuildCost());
     }
@@ -84,12 +85,12 @@ public class AlienPlayer {
         return null;
     }
 
-    public List<Fleet> buildHomeDefense(Map<String, Object> params) {
+    public List<Fleet> buildHomeDefense() {
         List<Fleet> newFleets = new ArrayList<>();
         int currentFleetCP = economicSheet.getFleetCP();
         if (currentFleetCP >= ShipType.SCOUT.getCost()) {
             Fleet fleet = new Fleet(this, DEFENSE_FLEET, currentFleetCP);
-            buyTechs(fleet, params);
+            buyTechs(fleet, FleetBuildOptions.COMBAT_IS_ABOVE_PLANET);
             game.fleetBuilder.buildFleet(fleet);
             fleet.setFleetType(REGULAR_FLEET);
             economicSheet.spendFleetCP(fleet.getBuildCost());

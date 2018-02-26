@@ -13,12 +13,14 @@ import static com.thilian.se4x.robot.game.enums.Technology.SECURITY_FORCES;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.TechnologyBuyer;
+import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
 
 /**
  * Created by thili on 2017. 12. 06..
@@ -53,12 +55,12 @@ class Scenario4TechnologyBuyer extends TechnologyBuyer {
     }
 
     @Override
-    public void buyOptionalTechs(Fleet fleet, Map<String, Object> params) {
+    public void buyOptionalTechs(Fleet fleet, FleetBuildOptions... options) {
         AlienPlayer ap = fleet.getAp();
         buyPointDefenseIfNeeded(ap);
         buyMineSweepIfNeeded(ap);
         buySecurityIfNeeded(ap);
-        buyGroundCombatIfNeeded(ap, (boolean) params.get(COMBAT_IS_ABOVE_PLANET));
+        buyGroundCombatIfNeeded(ap, new HashSet<>(Arrays.asList(options)).contains(COMBAT_IS_ABOVE_PLANET));
         buyMilitaryAcademyIfNeeded(ap);
         buyScannerIfNeeded(ap);
         buyBoardingIfNeeded(ap);

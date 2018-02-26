@@ -19,7 +19,6 @@ import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.MockRoller;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetType;
-import com.thilian.se4x.robot.game.enums.Technology;
 
 public class ColonyDefenseBuildTest {
     private AlienPlayer ap;

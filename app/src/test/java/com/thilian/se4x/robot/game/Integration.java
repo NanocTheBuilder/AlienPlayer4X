@@ -58,7 +58,7 @@ public class Integration {
 
 		fleet = ap.getFleets().get(0);
 		roller.mockRoll(9); // ShipSize
-		ap.buildFleet(fleet, null);
+		ap.buildFleet(fleet);
 		assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
 		assertGroups(fleet, new Group(ShipType.DESTROYER, 1));
 		assertCPs(16, 0, 20);
@@ -90,7 +90,7 @@ public class Integration {
 		fleet = ap.getFleets().get(0);
 		roller.mockRoll(9); // ShipSize
 		roller.mockRoll(6); // Cloaking
-		ap.buildFleet(fleet, null);
+		ap.buildFleet(fleet);
 		assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
 		assertEquals(1, ap.getLevel(Technology.CLOAKING));
 		assertGroups(fleet, new Group(ShipType.RAIDER, 2));
@@ -109,7 +109,7 @@ public class Integration {
 		roller.mockRoll(9); // ShipSize (Ignored)
 		roller.mockRoll(1); //Max number of ships
 		roller.mockRoll(10); //Max bases
-		ap.buildHomeDefense(null);
+		ap.buildHomeDefense();
 		assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
 		assertEquals(1, ap.getLevel(Technology.SCANNER));
 		assertGroups(ap.getFleets().get(1), new Group(ShipType.DESTROYER, 1), new Group(ShipType.SCOUT, 2));
