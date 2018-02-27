@@ -181,7 +181,7 @@ public class OptionalTechPurchaseTest  extends BasegameTechnologyBuyerTestBase {
 		sheet.setTechCP(100);
 		techBuyer.buyCloakingIfNeeded(fleet);
 		assertLevel(CLOAKING, expectedLevel);
-		assertEquals(100 - game.technologyPrices.getCost(CLOAKING, expectedLevel), sheet.getTechCP());
+		assertEquals(100 - game.scenario.getCost(CLOAKING, expectedLevel), sheet.getTechCP());
 	}
 
 	private void assertDontBuyCloaking(int expectedLevel) {

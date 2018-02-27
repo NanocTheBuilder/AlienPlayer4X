@@ -41,4 +41,8 @@ public class DefenseBuilder extends GroupBuilder{
     private boolean canBuyMine(Fleet fleet) {
         return fleet.getRemainigCP() >= ShipType.MINE.getCost();
     }
+
+    public Fleet buildColonyDefense(AlienPlayer ap) {
+        throw new UnsupportedOperationException();
+    }
 }

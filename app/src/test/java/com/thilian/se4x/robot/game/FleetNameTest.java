@@ -1,10 +1,12 @@
 package com.thilian.se4x.robot.game;
 
-import com.thilian.se4x.robot.game.enums.FleetType;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.thilian.se4x.robot.game.basegame.BaseGameScenario;
+import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.enums.FleetType;
 
 /**
  * Created by thili on 2017. 11. 23..
@@ -15,7 +17,9 @@ public class FleetNameTest {
 
     @Before
     public void setUp(){
-        ap = new AlienPlayer(null, new Game(), null);
+        Game game = new Game();
+        game.createGame(Difficulty.NORMAL,new BaseGameScenario(game));
+        ap = game.aliens.get(0);
     }
 
     @Test

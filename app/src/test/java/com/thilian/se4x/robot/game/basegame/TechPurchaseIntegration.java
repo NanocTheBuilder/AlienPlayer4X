@@ -5,14 +5,15 @@ import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
+import com.thilian.se4x.robot.game.DefenseBuilder;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuilder;
+import com.thilian.se4x.robot.game.Scenario;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
-
 
     @Override
     protected void buildFleet() {
@@ -21,13 +22,8 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
 
     @Test
     public void integration() {
-        game.fleetBuilder = new FleetBuilder(game){
-            @Override
-            public void buildFleet(Fleet fleet) {
 
-            }
-        };
-
+        game.scenario = new NonFleetBuilderScenario();
         sheet.setTechCP(120);
         ap.setLevel(Technology.SHIP_SIZE, 3);
         game.addSeenThing(Seeable.MINES);
@@ -43,5 +39,19 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
         assertLevel(Technology.TACTICS, 1);
         assertLevel(Technology.CLOAKING, 1);
         assertEquals(10, sheet.getTechCP());
+    }
+
+    private class NonFleetBuilderScenario extends Scenario {
+        public NonFleetBuilderScenario() {
+            defenseBuilder = new DefenseBuilder(game);
+            techBuyer = new BaseGameTechnologyBuyer(game);
+            techPrices = new BaseGameTechnologyPrices();
+            fleetBuilder = new FleetBuilder(game) {
+                @Override
+                public void buildFleet(Fleet fleet) {
+                }
+            };
+
+        }
     }
 }

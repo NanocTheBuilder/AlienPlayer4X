@@ -33,12 +33,8 @@ public class Integration {
         MockRoller roller = new MockRoller();
         Game game = new Game();
         game.roller = roller;
+        game.scenario = new Scenario4(game);
         game.resetSeenLevels();
-
-        game.technologyPrices = new Scenario4TechnologyPrices();
-        game.fleetBuilder = new FleetBuilder(game);
-        game.techBuyer = new Scenario4TechnologyBuyer(game);
-        game.defenseBuilder = new DefenseBuilder(game);
         
         AlienPlayer ap = new AlienPlayer(sheet, game, null);
 

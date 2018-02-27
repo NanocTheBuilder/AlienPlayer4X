@@ -1,8 +1,5 @@
 package com.thilian.se4x.robot.game.basegame;
 
-import com.thilian.se4x.robot.game.Game;
-import com.thilian.se4x.robot.game.TechnologyBuyer;
-import com.thilian.se4x.robot.game.TechnologyPrices;
 import com.thilian.se4x.robot.game.TechnologyBuyerTestBase;
 
 /**
@@ -10,14 +7,4 @@ import com.thilian.se4x.robot.game.TechnologyBuyerTestBase;
  */
 
 public class BasegameTechnologyBuyerTestBase extends TechnologyBuyerTestBase {
-
-    @Override
-    protected TechnologyBuyer getTechBuyer(Game game) {
-        return new BaseGameTechnologyBuyer(game);
-    }
-
-    @Override
-    protected TechnologyPrices getTechPrices() {
-        return new BaseGameTechnologyPrices();
-    }
 }

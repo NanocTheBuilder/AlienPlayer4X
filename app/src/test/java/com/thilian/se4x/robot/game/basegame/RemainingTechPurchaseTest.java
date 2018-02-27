@@ -17,8 +17,8 @@ public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
         assertNotAvailabe(Technology.SECURITY_FORCES);
         assertNotAvailabe(Technology.GROUND_COMBAT);
         assertNotAvailabe(Technology.MILITARY_ACADEMY);
-        assertEquals(6, game.technologyPrices.getMaxLevel(SHIP_SIZE));
-        assertEquals(2, game.technologyPrices.getMaxLevel(MINE_SWEEPER));
+        assertEquals(6, game.scenario.getMaxLevel(SHIP_SIZE));
+        assertEquals(2, game.scenario.getMaxLevel(MINE_SWEEPER));
     }
 
     private void assertNotAvailabe(Technology technology) {
@@ -45,19 +45,19 @@ public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
         ap.setLevel(ATTACK, 1);
         ap.setLevel(Technology.DEFENSE, 1);
 
-        sheet.setTechCP(game.technologyPrices.getCost(ATTACK, 2));
+        sheet.setTechCP(game.scenario.getCost(ATTACK, 2));
         roller.mockRoll(5);
         buyTech();
         assertEquals(2, ap.getLevel(ATTACK));
         assertEquals(0, ap.getLevel(TACTICS));
 
-        sheet.setTechCP(game.technologyPrices.getCost(DEFENSE, 2));
+        sheet.setTechCP(game.scenario.getCost(DEFENSE, 2));
         roller.mockRoll(5);
         buyTech();
         assertEquals(2, ap.getLevel(Technology.DEFENSE));
         assertEquals(0, ap.getLevel(Technology.TACTICS));
 
-        sheet.setTechCP(game.technologyPrices.getCost(TACTICS, 1));
+        sheet.setTechCP(game.scenario.getCost(TACTICS, 1));
         roller.mockRoll(1);
         buyTech();
         assertEquals(1, ap.getLevel(Technology.TACTICS));
@@ -65,7 +65,7 @@ public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
         ap.setLevel(ATTACK, 1);
         ap.setLevel(Technology.DEFENSE, 0);
         ap.setLevel(Technology.TACTICS, 0);
-        sheet.setTechCP(game.technologyPrices.getCost(DEFENSE, 1));
+        sheet.setTechCP(game.scenario.getCost(DEFENSE, 1));
         roller.mockRoll(3);  //ATTACK IS NOT BUYABLE
         buyTech();
         assertEquals(1, ap.getLevel(ATTACK));
@@ -75,7 +75,7 @@ public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
         ap.setLevel(ATTACK, 0);
         ap.setLevel(Technology.DEFENSE, 1);
         ap.setLevel(Technology.TACTICS, 0);
-        sheet.setTechCP(game.technologyPrices.getCost(ATTACK, 1));
+        sheet.setTechCP(game.scenario.getCost(ATTACK, 1));
         roller.mockRoll(3);  //DEFENSE IS NOT BUYABLE
         buyTech();
         assertEquals(1, ap.getLevel(ATTACK));
@@ -93,7 +93,7 @@ public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
 
         ap.setLevel(ATTACK, 1);
         ap.setLevel(Technology.DEFENSE, 0);
-        sheet.setTechCP(game.technologyPrices.getCost(DEFENSE, 1));
+        sheet.setTechCP(game.scenario.getCost(DEFENSE, 1));
         assertEquals(true, techBuyer.canBuyNextLevel(ap, Technology.TACTICS));
     }
 
@@ -145,14 +145,14 @@ public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
     }
 
     private void assertBuysRemaining(Technology technology, int rollNeeded) {
-        for (int i = game.technologyPrices.getStartingLevel(technology); i < game.technologyPrices.getMaxLevel(technology); i++)
+        for (int i = game.scenario.getStartingLevel(technology); i < game.scenario.getMaxLevel(technology); i++)
             assertBuysNextRemaining(technology, i, rollNeeded);
     }
 
     private void assertBuysNextRemaining(Technology technology, int currentLevel, int rollNeeded) {
         ap.setLevel(technology, currentLevel);
         int nextLevel = currentLevel + 1;
-        sheet.setTechCP(game.technologyPrices.getCost(technology, nextLevel));
+        sheet.setTechCP(game.scenario.getCost(technology, nextLevel));
         assertBuys(technology, nextLevel, rollNeeded);
         assertEquals(0, sheet.getTechCP());
     }

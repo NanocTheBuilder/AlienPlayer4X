@@ -1,7 +1,10 @@
 package com.thilian.se4x.robot.game.scenario4;
 
 import static com.thilian.se4x.robot.game.enums.FleetType.DEFENSE_FLEET;
-import static com.thilian.se4x.robot.game.enums.ShipType.*;
+import static com.thilian.se4x.robot.game.enums.ShipType.BASE;
+import static com.thilian.se4x.robot.game.enums.ShipType.HEAVY_INFANTRY;
+import static com.thilian.se4x.robot.game.enums.ShipType.INFANTRY;
+import static com.thilian.se4x.robot.game.enums.ShipType.MINE;
 import static com.thilian.se4x.robot.game.enums.Technology.GROUND_COMBAT;
 import static org.junit.Assert.assertEquals;
 
@@ -11,33 +14,25 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thilian.se4x.robot.game.AlienEconomicSheet;
-import com.thilian.se4x.robot.game.AlienPlayer;
+import com.thilian.se4x.robot.game.Fixture;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.MockRoller;
-import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.Scenario;
 import com.thilian.se4x.robot.game.enums.FleetType;
 
-public class ColonyDefenseBuildTest {
-    private AlienPlayer ap;
-    private DefenseBuilder builder;
-    private MockRoller roller;
-    private AlienEconomicSheet sheet;
+public class ColonyDefenseBuildTest extends Fixture{
 
     @Before
     public void setUp() {
-        roller = new MockRoller();
-        Game game = new Game();
-        game.roller = roller;
-        game.technologyPrices = new Scenario4TechnologyPrices();
-        builder = new DefenseBuilder(game);
-        sheet = new AlienEconomicSheet(Difficulty.NORMAL);
         sheet.setDefCP(100);
-        ap = new AlienPlayer(sheet, game, null);
     }
 
+    @Override
+    protected Scenario createScenario(Game game) {
+        return new Scenario4(game);
+    }
+    
     @After
     public void assertAllRollsUsed() {
         assertEquals(0, roller.rolls.size());
@@ -47,7 +42,7 @@ public class ColonyDefenseBuildTest {
     public void dontSpendOverDiceRoll() {
         roller.mockRoll(1, 1);
         roller.mockRoll(1);
-        Fleet fleet = builder.buildColonyDefense(ap);
+        Fleet fleet = defBuilder.buildColonyDefense(ap);
         assertEquals(DEFENSE_FLEET, fleet.getFleetType());
         assertEquals(2, fleet.getFleetCP());
     }
@@ -57,7 +52,7 @@ public class ColonyDefenseBuildTest {
         sheet.setDefCP(2);
         roller.mockRoll(10, 10);
         roller.mockRoll(1);
-        Fleet fleet = builder.buildColonyDefense(ap);
+        Fleet fleet = defBuilder.buildColonyDefense(ap);
         assertEquals(DEFENSE_FLEET, fleet.getFleetType());
         assertEquals(2, fleet.getFleetCP());
     }
@@ -106,7 +101,7 @@ public class ColonyDefenseBuildTest {
     }
 
     private void assertBuiltGroups(Group... expectedGroups) {
-        Fleet fleet = builder.buildColonyDefense(ap);
+        Fleet fleet = defBuilder.buildColonyDefense(ap);
         int expectedCost = 0;
         for (Group g : expectedGroups) {
             expectedCost += g.getShipType().getCost() * g.getSize();

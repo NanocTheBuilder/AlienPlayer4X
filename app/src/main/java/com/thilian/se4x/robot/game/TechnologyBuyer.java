@@ -87,7 +87,7 @@ public abstract class TechnologyBuyer {
         int currentLevel = ap.getLevel(technology);
         if (canBuyNextLevel(ap, technology)) {
             int nextLevel = currentLevel + 1;
-            int cost = game.technologyPrices.getCost(technology, nextLevel);
+            int cost = game.scenario.getCost(technology, nextLevel);
             ap.setLevel(technology, nextLevel);
             ap.getEconomicSheet().spendTechCP(cost);
         }
@@ -101,12 +101,12 @@ public abstract class TechnologyBuyer {
                 return canBuyNextLevel(ap, ATTACK) | canBuyNextLevel(ap, DEFENSE);
             }
         }
-        if (technology.equals(CLOAKING) && game.getSeenLevel(SCANNER) == game.technologyPrices.getMaxLevel(SCANNER)) {
+        if (technology.equals(CLOAKING) && game.getSeenLevel(SCANNER) == game.scenario.getMaxLevel(SCANNER)) {
             return false;
         }
 
-        return currentLevel < game.technologyPrices.getMaxLevel(technology)
-                && ap.getEconomicSheet().getTechCP() >= game.technologyPrices.getCost(technology, currentLevel + 1);
+        return currentLevel < game.scenario.getMaxLevel(technology)
+                && ap.getEconomicSheet().getTechCP() >= game.scenario.getCost(technology, currentLevel + 1);
     }
 
     public boolean canBuyNextLevel(Fleet fleet, Technology technology) {
@@ -142,7 +142,7 @@ public abstract class TechnologyBuyer {
     }
 
     public void buyShipSizeIfRolled(AlienPlayer ap) {
-        if (ap.getLevel(SHIP_SIZE) < game.technologyPrices.getMaxLevel(SHIP_SIZE))
+        if (ap.getLevel(SHIP_SIZE) < game.scenario.getMaxLevel(SHIP_SIZE))
             if (game.roller.roll() <= getShipSizeRollTable()[ap.getLevel(SHIP_SIZE)])
                 buyNextLevel(ap, SHIP_SIZE);
     }

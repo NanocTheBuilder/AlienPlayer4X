@@ -32,8 +32,8 @@ public class AlienPlayer {
         this.game = game;
         this.color = color;
 
-        for (Technology technology : game.technologyPrices.getAvailableTechs()) {
-            int startingLevel = game.technologyPrices.getStartingLevel(technology);
+        for (Technology technology : game.scenario.getAvailableTechs()) {
+            int startingLevel = game.scenario.getStartingLevel(technology);
             technologyLevels.put(technology, startingLevel);
         }
     }
@@ -54,12 +54,12 @@ public class AlienPlayer {
 
     void buyTechs(Fleet fleet, FleetBuildOptions... options) {
         setJustPurchasedCloaking(false);
-        game.techBuyer.buyTechs(fleet, options);
+        game.scenario.buyTechs(fleet, options);
     }
 
     public void buildFleet(Fleet fleet, FleetBuildOptions... options) {
         buyTechs(fleet, options);
-        game.fleetBuilder.buildFleet(fleet);
+        game.scenario.buildFleet(fleet);
         economicSheet.addFleetCP(fleet.getFleetCP() - fleet.getBuildCost());
     }
 
@@ -75,7 +75,7 @@ public class AlienPlayer {
                 Fleet fleet = new Fleet(this, REGULAR_FLEET, currentFleetCP);
                 if (shouldBuildRaiderFleet(currentFleetCP)) {
                     fleet.setFleetType(RAIDER_FLEET);
-                    game.fleetBuilder.buildFleet(fleet);
+                    game.scenario.buildFleet(fleet);
                 }
                 int cpSpent = fleet.getFleetType().equals(RAIDER_FLEET) ? fleet.getBuildCost() : fleet.getFleetCP();
                 economicSheet.spendFleetCP(cpSpent);
@@ -91,14 +91,14 @@ public class AlienPlayer {
         if (currentFleetCP >= ShipType.SCOUT.getCost()) {
             Fleet fleet = new Fleet(this, DEFENSE_FLEET, currentFleetCP);
             buyTechs(fleet, FleetBuildOptions.COMBAT_IS_ABOVE_PLANET);
-            game.fleetBuilder.buildFleet(fleet);
+            game.scenario.buildFleet(fleet);
             fleet.setFleetType(REGULAR_FLEET);
             economicSheet.spendFleetCP(fleet.getBuildCost());
             newFleets.add(fleet);
         }
 
         if (economicSheet.getDefCP() >= ShipType.MINE.getCost()) {
-            Fleet fleet = game.defenseBuilder.buildHomeDefense(this);
+            Fleet fleet = game.scenario.buildHomeDefense(this);
             economicSheet.spendDefCP(fleet.getBuildCost());
             newFleets.add(fleet);
         }
@@ -107,7 +107,7 @@ public class AlienPlayer {
 
     void buyNextMoveLevel() {
         if (game.roller.roll() <= 4) {
-            game.techBuyer.buyNextLevel(this, Technology.MOVE);
+            game.scenario.buyNextLevel(this, Technology.MOVE);
         }
     }
 

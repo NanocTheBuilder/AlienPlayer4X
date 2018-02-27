@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.thilian.se4x.robot.game.basegame.BaseGameScenario;
+import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -22,10 +24,10 @@ public class FleetLaunchTest {
 		roller = new MockRoller();
 		game = new Game();
 		game.roller = roller;
-		game.resetSeenLevels();
-		sheet = new AlienEconomicSheet(null);
+		game.createGame(Difficulty.NORMAL, new BaseGameScenario(game));
+		ap = game.aliens.get(0);
+		sheet = ap.getEconomicSheet();
 		sheet.setFleetCP(500);
-		ap = new AlienPlayer(sheet, game, null);
 		roll = 7;
 		turn = 4;
 	}
