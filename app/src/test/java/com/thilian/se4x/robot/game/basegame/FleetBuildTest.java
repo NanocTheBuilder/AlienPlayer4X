@@ -1,4 +1,4 @@
-package com.thilian.se4x.robot.game;
+package com.thilian.se4x.robot.game.basegame;
 
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.FleetType.REGULAR_FLEET;
@@ -22,20 +22,16 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 
-import org.junit.After;
 import org.junit.Test;
 
+import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
-public class FleetBuildTest extends Fixture{
-
-    @After
-    public void assertAllRollsUsed() {
-        assertEquals(0, roller.rolls.size());
-    }
+public class FleetBuildTest extends BasegameFixture{
 
     @Test
     public void buildRaiderFleet() {

@@ -1,11 +1,13 @@
 package com.thilian.se4x.robot.game;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.After;
 import org.junit.Before;
 
-import com.thilian.se4x.robot.game.basegame.BaseGameScenario;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 
-public class Fixture {
+public abstract class Fixture {
     protected Game game;
     protected AlienPlayer ap;
     protected DefenseBuilder defBuilder;
@@ -26,9 +28,12 @@ public class Fixture {
         sheet = ap.getEconomicSheet();
     }
 
-    protected Scenario createScenario(Game game) {
-        return new BaseGameScenario(game);
+    @After
+    public void assertAllRollsUsed() {
+        assertEquals(0, roller.rolls.size());
     }
+
+    protected abstract Scenario createScenario(Game game);
     
     private void setupRoller(Game game) {
         roller = new MockRoller();

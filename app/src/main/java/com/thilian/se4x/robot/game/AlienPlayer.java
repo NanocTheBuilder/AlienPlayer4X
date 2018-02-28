@@ -67,7 +67,7 @@ public class AlienPlayer {
         fleets.remove(fleet);
     }
 
-    Fleet rollFleetLaunch(int turn) {
+    public Fleet rollFleetLaunch(int turn) {
         int currentFleetCP = economicSheet.getFleetCP();
         if (currentFleetCP >= ShipType.SCOUT.getCost()) {
             int roll = getFleetLaunchRoll(currentFleetCP);
@@ -105,7 +105,7 @@ public class AlienPlayer {
         return newFleets;
     }
 
-    void buyNextMoveLevel() {
+    public void buyNextMoveLevel() {
         if (game.roller.roll() <= 4) {
             game.scenario.buyNextLevel(this, Technology.MOVE);
         }

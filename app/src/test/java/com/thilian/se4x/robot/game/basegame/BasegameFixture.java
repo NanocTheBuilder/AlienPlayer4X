@@ -1,14 +1,10 @@
 package com.thilian.se4x.robot.game.basegame;
 
+import com.thilian.se4x.robot.game.Fixture;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Scenario;
-import com.thilian.se4x.robot.game.TechnologyBuyerTestBase;
 
-/**
- * Created by thili on 2018. 01. 05..
- */
-
-public class BasegameTechnologyBuyerTestBase extends TechnologyBuyerTestBase {
+public class BasegameFixture extends Fixture{
     @Override
     protected Scenario createScenario(Game game) {
         return new BaseGameScenario(game);

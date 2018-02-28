@@ -1,52 +1,46 @@
 package com.thilian.se4x.robot.game.scenario4;
 
-import static com.thilian.se4x.robot.game.enums.ShipType.*;
-import static com.thilian.se4x.robot.game.enums.FleetType.*;
-import static com.thilian.se4x.robot.game.enums.Technology.*;
+import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
+import static com.thilian.se4x.robot.game.enums.FleetType.REGULAR_FLEET;
+import static com.thilian.se4x.robot.game.enums.ShipType.BATTLECRUISER;
+import static com.thilian.se4x.robot.game.enums.ShipType.BATTLESHIP;
+import static com.thilian.se4x.robot.game.enums.ShipType.BOARDING_SHIP;
+import static com.thilian.se4x.robot.game.enums.ShipType.CARRIER;
+import static com.thilian.se4x.robot.game.enums.ShipType.CRUISER;
+import static com.thilian.se4x.robot.game.enums.ShipType.DESTROYER;
+import static com.thilian.se4x.robot.game.enums.ShipType.DREADNAUGHT;
+import static com.thilian.se4x.robot.game.enums.ShipType.FIGHTER;
+import static com.thilian.se4x.robot.game.enums.ShipType.GRAV_ARMOR;
+import static com.thilian.se4x.robot.game.enums.ShipType.HEAVY_INFANTRY;
+import static com.thilian.se4x.robot.game.enums.ShipType.INFANTRY;
+import static com.thilian.se4x.robot.game.enums.ShipType.MARINE;
+import static com.thilian.se4x.robot.game.enums.ShipType.RAIDER;
+import static com.thilian.se4x.robot.game.enums.ShipType.SCOUT;
+import static com.thilian.se4x.robot.game.enums.ShipType.TITAN;
+import static com.thilian.se4x.robot.game.enums.ShipType.TRANSPORT;
+import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
+import static com.thilian.se4x.robot.game.enums.Technology.BOARDING;
+import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
+import static com.thilian.se4x.robot.game.enums.Technology.DEFENSE;
+import static com.thilian.se4x.robot.game.enums.Technology.FIGHTERS;
+import static com.thilian.se4x.robot.game.enums.Technology.GROUND_COMBAT;
+import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
+import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
-import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.MockRoller;
-import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
-public class FleetBuilderTest {
-
-    // COPY_PASTE_START
-    private Game game;
-    private AlienPlayer ap;
-    private FleetBuilder builder;
-    private MockRoller roller;
-
-    @Before
-    public void setUp() {
-        roller = new MockRoller();
-        game = new Game();
-        game.roller = roller;
-        game.createGame(Difficulty.NORMAL, new Scenario4(game));
-        builder = (FleetBuilder) game.scenario.fleetBuilder;
-        ap = game.aliens.get(0);
-    }
-
-    @After
-    public void assertAllRollsUsed() {
-        assertEquals(0, roller.rolls.size());
-    }
-
-    // COPY_PASTE_END
+public class FleetBuilderTest extends Scenario4Fixture{
 
     @Test
     public void raiderFleetBuysOnlyRaiders() {
@@ -285,7 +279,7 @@ public class FleetBuilderTest {
         fleetGroups.add(new Group(TRANSPORT, 1));
         fleetGroups.add(new Group(INFANTRY, 6));
 
-        builder.buildFleet(fleet);
+        fleetBuilder.buildFleet(fleet);
         int expectedCost = 0;
         for (Group g : expectedGroups) {
             expectedCost += g.getShipType().getCost() * g.getSize();
@@ -297,7 +291,7 @@ public class FleetBuilderTest {
     }
 
     private void assertBuiltRaiderGroups(Fleet fleet, Group... expectedGroups) {
-        builder.buildFleet(fleet);
+        fleetBuilder.buildFleet(fleet);
         int expectedCost = 0;
         for (Group g : expectedGroups) {
             expectedCost += g.getShipType().getCost() * g.getSize();
@@ -308,7 +302,7 @@ public class FleetBuilderTest {
     }
 
     private void assertBuiltFreeGroups(Fleet fleet, Group... expectedGroups) {
-        builder.buildFleet(fleet);
+        fleetBuilder.buildFleet(fleet);
         int expectedCost = 0;
         assertEquals(Arrays.asList(expectedGroups), fleet.getGroups());
         assertEquals(expectedCost, fleet.getBuildCost());

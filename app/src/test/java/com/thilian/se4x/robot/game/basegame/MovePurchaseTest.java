@@ -1,4 +1,4 @@
-package com.thilian.se4x.robot.game;
+package com.thilian.se4x.robot.game.basegame;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.thilian.se4x.robot.game.enums.Technology;
 
-public class MovePurchaseTest extends Fixture{
+public class MovePurchaseTest extends BasegameFixture{
 
 
     @Test

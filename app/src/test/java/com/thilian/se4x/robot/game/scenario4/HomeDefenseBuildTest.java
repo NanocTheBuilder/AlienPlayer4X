@@ -4,27 +4,15 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import com.thilian.se4x.robot.game.AlienEconomicSheet;
-import com.thilian.se4x.robot.game.AlienPlayer;
-import com.thilian.se4x.robot.game.Fixture;
 import com.thilian.se4x.robot.game.Fleet;
-import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.MockRoller;
-import com.thilian.se4x.robot.game.Scenario;
-import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
-public class HomeDefenseBuildTest extends Fixture{
-    @Override
-    protected Scenario createScenario(Game game) {
-        return new Scenario4(game);
-    }
+public class HomeDefenseBuildTest extends Scenario4Fixture{
 
     @Test
     public void ifNoGroundCombatTechSpendBalanced() {

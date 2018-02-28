@@ -10,34 +10,20 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thilian.se4x.robot.game.Fixture;
 import com.thilian.se4x.robot.game.Fleet;
-import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.Scenario;
 import com.thilian.se4x.robot.game.enums.FleetType;
 
-public class ColonyDefenseBuildTest extends Fixture{
+public class ColonyDefenseBuildTest extends Scenario4Fixture{
 
     @Before
     public void setUp() {
         sheet.setDefCP(100);
     }
-
-    @Override
-    protected Scenario createScenario(Game game) {
-        return new Scenario4(game);
-    }
     
-    @After
-    public void assertAllRollsUsed() {
-        assertEquals(0, roller.rolls.size());
-    }
-
     @Test
     public void dontSpendOverDiceRoll() {
         roller.mockRoll(1, 1);

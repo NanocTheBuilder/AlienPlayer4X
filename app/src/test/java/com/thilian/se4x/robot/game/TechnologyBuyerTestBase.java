@@ -2,10 +2,8 @@ package com.thilian.se4x.robot.game;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
 import org.junit.Before;
 
-import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -20,11 +18,6 @@ public abstract class TechnologyBuyerTestBase extends Fixture{
             assertLevel(t, game.scenario.getStartingLevel(t));
         }
         buildFleet();
-    }
-
-    @After
-    public void assertAllRollsUsed() {
-        assertEquals(0, roller.rolls.size());
     }
 
     protected void buildFleet() {

@@ -1,4 +1,4 @@
-package com.thilian.se4x.robot.game;
+package com.thilian.se4x.robot.game.basegame;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,10 +6,12 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.ShipType;
 
-public class DefenseBuildTest extends Fixture{
+public class DefenseBuildTest extends BasegameFixture{
     @Test
     public void spendNoDefenseCPBuildNothings() {
         assertBuiltGroups(0, 1);

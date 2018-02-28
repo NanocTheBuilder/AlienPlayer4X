@@ -1,7 +1,6 @@
 package com.thilian.se4x.robot.game.basegame;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
