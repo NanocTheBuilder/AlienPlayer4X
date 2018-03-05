@@ -34,7 +34,7 @@ public class FleetLaunchTest extends BasegameFixture {
         turn = 2;
         roll = 1;
         int fleetCP = sheet.getFleetCP();
-        ap.rollFleetLaunch(turn);
+        fleetLauncher.rollFleetLaunch(ap, turn);
         assertEquals(fleetCP, sheet.getFleetCP());
         assertTrue(ap.getFleets().isEmpty());
     }
@@ -65,11 +65,18 @@ public class FleetLaunchTest extends BasegameFixture {
     }
 
     @Test
+    public void onlySubstract2ForFightersIfHasEnoughCP() {
+        sheet.setFleetCP(26);
+        ap.setLevel(Technology.FIGHTERS, 1);
+        assertFleetDoesNotLaunch();
+    }
+    
+    @Test
     public void testRaiderFleetLaunch() {
         ap.setLevel(Technology.CLOAKING, 1);
         sheet.setFleetCP(13);
         roller.mockRoll(roll);
-        ap.rollFleetLaunch(turn);
+        fleetLauncher.rollFleetLaunch(ap, turn);
         Fleet fleet = ap.getFleets().get(0);
         assertEquals(1, sheet.getFleetCP());
         assertEquals(FleetType.RAIDER_FLEET, fleet.getFleetType());
@@ -90,7 +97,7 @@ public class FleetLaunchTest extends BasegameFixture {
         ap.setLevel(Technology.CLOAKING, 1);
         sheet.setFleetCP(11);
         roller.mockRoll(3);
-        ap.rollFleetLaunch(turn);
+        fleetLauncher.rollFleetLaunch(ap, turn);
         Fleet fleet = ap.getFleets().get(0);
         assertEquals(0, sheet.getFleetCP());
         assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
@@ -102,7 +109,7 @@ public class FleetLaunchTest extends BasegameFixture {
     private void assertFleetLaunches() {
         int fleetCP = sheet.getFleetCP();
         roller.mockRoll(roll);
-        ap.rollFleetLaunch(turn);
+        fleetLauncher.rollFleetLaunch(ap, turn);
         assertEquals(0, sheet.getFleetCP());
         assertEquals(fleetCP, ap.getFleets().get(0).getFleetCP());
         assertEquals(false, ap.getFleets().get(0).isBuilt());
@@ -111,7 +118,7 @@ public class FleetLaunchTest extends BasegameFixture {
     private void assertFleetDoesNotLaunch() {
         int fleetCP = sheet.getFleetCP();
         roller.mockRoll(roll);
-        ap.rollFleetLaunch(turn);
+        fleetLauncher.rollFleetLaunch(ap, turn);
         assertEquals(fleetCP, sheet.getFleetCP());
         assertTrue(ap.getFleets().isEmpty());
     }

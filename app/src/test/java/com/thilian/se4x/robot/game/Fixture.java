@@ -15,6 +15,7 @@ public abstract class Fixture {
     protected AlienEconomicSheet sheet;
     protected FleetBuilder fleetBuilder;
     protected TechnologyBuyer techBuyer;
+    protected FleetLauncher fleetLauncher;
 
     @Before
     public void setUpFixture() {
@@ -23,6 +24,7 @@ public abstract class Fixture {
         game.createGame(Difficulty.NORMAL, createScenario(game));
         defBuilder = game.scenario.defenseBuilder;
         fleetBuilder = game.scenario.fleetBuilder;
+        fleetLauncher = game.scenario.fleetLauncher;
         techBuyer = game.scenario.techBuyer;
         ap = game.aliens.get(0);
         sheet = ap.getEconomicSheet();

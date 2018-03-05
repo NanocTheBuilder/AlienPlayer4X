@@ -46,24 +46,23 @@ public class FleetBuilder extends GroupBuilder {
             AlienPlayer ap = fleet.getAp();
             int fleetCompositionRoll = game.roller.roll();
             boolean canUsePD = ap.getLevel(Technology.POINT_DEFENSE) > 0 && game.isSeenThing(Seeable.FIGHTERS);
-            if (canUsePD)
+            if (canUsePD){
                 fleetCompositionRoll -= 2;
+                if(fleet.findGroup(CARRIER) == null){
+                    addGroup(fleet, SCOUT, 2);
+                }
+            }
 
             if (fleetCompositionRoll <= 3) {
                 buildBallanced(fleet, 1);
-            } else {
-                if (canUsePD && fleet.findGroup(CARRIER) == null) {
-                    addGroup(fleet, SCOUT, 2);
-                }
-                if (fleetCompositionRoll <= 6) {
+            } else if (fleetCompositionRoll <= 6) {
                     if (fleet.canBuyMoreShips())
                         buildBallanced(fleet,
                                 Math.max(ap.getLevel(Technology.ATTACK), ap.getLevel(Technology.DEFENSE)));
-                } else {
-                    while (fleet.canBuyMoreShips()) {
-                        ShipType shipType = ShipType.findBiggest(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE));
-                        fleet.addGroup(new Group(shipType, 1));
-                    }
+            } else {
+                while (fleet.canBuyMoreShips()) {
+                    ShipType shipType = ShipType.findBiggest(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE));
+                    fleet.addGroup(new Group(shipType, 1));
                 }
             }
         }

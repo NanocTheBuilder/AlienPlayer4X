@@ -11,6 +11,7 @@ public abstract class Scenario{
     public TechnologyPrices techPrices;
     public FleetBuilder fleetBuilder;
     public DefenseBuilder defenseBuilder;
+    public FleetLauncher fleetLauncher;
 
     public Collection<Technology> getAvailableTechs() {
         return techPrices.getAvailableTechs();
@@ -44,4 +45,11 @@ public abstract class Scenario{
         return techPrices.getMaxLevel(technology);
     }
 
+    public Fleet buildColonyDefense(AlienPlayer alienPlayer) {
+        return defenseBuilder.buildColonyDefense(alienPlayer);
+    }
+
+    public Fleet rollFleetLaunch(AlienPlayer alienPlayer, int turn){
+        return fleetLauncher.rollFleetLaunch(alienPlayer, turn);
+    }
 }

@@ -106,8 +106,8 @@ public class Integration {
         assertCPs(17, 5, 20);
         assertEquals(0, roller.rolls.size());
 
-        roller.mockRoll(2, 9, 7, 7, 7);
-        fleet = ap.makeEconRoll(8);
+        roller.mockRoll(2, 9, 7, 7, 8);
+        fleet = ap.makeEconRoll(9);
         assertEquals(null, fleet);
         assertCPs(22, 20, 20);
         assertEquals(0, roller.rolls.size());

@@ -68,7 +68,7 @@ public class Integration {
         roller.mockRoll(9); // ShipSize
         ap.buildFleet(fleet);
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
-        assertGroups(fleet, new Group(ShipType.DESTROYER, 1));
+        assertGroups(fleet, new Group(ShipType.TRANSPORT, 1), new Group(ShipType.INFANTRY, 6), new Group(ShipType.DESTROYER, 1));
         assertCPs(16, 0, 20);
         assertEquals(0, roller.rolls.size());
 
@@ -97,8 +97,8 @@ public class Integration {
 
         fleet = ap.getFleets().get(0);
         roller.mockRoll(9); // ShipSize
-        roller.mockRoll(6); // Cloaking
-        ap.buildFleet(fleet, null);
+        roller.mockRoll(70); // Cloaking
+        ap.buildFleet(fleet);
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
         assertEquals(1, ap.getLevel(Technology.CLOAKING));
         assertGroups(fleet, new Group(ShipType.RAIDER, 2));
@@ -106,8 +106,8 @@ public class Integration {
         assertCPs(17, 5, 20);
         assertEquals(0, roller.rolls.size());
 
-        roller.mockRoll(2, 9, 7, 7, 7);
-        fleet = ap.makeEconRoll(8);
+        roller.mockRoll(2, 9, 7, 7, 8);
+        fleet = ap.makeEconRoll(9);
         assertEquals(null, fleet);
         assertCPs(22, 20, 20);
         assertEquals(0, roller.rolls.size());
@@ -120,13 +120,19 @@ public class Integration {
         ap.buildHomeDefense();
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
         assertEquals(1, ap.getLevel(Technology.SCANNER));
-        assertGroups(ap.getFleets().get(1), new Group(ShipType.DESTROYER, 1), new Group(ShipType.SCOUT, 2));
+        assertGroups(ap.getFleets().get(1), new Group(ShipType.TRANSPORT, 1), new Group(ShipType.INFANTRY, 6), new Group(ShipType.DESTROYER, 1), new Group(ShipType.SCOUT, 2));
         assertEquals(FleetType.REGULAR_FLEET, ap.getFleets().get(1).getFleetType());
         assertGroups(ap.getFleets().get(2), new Group(ShipType.BASE, 1), new Group(ShipType.MINE, 1));
         assertEquals(FleetType.DEFENSE_FLEET, ap.getFleets().get(2).getFleetType());
         assertCPs(1, 0, 3);
         assertEquals(0, roller.rolls.size());
 
+        roller.mockRoll(2, 9, 10, 7, 10, 8);
+        fleet = ap.makeEconRoll(10);
+        assertEquals(null, fleet);
+        assertCPs(6, 10, 23);
+        assertEquals(0, roller.rolls.size());
+        ap.buildColonyDefense();
         // TODO build raider fleet (isJustPurchasedCloaking)
     }
 

@@ -3,7 +3,6 @@ package com.thilian.se4x.robot.game;
 //import android.support.annotation.Nullable;
 //import android.util.Log;
 import static com.thilian.se4x.robot.game.enums.FleetType.DEFENSE_FLEET;
-import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.FleetType.REGULAR_FLEET;
 
 import java.util.ArrayList;
@@ -45,11 +44,11 @@ public class AlienPlayer {
     public Fleet makeEconRoll(int turn) {
         for (int i = 0; i < economicSheet.getEconRolls(turn) + economicSheet.getExtraEcon(turn); i++)
             economicSheet.applyRoll(turn, game.roller.roll());
-        Fleet fleet = rollFleetLaunch(turn);
-        if (fleet != null) {
+        Fleet newFleet = game.scenario.rollFleetLaunch(this, turn);
+        if (newFleet != null) {
             buyNextMoveLevel();
         }
-        return fleet;
+        return newFleet;
     }
 
     void buyTechs(Fleet fleet, FleetBuildOptions... options) {
@@ -65,24 +64,6 @@ public class AlienPlayer {
 
     public void destroyFleet(Fleet fleet) {
         fleets.remove(fleet);
-    }
-
-    public Fleet rollFleetLaunch(int turn) {
-        int currentFleetCP = economicSheet.getFleetCP();
-        if (currentFleetCP >= ShipType.SCOUT.getCost()) {
-            int roll = getFleetLaunchRoll(currentFleetCP);
-            if (roll <= economicSheet.getFleetLaunch(turn)) {
-                Fleet fleet = new Fleet(this, REGULAR_FLEET, currentFleetCP);
-                if (shouldBuildRaiderFleet(currentFleetCP)) {
-                    fleet.setFleetType(RAIDER_FLEET);
-                    game.scenario.buildFleet(fleet);
-                }
-                int cpSpent = fleet.getFleetType().equals(RAIDER_FLEET) ? fleet.getBuildCost() : fleet.getFleetCP();
-                economicSheet.spendFleetCP(cpSpent);
-                return fleet;
-            }
-        }
-        return null;
     }
 
     public List<Fleet> buildHomeDefense() {
@@ -105,24 +86,15 @@ public class AlienPlayer {
         return newFleets;
     }
 
+
+    public Fleet buildColonyDefense() {
+        return game.scenario.buildColonyDefense(this);
+    }
+
     public void buyNextMoveLevel() {
         if (game.roller.roll() <= 4) {
             game.scenario.buyNextLevel(this, Technology.MOVE);
         }
-    }
-
-    private int getFleetLaunchRoll(int currentFleetCP) {
-        int roll = game.roller.roll();
-        if ((currentFleetCP >= 25
-                && technologyLevels.get(Technology.FIGHTERS) > game.getSeenLevel(Technology.POINT_DEFENSE))
-                || shouldBuildRaiderFleet(currentFleetCP))
-            roll -= 2;
-        return roll;
-    }
-
-    private boolean shouldBuildRaiderFleet(int currentFleetCP) {
-        return currentFleetCP >= 12
-                && technologyLevels.get(Technology.CLOAKING) > game.getSeenLevel(Technology.SCANNER);
     }
 
     public List<Fleet> getFleets() {
