@@ -9,7 +9,6 @@ import static com.thilian.se4x.robot.game.enums.ShipType.MINE;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
-import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -30,14 +29,14 @@ public class DefenseBuilder extends com.thilian.se4x.robot.game.DefenseBuilder {
 
     private void buyGravArmor(Fleet fleet) {
         if (fleet.getAp().getLevel(Technology.GROUND_COMBAT) == 3) {
-            fleet.addGroup(new Group(GRAV_ARMOR, 2));
+            buildGroup(fleet, GRAV_ARMOR, 2);
         }
     }
 
     private void buyHeavyInfantry(Fleet fleet) {
         if (fleet.getAp().getLevel(Technology.GROUND_COMBAT) >= 2) {
             int howManyHI = game.roller.roll();
-            fleet.addGroup(new Group(HEAVY_INFANTRY, howManyHI));
+            buildGroup(fleet, HEAVY_INFANTRY, howManyHI);
         }
     }
 
@@ -54,15 +53,15 @@ public class DefenseBuilder extends com.thilian.se4x.robot.game.DefenseBuilder {
 
     private void addGroundTroops(AlienPlayer ap, Fleet fleet) {
         if(ap.getLevel(Technology.GROUND_COMBAT) > 1)
-            addGroup(fleet, HEAVY_INFANTRY);
+            buildGroup(fleet, HEAVY_INFANTRY);
         else
-            addGroup(fleet, INFANTRY);
+            buildGroup(fleet, INFANTRY);
     }
 
     private void addBasesOrMines(Fleet fleet) {
         if (game.roller.roll() < 6)
-            addGroup(fleet, BASE, 1);
+            buildGroup(fleet, BASE, 1);
         else
-            addGroup(fleet, MINE, 2);
+            buildGroup(fleet, MINE, 2);
     }
 }

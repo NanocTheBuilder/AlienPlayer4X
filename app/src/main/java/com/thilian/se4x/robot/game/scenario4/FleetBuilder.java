@@ -31,13 +31,13 @@ public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
 
     private void buyBoardingShips(Fleet fleet) {
         if (fleet.getAp().getLevel(Technology.BOARDING) != 0) {
-            addGroup(fleet, ShipType.BOARDING_SHIP, 2);
+            buildGroup(fleet, ShipType.BOARDING_SHIP, 2);
         }
     }
 
     private void buyScoutsIfSeenMines(Fleet fleet) {
         if (game.isSeenThing(Seeable.MINES)) {
-            addGroup(fleet, ShipType.SCOUT, 2);
+            buildGroup(fleet, ShipType.SCOUT, 2);
         }
     }
 

@@ -222,7 +222,7 @@ public class FleetBuilderTest extends Scenario4Fixture{
         game.addSeenThing(Seeable.FIGHTERS);
 
         ap.setLevel(SHIP_SIZE, 3);
-        assertBuiltFleet(5, 27, new Group(CRUISER, 1), new Group(DESTROYER, 1), new Group(SCOUT, 1));
+        assertBuiltFleet(5, 27, new Group(CRUISER, 1), new Group(SCOUT, 2));
     }
 
     @Test

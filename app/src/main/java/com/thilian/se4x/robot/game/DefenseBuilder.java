@@ -1,7 +1,9 @@
 package com.thilian.se4x.robot.game;
 
+import static com.thilian.se4x.robot.game.enums.ShipType.BASE;
+import static com.thilian.se4x.robot.game.enums.ShipType.MINE;
+
 import com.thilian.se4x.robot.game.enums.FleetType;
-import com.thilian.se4x.robot.game.enums.ShipType;
 
 public class DefenseBuilder extends GroupBuilder{
 
@@ -16,30 +18,24 @@ public class DefenseBuilder extends GroupBuilder{
         buyHomeDefenseUnits(fleet);
         return fleet;
     }
-
+    
     protected void buyHomeDefenseUnits(Fleet fleet) {
         int roll = game.roller.roll();
         if (roll < 4) {
-            addGroup(fleet, ShipType.MINE);
+            buildGroup(fleet, MINE);
         } else if (roll < 8) {
             while (canBuyMine(fleet)) {
-                if (canBuyBase(fleet))
-                    fleet.addGroup(new Group(ShipType.BASE, 1));
-                if (canBuyMine(fleet))
-                    fleet.addGroup(new Group(ShipType.MINE, 1));
+                buildGroup(fleet, BASE, 1);
+                buildGroup(fleet, MINE, 1);
             }
         } else {
-            addGroup(fleet, ShipType.BASE);
-            addGroup(fleet, ShipType.MINE);
+            buildGroup(fleet, BASE);
+            buildGroup(fleet, MINE);
         }
     }
 
-    private boolean canBuyBase(Fleet fleet) {
-        return fleet.getRemainigCP() >= ShipType.BASE.getCost();
-    }
-
     private boolean canBuyMine(Fleet fleet) {
-        return fleet.getRemainigCP() >= ShipType.MINE.getCost();
+        return fleet.getRemainigCP() >= MINE.getCost();
     }
 
     public Fleet buildColonyDefense(AlienPlayer ap) {

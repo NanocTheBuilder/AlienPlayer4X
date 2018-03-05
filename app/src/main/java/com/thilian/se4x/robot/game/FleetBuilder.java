@@ -49,7 +49,7 @@ public class FleetBuilder extends GroupBuilder {
             if (canUsePD){
                 fleetCompositionRoll -= 2;
                 if(fleet.findGroup(CARRIER) == null){
-                    addGroup(fleet, SCOUT, 2);
+                    buildGroup(fleet, SCOUT, 2);
                 }
             }
 
@@ -61,8 +61,7 @@ public class FleetBuilder extends GroupBuilder {
                                 Math.max(ap.getLevel(Technology.ATTACK), ap.getLevel(Technology.DEFENSE)));
             } else {
                 while (fleet.canBuyMoreShips()) {
-                    ShipType shipType = ShipType.findBiggest(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE));
-                    fleet.addGroup(new Group(shipType, 1));
+                    buildGroup(fleet, ShipType.findBiggest(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE)));
                 }
             }
         }
@@ -82,20 +81,21 @@ public class FleetBuilder extends GroupBuilder {
         fleet.addGroup(new Group(FIGHTER, shipsToBuild * 3));
     }
 
+    //TODO: FIND A READABLE ALGORITHM?
     private void buildBallanced(Fleet fleet, int minHullSize) {
+        int apShipSize = fleet.getAp().getLevel(SHIP_SIZE);
         for (int i = minHullSize; i >= 0; i--) {
             ShipType cheapestType = ShipType.findCheapest(i);
-            int apShipSize = fleet.getAp().getLevel(SHIP_SIZE);
             if (apShipSize >= cheapestType.getRequiredShipSize()) {
                 for (ShipType biggerType : ShipType.getBiggerTypesInReverse(cheapestType)) {
-                    if (apShipSize >= biggerType.getRequiredShipSize()) {
+                    if (apShipSize >= biggerType.getRequiredShipSize() && fleet.getRemainigCP() >= biggerType.getCost()) {
                         int remainder = fleet.getRemainigCP() % cheapestType.getCost();
                         int difference = biggerType.getCost() - cheapestType.getCost();
                         int shipType2ToBuy = remainder / difference;
-                        fleet.addGroup(new Group(biggerType, shipType2ToBuy));
+                        buildGroup(fleet, biggerType, shipType2ToBuy);
                     }
                 }
-                addGroup(fleet, cheapestType);
+                buildGroup(fleet, cheapestType);
             }
         }
     }
@@ -103,7 +103,7 @@ public class FleetBuilder extends GroupBuilder {
     protected void buildPossibleDD(Fleet fleet) {
         if (fleet.getRemainigCP() >= 9) {
             AlienPlayer ap = fleet.getAp();
-            if (ShipType.canBuild(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE), DESTROYER)
+            if (DESTROYER.canBeBuilt(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE))
                     && game.getSeenLevel(CLOAKING) <= ap.getLevel(SCANNER) && fleet.findGroup(DESTROYER) == null)
                 fleet.addGroup(new Group(DESTROYER, 1));
         }
@@ -111,7 +111,7 @@ public class FleetBuilder extends GroupBuilder {
 
     protected void buildRaiderFleet(Fleet fleet) {
         fleet.setFleetType(RAIDER_FLEET);
-        addGroup(fleet, RAIDER);
+        buildGroup(fleet, RAIDER);
     }
 
     protected void buildFlagship(Fleet fleet) {

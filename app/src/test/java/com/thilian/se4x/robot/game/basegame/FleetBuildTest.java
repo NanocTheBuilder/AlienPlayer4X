@@ -183,8 +183,18 @@ public class FleetBuildTest extends BasegameFixture{
         assertBuiltFleet(4, 50, new Group(BATTLESHIP, 1), new Group(BATTLECRUISER, 2));
         assertBuiltFleet(4, 52, new Group(BATTLESHIP, 2), new Group(CRUISER, 1));
         assertBuiltFleet(4, 56, new Group(BATTLESHIP, 1), new Group(CRUISER, 3));
+        //+20 for BATTLESHIP
+        assertBuiltFleet(4, 26, new Group(BATTLESHIP, 1), new Group(SCOUT, 1));
+        assertBuiltFleet(4, 29, new Group(BATTLESHIP, 1), new Group(DESTROYER, 1));
+        assertBuiltFleet(4, 32, new Group(BATTLESHIP, 1), new Group(CRUISER, 1));
+        assertBuiltFleet(4, 35, new Group(BATTLESHIP, 1), new Group(BATTLECRUISER, 1));
+        assertBuiltFleet(4, 41, new Group(BATTLESHIP, 2));
 
-        ap.setLevel(SHIP_SIZE, 2);
+        ap.setLevel(SHIP_SIZE, 2); //+9 for DD
+        assertBuiltFleet(4, 15, new Group(DESTROYER, 1), new Group(SCOUT, 1));
+        assertBuiltFleet(4, 18, new Group(DESTROYER, 2));
+        assertBuiltFleet(4, 21, new Group(DESTROYER, 1), new Group(SCOUT, 2));
+        assertBuiltFleet(4, 24, new Group(DESTROYER, 2), new Group(SCOUT, 1));
         assertBuiltFleet(4, 44, new Group(DESTROYER, 2), new Group(SCOUT, 4));
 
         ap.setLevel(SHIP_SIZE, 3);
@@ -198,7 +208,7 @@ public class FleetBuildTest extends BasegameFixture{
         game.addSeenThing(Seeable.FIGHTERS);
 
         ap.setLevel(SHIP_SIZE, 3);
-        assertBuiltFleet(5, 27, new Group(CRUISER, 1), new Group(DESTROYER, 1), new Group(SCOUT, 1));
+        assertBuiltFleet(5, 27, new Group(CRUISER, 1), new Group(SCOUT, 2));
     }
 
     @Test
