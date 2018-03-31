@@ -21,7 +21,7 @@ public abstract class Fixture {
     public void setUpFixture() {
         game = new Game();
         setupRoller(game);
-        game.createGame(Difficulty.NORMAL, createScenario(game));
+        game.createGame(Difficulty.NORMAL, getScenario());
         defBuilder = game.scenario.defenseBuilder;
         fleetBuilder = game.scenario.fleetBuilder;
         fleetLauncher = game.scenario.fleetLauncher;
@@ -35,7 +35,7 @@ public abstract class Fixture {
         assertEquals(0, roller.rolls.size());
     }
 
-    protected abstract Scenario createScenario(Game game);
+    protected abstract Scenario getScenario();
     
     private void setupRoller(Game game) {
         roller = new MockRoller();

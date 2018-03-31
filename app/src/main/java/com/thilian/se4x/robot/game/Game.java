@@ -23,6 +23,7 @@ public class Game {
     public int currentTurn;
 
     public void createGame(Difficulty difficulty, Scenario scenario) {
+        scenario.init(this);
         this.scenario = scenario;
         this.aliens = new ArrayList<>();
         for (int i = 0; i < difficulty.getNumberOfAlienPlayers(); i++) {

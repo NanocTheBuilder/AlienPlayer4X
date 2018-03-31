@@ -6,7 +6,7 @@ import com.thilian.se4x.robot.game.Scenario;
 
 public class Scenario4Fixture extends Fixture{
     @Override
-    protected Scenario createScenario(Game game) {
-        return new Scenario4(game);
+    protected Scenario getScenario() {
+        return new Scenario4();
     }
 }

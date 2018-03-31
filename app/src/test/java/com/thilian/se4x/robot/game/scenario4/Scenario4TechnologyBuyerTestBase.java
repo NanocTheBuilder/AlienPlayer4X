@@ -10,7 +10,8 @@ import com.thilian.se4x.robot.game.TechnologyBuyerTestBase;
 
 public class Scenario4TechnologyBuyerTestBase extends TechnologyBuyerTestBase {
     @Override
-    protected Scenario createScenario(Game game) {
-        return new Scenario4(game);
+    protected Scenario getScenario() {
+        return new Scenario4();
     }
+
 }

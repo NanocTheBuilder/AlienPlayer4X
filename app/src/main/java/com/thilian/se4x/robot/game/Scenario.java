@@ -6,12 +6,15 @@ import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public abstract class Scenario{
-    
+
+    //TODO: private these
     public TechnologyBuyer techBuyer;
     public TechnologyPrices techPrices;
     public FleetBuilder fleetBuilder;
     public DefenseBuilder defenseBuilder;
     public FleetLauncher fleetLauncher;
+
+    public abstract void init(Game game);
 
     public Collection<Technology> getAvailableTechs() {
         return techPrices.getAvailableTechs();

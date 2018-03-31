@@ -24,13 +24,12 @@ public class Integration {
 
     @Test
     public void economyRollStartsNewFleet() {
-        sheet = new AlienEconomicSheet(Difficulty.NORMAL);
         MockRoller roller = new MockRoller();
         Game game = new Game();
+        game.createGame(Difficulty.NORMAL, new BaseGameScenario());
         game.roller = roller;
-        game.scenario = new BaseGameScenario(game);
-        game.resetSeenLevels();
-        AlienPlayer ap = new AlienPlayer(sheet, game, null);
+        AlienPlayer ap = game.aliens.get(0);
+        sheet = ap.getEconomicSheet();
 
         roller.mockRoll(1);
         assertEquals(null, ap.makeEconRoll(1));

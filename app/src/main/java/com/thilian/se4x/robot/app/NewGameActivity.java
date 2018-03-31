@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.thilian.se4x.robot.game.basegame.BaseGameScenario;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 
 public class NewGameActivity extends Activity {
@@ -33,7 +34,7 @@ public class NewGameActivity extends Activity {
     public void createGame(){
         final SE4XApplication app = (SE4XApplication) this.getApplication();
         Spinner spinner = (Spinner) findViewById(R.id.difficultySpinner);
-        app.getGame().createGame((Difficulty) spinner.getSelectedItem());
+        app.getGame().createGame((Difficulty) spinner.getSelectedItem(), new BaseGameScenario());
     }
 
     private void startMainActivity(){

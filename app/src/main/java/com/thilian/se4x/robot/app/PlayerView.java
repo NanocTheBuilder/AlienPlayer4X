@@ -49,14 +49,14 @@ public class PlayerView extends LinearLayout {
     public void update(){
         TextView textView;
         int id,sid;
-        for(Technology technology : game.technologyPrices.getAvailableTechs()){
+        for(Technology technology : game.scenario.techPrices.getAvailableTechs()){
             id = getResources().getIdentifier(technology.toString().toLowerCase() + "_text", "id", getContext().getPackageName());
             if(id != 0){
                 textView = findViewById(id);
                 sid = getResources().getIdentifier(technology.toString(), "string", getContext().getPackageName());
                 int level = alienPlayer.getLevel(technology);
                 textView.setText(getResources().getString(sid, level));
-                if(level != game.technologyPrices.getStartingLevel(technology)){
+                if(level != game.scenario.techPrices.getStartingLevel(technology)){
                     textView.setTypeface(textView.getTypeface(), 1);
                 }
             }

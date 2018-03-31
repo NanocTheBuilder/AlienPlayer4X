@@ -73,7 +73,7 @@ public class SeenTechnologyActivity extends Activity {
 
     private void createAdapter(int id, Technology technology) {
         final SE4XApplication app = (SE4XApplication) this.getApplication();
-        TechnologyPrices technologyPrices = app.getGame().technologyPrices;
+        TechnologyPrices technologyPrices = app.getGame().scenario.techPrices;
         Spinner spinner = (Spinner) findViewById(id);
         List<Integer> values = new ArrayList<>();
         for(int i = 0; i <= technologyPrices.getMaxLevel(technology); i++)
