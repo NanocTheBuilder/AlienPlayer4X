@@ -26,8 +26,6 @@ import com.thilian.se4x.robot.game.enums.Technology;
  */
 
 public abstract class TechnologyBuyer {
-    public static final String COMBAT_IS_ABOVE_PLANET = "COMBAT_IS_ABOVE_PLANET";
-
     protected Game game;
 
     protected Map<Technology, Integer> TECHNOLOGY_ROLL_TABLE = new TreeMap<>();

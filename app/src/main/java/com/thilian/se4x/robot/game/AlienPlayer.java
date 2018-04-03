@@ -88,7 +88,9 @@ public class AlienPlayer {
 
 
     public Fleet buildColonyDefense() {
-        return game.scenario.buildColonyDefense(this);
+        Fleet fleet = game.scenario.buildColonyDefense(this);
+        economicSheet.spendDefCP(fleet.getBuildCost());
+        return fleet;
     }
 
     public void buyNextMoveLevel() {

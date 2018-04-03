@@ -60,7 +60,7 @@ class Scenario4TechnologyBuyer extends TechnologyBuyer {
         buyPointDefenseIfNeeded(ap);
         buyMineSweepIfNeeded(ap);
         buySecurityIfNeeded(ap);
-        buyGroundCombatIfNeeded(ap, new HashSet<>(Arrays.asList(options)).contains(COMBAT_IS_ABOVE_PLANET));
+        buyGroundCombatIfNeeded(ap, new HashSet<>(Arrays.asList(options)).contains(FleetBuildOptions.COMBAT_IS_ABOVE_PLANET));
         buyMilitaryAcademyIfNeeded(ap);
         buyScannerIfNeeded(ap);
         buyBoardingIfNeeded(ap);
