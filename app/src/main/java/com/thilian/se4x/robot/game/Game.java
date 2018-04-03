@@ -27,7 +27,7 @@ public class Game {
         this.scenario = scenario;
         this.aliens = new ArrayList<>();
         for (int i = 0; i < difficulty.getNumberOfAlienPlayers(); i++) {
-            aliens.add(new AlienPlayer(new AlienEconomicSheet(difficulty), this, PlayerColor.values()[i]));
+            aliens.add(scenario.newPlayer(this, difficulty, PlayerColor.values()[i]));
         }
 
         resetSeenLevels();

@@ -4,12 +4,16 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.thilian.se4x.robot.game.AlienEconomicSheet;
+import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.DefenseBuilder;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuilder;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Scenario;
+import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -53,6 +57,11 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
                     public void buildFleet(Fleet fleet) {
                     }
                 };
+            }
+
+            @Override
+            public AlienPlayer newPlayer(Game game, Difficulty difficulty, PlayerColor color) {
+                return new AlienPlayer(new AlienEconomicSheet(difficulty), game, color);
             }
         };
     }

@@ -19,8 +19,8 @@ import com.thilian.se4x.robot.game.enums.Technology;
 public class AlienPlayer {
 
     private List<Fleet> fleets = new ArrayList<>();
-    private AlienEconomicSheet economicSheet;
-    private Game game;
+    protected AlienEconomicSheet economicSheet;
+    protected Game game;
     private PlayerColor color;
     private Map<Technology, Integer> technologyLevels = new HashMap<>();
 
@@ -84,13 +84,6 @@ public class AlienPlayer {
             newFleets.add(fleet);
         }
         return newFleets;
-    }
-
-
-    public Fleet buildColonyDefense() {
-        Fleet fleet = game.scenario.buildColonyDefense(this);
-        economicSheet.spendDefCP(fleet.getBuildCost());
-        return fleet;
     }
 
     public void buyNextMoveLevel() {

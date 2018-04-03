@@ -28,7 +28,7 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
     public void dontSpendOverDiceRoll() {
         roller.mockRoll(1, 1);
         roller.mockRoll(1);
-        Fleet fleet = defBuilder.buildColonyDefense(ap);
+        Fleet fleet = ((DefenseBuilder)defBuilder).buildColonyDefense(ap);
         assertEquals(DEFENSE_FLEET, fleet.getFleetType());
         assertEquals(2, fleet.getFleetCP());
     }
@@ -38,7 +38,7 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
         sheet.setDefCP(2);
         roller.mockRoll(10, 10);
         roller.mockRoll(1);
-        Fleet fleet = defBuilder.buildColonyDefense(ap);
+        Fleet fleet = ((DefenseBuilder)defBuilder).buildColonyDefense(ap);
         assertEquals(DEFENSE_FLEET, fleet.getFleetType());
         assertEquals(2, fleet.getFleetCP());
     }
@@ -87,7 +87,7 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
     }
 
     private void assertBuiltGroups(Group... expectedGroups) {
-        Fleet fleet = defBuilder.buildColonyDefense(ap);
+        Fleet fleet = ((DefenseBuilder)defBuilder).buildColonyDefense(ap);
         int expectedCost = 0;
         for (Group g : expectedGroups) {
             expectedCost += g.getShipType().getCost() * g.getSize();

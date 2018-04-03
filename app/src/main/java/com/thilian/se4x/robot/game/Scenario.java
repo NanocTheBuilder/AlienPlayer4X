@@ -2,7 +2,9 @@ package com.thilian.se4x.robot.game;
 
 import java.util.Collection;
 
+import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
+import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public abstract class Scenario{
@@ -15,6 +17,8 @@ public abstract class Scenario{
     public FleetLauncher fleetLauncher;
 
     public abstract void init(Game game);
+
+    public abstract AlienPlayer newPlayer(Game game, Difficulty difficulty, PlayerColor color);
 
     public Collection<Technology> getAvailableTechs() {
         return techPrices.getAvailableTechs();
@@ -46,10 +50,6 @@ public abstract class Scenario{
 
     public int getMaxLevel(Technology technology) {
         return techPrices.getMaxLevel(technology);
-    }
-
-    public Fleet buildColonyDefense(AlienPlayer alienPlayer) {
-        return defenseBuilder.buildColonyDefense(alienPlayer);
     }
 
     public Fleet rollFleetLaunch(AlienPlayer alienPlayer, int turn){

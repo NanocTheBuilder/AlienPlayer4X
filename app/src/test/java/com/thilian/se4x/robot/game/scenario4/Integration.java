@@ -29,7 +29,7 @@ public class Integration {
         game.createGame(Difficulty.NORMAL, new Scenario4());
         game.roller = roller;
         
-        AlienPlayer ap = game.aliens.get(0);
+        Scenario4Player ap = (Scenario4Player) game.aliens.get(0);
         sheet = ap.getEconomicSheet();
 
         roller.mockRoll(1);
