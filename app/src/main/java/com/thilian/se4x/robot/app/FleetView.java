@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Group;
+import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
+import com.thilian.se4x.robot.game.scenario4.Scenario4Player;
 
 /**
  * TODO: document your custom view class.
@@ -50,6 +52,18 @@ public class FleetView extends RelativeLayout{
             }
         });
 
+        if(fleet.getAp() instanceof Scenario4Player){
+            Button revealAbovePlanetButton = findViewById(R.id.reveal_fleet_above_planet_button);
+            revealAbovePlanetButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fleet.getAp().buildFleet(fleet, FleetBuildOptions.COMBAT_IS_ABOVE_PLANET);
+                    update();
+                    fleetRevealListener.onFleetRevealed(fleet);
+                }
+            });
+        }
+
         update();
     }
 
@@ -71,6 +85,14 @@ public class FleetView extends RelativeLayout{
 
         Button removeFleetButton = findViewById(R.id.remove_fleet_button);
         removeFleetButton.setVisibility(fleet.isBuilt() ? VISIBLE : INVISIBLE);
+
+        if(fleet.getAp() instanceof Scenario4Player){
+            Button revealAbovePlanetButton = findViewById(R.id.reveal_fleet_above_planet_button);
+            revealAbovePlanetButton.setVisibility(fleet.isBuilt() ? INVISIBLE : VISIBLE);
+        }
+        else{
+            findViewById(R.id.reveal_fleet_above_planet_button).setVisibility(GONE);
+        }
     }
 
     public interface FleetRevealListener{

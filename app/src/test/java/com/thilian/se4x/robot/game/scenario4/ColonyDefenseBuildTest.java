@@ -72,6 +72,13 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
     }
 
     @Test
+    public void buy1MineIfCantAffordBase() {
+        roller.mockRoll(2, 3); //max cp
+        roller.mockRoll(3); //buy 2 mines
+        assertBuiltGroups(new Group(MINE, 1));
+    }
+
+    @Test
     public void buy2MinesAnd4Infantry() {
         roller.mockRoll(10, 9); //max cp
         roller.mockRoll(6); //buy 2 mines

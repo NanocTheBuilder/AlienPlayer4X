@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.scenario4.Scenario4Player;
 
 import java.util.List;
 
@@ -29,13 +30,23 @@ public class FleetsActivity extends Activity implements FleetView.FleetRevealLis
             }
         });
 
-        Button buildDefenseButton = findViewById(R.id.build_defense_button);
-        buildDefenseButton.setOnClickListener(new View.OnClickListener() {
+        Button buildHomeDefenseButton = findViewById(R.id.build_home_defense_button);
+        buildHomeDefenseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buildDefenseButtonClicked();
+                buildHomeDefenseButtonClicked();
             }
         });
+
+
+        Button buildColonyDefenseButton = findViewById(R.id.build_colony_defense_button);
+        buildColonyDefenseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buildColonyDefenseButtonClicked();
+            }
+        });
+
     }
 
     @Override
@@ -49,8 +60,11 @@ public class FleetsActivity extends Activity implements FleetView.FleetRevealLis
         PlayerView playerView = findViewById(R.id.player_view);
         playerView.setAlienPlayer(alienPlayer);
         playerView.setGame(app.getGame());
+        playerView.initTexts();
         playerView.setBackgroundColor();
         playerView.update();
+
+        findViewById(R.id.build_colony_defense_button).setVisibility(alienPlayer instanceof Scenario4Player ? View.VISIBLE : View.GONE);
 
         LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
         fleets.setBackgroundColor(Color.parseColor(alienPlayer.getColor().toString()));
@@ -60,9 +74,21 @@ public class FleetsActivity extends Activity implements FleetView.FleetRevealLis
         }
     }
 
-    private void buildDefenseButtonClicked(){
+    private void buildHomeDefenseButtonClicked(){
         LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
         List<Fleet> newFleets = alienPlayer.buildHomeDefense();
+        if(newFleets.size() != 0) {
+            SE4XApplication app = (SE4XApplication) this.getApplication();
+            app.showNewFleets(this, newFleets);
+            for (Fleet fleet : newFleets) {
+                fleets.addView(new FleetView(this, fleet, this));
+            }
+            onFleetRevealed(null);
+        }
+    }
+    private void buildColonyDefenseButtonClicked(){
+        LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
+        List<Fleet> newFleets = ((Scenario4Player)alienPlayer).buildColonyDefense();
         if(newFleets.size() != 0) {
             SE4XApplication app = (SE4XApplication) this.getApplication();
             app.showNewFleets(this, newFleets);

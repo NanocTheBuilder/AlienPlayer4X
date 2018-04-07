@@ -67,6 +67,10 @@ public class Game {
         seenThings.add(seeable);
     }
 
+    public void removeSeenThing(Seeable seeable){
+        seenThings.remove(seeable);
+    }
+
     public boolean isSeenThing(Seeable seeable) {
         return seenThings.contains(seeable);
     }

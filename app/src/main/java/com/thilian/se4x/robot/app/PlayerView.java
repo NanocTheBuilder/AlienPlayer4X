@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Technology;
+import com.thilian.se4x.robot.game.scenario4.Scenario4;
 
 /**
  * TODO: document your custom view class.
@@ -38,8 +39,18 @@ public class PlayerView extends LinearLayout {
         this(context, null);
         this.game = game;
         this.alienPlayer = alienPlayer;
+        initTexts();
         setBackgroundColor();
         update();
+    }
+
+    public void initTexts() {
+        if(!(game.scenario instanceof Scenario4)){
+            findViewById(R.id.ground_combat_text).setVisibility(GONE);
+            findViewById(R.id.boarding_text).setVisibility(GONE);
+            findViewById(R.id.security_forces_text).setVisibility(GONE);
+            findViewById(R.id.military_academy_text).setVisibility(GONE);
+        }
     }
 
     public void setBackgroundColor(){
@@ -50,7 +61,8 @@ public class PlayerView extends LinearLayout {
         TextView textView;
         int id,sid;
         for(Technology technology : game.scenario.techPrices.getAvailableTechs()){
-            id = getResources().getIdentifier(technology.toString().toLowerCase() + "_text", "id", getContext().getPackageName());
+            String name = technology.toString().toLowerCase() + "_text";
+            id = getResources().getIdentifier(name, "id", getContext().getPackageName());
             if(id != 0){
                 textView = findViewById(id);
                 sid = getResources().getIdentifier(technology.toString(), "string", getContext().getPackageName());
@@ -59,6 +71,9 @@ public class PlayerView extends LinearLayout {
                 if(level != game.scenario.techPrices.getStartingLevel(technology)){
                     textView.setTypeface(textView.getTypeface(), 1);
                 }
+            }
+            else{
+                System.out.println(String.format("Not found <%s>", name));
             }
         }
 

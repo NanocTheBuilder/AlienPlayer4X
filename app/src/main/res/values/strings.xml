@@ -4,7 +4,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_main">MainActivity</string>
     <string name="econPhase">Economic Phase %d</string>
-    <string name="buildDefense">Build Defense Fleet</string>
+    <string name="buildHomeDefense">Build Home Defense</string>
+    <string name="buildColonyDefense">Build Colony Defense</string>
     <string name="newFleets">New Fleets</string>
     <string name="areYouSure">Are You Sure?</string>
     <string name="gameOver">...</string>
@@ -25,18 +26,34 @@
     <string name="SCANNER">Scanner: %d</string>
     <string name="FIGHTERS">Fighters: %d</string>
     <string name="POINT_DEFENSE">Point Defense: %d</string>
-    <string name="MINE_SWEEP">Mine Sweep: %d</string>
+    <string name="MINE_SWEEPER">Mine Sweep: %d</string>
 
-    <string name="RAIDER">R %d; </string>
-    <string name="CARRIER">CV %d; </string>
-    <string name="FIGHTER">F %d; </string>
-    <string name="BASE">Base %d; </string>
-    <string name="MINE">Mines %d; </string>
-    <string name="SCOUT">SC %d; </string>
-    <string name="DESTROYER">DD %d; </string>
-    <string name="CRUISER">CA %d; </string>
-    <string name="BATTLECRUISER">BC %d; </string>
-    <string name="BATTLESHIP">BB %d; </string>
-    <string name="DREADNAUGHT">DN %d; </string>
+    <string name="RAIDER">%d R;</string>
+    <string name="CARRIER">%d CV;</string>
+    <string name="FIGHTER">%d F;</string>
+    <string name="BASE">%d Base;</string>
+    <string name="MINE">%d Mines;</string>
+    <string name="SCOUT">%d SC;</string>
+    <string name="DESTROYER">%d DD;</string>
+    <string name="CRUISER">%d CA;</string>
+    <string name="BATTLECRUISER">%d BC;</string>
+    <string name="BATTLESHIP">%d BB;</string>
+    <string name="DREADNAUGHT">%d DN;</string>
+
+    <!-- Scenari 4 -->
+
+    <string name="SECURITY_FORCES">Security: %d</string>
+    <string name="MILITARY_ACADEMY">Military academy: %d</string>
+    <string name="BOARDING">Boarding: %d</string>
+    <string name="GROUND_COMBAT">Ground :%d</string>
+
+    <string name="TITAN">%d Titan;</string>
+    <string name="TRANSPORT">%d T;</string>
+    <string name="INFANTRY">%d Inf;</string>
+    <string name="MARINE">%d Mar;</string>
+    <string name="HEAVY_INFANTRY">%d HI;</string>
+    <string name="GRAV_ARMOR">%d Grav;</string>
+    <string name="BOARDING_SHIP">%d BD;</string>
+
     <string name="setSeenLevels">Set Seen Technology</string>
 </resources>

@@ -58,7 +58,7 @@ public class DefenseBuilder extends com.thilian.se4x.robot.game.DefenseBuilder {
     }
 
     private void addBasesOrMines(Fleet fleet) {
-        if (game.roller.roll() < 6)
+        if (game.roller.roll() < 6 && fleet.getRemainigCP() >= BASE.getCost())
             buildGroup(fleet, BASE, 1);
         else
             buildGroup(fleet, MINE, 2);
