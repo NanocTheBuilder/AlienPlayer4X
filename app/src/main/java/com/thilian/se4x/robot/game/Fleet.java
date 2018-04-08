@@ -53,8 +53,8 @@ public class Fleet {
     }
 
     public void setFleetType(FleetType fleetType) {
-        this.fleetType = fleetType;
         this.name = ap.findFleetName(fleetType);
+        this.fleetType = fleetType;
     }
 
     public int getFleetCP() {
