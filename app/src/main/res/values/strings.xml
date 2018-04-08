@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">AlienPlayer4X</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_main">MainActivity</string>
     <string name="econPhase">Economic Phase %d</string>
     <string name="buildHomeDefense">Build Home Defense</string>
@@ -9,6 +8,7 @@
     <string name="newFleets">New Fleets</string>
     <string name="areYouSure">Are You Sure?</string>
     <string name="gameOver">...</string>
+    <string name="start">Start</string>
 
     <string name="REGULAR_FLEET">Regular Fleet %s</string>
     <string name="RAIDER_FLEET">Raider Fleet %s</string>

@@ -82,7 +82,9 @@ public class SeenTechnologyActivity extends Activity{
         List<Integer> values = new ArrayList<>();
         for(int i = 0; i <= technologyPrices.getMaxLevel(technology); i++)
             values.add(i);
-        spinner.setAdapter(new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, values.toArray(new Integer[values.size()])));
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, values.toArray(new Integer[values.size()]));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new SpinnerListener(technology));
     }
 

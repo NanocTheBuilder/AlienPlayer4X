@@ -8,8 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.thilian.se4x.robot.game.Scenario;
-import com.thilian.se4x.robot.game.basegame.BaseGameScenario;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.Scenarios;
 
@@ -20,11 +18,9 @@ public class NewGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
 
-        Spinner difficultySpinner = (Spinner) findViewById(R.id.difficultySpinner);
-        difficultySpinner.setAdapter(new ArrayAdapter<Difficulty>(this, android.R.layout.simple_spinner_item, Difficulty.values()));
+        createEnumSpinner(R.id.difficultySpinner, Difficulty.EASY);
 
-        Spinner scenarioSpinner = (Spinner) findViewById(R.id.scenarioSpinner);
-        scenarioSpinner.setAdapter(new ArrayAdapter<Scenarios>(this, android.R.layout.simple_spinner_item, Scenarios.values()));
+        createEnumSpinner(R.id.scenarioSpinner, Scenarios.BASE_GAME);
 
         Button  startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +37,13 @@ public class NewGameActivity extends Activity {
                 }
             }
         });
+    }
+
+    private <T extends Enum> void createEnumSpinner(int id, T enumValue){
+        Spinner spinner = (Spinner) findViewById(id);
+        ArrayAdapter<T> adapter = new ArrayAdapter<T>(this, android.R.layout.simple_spinner_dropdown_item, (T[])enumValue.getDeclaringClass().getEnumConstants());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
     public void createGame() throws IllegalAccessException, InstantiationException {
