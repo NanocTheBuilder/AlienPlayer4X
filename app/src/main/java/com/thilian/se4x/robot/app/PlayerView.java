@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Technology;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
+import com.thilian.se4x.robot.game.scenarios.vpscenario.VpScenario;
 
 /**
  * TODO: document your custom view class.
@@ -35,11 +38,22 @@ public class PlayerView extends LinearLayout {
         this.alienPlayer = alienPlayer;
     }
 
-    public PlayerView(Context context, Game game, AlienPlayer alienPlayer) {
+    public PlayerView(Context context, Game game, final AlienPlayer alienPlayer) {
         this(context, null);
         this.game = game;
         this.alienPlayer = alienPlayer;
         initTexts();
+
+        ((Button)findViewById(R.id.eliminate_button)).setOnClickListener(
+                new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alienPlayer.setEliminated(true);
+                        view.setEnabled(false);
+                    }
+                }
+        );
+
         setBackgroundColor();
         update();
     }
@@ -51,6 +65,11 @@ public class PlayerView extends LinearLayout {
             findViewById(R.id.security_forces_text).setVisibility(GONE);
             findViewById(R.id.military_academy_text).setVisibility(GONE);
         }
+        if(!(game.scenario instanceof VpScenario)){
+            findViewById(R.id.colonies_text).setVisibility(INVISIBLE);
+            findViewById(R.id.colonies_spinner).setVisibility(INVISIBLE);
+        }
+        findViewById(R.id.eliminate_button).setEnabled(true);
     }
 
     public void setBackgroundColor(){

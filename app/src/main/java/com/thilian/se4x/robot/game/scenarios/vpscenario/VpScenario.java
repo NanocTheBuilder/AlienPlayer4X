@@ -5,8 +5,9 @@ import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Scenario;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
+import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
 
-public class VpScenario extends Scenario {
+public class VpScenario extends Scenario4 {
     @Override
     public void init(Game game) {
 
