@@ -13,7 +13,7 @@ import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.TechnologyPrices;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
-import com.thilian.se4x.robot.game.scenario4.Scenario4;
+import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
 
 import java.util.ArrayList;
 import java.util.List;

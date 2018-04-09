@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
-import com.thilian.se4x.robot.game.scenario4.Scenario4Player;
+import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 
 import java.util.List;
 

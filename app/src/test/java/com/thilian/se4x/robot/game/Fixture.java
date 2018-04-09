@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 
 import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
 
 public abstract class Fixture {
     protected Game game;
@@ -21,7 +22,7 @@ public abstract class Fixture {
     public void setUpFixture() {
         game = new Game();
         setupRoller(game);
-        game.createGame(Difficulty.NORMAL, getScenario());
+        game.createGame(BaseGameDifficulty.NORMAL, getScenario());
         defBuilder = game.scenario.defenseBuilder;
         fleetBuilder = game.scenario.fleetBuilder;
         fleetLauncher = game.scenario.fleetLauncher;

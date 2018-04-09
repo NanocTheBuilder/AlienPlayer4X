@@ -26,6 +26,8 @@ public class AlienPlayer {
 
     private boolean purchasedCloakThisTurn = false;
 
+    private boolean eliminated = false;
+
     public AlienPlayer(AlienEconomicSheet sheet, Game game, PlayerColor color) {
         this.economicSheet = sheet;
         this.game = game;
@@ -134,4 +136,11 @@ public class AlienPlayer {
         return null;
     }
 
+    public boolean isEliminated() {
+        return eliminated;
+    }
+
+    public void setEliminated(boolean eliminated) {
+        this.eliminated = eliminated;
+    }
 }

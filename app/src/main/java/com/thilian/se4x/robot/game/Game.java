@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.thilian.se4x.robot.game.basegame.BaseGameTechnologyBuyer;
-import com.thilian.se4x.robot.game.basegame.BaseGameTechnologyPrices;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.Seeable;
@@ -47,9 +45,11 @@ public class Game {
     public List<Fleet> doEconomicPhase() {
         List<Fleet> newFleets = new ArrayList<>();
         for (AlienPlayer ap : aliens) {
-            Fleet fleet = ap.makeEconRoll(currentTurn);
-            if (fleet != null)
-                newFleets.add(fleet);
+            if(!ap.isEliminated()){
+                Fleet fleet = ap.makeEconRoll(currentTurn);
+                if (fleet != null)
+                    newFleets.add(fleet);
+            }
         }
         currentTurn++;
         return newFleets;

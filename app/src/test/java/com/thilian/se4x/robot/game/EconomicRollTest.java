@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
 
 public class EconomicRollTest {
 	
@@ -38,7 +39,7 @@ public class EconomicRollTest {
 	@Test
 	public void testCPResults() {
 		for(int turn = 1; turn < 21; turn ++){
-			for(Difficulty diff : Difficulty.values()){
+			for(Difficulty diff : BaseGameDifficulty.values()){
 				assertFleetResults(turn, diff);
 				assertTechResults(turn, diff);
 				assertDefResults(turn, diff);
@@ -48,7 +49,7 @@ public class EconomicRollTest {
 	
 	@Test
 	public void testEconResult() {
-		AlienEconomicSheet sheet = new AlienEconomicSheet(Difficulty.EASY);
+		AlienEconomicSheet sheet = new AlienEconomicSheet(BaseGameDifficulty.EASY);
 		assertEquals(0, sheet.getExtraEcon(4));
 		sheet.applyRoll(1, 1);
 		sheet.applyRoll(2, 1);

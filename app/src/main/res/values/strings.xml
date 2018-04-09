@@ -10,6 +10,9 @@
     <string name="gameOver">...</string>
     <string name="start">Start</string>
 
+    <string name="eliminate">Eliminate</string>
+    <string name="eliminated">Eliminated</string>
+
     <string name="REGULAR_FLEET">Regular Fleet %s</string>
     <string name="RAIDER_FLEET">Raider Fleet %s</string>
     <string name="DEFENSE_FLEET">Defense Fleet %s</string>

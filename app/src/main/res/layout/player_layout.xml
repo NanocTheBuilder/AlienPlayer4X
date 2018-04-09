@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    tools:padding="8dp">
 
     <TextView
         android:id="@+id/move_text"
@@ -125,13 +126,12 @@
         android:layout_height="wrap_content"
         android:text="Ground: 0"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/mine_sweeper_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/boarding_text"
         app:layout_constraintBottom_toTopOf="@+id/military_academy_text"
+        app:layout_constraintEnd_toStartOf="@+id/boarding_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mine_sweeper_text" />
 
     <TextView
         android:id="@+id/boarding_text"
@@ -157,7 +157,6 @@
         app:layout_constraintStart_toEndOf="@+id/boarding_text"
         app:layout_constraintTop_toBottomOf="@+id/scanner_text" />
 
-
     <TextView
         android:id="@+id/military_academy_text"
         android:layout_width="wrap_content"
@@ -170,14 +169,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boarding_text" />
 
+    <Button
+        android:id="@+id/eliminate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/eliminate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fleets_text"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/military_academy_text" />
+
     <TextView
         android:id="@+id/fleets_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="[]"
+        android:text="0 fleets"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/colonies_text"
+        app:layout_constraintStart_toEndOf="@id/eliminate_button"
         app:layout_constraintTop_toBottomOf="@+id/military_academy_text" />
+
+
+    <TextView
+        android:id="@+id/colonies_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Colonies:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/colonies_spinner"
+        app:layout_constraintStart_toStartOf="@id/fleets_text"
+        app:layout_constraintTop_toBottomOf="@+id/military_academy_text" />
+
+    <Spinner
+        android:id="@+id/colonies_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/colonies_text"
+        app:layout_constraintTop_toBottomOf="@+id/military_academy_text" />
+
+
 </android.support.constraint.ConstraintLayout>

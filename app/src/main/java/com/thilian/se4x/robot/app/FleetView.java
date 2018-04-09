@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
-import com.thilian.se4x.robot.game.scenario4.Scenario4Player;
+import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 
 /**
  * TODO: document your custom view class.

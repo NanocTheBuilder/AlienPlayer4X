@@ -20,6 +20,8 @@ public abstract class Scenario{
 
     public abstract AlienPlayer newPlayer(Game game, Difficulty difficulty, PlayerColor color);
 
+    public abstract Difficulty[] getDifficulties();
+
     public Collection<Technology> getAvailableTechs() {
         return techPrices.getAvailableTechs();
     }

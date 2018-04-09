@@ -4,7 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thilian.se4x.robot.game.basegame.BaseGameScenario;
+import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
+import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameScenario;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetType;
 
@@ -18,7 +19,7 @@ public class FleetNameTest {
     @Before
     public void setUp(){
         Game game = new Game();
-        game.createGame(Difficulty.NORMAL,new BaseGameScenario());
+        game.createGame(BaseGameDifficulty.NORMAL,new BaseGameScenario());
         ap = game.aliens.get(0);
     }
 
