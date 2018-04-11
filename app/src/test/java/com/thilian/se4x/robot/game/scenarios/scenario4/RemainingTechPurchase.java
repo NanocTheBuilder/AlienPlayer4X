@@ -3,6 +3,8 @@ package com.thilian.se4x.robot.game.scenarios.scenario4;
 import static com.thilian.se4x.robot.game.enums.Technology.*;
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
+
 import org.junit.Test;
 
 import com.thilian.se4x.robot.game.enums.FleetType;
@@ -10,6 +12,22 @@ import com.thilian.se4x.robot.game.enums.Technology;
 
 //TODO THIS WHOLE CLASS IS A DUPLICATE
 public class RemainingTechPurchase extends Scenario4TechnologyBuyerTestBase {
+//    private HashMap<Technology, Integer> rollMap = new HashMap<>();
+//    {
+//        rollMap.put(ATTACK, 20);
+//        rollMap.put(DEFENSE, 20);
+//        rollMap.put(FIGHTERS, 8);
+//        rollMap.put(SCANNER, 2);
+//        rollMap.put(MINE_SWEEPER, 5);
+//        rollMap.put(TACTICS, 12);
+//        rollMap.put(SECURITY_FORCES, 3);
+//        rollMap.put(MILITARY_ACADEMY, 4);
+//        rollMap.put(POINT_DEFENSE, 3);
+//        rollMap.put(CLOAKING, 3);
+//        rollMap.put(BOARDING, 4);
+//        rollMap.put(SHIP_SIZE, 16);
+//    }
+
     @Test
     public void expansionsTechnologiesAvailable() {
         assertEquals(7, game.scenario.getMaxLevel(SHIP_SIZE));
@@ -27,12 +45,16 @@ public class RemainingTechPurchase extends Scenario4TechnologyBuyerTestBase {
 
     @Test
     public void buyAttack() {
-        assertBuysRemaining(ATTACK, 36);
+        assertBuysNextRemaining(ATTACK, 0, 36, 89); //CLOAKING, FIGHTERS
+        assertBuysNextRemaining(ATTACK, 1, 36, 100);
+        assertBuysNextRemaining(ATTACK, 2, 36, 97);
     }
 
     @Test
     public void buyDefense() {
-        assertBuysRemaining(DEFENSE, 56);
+        assertBuysNextRemaining(DEFENSE, 0, 56, 89); //CLOAKING, FIGHTERS
+        assertBuysNextRemaining(DEFENSE, 1, 56, 100);
+        assertBuysNextRemaining(DEFENSE, 2, 56, 97);
     }
 
     @Test
@@ -170,21 +192,17 @@ public class RemainingTechPurchase extends Scenario4TechnologyBuyerTestBase {
     }
 
     // TODO DUPLICATE!!!
-    private void assertBuysRemaining(Technology technology, int rollNeeded) {
-        for (int i = game.scenario.getStartingLevel(technology); i < game.scenario.getMaxLevel(technology); i++)
-            assertBuysNextRemaining(technology, i, rollNeeded);
-    }
 
-    private void assertBuysNextRemaining(Technology technology, int currentLevel, int rollNeeded) {
+    private void assertBuysNextRemaining(Technology technology, int currentLevel, int rollNeeded, int rollLimit) {
         ap.setLevel(technology, currentLevel);
         int nextLevel = currentLevel + 1;
         sheet.setTechCP(game.scenario.getCost(technology, nextLevel));
-        assertBuys(technology, nextLevel, rollNeeded);
+        assertBuys(technology, nextLevel, rollNeeded, rollLimit);
         assertEquals(0, sheet.getTechCP());
     }
 
-    private void assertBuys(Technology technology, int techonogyLevel, int roll) {
-        roller.mockRoll(roll);
+    private void assertBuys(Technology technology, int techonogyLevel, int roll, int limit) {
+        roller.mockRoll(limit, roll);
         buyTech();
         assertLevel(technology, techonogyLevel);
     }

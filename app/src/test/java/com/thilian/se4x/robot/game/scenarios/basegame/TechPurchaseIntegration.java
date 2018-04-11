@@ -35,7 +35,9 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
         ap.setLevel(Technology.DEFENSE, 1);
         roller.mockRoll(10); // no ship shize
         roller.mockRoll(3); // buys fighter
-        roller.mockRoll(5, 5, 6);
+        roller.mockRoll(5);
+        roller.mockRoll(5);
+        roller.mockRoll(6);
         ap.buildFleet(fleet);
         assertLevel(Technology.FIGHTERS, 2);
         assertLevel(Technology.DEFENSE, 2);

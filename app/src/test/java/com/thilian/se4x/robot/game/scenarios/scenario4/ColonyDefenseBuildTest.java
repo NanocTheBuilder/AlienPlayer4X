@@ -26,7 +26,8 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
     
     @Test
     public void dontSpendOverDiceRoll() {
-        roller.mockRoll(1, 1);
+        roller.mockRoll(1);
+        roller.mockRoll(1); //Max CP
         roller.mockRoll(1);
         Fleet fleet = ((DefenseBuilder)defBuilder).buildColonyDefense(ap);
         assertEquals(DEFENSE_FLEET, fleet.getFleetType());
@@ -36,7 +37,8 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
     @Test
     public void dontSpendMoreThanDefCP() {
         sheet.setDefCP(2);
-        roller.mockRoll(10, 10);
+        roller.mockRoll(10);
+        roller.mockRoll(10);//Max CP
         roller.mockRoll(1);
         Fleet fleet = ((DefenseBuilder)defBuilder).buildColonyDefense(ap);
         assertEquals(DEFENSE_FLEET, fleet.getFleetType());
@@ -45,42 +47,48 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
 
     @Test
     public void buy1Base() {
-        roller.mockRoll(5, 7); //max cp
+        roller.mockRoll(5);
+        roller.mockRoll(7);//max cp
         roller.mockRoll(5); //buy 1 base
         assertBuiltGroups(new Group(BASE, 1));
     }
 
     @Test
     public void buy0Base() {
-        roller.mockRoll(1, 0); //max cp
+        roller.mockRoll(1);
+        roller.mockRoll(0); //max cp
         roller.mockRoll(5); //buy 1 base
         assertBuiltGroups();
     }
 
     @Test
     public void buy2Mines() {
-        roller.mockRoll(3, 7); //max cp
+        roller.mockRoll(3);
+        roller.mockRoll(7); //max cp
         roller.mockRoll(6); //buy 2 mines
         assertBuiltGroups(new Group(MINE, 2));
     }
 
     @Test
     public void buy1Mine() {
-        roller.mockRoll(3, 2); //max cp
+        roller.mockRoll(3);
+        roller.mockRoll(2); //max cp
         roller.mockRoll(6); //buy 2 mines
         assertBuiltGroups(new Group(MINE, 1));
     }
 
     @Test
     public void buy1MineIfCantAffordBase() {
-        roller.mockRoll(2, 3); //max cp
+        roller.mockRoll(2);
+        roller.mockRoll(3); //max cp
         roller.mockRoll(3); //buy 2 mines
         assertBuiltGroups(new Group(MINE, 1));
     }
 
     @Test
     public void buy2MinesAnd4Infantry() {
-        roller.mockRoll(10, 9); //max cp
+        roller.mockRoll(10);
+        roller.mockRoll(9); //max cp
         roller.mockRoll(6); //buy 2 mines
         assertBuiltGroups(new Group(MINE, 2), new Group(INFANTRY, 4));
     }
@@ -88,7 +96,8 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
     @Test
     public void buy2MinesAnd3HeavyInfantry() {
         ap.setLevel(GROUND_COMBAT, 2);
-        roller.mockRoll(10, 9); //max cp
+        roller.mockRoll(10);
+        roller.mockRoll(9); //max cp
         roller.mockRoll(6); //buy 2 mines
         assertBuiltGroups(new Group(MINE, 2), new Group(HEAVY_INFANTRY, 3));
     }
