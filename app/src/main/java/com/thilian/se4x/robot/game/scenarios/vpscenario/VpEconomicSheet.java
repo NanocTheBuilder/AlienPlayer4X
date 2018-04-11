@@ -43,7 +43,21 @@ public class VpEconomicSheet extends AlienEconomicSheet {
 
     @Override
     public void makeRoll(int turn, DiceRoller roller) {
-        super.makeRoll(turn, roller);
+        int limit = 10;
+        if(getDefCP() == ((VpDifficulty)difficulty).getMaxDefenseCp()
+                && requiredRoll(turn, RESULT_DEF) != 99)
+        {
+            limit = requiredRoll(turn, RESULT_DEF) - 1;
+        }
+
+        int result = roller.roll(limit);
+        if (result >= requiredRoll(turn, RESULT_DEF))
+            defCP += 2 * difficulty.getCPPerEcon();
+        else if (result >= requiredRoll(turn, RESULT_TECH))
+            techCP += difficulty.getCPPerEcon();
+        else
+            fleetCP += difficulty.getCPPerEcon();
+
         int maxDefenseCp = ((VpDifficulty)difficulty).getMaxDefenseCp();
         if(defCP > maxDefenseCp){
             defCP = maxDefenseCp;

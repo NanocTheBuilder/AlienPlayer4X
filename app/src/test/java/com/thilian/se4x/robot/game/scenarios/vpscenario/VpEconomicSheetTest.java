@@ -56,8 +56,10 @@ public class VpEconomicSheetTest extends EconomicRollTest{
         sheet.setDefCP(50);
         
         MockRoller roller = new MockRoller();
-        roller.mockRoll(10);
-        roller.mockRoll(9);
+        roller.mockRoll(9, 9);
+        sheet.makeRoll(5, roller);
+        Assert.assertEquals(50, sheet.getDefCP());
+        Assert.assertEquals(5, sheet.getTechCP());
     }
     
     @Override
