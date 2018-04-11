@@ -49,7 +49,8 @@ public class AlienEconomicSheet {
         this.difficulty = difficulty;
     }
 
-    public void applyRoll(int turn, int result) {
+    public void makeRoll(int turn, DiceRoller roller) {
+        int result = roller.roll();
         if (result >= requiredRoll(turn, RESULT_DEF))
             defCP += 2 * difficulty.getCPPerEcon();
         else if (result >= requiredRoll(turn, RESULT_TECH))
@@ -106,14 +107,17 @@ public class AlienEconomicSheet {
         return fleetCP;
     }
 
+    //only for testing
     public void setDefCP(int defCP) {
         this.defCP = defCP;
     }
 
+    //only for testing
     public void setFleetCP(int fleetCP) {
         this.fleetCP = fleetCP;
     }
 
+    //only for testing
     public void setTechCP(int techCP) {
         this.techCP = techCP;
     }

@@ -45,7 +45,7 @@ public class AlienPlayer {
 
     public Fleet makeEconRoll(int turn) {
         for (int i = 0; i < economicSheet.getEconRolls(turn) + getExtraEconRoll(turn); i++)
-            economicSheet.applyRoll(turn, game.roller.roll());
+            economicSheet.makeRoll(turn, game.roller);
         Fleet newFleet = game.scenario.rollFleetLaunch(this, turn);
         if (newFleet != null) {
             buyNextMoveLevel();

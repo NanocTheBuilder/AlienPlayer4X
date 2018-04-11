@@ -1,6 +1,7 @@
 package com.thilian.se4x.robot.game.scenarios.vpscenario;
 
 import com.thilian.se4x.robot.game.AlienEconomicSheet;
+import com.thilian.se4x.robot.game.DiceRoller;
 
 public class VpEconomicSheet extends AlienEconomicSheet {
 
@@ -40,6 +41,14 @@ public class VpEconomicSheet extends AlienEconomicSheet {
 
     //@formatter:on
 
+    @Override
+    public void makeRoll(int turn, DiceRoller roller) {
+        super.makeRoll(turn, roller);
+        int maxDefenseCp = ((VpDifficulty)difficulty).getMaxDefenseCp();
+        if(defCP > maxDefenseCp){
+            defCP = maxDefenseCp;
+        }
+    }
 
     @Override
     protected int requiredRoll(int turn, int result) {
@@ -53,12 +62,16 @@ public class VpEconomicSheet extends AlienEconomicSheet {
 
     @Override
     public int getEconRolls(int turn) {
-        return 0;
+        return econRolls[turn];
     }
 
     @Override
     public int getFleetLaunch(int turn) {
         return VpEconomicSheet.fleetLaunch[turn];
+    }
+
+    public boolean isMaxDefCP() {
+        return defCP == ((VpDifficulty)difficulty).getMaxDefenseCp();
     }
 
 
