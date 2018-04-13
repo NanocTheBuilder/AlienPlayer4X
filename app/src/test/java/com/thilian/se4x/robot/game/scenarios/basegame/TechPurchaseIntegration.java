@@ -47,8 +47,8 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
     }
 
     @Override
-    protected Scenario getScenario() {
-        return new Scenario(){
+    protected void createGame(){
+        game.createGame(BaseGameDifficulty.NORMAL, new Scenario(){
             @Override
             public void init(Game game) {
                 defenseBuilder = new DefenseBuilder(game);
@@ -70,6 +70,6 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
             public Difficulty[] getDifficulties() {
                 return new Difficulty[0];
             }
-        };
+        });
     }
 }

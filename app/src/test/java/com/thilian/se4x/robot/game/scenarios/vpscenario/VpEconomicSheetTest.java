@@ -35,6 +35,13 @@ public class VpEconomicSheetTest extends EconomicRollTest{
         };
     
     @Test
+    public void testStartingBank(){
+        Assert.assertEquals(0, new VpEconomicSheet(VpDifficulty.EASY).getBank());
+        Assert.assertEquals(100, new VpEconomicSheet(VpDifficulty.NORMAL).getBank());
+        Assert.assertEquals(100, new VpEconomicSheet(VpDifficulty.HARD).getBank());
+    }
+    
+    @Test
     public void testMaxDefense(){
         VpEconomicSheet sheet = new VpEconomicSheet(VpDifficulty.EASY);
         sheet.setDefCP(49);
@@ -79,6 +86,11 @@ public class VpEconomicSheetTest extends EconomicRollTest{
     @Override
     protected int[] getFleetLaunchValues() {
         return new int[] { 0, -99, 10, 10, 5, 10, 4, 10, 4, 5, 6, 4, 6, 3, 10, 3, 10, 3, 10, 3, 10};
+    }
+    
+    @Override
+    protected AlienEconomicSheet getEconomicSheet() {
+        return getEconomicSheet(VpDifficulty.EASY);
     }
     
     @Override

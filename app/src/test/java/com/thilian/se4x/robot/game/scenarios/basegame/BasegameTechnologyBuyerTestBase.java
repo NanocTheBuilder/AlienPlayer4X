@@ -8,8 +8,9 @@ import com.thilian.se4x.robot.game.TechnologyBuyerTestBase;
  */
 
 public class BasegameTechnologyBuyerTestBase extends TechnologyBuyerTestBase {
+
     @Override
-    protected Scenario getScenario() {
-        return new BaseGameScenario();
+    protected void createGame() {
+        game.createGame(BaseGameDifficulty.NORMAL, new BaseGameScenario());
     }
 }

@@ -26,7 +26,7 @@ import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
  * Created by thili on 2017. 12. 06..
  */
 
-class Scenario4TechnologyBuyer extends TechnologyBuyer {
+public class Scenario4TechnologyBuyer extends TechnologyBuyer {
     private static int[] SHIP_SIZE_ROLL_TABLE = new int[] { 0, 10, 7, 6, 5, 3, 6 };
 
     public Scenario4TechnologyBuyer(Game game) {

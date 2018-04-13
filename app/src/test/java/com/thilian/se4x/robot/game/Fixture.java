@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 
-import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
 
 public abstract class Fixture {
@@ -22,7 +21,7 @@ public abstract class Fixture {
     public void setUpFixture() {
         game = new Game();
         setupRoller(game);
-        game.createGame(BaseGameDifficulty.NORMAL, getScenario());
+        createGame();
         defBuilder = game.scenario.defenseBuilder;
         fleetBuilder = game.scenario.fleetBuilder;
         fleetLauncher = game.scenario.fleetLauncher;
@@ -31,12 +30,12 @@ public abstract class Fixture {
         sheet = ap.getEconomicSheet();
     }
 
+    protected abstract void createGame();
+
     @After
     public void assertAllRollsUsed() {
         assertEquals(0, roller.rolls.size());
     }
-
-    protected abstract Scenario getScenario();
     
     private void setupRoller(Game game) {
         roller = new MockRoller();

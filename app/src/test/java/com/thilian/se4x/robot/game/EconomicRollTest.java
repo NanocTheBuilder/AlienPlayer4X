@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
+import com.thilian.se4x.robot.game.scenarios.vpscenario.VpDifficulty;
 
 public class EconomicRollTest {
 
@@ -74,7 +75,7 @@ public class EconomicRollTest {
     @Test
     public void testEconRollsColumn() {
         int[] expected = getEconRolls();
-        AlienEconomicSheet sheet = getEconomicSheet(null);
+        AlienEconomicSheet sheet = getEconomicSheet();
         for (int turn = 1; turn < 21; turn++)
             assertEquals(expected[turn], sheet.getEconRolls(turn));
     }
@@ -86,7 +87,7 @@ public class EconomicRollTest {
     @Test
     public void testFleetLaunch() {
         int[] expected = getFleetLaunchValues();
-        AlienEconomicSheet sheet = getEconomicSheet(null);
+        AlienEconomicSheet sheet = getEconomicSheet();
         for (int turn = 1; turn < 21; turn++)
             assertEquals(expected[turn], sheet.getFleetLaunch(turn));
     }
@@ -144,6 +145,11 @@ public class EconomicRollTest {
         assertEquals(2 * diff.getCPPerEcon(), sheet.getDefCP());
     }
 
+    protected AlienEconomicSheet getEconomicSheet() {
+        AlienEconomicSheet sheet = new AlienEconomicSheet(BaseGameDifficulty.EASY);
+        return sheet;
+    }
+    
     protected AlienEconomicSheet getEconomicSheet(Difficulty diff) {
         AlienEconomicSheet sheet = new AlienEconomicSheet(diff);
         return sheet;

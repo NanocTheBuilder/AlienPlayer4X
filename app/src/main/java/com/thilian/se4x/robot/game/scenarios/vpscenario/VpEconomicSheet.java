@@ -6,8 +6,11 @@ import com.thilian.se4x.robot.game.DiceRoller;
 public class VpEconomicSheet extends AlienEconomicSheet {
 
 
+    private int bank;
+
     public VpEconomicSheet(VpDifficulty difficulty) {
         super(difficulty);
+        bank = difficulty.getStartingBank();
     }
 
     //@formatter:off
@@ -86,6 +89,10 @@ public class VpEconomicSheet extends AlienEconomicSheet {
 
     public boolean isMaxDefCP() {
         return defCP == ((VpDifficulty)difficulty).getMaxDefenseCp();
+    }
+
+    public int getBank() {
+        return bank;
     }
 
 
