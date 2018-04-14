@@ -5,9 +5,13 @@ import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
+import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
 
@@ -15,11 +19,11 @@ public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
         super(game);
     };
 
-    public void buildFleet(Fleet fleet) {
+    public void buildFleet(Fleet fleet, FleetBuildOptions... options) {
         if (fleet.getFleetType().equals(RAIDER_FLEET) || shouldBuildRaiderFleet(fleet)) {
             buildRaiderFleet(fleet);
         } else {
-            buildOneFullyLoadedTransport(fleet);
+            buildOneFullyLoadedTransport(fleet, options);
             buyBoardingShips(fleet);
             buyScoutsIfSeenMines(fleet);
             buyFullCarriers(fleet);
@@ -41,22 +45,30 @@ public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
         }
     }
 
-    private void buildOneFullyLoadedTransport(Fleet fleet) {
+    protected void buildOneFullyLoadedTransport(Fleet fleet, FleetBuildOptions... options) {
         fleet.addFreeGroup(new Group(ShipType.TRANSPORT, 1));
-        switch (fleet.getAp().getLevel(Technology.GROUND_COMBAT)) {
-        default:
-            fleet.addFreeGroup(new Group(ShipType.INFANTRY, 6));
-            break;
-        case 2:
-            fleet.addFreeGroup(new Group(ShipType.MARINE, 5));
-            fleet.addFreeGroup(new Group(ShipType.HEAVY_INFANTRY, 1));
-            break;
-        case 3:
-            fleet.addFreeGroup(new Group(ShipType.MARINE, 4));
-            fleet.addFreeGroup(new Group(ShipType.HEAVY_INFANTRY, 1));
-            fleet.addFreeGroup(new Group(ShipType.GRAV_ARMOR, 1));
-            break;
+        for(Group group : buildGroundUnits(fleet)){
+            fleet.addFreeGroup(group);
         }
+    }
+
+    protected List<Group> buildGroundUnits(Fleet fleet){
+        List<Group> groups = new ArrayList<>();
+        switch (fleet.getAp().getLevel(Technology.GROUND_COMBAT)) {
+            default:
+                groups.add(new Group(ShipType.INFANTRY, 6));
+                break;
+            case 2:
+                groups.add(new Group(ShipType.MARINE, 5));
+                groups.add(new Group(ShipType.HEAVY_INFANTRY, 1));
+                break;
+            case 3:
+                groups.add(new Group(ShipType.MARINE, 4));
+                groups.add(new Group(ShipType.HEAVY_INFANTRY, 1));
+                groups.add(new Group(ShipType.GRAV_ARMOR, 1));
+                break;
+        }
+        return groups;
     }
 
 }

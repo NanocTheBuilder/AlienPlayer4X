@@ -1,5 +1,7 @@
 package com.thilian.se4x.robot.game;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,12 +38,12 @@ public class Fleet {
         return sumGroupCost(freeGroups);
     }
 
-    public int getRemainigCP() {
+    public int getRemainingCP() {
         return fleetCP - getBuildCost();
     }
 
     public boolean canBuyMoreShips() {
-        return getRemainigCP() >= ShipType.SCOUT.getCost();
+        return getRemainingCP() >= ShipType.SCOUT.getCost();
     }
 
     public boolean isBuilt() {

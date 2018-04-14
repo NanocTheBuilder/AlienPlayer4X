@@ -13,6 +13,7 @@ import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 
+import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -25,7 +26,7 @@ public class FleetBuilder extends GroupBuilder {
         this.game = game;
     }
 
-    public void buildFleet(Fleet fleet) { // WOWOWO THIS IS WRONG
+    public void buildFleet(Fleet fleet, FleetBuildOptions... options) {
         if (fleet.getFleetType().equals(RAIDER_FLEET)) {
             buildRaiderFleet(fleet);
         } else {
@@ -61,7 +62,7 @@ public class FleetBuilder extends GroupBuilder {
                                 Math.max(ap.getLevel(Technology.ATTACK), ap.getLevel(Technology.DEFENSE)));
             } else {
                 while (fleet.canBuyMoreShips()) {
-                    buildGroup(fleet, ShipType.findBiggest(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE)));
+                    buildGroup(fleet, ShipType.findBiggest(fleet.getRemainingCP(), ap.getLevel(SHIP_SIZE)));
                 }
             }
         }
@@ -88,8 +89,8 @@ public class FleetBuilder extends GroupBuilder {
             ShipType cheapestType = ShipType.findCheapest(i);
             if (apShipSize >= cheapestType.getRequiredShipSize()) {
                 for (ShipType biggerType : ShipType.getBiggerTypesInReverse(cheapestType)) {
-                    if (apShipSize >= biggerType.getRequiredShipSize() && fleet.getRemainigCP() >= biggerType.getCost()) {
-                        int remainder = fleet.getRemainigCP() % cheapestType.getCost();
+                    if (apShipSize >= biggerType.getRequiredShipSize() && fleet.getRemainingCP() >= biggerType.getCost()) {
+                        int remainder = fleet.getRemainingCP() % cheapestType.getCost();
                         int difference = biggerType.getCost() - cheapestType.getCost();
                         int shipType2ToBuy = remainder / difference;
                         buildGroup(fleet, biggerType, shipType2ToBuy);
@@ -101,9 +102,9 @@ public class FleetBuilder extends GroupBuilder {
     }
 
     protected void buildPossibleDD(Fleet fleet) {
-        if (fleet.getRemainigCP() >= 9) {
+        if (fleet.getRemainingCP() >= 9) {
             AlienPlayer ap = fleet.getAp();
-            if (DESTROYER.canBeBuilt(fleet.getRemainigCP(), ap.getLevel(SHIP_SIZE))
+            if (DESTROYER.canBeBuilt(fleet.getRemainingCP(), ap.getLevel(SHIP_SIZE))
                     && game.getSeenLevel(CLOAKING) <= ap.getLevel(SCANNER) && fleet.findGroup(DESTROYER) == null)
                 fleet.addGroup(new Group(DESTROYER, 1));
         }
@@ -116,7 +117,7 @@ public class FleetBuilder extends GroupBuilder {
 
     protected void buildFlagship(Fleet fleet) {
         if (fleet.canBuyMoreShips()) {
-            ShipType shipType = ShipType.findBiggest(fleet.getRemainigCP(), fleet.getAp().getLevel(SHIP_SIZE));
+            ShipType shipType = ShipType.findBiggest(fleet.getRemainingCP(), fleet.getAp().getLevel(SHIP_SIZE));
             fleet.addGroup(new Group(shipType, 1));
         }
     }

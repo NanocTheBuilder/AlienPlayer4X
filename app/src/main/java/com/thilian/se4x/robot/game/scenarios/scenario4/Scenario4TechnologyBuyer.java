@@ -1,5 +1,6 @@
 package com.thilian.se4x.robot.game.scenarios.scenario4;
 
+import static com.thilian.se4x.robot.game.enums.FleetBuildOptions.COMBAT_IS_ABOVE_PLANET;
 import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
 import static com.thilian.se4x.robot.game.enums.Technology.BOARDING;
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
@@ -60,7 +61,7 @@ public class Scenario4TechnologyBuyer extends TechnologyBuyer {
         buyPointDefenseIfNeeded(ap);
         buyMineSweepIfNeeded(ap);
         buySecurityIfNeeded(ap);
-        buyGroundCombatIfNeeded(ap, new HashSet<>(Arrays.asList(options)).contains(FleetBuildOptions.COMBAT_IS_ABOVE_PLANET));
+        buyGroundCombatIfNeeded(ap,options.length != 0 && options[0].equals(COMBAT_IS_ABOVE_PLANET));
         buyMilitaryAcademyIfNeeded(ap);
         buyScannerIfNeeded(ap);
         buyBoardingIfNeeded(ap);

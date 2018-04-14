@@ -12,6 +12,7 @@ import com.thilian.se4x.robot.game.FleetBuilder;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Scenario;
 import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.Seeable;
@@ -56,7 +57,7 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
                 techPrices = new BaseGameTechnologyPrices();
                 fleetBuilder = new FleetBuilder(game) {
                     @Override
-                    public void buildFleet(Fleet fleet) {
+                    public void buildFleet(Fleet fleet, FleetBuildOptions... options) {
                     }
                 };
             }

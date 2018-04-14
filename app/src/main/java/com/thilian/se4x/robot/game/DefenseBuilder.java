@@ -35,6 +35,6 @@ public class DefenseBuilder extends GroupBuilder{
     }
 
     private boolean canBuyMine(Fleet fleet) {
-        return fleet.getRemainigCP() >= MINE.getCost();
+        return fleet.getRemainingCP() >= MINE.getCost();
     }
 }

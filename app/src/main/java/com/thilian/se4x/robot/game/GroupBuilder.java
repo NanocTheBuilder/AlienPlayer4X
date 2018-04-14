@@ -9,7 +9,7 @@ public class GroupBuilder {
     }
 
     protected void buildGroup(Fleet fleet, ShipType shipType, int maxToBuy) {
-        int shipToBuy = fleet.getRemainigCP() / shipType.getCost();
+        int shipToBuy = fleet.getRemainingCP() / shipType.getCost();
         shipToBuy = shipToBuy > maxToBuy ? maxToBuy : shipToBuy;
         fleet.addGroup(new Group(shipType, shipToBuy));
     }

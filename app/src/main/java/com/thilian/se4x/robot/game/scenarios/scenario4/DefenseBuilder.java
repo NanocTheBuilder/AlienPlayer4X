@@ -20,7 +20,7 @@ public class DefenseBuilder extends com.thilian.se4x.robot.game.DefenseBuilder {
 
     @Override
     protected void buyHomeDefenseUnits(Fleet fleet) {
-        if (fleet.getRemainigCP() > 25) {
+        if (fleet.getRemainingCP() > 25) {
             buyGravArmor(fleet);
             buyHeavyInfantry(fleet);
         }
@@ -58,7 +58,7 @@ public class DefenseBuilder extends com.thilian.se4x.robot.game.DefenseBuilder {
     }
 
     private void addBasesOrMines(Fleet fleet) {
-        if (game.roller.roll() < 6 && fleet.getRemainigCP() >= BASE.getCost())
+        if (game.roller.roll() < 6 && fleet.getRemainingCP() >= BASE.getCost())
             buildGroup(fleet, BASE, 1);
         else
             buildGroup(fleet, MINE, 2);

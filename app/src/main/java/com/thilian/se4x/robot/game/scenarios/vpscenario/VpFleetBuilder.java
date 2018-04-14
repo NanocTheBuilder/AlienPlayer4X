@@ -1,0 +1,35 @@
+package com.thilian.se4x.robot.game.scenarios.vpscenario;
+
+import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.Game;
+import com.thilian.se4x.robot.game.Group;
+import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
+import com.thilian.se4x.robot.game.enums.ShipType;
+import com.thilian.se4x.robot.game.scenarios.scenario4.FleetBuilder;
+
+import static com.thilian.se4x.robot.game.enums.FleetBuildOptions.COMBAT_IS_ABOVE_PLANET;
+import static com.thilian.se4x.robot.game.enums.FleetType.EXPANSION_FLEET;
+
+public class VpFleetBuilder extends FleetBuilder {
+    public VpFleetBuilder(Game game) {
+        super(game);
+    }
+
+    @Override
+    protected void buildOneFullyLoadedTransport(Fleet fleet, FleetBuildOptions... options) {
+        if(EXPANSION_FLEET.equals(fleet.getFleetType())){
+            super.buildOneFullyLoadedTransport(fleet);
+        }
+        else if(fleet.getRemainingCP() >= 40){
+            int roll = game.roller.roll();
+            if(options.length != 0 && options[0].equals(COMBAT_IS_ABOVE_PLANET))
+                roll -=2;
+            if(roll <= 5){
+                fleet.addGroup(new Group(ShipType.TRANSPORT, 1));
+                for (Group group : buildGroundUnits(fleet)) {
+                    fleet.addGroup(group);
+                }
+            }
+        }
+    }
+}
