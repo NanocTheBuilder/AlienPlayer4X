@@ -216,7 +216,7 @@ public class FleetBuilderTest extends Scenario4Fixture{
     }
 
     @Test
-    public void substractTwoIfHasPDAndSeenFighters() {
+    public void subtractTwoIfHasPDAndSeenFighters() {
         game.setSeenLevel(CLOAKING, 1); // No Possible DD
         ap.setLevel(Technology.POINT_DEFENSE, 1);
         game.addSeenThing(Seeable.FIGHTERS);
@@ -226,7 +226,7 @@ public class FleetBuilderTest extends Scenario4Fixture{
     }
 
     @Test
-    public void substractTwoIfHasPDAndSeenFightersAndBuy2SC() {
+    public void subtractTwoIfHasPDAndSeenFightersAndBuy2SC() {
         game.setSeenLevel(CLOAKING, 1); // No Possible DD
         ap.setLevel(Technology.POINT_DEFENSE, 1);
         game.addSeenThing(Seeable.FIGHTERS);
@@ -243,7 +243,7 @@ public class FleetBuilderTest extends Scenario4Fixture{
     }
 
     @Test
-    public void substractTwoIfHasPDAndSeenFightersAndDontBuy2SCIfHasFullCarrier() {
+    public void subtractTwoIfHasPDAndSeenFightersAndDontBuy2SCIfHasFullCarrier() {
         game.setSeenLevel(CLOAKING, 1); // No Possible DD
         ap.setLevel(FIGHTERS, 1);
         ap.setLevel(Technology.POINT_DEFENSE, 1);

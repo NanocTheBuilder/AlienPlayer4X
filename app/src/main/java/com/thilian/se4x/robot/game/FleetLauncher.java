@@ -8,7 +8,7 @@ import com.thilian.se4x.robot.game.enums.Technology;
 
 public class FleetLauncher {
     
-    private Game game;
+    protected Game game;
 
 
     public FleetLauncher(Game game) {
@@ -22,7 +22,7 @@ public class FleetLauncher {
             int roll = getFleetLaunchRoll(ap);
             if (roll <= economicSheet.getFleetLaunch(turn)) {
                 Fleet fleet = new Fleet(ap, REGULAR_FLEET, currentFleetCP);
-                if (shouldBuildRaiderFleet(ap)) {
+                if (shouldLaunchRaiderFleet(ap)) {
                     fleet.setFleetType(RAIDER_FLEET);
                     game.scenario.buildFleet(fleet);
                 }
@@ -39,13 +39,13 @@ public class FleetLauncher {
         int roll = game.roller.roll();
         if ((currentFleetCP >= 27
                 && ap.getLevel(Technology.FIGHTERS) > game.getSeenLevel(Technology.POINT_DEFENSE))
-                || shouldBuildRaiderFleet(ap))
+                || shouldLaunchRaiderFleet(ap))
             roll -= 2;
         return roll;
     }
 
 
-    private boolean shouldBuildRaiderFleet(AlienPlayer ap) {
+    private boolean shouldLaunchRaiderFleet(AlienPlayer ap) {
         int currentFleetCP = ap.getEconomicSheet().getFleetCP();
         return currentFleetCP >= 12
                 && ap.getLevel(Technology.CLOAKING) > game.getSeenLevel(Technology.SCANNER);

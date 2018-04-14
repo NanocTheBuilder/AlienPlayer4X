@@ -53,12 +53,18 @@ public class Fleet {
     }
 
     public void setFleetType(FleetType fleetType) {
-        this.name = ap.findFleetName(fleetType);
-        this.fleetType = fleetType;
+        if(!getFleetType().equals(fleetType)) {
+            this.name = ap.findFleetName(fleetType);
+            this.fleetType = fleetType;
+        }
     }
 
     public int getFleetCP() {
         return fleetCP;
+    }
+
+    public void addFleetCp(int amount) {
+        fleetCP += amount;
     }
 
     public List<Group> getGroups() {

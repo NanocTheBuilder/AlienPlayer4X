@@ -95,5 +95,13 @@ public class VpEconomicSheet extends AlienEconomicSheet {
         return bank;
     }
 
+    public void setBank(int bank) {
+        this.bank = bank;
+    }
+
+    public void spendBank(int amount){
+        bank -= amount;
+    }
+
 
 }

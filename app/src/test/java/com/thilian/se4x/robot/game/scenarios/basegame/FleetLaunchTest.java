@@ -52,20 +52,20 @@ public class FleetLaunchTest extends BasegameFixture {
     }
 
     @Test
-    public void substract2ForFighters() {
+    public void subtract2ForFighters() {
         ap.setLevel(Technology.FIGHTERS, 1);
         assertFleetLaunches();
     }
 
     @Test
-    public void onlySubstract2ForFightersIfPDNotSeen() {
+    public void onlySubtract2ForFightersIfPDNotSeen() {
         ap.setLevel(Technology.FIGHTERS, 1);
         game.setSeenLevel(Technology.POINT_DEFENSE, 1);
         assertFleetDoesNotLaunch();
     }
 
     @Test
-    public void onlySubstract2ForFightersIfHasEnoughCP() {
+    public void onlySubtract2ForFightersIfHasEnoughCP() {
         sheet.setFleetCP(26);
         ap.setLevel(Technology.FIGHTERS, 1);
         assertFleetDoesNotLaunch();
@@ -86,7 +86,7 @@ public class FleetLaunchTest extends BasegameFixture {
     }
 
     @Test
-    public void onlySubstract2ForCloakingIfScannerNotSeen() {
+    public void onlySubtract2ForCloakingIfScannerNotSeen() {
         ap.setLevel(Technology.FIGHTERS, 1);
         game.setSeenLevel(Technology.POINT_DEFENSE, 1);
         assertFleetDoesNotLaunch();

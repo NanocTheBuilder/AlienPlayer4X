@@ -18,7 +18,7 @@ public class VpScenario extends Scenario4 {
         techPrices = new Scenario4TechnologyPrices();
         fleetBuilder = new FleetBuilder(game);
         defenseBuilder = new DefenseBuilder(game);
-        fleetLauncher = new FleetLauncher(game);
+        fleetLauncher = new VpFleetLauncher(game);
 
     }
 
