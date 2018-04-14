@@ -14,9 +14,6 @@ import static com.thilian.se4x.robot.game.enums.Technology.SECURITY_FORCES;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
@@ -61,7 +58,7 @@ public class Scenario4TechnologyBuyer extends TechnologyBuyer {
         buyPointDefenseIfNeeded(ap);
         buyMineSweepIfNeeded(ap);
         buySecurityIfNeeded(ap);
-        buyGroundCombatIfNeeded(ap,options.length != 0 && options[0].equals(COMBAT_IS_ABOVE_PLANET));
+        buyGroundCombatIfNeeded(ap, FleetBuildOptions.isOption(COMBAT_IS_ABOVE_PLANET, options));
         buyMilitaryAcademyIfNeeded(ap);
         buyScannerIfNeeded(ap);
         buyBoardingIfNeeded(ap);

@@ -22,7 +22,7 @@ public class VpFleetBuilder extends FleetBuilder {
         }
         else if(fleet.getRemainingCP() >= 40){
             int roll = game.roller.roll();
-            if(options.length != 0 && options[0].equals(COMBAT_IS_ABOVE_PLANET))
+            if(FleetBuildOptions.isOption(COMBAT_IS_ABOVE_PLANET, options))
                 roll -=2;
             if(roll <= 5){
                 fleet.addGroup(new Group(ShipType.TRANSPORT, 1));
