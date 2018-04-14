@@ -1,4 +1,4 @@
-package com.thilian.se4x.robot.game.scenarios.basegame;
+package com.thilian.se4x.robot.integration;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,7 +7,6 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import com.thilian.se4x.robot.game.AlienEconomicSheet;
-import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
@@ -15,8 +14,11 @@ import com.thilian.se4x.robot.game.MockRoller;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
+import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
+import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
+import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 
-public class Integration {
+public class Scenario4Integration {
 
     private AlienEconomicSheet sheet;
 
@@ -24,9 +26,10 @@ public class Integration {
     public void economyRollStartsNewFleet() {
         MockRoller roller = new MockRoller();
         Game game = new Game();
-        game.createGame(BaseGameDifficulty.NORMAL, new BaseGameScenario());
+        game.createGame(BaseGameDifficulty.NORMAL, new Scenario4());
         game.roller = roller;
-        AlienPlayer ap = game.aliens.get(0);
+        
+        Scenario4Player ap = (Scenario4Player) game.aliens.get(0);
         sheet = ap.getEconomicSheet();
 
         roller.mockRoll(1);
@@ -74,7 +77,7 @@ public class Integration {
         roller.mockRoll(9); // ShipSize
         ap.buildFleet(fleet);
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
-        assertGroups(fleet, new Group(ShipType.DESTROYER, 1));
+        assertGroups(fleet, new Group(ShipType.TRANSPORT, 1), new Group(ShipType.INFANTRY, 6), new Group(ShipType.DESTROYER, 1));
         assertCPs(16, 0, 20);
         assertEquals(0, roller.rolls.size());
 
@@ -116,7 +119,7 @@ public class Integration {
 
         fleet = ap.getFleets().get(0);
         roller.mockRoll(9); // ShipSize
-        roller.mockRoll(6); // Cloaking
+        roller.mockRoll(100, 70); // Cloaking
         ap.buildFleet(fleet);
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
         assertEquals(1, ap.getLevel(Technology.CLOAKING));
@@ -130,7 +133,6 @@ public class Integration {
         roller.mockRoll(7);
         roller.mockRoll(7);
         roller.mockRoll(8);
-        
         fleet = ap.makeEconRoll(9);
         assertEquals(null, fleet);
         assertCPs(22, 20, 20);
@@ -139,19 +141,40 @@ public class Integration {
         game.setSeenLevel(Technology.CLOAKING, 1);
         roller.mockRoll(1); // Scanners
         roller.mockRoll(9); // ShipSize (Ignored)
+        roller.mockRoll(4, 3); // Military academy
         roller.mockRoll(1); // Max number of ships
         roller.mockRoll(10); // Max bases
         ap.buildHomeDefense();
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
-        assertEquals(1, ap.getLevel(Technology.SCANNER));
-        assertGroups(ap.getFleets().get(1), new Group(ShipType.DESTROYER, 1), new Group(ShipType.SCOUT, 2));
+        assertEquals(0, ap.getLevel(Technology.SCANNER));
+        assertEquals(2, ap.getLevel(Technology.GROUND_COMBAT));
+        assertEquals(1, ap.getLevel(Technology.MILITARY_ACADEMY));
+        assertGroups(ap.getFleets().get(1), new Group(ShipType.TRANSPORT, 1), new Group(ShipType.MARINE, 5), new Group(ShipType.HEAVY_INFANTRY, 1), new Group(ShipType.DESTROYER, 1), new Group(ShipType.SCOUT, 2));
         assertEquals(FleetType.REGULAR_FLEET, ap.getFleets().get(1).getFleetType());
         assertGroups(ap.getFleets().get(2), new Group(ShipType.BASE, 1), new Group(ShipType.MINE, 1));
         assertEquals(FleetType.DEFENSE_FLEET, ap.getFleets().get(2).getFleetType());
         assertCPs(1, 0, 3);
         assertEquals(0, roller.rolls.size());
 
-        // TODO build raider fleet (isJustPurchasedCloaking)
+        roller.mockRoll(2);
+        roller.mockRoll(9);
+        roller.mockRoll(10);
+        roller.mockRoll(7);
+        roller.mockRoll(10);
+        roller.mockRoll(8);
+        fleet = ap.makeEconRoll(10);
+        assertEquals(null, fleet);
+        assertCPs(6, 10, 23);
+        assertEquals(0, roller.rolls.size());
+
+        roller.mockRoll(7);
+        roller.mockRoll(5); // max spending
+        roller.mockRoll(3); //buy 1 base
+        ap.buildColonyDefense();
+        assertGroups(ap.getFleets().get(3), new Group(ShipType.BASE, 1));
+        assertEquals(FleetType.DEFENSE_FLEET, ap.getFleets().get(3).getFleetType());
+        assertCPs(6, 10, 11); //spend 12 on 1 base
+        assertEquals(0, roller.rolls.size());
     }
 
     public void assertCPs(int fleetCP, int techCP, int defCP) {
