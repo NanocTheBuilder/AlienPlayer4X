@@ -2,9 +2,6 @@ package com.thilian.se4x.robot.game.scenarios.vpscenario;
 
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.enums.FleetType;
-import com.thilian.se4x.robot.game.enums.Technology;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -19,17 +16,20 @@ public class VpFleetLaunchTest extends VpScenarioFixture{
 
     @Test
     public void noCpLaunchesExpansionFleetFromBank(){
+        roller.mockRoll(1); //launch
         assertFleetLaunched(EXPANSION_FLEET, "1", 50);
         assertBank(50);
 
+        roller.mockRoll(1); //launch
         assertFleetLaunched(EXPANSION_FLEET, "2", 50);
         assertBank(0);
 
+        roller.mockRoll(1); //launch
         assertNull(fleetLauncher.rollFleetLaunch(ap, 2));
         assertBank(0);
     }
 
-    public void assertBank(int expectedBank) {
+    private void assertBank(int expectedBank) {
         assertEquals(expectedBank, ((VpEconomicSheet) sheet).getBank());
     }
 
@@ -38,8 +38,10 @@ public class VpFleetLaunchTest extends VpScenarioFixture{
         VpEconomicSheet vpSheet = (VpEconomicSheet)sheet;
         vpSheet.spendBank(40);
         assertEquals(60, vpSheet.getBank());
+        roller.mockRoll(1); //launch
         assertFleetLaunched(EXPANSION_FLEET, "1", 50);
         assertBank(10);
+        roller.mockRoll(1); //launch
         assertNull(fleetLauncher.rollFleetLaunch(ap, 2));
         assertBank(10);
     }
@@ -106,7 +108,7 @@ public class VpFleetLaunchTest extends VpScenarioFixture{
         assertBank(10);
     }
 
-    public void assertFleetLaunched(FleetType fleetType, String name, int fleetCP) {
+    private void assertFleetLaunched(FleetType fleetType, String name, int fleetCP) {
         assertFleetLaunched(2, fleetType, name, fleetCP);
     }
 

@@ -1,6 +1,6 @@
 package com.thilian.se4x.robot.game.scenarios.scenario4;
 
-import static com.thilian.se4x.robot.game.enums.FleetBuildOptions.COMBAT_IS_ABOVE_PLANET;
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
 import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
 import static com.thilian.se4x.robot.game.enums.Technology.BOARDING;
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
@@ -18,7 +18,7 @@ import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.TechnologyBuyer;
-import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 
 /**
  * Created by thili on 2017. 12. 06..
@@ -53,12 +53,12 @@ public class Scenario4TechnologyBuyer extends TechnologyBuyer {
     }
 
     @Override
-    public void buyOptionalTechs(Fleet fleet, FleetBuildOptions... options) {
+    public void buyOptionalTechs(Fleet fleet, FleetBuildOption... options) {
         AlienPlayer ap = fleet.getAp();
         buyPointDefenseIfNeeded(ap);
         buyMineSweepIfNeeded(ap);
         buySecurityIfNeeded(ap);
-        buyGroundCombatIfNeeded(ap, FleetBuildOptions.isOption(COMBAT_IS_ABOVE_PLANET, options));
+        buyGroundCombatIfNeeded(ap, FleetBuildOption.isOption(COMBAT_IS_ABOVE_PLANET, options));
         buyMilitaryAcademyIfNeeded(ap);
         buyScannerIfNeeded(ap);
         buyBoardingIfNeeded(ap);

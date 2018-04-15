@@ -1,12 +1,12 @@
 package com.thilian.se4x.robot.game.scenarios.basegame;
 
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
@@ -165,9 +165,8 @@ public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
     @Test
     public void dontBuyMineSweepForDefenseFleet() {
         sheet.setTechCP(100);
-        assertEquals(true, techBuyer.canBuyNextLevel(fleet, Technology.MINE_SWEEPER));
-        fleet.setFleetType(FleetType.DEFENSE_FLEET);
-        assertEquals(false, techBuyer.canBuyNextLevel(fleet, Technology.MINE_SWEEPER));
+        assertEquals(true, techBuyer.canBuyNextLevel(fleet, MINE_SWEEPER));
+        assertEquals(false, techBuyer.canBuyNextLevel(fleet, MINE_SWEEPER, HOME_DEFENSE));
     }
 
     private void assertBuysNextRemaining(Technology technology, int currentLevel, int rollNeeded, int rollLimit) {

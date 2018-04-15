@@ -2,7 +2,8 @@ package com.thilian.se4x.robot.game;
 
 //import android.support.annotation.Nullable;
 //import android.util.Log;
-import static com.thilian.se4x.robot.game.enums.FleetType.DEFENSE_FLEET;
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.FleetType.REGULAR_FLEET;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.ShipType;
@@ -57,12 +58,12 @@ public class AlienPlayer {
         return economicSheet.getExtraEcon(turn);
     }
 
-    void buyTechs(Fleet fleet, FleetBuildOptions... options) {
+    void buyTechs(Fleet fleet, FleetBuildOption... options) {
         setJustPurchasedCloaking(false);
         game.scenario.buyTechs(fleet, options);
     }
 
-    public void buildFleet(Fleet fleet, FleetBuildOptions... options) {
+    public void buildFleet(Fleet fleet, FleetBuildOption... options) {
         buyTechs(fleet, options);
         game.scenario.buildFleet(fleet);
         economicSheet.addFleetCP(fleet.getFleetCP() - fleet.getBuildCost());
@@ -74,18 +75,15 @@ public class AlienPlayer {
 
     public List<Fleet> buildHomeDefense() {
         List<Fleet> newFleets = new ArrayList<>();
-        int currentFleetCP = economicSheet.getFleetCP();
-        if (currentFleetCP >= ShipType.SCOUT.getCost()) {
-            Fleet fleet = new Fleet(this, DEFENSE_FLEET, currentFleetCP);
-            buyTechs(fleet, FleetBuildOptions.COMBAT_IS_ABOVE_PLANET);
-            game.scenario.buildFleet(fleet);
-            fleet.setFleetType(REGULAR_FLEET);
-            economicSheet.spendFleetCP(fleet.getBuildCost());
+        Fleet fleet = game.scenario.fleetLauncher.launchFleet(this, game.currentTurn, HOME_DEFENSE);
+        if(fleet != null) {
+            game.scenario.buildFleet(fleet, HOME_DEFENSE);
+            buyTechs(fleet, HOME_DEFENSE, COMBAT_IS_ABOVE_PLANET);
             newFleets.add(fleet);
         }
 
         if (economicSheet.getDefCP() >= ShipType.MINE.getCost()) {
-            Fleet fleet = game.scenario.buildHomeDefense(this);
+            fleet = game.scenario.buildHomeDefense(this);
             economicSheet.spendDefCP(fleet.getBuildCost());
             newFleets.add(fleet);
         }

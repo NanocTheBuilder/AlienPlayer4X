@@ -1,14 +1,24 @@
 package com.thilian.se4x.robot.game.scenarios.scenario4;
 
-import static com.thilian.se4x.robot.game.enums.Technology.*;
-import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
+import com.thilian.se4x.robot.game.enums.Technology;
 
 import org.junit.Test;
 
-import com.thilian.se4x.robot.game.enums.FleetType;
-import com.thilian.se4x.robot.game.enums.Technology;
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
+import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
+import static com.thilian.se4x.robot.game.enums.Technology.BOARDING;
+import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
+import static com.thilian.se4x.robot.game.enums.Technology.DEFENSE;
+import static com.thilian.se4x.robot.game.enums.Technology.FIGHTERS;
+import static com.thilian.se4x.robot.game.enums.Technology.GROUND_COMBAT;
+import static com.thilian.se4x.robot.game.enums.Technology.MILITARY_ACADEMY;
+import static com.thilian.se4x.robot.game.enums.Technology.MINE_SWEEPER;
+import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
+import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
+import static com.thilian.se4x.robot.game.enums.Technology.SECURITY_FORCES;
+import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
+import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
+import static org.junit.Assert.assertEquals;
 
 //TODO THIS WHOLE CLASS IS A DUPLICATE
 public class RemainingTechPurchase extends Scenario4TechnologyBuyerTestBase {
@@ -176,8 +186,7 @@ public class RemainingTechPurchase extends Scenario4TechnologyBuyerTestBase {
     public void dontBuyMineSweepForDefenseFleet() {
         sheet.setTechCP(100);
         assertEquals(true, techBuyer.canBuyNextLevel(fleet, Technology.MINE_SWEEPER));
-        fleet.setFleetType(FleetType.DEFENSE_FLEET);
-        assertEquals(false, techBuyer.canBuyNextLevel(fleet, Technology.MINE_SWEEPER));
+        assertEquals(false, techBuyer.canBuyNextLevel(fleet, Technology.MINE_SWEEPER, HOME_DEFENSE));
     }
 
     // TODO THIS IS NEW STUFF

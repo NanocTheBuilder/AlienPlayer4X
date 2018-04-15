@@ -13,7 +13,7 @@ import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.TechnologyBuyer;
-import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 
 public class BaseGameTechnologyBuyer extends TechnologyBuyer {
 
@@ -41,7 +41,7 @@ public class BaseGameTechnologyBuyer extends TechnologyBuyer {
     }
 
     @Override
-    public void buyOptionalTechs(Fleet fleet, FleetBuildOptions... options) {
+    public void buyOptionalTechs(Fleet fleet, FleetBuildOption... options) {
         AlienPlayer ap = fleet.getAp();
         buyPointDefenseIfNeeded(ap);
         buyMineSweepIfNeeded(ap);

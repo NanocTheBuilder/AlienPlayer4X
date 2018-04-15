@@ -3,7 +3,7 @@ package com.thilian.se4x.robot.game;
 import java.util.Collection;
 
 import com.thilian.se4x.robot.game.enums.Difficulty;
-import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -30,8 +30,8 @@ public abstract class Scenario{
         return techPrices.getStartingLevel(technology);
     }
 
-    public void buildFleet(Fleet fleet) {
-        fleetBuilder.buildFleet(fleet);
+    public void buildFleet(Fleet fleet, FleetBuildOption... options) {
+        fleetBuilder.buildFleet(fleet, options);
     }
 
     public Fleet buildHomeDefense(AlienPlayer alienPlayer) {
@@ -42,7 +42,7 @@ public abstract class Scenario{
         techBuyer.buyNextLevel(alienPlayer, technology);
     }
 
-    public void buyTechs(Fleet fleet, FleetBuildOptions[] options) {
+    public void buyTechs(Fleet fleet, FleetBuildOption[] options) {
         techBuyer.buyTechs(fleet, options);
     }
 

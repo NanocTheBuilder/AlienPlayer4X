@@ -1,6 +1,11 @@
 package com.thilian.se4x.robot.game;
 
-import static com.thilian.se4x.robot.game.enums.FleetType.DEFENSE_FLEET;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
+import com.thilian.se4x.robot.game.enums.Seeable;
+import com.thilian.se4x.robot.game.enums.ShipType;
+import com.thilian.se4x.robot.game.enums.Technology;
+
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.ShipType.CARRIER;
 import static com.thilian.se4x.robot.game.enums.ShipType.DESTROYER;
@@ -13,11 +18,6 @@ import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 
-import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
-import com.thilian.se4x.robot.game.enums.Seeable;
-import com.thilian.se4x.robot.game.enums.ShipType;
-import com.thilian.se4x.robot.game.enums.Technology;
-
 public class FleetBuilder extends GroupBuilder {
 
     protected Game game;
@@ -26,7 +26,7 @@ public class FleetBuilder extends GroupBuilder {
         this.game = game;
     }
 
-    public void buildFleet(Fleet fleet, FleetBuildOptions... options) {
+    public void buildFleet(Fleet fleet, FleetBuildOption... options) {
         if (fleet.getFleetType().equals(RAIDER_FLEET)) {
             buildRaiderFleet(fleet);
         } else {
@@ -127,10 +127,10 @@ public class FleetBuilder extends GroupBuilder {
                 && (game.getSeenLevel(POINT_DEFENSE) == 0 || game.roller.roll() < 5);
     }
 
-    protected boolean shouldBuildRaiderFleet(Fleet fleet) {
+    protected boolean shouldBuildRaiderFleet(Fleet fleet, FleetBuildOption... options) {
         // TODO more test for this. Especially the resetting of
         // isPurchasedThisTurn
-        if (fleet.getFleetType().equals(DEFENSE_FLEET))
+        if (FleetBuildOption.isOption(HOME_DEFENSE, options))
             return false;
         AlienPlayer ap = fleet.getAp();
         return fleet.getGroups().size() == 0 && fleet.getFleetCP() >= RAIDER.getCost() && ap.isJustPurchasedCloaking()

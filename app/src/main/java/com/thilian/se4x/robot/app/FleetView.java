@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 
 /**
@@ -57,7 +57,7 @@ public class FleetView extends RelativeLayout{
             revealAbovePlanetButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    fleet.getAp().buildFleet(fleet, FleetBuildOptions.COMBAT_IS_ABOVE_PLANET);
+                    fleet.getAp().buildFleet(fleet, FleetBuildOption.COMBAT_IS_ABOVE_PLANET);
                     update();
                     fleetRevealListener.onFleetRevealed(fleet);
                 }

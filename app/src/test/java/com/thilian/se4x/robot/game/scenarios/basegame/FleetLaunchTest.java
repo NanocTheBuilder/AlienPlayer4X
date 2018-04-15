@@ -33,10 +33,7 @@ public class FleetLaunchTest extends BasegameFixture {
         sheet.setFleetCP(5);
         turn = 2;
         roll = 1;
-        int fleetCP = sheet.getFleetCP();
-        fleetLauncher.rollFleetLaunch(ap, turn);
-        assertEquals(fleetCP, sheet.getFleetCP());
-        assertTrue(ap.getFleets().isEmpty());
+        assertFleetDoesNotLaunch();
     }
 
     @Test

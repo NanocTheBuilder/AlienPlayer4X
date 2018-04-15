@@ -2,18 +2,15 @@ package com.thilian.se4x.robot.game.scenarios.vpscenario;
 
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.thilian.se4x.robot.game.enums.FleetBuildOptions.COMBAT_IS_ABOVE_PLANET;
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
 import static com.thilian.se4x.robot.game.enums.FleetType.EXPANSION_FLEET;
 import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET;
-import static com.thilian.se4x.robot.game.enums.FleetType.REGULAR_FLEET;
 import static com.thilian.se4x.robot.game.enums.ShipType.INFANTRY;
 import static com.thilian.se4x.robot.game.enums.ShipType.SCOUT;
 import static com.thilian.se4x.robot.game.enums.ShipType.TRANSPORT;

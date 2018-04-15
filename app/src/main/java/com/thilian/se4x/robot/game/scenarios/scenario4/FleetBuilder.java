@@ -5,7 +5,7 @@ import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.enums.FleetBuildOptions;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -19,7 +19,7 @@ public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
         super(game);
     };
 
-    public void buildFleet(Fleet fleet, FleetBuildOptions... options) {
+    public void buildFleet(Fleet fleet, FleetBuildOption... options) {
         if (fleet.getFleetType().equals(RAIDER_FLEET) || shouldBuildRaiderFleet(fleet)) {
             buildRaiderFleet(fleet);
         } else {
@@ -45,7 +45,7 @@ public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
         }
     }
 
-    protected void buildOneFullyLoadedTransport(Fleet fleet, FleetBuildOptions... options) {
+    protected void buildOneFullyLoadedTransport(Fleet fleet, FleetBuildOption... options) {
         fleet.addFreeGroup(new Group(ShipType.TRANSPORT, 1));
         for(Group group : buildGroundUnits(fleet)){
             fleet.addFreeGroup(group);
