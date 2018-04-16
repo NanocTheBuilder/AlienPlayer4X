@@ -4,6 +4,10 @@ public enum FleetBuildOption {
     COMBAT_IS_ABOVE_PLANET, HOME_DEFENSE;
 
     public static boolean isOption(FleetBuildOption option, FleetBuildOption[] options){
-        return options.length != 0 && options[0].equals(option);
+        for(FleetBuildOption opt : options){
+            if(option.equals(option))
+                    return true;
+        };
+        return false;
     }
 }

@@ -37,7 +37,7 @@ public abstract class TechnologyBuyer {
 
     public void buyTechs(Fleet fleet, FleetBuildOption... options) {
         buyOptionalTechs(fleet, options);
-        spendRemainingTechCP(fleet);
+        spendRemainingTechCP(fleet, options);
     }
 
     protected abstract void initRollTable();
