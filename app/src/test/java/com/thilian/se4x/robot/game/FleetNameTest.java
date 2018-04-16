@@ -35,7 +35,7 @@ public class FleetNameTest {
     public void namesFillHoles(){
         Fleet fleet1 = new Fleet(ap, FleetType.REGULAR_FLEET, 0);
         Fleet fleet2 = new Fleet(ap, FleetType.REGULAR_FLEET, 0);
-        ap.destroyFleet(fleet1);
+        ap.removeFleet(fleet1);
 
         Fleet fleet = new Fleet(ap, FleetType.REGULAR_FLEET, 0);
         Assert.assertEquals("1", fleet.getName());

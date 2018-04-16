@@ -44,7 +44,7 @@ public class FleetView extends RelativeLayout{
         removeFleetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                fleet.getAp().destroyFleet(fleet);
+                fleet.getAp().removeFleet(fleet);
                 FleetsActivity activity = (FleetsActivity) getContext();
                 LinearLayout layout = activity.findViewById(R.id.fleets);
                 layout.removeView(FleetView.this);

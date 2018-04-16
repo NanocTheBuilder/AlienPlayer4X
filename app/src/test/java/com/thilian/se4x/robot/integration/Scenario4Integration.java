@@ -32,13 +32,15 @@ public class Scenario4Integration {
         Scenario4Player ap = (Scenario4Player) game.aliens.get(0);
         sheet = ap.getEconomicSheet();
 
-        roller.mockRoll(1);
+        roller.mockRoll(1); //extra exon
+        roller.mockRoll(1); //launch
         assertEquals(null, ap.makeEconRoll(1));
         assertEquals(1, sheet.getExtraEcon(4));
         assertCPs(0, 0, 0);
         assertEquals(0, roller.rolls.size());
 
         roller.mockRoll(5);
+        roller.mockRoll(1); //launch
         assertEquals(null, ap.makeEconRoll(2));
         assertCPs(0, 5, 0);
         assertEquals(0, roller.rolls.size());
@@ -81,7 +83,7 @@ public class Scenario4Integration {
         assertCPs(16, 0, 20);
         assertEquals(0, roller.rolls.size());
 
-        ap.destroyFleet(fleet);
+        ap.removeFleet(fleet);
         assertEquals(0, ap.getFleets().size());
 
         roller.mockRoll(6);
@@ -141,15 +143,12 @@ public class Scenario4Integration {
         game.setSeenLevel(Technology.CLOAKING, 1);
         roller.mockRoll(1); // Scanners
         roller.mockRoll(9); // ShipSize (Ignored)
-        roller.mockRoll(4, 3); // Military academy
         roller.mockRoll(1); // Max number of ships
         roller.mockRoll(10); // Max bases
         ap.buildHomeDefense();
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
-        assertEquals(0, ap.getLevel(Technology.SCANNER));
-        assertEquals(2, ap.getLevel(Technology.GROUND_COMBAT));
-        assertEquals(1, ap.getLevel(Technology.MILITARY_ACADEMY));
-        assertGroups(ap.getFleets().get(1), new Group(ShipType.TRANSPORT, 1), new Group(ShipType.MARINE, 5), new Group(ShipType.HEAVY_INFANTRY, 1), new Group(ShipType.DESTROYER, 1), new Group(ShipType.SCOUT, 2));
+        assertEquals(1, ap.getLevel(Technology.SCANNER));
+        assertGroups(ap.getFleets().get(1), new Group(ShipType.TRANSPORT, 1), new Group(ShipType.INFANTRY, 6), new Group(ShipType.DESTROYER, 1), new Group(ShipType.SCOUT, 2));
         assertEquals(FleetType.REGULAR_FLEET, ap.getFleets().get(1).getFleetType());
         assertGroups(ap.getFleets().get(2), new Group(ShipType.BASE, 1), new Group(ShipType.MINE, 1));
         assertEquals(FleetType.DEFENSE_FLEET, ap.getFleets().get(2).getFleetType());

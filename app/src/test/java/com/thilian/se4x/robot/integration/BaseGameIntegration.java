@@ -31,13 +31,15 @@ public class BaseGameIntegration {
         AlienPlayer ap = game.aliens.get(0);
         sheet = ap.getEconomicSheet();
 
-        roller.mockRoll(1);
+        roller.mockRoll(1); //extra econ
+        roller.mockRoll(1); //launch
         assertEquals(null, ap.makeEconRoll(1));
         assertEquals(1, sheet.getExtraEcon(4));
         assertCPs(0, 0, 0);
         assertEquals(0, roller.rolls.size());
 
         roller.mockRoll(5);
+        roller.mockRoll(1); //launch
         assertEquals(null, ap.makeEconRoll(2));
         assertCPs(0, 5, 0);
         assertEquals(0, roller.rolls.size());
@@ -80,7 +82,7 @@ public class BaseGameIntegration {
         assertCPs(16, 0, 20);
         assertEquals(0, roller.rolls.size());
 
-        ap.destroyFleet(fleet);
+        ap.removeFleet(fleet);
         assertEquals(0, ap.getFleets().size());
 
         roller.mockRoll(6);
