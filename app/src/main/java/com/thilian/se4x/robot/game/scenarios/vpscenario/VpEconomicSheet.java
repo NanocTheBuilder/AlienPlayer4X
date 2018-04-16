@@ -47,7 +47,7 @@ public class VpEconomicSheet extends AlienEconomicSheet {
     @Override
     public void makeRoll(int turn, DiceRoller roller) {
         int limit = 10;
-        if(getDefCP() == ((VpDifficulty)difficulty).getMaxDefenseCp()
+        if(defCP == ((VpDifficulty)difficulty).getMaxDefenseCp()
                 && requiredRoll(turn, RESULT_DEF) != 99)
         {
             limit = requiredRoll(turn, RESULT_DEF) - 1;
@@ -103,5 +103,14 @@ public class VpEconomicSheet extends AlienEconomicSheet {
         bank -= amount;
     }
 
+    @Override
+    public int getDefCP() {
+        return defCP + bank;
+    }
 
+    @Override
+    public void spendDefCP(int amount) {
+        defCP -= amount > bank ? amount - bank : 0;
+        bank -= amount > bank ? bank : amount;
+    }
 }

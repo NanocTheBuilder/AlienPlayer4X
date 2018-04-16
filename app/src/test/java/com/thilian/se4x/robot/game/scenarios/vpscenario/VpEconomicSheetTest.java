@@ -33,14 +33,7 @@ public class VpEconomicSheetTest extends EconomicRollTest{
             {{     }, { 1, 9}, {    10}, {      }}, 
             {{     }, { 1, 9}, {    10}, {      }}, 
         };
-    
-    @Test
-    public void testStartingBank(){
-        Assert.assertEquals(0, new VpEconomicSheet(VpDifficulty.EASY).getBank());
-        Assert.assertEquals(100, new VpEconomicSheet(VpDifficulty.NORMAL).getBank());
-        Assert.assertEquals(100, new VpEconomicSheet(VpDifficulty.HARD).getBank());
-    }
-    
+
     @Test
     public void testMaxDefense(){
         VpEconomicSheet sheet = new VpEconomicSheet(VpDifficulty.EASY);
@@ -95,7 +88,9 @@ public class VpEconomicSheetTest extends EconomicRollTest{
     
     @Override
     protected AlienEconomicSheet getEconomicSheet(Difficulty diff) {
-        return new VpEconomicSheet((VpDifficulty) diff);
+        VpEconomicSheet sheet = new VpEconomicSheet((VpDifficulty) diff);
+        sheet.setBank(0);
+        return sheet;
     }
     
     @Override

@@ -96,19 +96,19 @@ public class EconomicRollTest {
         return new int[] { 0, -99, 10, 10, 5, 3, 4, 4, 4, 5, 5, 3, 3, 3, 10, 3, 10, 3, 10, 3, 10 };
     }
 
-    protected void assertFleetResults(int turn, Difficulty diff) {
+    private void assertFleetResults(int turn, Difficulty diff) {
         for (Integer i : getFleetRange(turn)) {
             assertIsFleet(turn, diff, i);
         }
     }
 
-    protected void assertTechResults(int turn, Difficulty diff) {
+    private void assertTechResults(int turn, Difficulty diff) {
         for (Integer i : getTechRange(turn)) {
             assertIsTech(turn, diff, i);
         }
     }
 
-    protected void assertDefResults(int turn, Difficulty diff) {
+    private void assertDefResults(int turn, Difficulty diff) {
         for (Integer i : getDefRange(turn)) {
             assertIsDef(turn, diff, i);
         }
@@ -146,13 +146,11 @@ public class EconomicRollTest {
     }
 
     protected AlienEconomicSheet getEconomicSheet() {
-        AlienEconomicSheet sheet = new AlienEconomicSheet(BaseGameDifficulty.EASY);
-        return sheet;
+        return new AlienEconomicSheet(BaseGameDifficulty.EASY);
     }
     
     protected AlienEconomicSheet getEconomicSheet(Difficulty diff) {
-        AlienEconomicSheet sheet = new AlienEconomicSheet(diff);
-        return sheet;
+        return new AlienEconomicSheet(diff);
     }
 
     private List<Integer> getRange(int turn, int index) {
