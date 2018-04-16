@@ -53,10 +53,10 @@ public class Fleet {
     }
 
     public void setFleetType(FleetType fleetType) {
-        if(!getFleetType().equals(fleetType)) {
+        if(!getFleetType().isSameNameSequence(fleetType)) {
             this.name = ap.findFleetName(fleetType);
-            this.fleetType = fleetType;
         }
+        this.fleetType = fleetType;
     }
 
     public int getFleetCP() {

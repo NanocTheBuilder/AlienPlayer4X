@@ -127,10 +127,9 @@ public class AlienPlayer {
         return "?";
     }
 
-    // @Nullable
     private Fleet findFleetByName(String name, FleetType fleetType) {
         for (Fleet fleet : fleets) {
-            if (fleet.getName().equals(name) && fleet.getFleetType().equals(fleetType))
+            if (fleet.getName().equals(name) && fleet.getFleetType().isSameNameSequence(fleetType))
                 return fleet;
         }
         return null;

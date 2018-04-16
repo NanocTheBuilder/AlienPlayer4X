@@ -60,4 +60,18 @@ public class FleetNameTest {
         Assert.assertEquals("1", fleet.getName());
     }
 
+
+    @Test
+    public void setTypeFromRegularToExDontChangeName(){
+        Fleet fleet1 = new Fleet(ap, FleetType.REGULAR_FLEET, 0);
+
+        Fleet fleet = new Fleet(ap, FleetType.REGULAR_FLEET, 0);
+        Assert.assertEquals("2", fleet.getName());
+
+        fleet.setFleetType(FleetType.EXPANSION_FLEET);
+        Assert.assertEquals("2", fleet.getName());
+
+        fleet.setFleetType(FleetType.EXTERMINATION_FLEET);
+        Assert.assertEquals("2", fleet.getName());
+    }
 }
