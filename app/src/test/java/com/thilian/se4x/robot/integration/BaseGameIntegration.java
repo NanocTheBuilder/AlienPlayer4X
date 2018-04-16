@@ -26,7 +26,7 @@ public class BaseGameIntegration {
     public void economyRollStartsNewFleet() {
         MockRoller roller = new MockRoller();
         Game game = new Game();
-        game.createGame(BaseGameDifficulty.NORMAL, new BaseGameScenario());
+        game.createGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL);
         game.roller = roller;
         AlienPlayer ap = game.aliens.get(0);
         sheet = ap.getEconomicSheet();

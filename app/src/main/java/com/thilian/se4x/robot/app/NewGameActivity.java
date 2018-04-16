@@ -65,7 +65,7 @@ public class NewGameActivity extends Activity {
         final SE4XApplication app = (SE4XApplication) this.getApplication();
         Difficulty difficulty = (Difficulty)(((Spinner) findViewById(R.id.difficultySpinner)).getSelectedItem());
         Scenarios scenario = (Scenarios)(((Spinner)findViewById(R.id.scenarioSpinner)).getSelectedItem());
-        app.getGame().createGame(difficulty, scenario.getClazz().newInstance());
+        app.getGame().createGame(scenario.getClazz().newInstance(), difficulty);
     }
 
     private void startMainActivity(){

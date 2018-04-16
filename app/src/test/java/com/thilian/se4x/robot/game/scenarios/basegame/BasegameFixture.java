@@ -5,6 +5,6 @@ import com.thilian.se4x.robot.game.Fixture;
 public class BasegameFixture extends Fixture{
     @Override
     protected void createGame() {
-        game.createGame(BaseGameDifficulty.NORMAL, new BaseGameScenario());
+        game.createGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL);
     }
 }

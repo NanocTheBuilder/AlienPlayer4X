@@ -20,7 +20,7 @@ public class Game {
     private Set<Seeable> seenThings;
     public int currentTurn;
 
-    public void createGame(Difficulty difficulty, Scenario scenario) {
+    public void createGame(Scenario scenario, Difficulty difficulty) {
         scenario.init(this);
         this.scenario = scenario;
         this.aliens = new ArrayList<>();
