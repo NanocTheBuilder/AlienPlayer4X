@@ -31,7 +31,7 @@ public class FleetBuilder extends GroupBuilder {
             buildRaiderFleet(fleet);
         } else {
             buyFullCarriers(fleet);
-            if (shouldBuildRaiderFleet(fleet)) {
+            if (shouldBuildRaiderFleet(fleet, options)) {
                 buildRaiderFleet(fleet);
             } else {
                 buildFlagship(fleet);

@@ -20,7 +20,7 @@ public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
     };
 
     public void buildFleet(Fleet fleet, FleetBuildOption... options) {
-        if (fleet.getFleetType().equals(RAIDER_FLEET) || shouldBuildRaiderFleet(fleet)) {
+        if (fleet.getFleetType().equals(RAIDER_FLEET) || shouldBuildRaiderFleet(fleet, options)) {
             buildRaiderFleet(fleet);
         } else {
             buildOneFullyLoadedTransport(fleet, options);

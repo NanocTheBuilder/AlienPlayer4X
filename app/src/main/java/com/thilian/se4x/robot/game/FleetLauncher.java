@@ -57,7 +57,7 @@ public class FleetLauncher {
         if(FleetBuildOption.isOption(HOME_DEFENSE, options))
             return false;
         int currentFleetCP = ap.getEconomicSheet().getFleetCP();
-        return currentFleetCP >= 12
+        return currentFleetCP >= ShipType.RAIDER.getCost()
                 && ap.getLevel(Technology.CLOAKING) > game.getSeenLevel(Technology.SCANNER);
     }
 

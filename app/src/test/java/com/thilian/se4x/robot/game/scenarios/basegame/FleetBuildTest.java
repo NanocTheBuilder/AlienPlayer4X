@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Group;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.ShipType;
@@ -99,6 +100,19 @@ public class FleetBuildTest extends BasegameFixture{
         ap.setLevel(SHIP_SIZE, 2);
         Fleet fleet = new Fleet(ap, REGULAR_FLEET, 11);
         assertBuiltGroups(fleet, new Group(DESTROYER, 1));
+    }
+
+
+    @Test
+    public void dontBuildRaiderFleetForHomeDefense() {
+        ap.setLevel(CLOAKING, 1);
+        ap.setJustPurchasedCloaking(true);
+        ap.setLevel(SHIP_SIZE, 2);
+        Fleet fleet = new Fleet(ap, REGULAR_FLEET, 12);
+        assertBuiltGroups(fleet, 
+                new FleetBuildOption[]{FleetBuildOption.HOME_DEFENSE}, 
+                new Group(DESTROYER, 1));
+
     }
 
     @Test
@@ -263,7 +277,12 @@ public class FleetBuildTest extends BasegameFixture{
     }
 
     private void assertBuiltGroups(Fleet fleet, Group... expectedGroups) {
-        fleetBuilder.buildFleet(fleet);
+        assertBuiltGroups(fleet, new FleetBuildOption[0], expectedGroups);
+    }
+
+
+    private void assertBuiltGroups(Fleet fleet, FleetBuildOption[] options, Group... expectedGroups) {
+        fleetBuilder.buildFleet(fleet, options);
         int expectedCost = 0;
         for (Group g : expectedGroups) {
             expectedCost += g.getShipType().getCost() * g.getSize();
