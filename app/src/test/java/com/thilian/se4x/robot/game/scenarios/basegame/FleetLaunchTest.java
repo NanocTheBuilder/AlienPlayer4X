@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
@@ -102,6 +103,20 @@ public class FleetLaunchTest extends BasegameFixture {
         assertEquals(0, fleet.getBuildCost());
         assertEquals(false, fleet.isBuilt());
     }
+    
+    @Test
+    public void testNoRaiderFleetForHomeDefense() {
+        ap.setLevel(Technology.CLOAKING, 1);
+        sheet.setFleetCP(12);
+        fleetLauncher.launchFleet(ap, turn, FleetBuildOption.HOME_DEFENSE);
+        Fleet fleet = ap.getFleets().get(0);
+        assertEquals(0, sheet.getFleetCP());
+        assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
+        assertEquals(12, fleet.getFleetCP());
+        assertEquals(0, fleet.getBuildCost());
+        assertEquals(false, fleet.isBuilt());
+    }
+    
 
     private void assertFleetLaunches() {
         int fleetCP = sheet.getFleetCP();
