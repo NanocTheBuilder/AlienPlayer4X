@@ -15,6 +15,7 @@ public class Fleet {
     private List<Group> freeGroups = new ArrayList<>();
     private AlienPlayer ap;
     private String name;
+    private boolean hadFirstCombat;
 
     public Fleet(AlienPlayer ap, FleetType fleetType, int fleetCP) {
         this.ap = ap;
@@ -42,10 +43,6 @@ public class Fleet {
 
     public boolean canBuyMoreShips() {
         return getRemainingCP() >= ShipType.SCOUT.getCost();
-    }
-
-    public boolean isBuilt() {
-        return !groups.isEmpty();
     }
 
     public FleetType getFleetType() {
@@ -108,5 +105,13 @@ public class Fleet {
             sum += group.getSize() * group.getShipType().getCost();
         }
         return sum;
+    }
+
+    public boolean hadFirstCombat() {
+        return hadFirstCombat;
+    }
+
+    public void setFirstCombat(boolean hadFirstCombat) {
+        this.hadFirstCombat = hadFirstCombat;
     }
 }

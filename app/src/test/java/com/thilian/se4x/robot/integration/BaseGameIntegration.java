@@ -76,7 +76,7 @@ public class BaseGameIntegration {
 
         fleet = ap.getFleets().get(0);
         roller.mockRoll(9); // ShipSize
-        ap.buildFleet(fleet);
+        ap.firstCombat(fleet);
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
         assertGroups(fleet, new Group(ShipType.DESTROYER, 1));
         assertCPs(16, 0, 20);
@@ -121,7 +121,7 @@ public class BaseGameIntegration {
         fleet = ap.getFleets().get(0);
         roller.mockRoll(9); // ShipSize
         roller.mockRoll(6); // Cloaking
-        ap.buildFleet(fleet);
+        ap.firstCombat(fleet);
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
         assertEquals(1, ap.getLevel(Technology.CLOAKING));
         assertGroups(fleet, new Group(ShipType.RAIDER, 2));

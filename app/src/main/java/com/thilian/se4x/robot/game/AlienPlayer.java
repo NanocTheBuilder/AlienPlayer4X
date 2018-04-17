@@ -4,6 +4,7 @@ package com.thilian.se4x.robot.game;
 //import android.util.Log;
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
+import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,10 +63,13 @@ public class AlienPlayer {
         game.scenario.buyTechs(fleet, options);
     }
 
-    public void buildFleet(Fleet fleet, FleetBuildOption... options) {
+    public void firstCombat(Fleet fleet, FleetBuildOption... options) {
         buyTechs(fleet, options);
-        game.scenario.buildFleet(fleet, options);
-        economicSheet.addFleetCP(fleet.getFleetCP() - fleet.getBuildCost());
+        if(!RAIDER_FLEET.equals(fleet.getFleetType())) {
+            game.scenario.buildFleet(fleet, options);
+            economicSheet.addFleetCP(fleet.getFleetCP() - fleet.getBuildCost());
+        }
+        fleet.setFirstCombat(true);
     }
 
     public void removeFleet(Fleet fleet) {
@@ -76,7 +80,7 @@ public class AlienPlayer {
         List<Fleet> newFleets = new ArrayList<>();
         Fleet fleet = game.scenario.fleetLauncher.launchFleet(this, game.currentTurn, HOME_DEFENSE);
         if(fleet != null) {
-            buildFleet(fleet, HOME_DEFENSE, COMBAT_IS_ABOVE_PLANET);
+            firstCombat(fleet, HOME_DEFENSE, COMBAT_IS_ABOVE_PLANET);
             newFleets.add(fleet);
         }
 

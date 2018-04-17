@@ -80,7 +80,6 @@ public class FleetLaunchTest extends BasegameFixture {
         assertEquals(FleetType.RAIDER_FLEET, fleet.getFleetType());
         assertEquals(13, fleet.getFleetCP());
         assertEquals(12, fleet.getBuildCost());
-        assertEquals(true, fleet.isBuilt());
     }
 
     @Test
@@ -101,7 +100,6 @@ public class FleetLaunchTest extends BasegameFixture {
         assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
         assertEquals(11, fleet.getFleetCP());
         assertEquals(0, fleet.getBuildCost());
-        assertEquals(false, fleet.isBuilt());
     }
     
     @Test
@@ -114,7 +112,6 @@ public class FleetLaunchTest extends BasegameFixture {
         assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
         assertEquals(12, fleet.getFleetCP());
         assertEquals(0, fleet.getBuildCost());
-        assertEquals(false, fleet.isBuilt());
     }
     
 
@@ -124,7 +121,6 @@ public class FleetLaunchTest extends BasegameFixture {
         fleetLauncher.rollFleetLaunch(ap, turn);
         assertEquals(0, sheet.getFleetCP());
         assertEquals(fleetCP, ap.getFleets().get(0).getFleetCP());
-        assertEquals(false, ap.getFleets().get(0).isBuilt());
     }
 
     private void assertFleetDoesNotLaunch() {

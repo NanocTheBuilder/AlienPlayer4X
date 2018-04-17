@@ -14,15 +14,15 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reveal_fleet_button" />
+        app:layout_constraintTop_toBottomOf="@+id/first_combat_button" />
 
     <Button
-        android:id="@+id/reveal_fleet_button"
+        android:id="@+id/first_combat_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="14dp"
         android:layout_marginRight="14dp"
-        android:text="Reveal fleet"
+        android:text="First combat"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -30,16 +30,16 @@
 
 
     <Button
-        android:id="@+id/reveal_fleet_above_planet_button"
+        android:id="@+id/first_combat_above_planet_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="14dp"
         android:layout_marginRight="14dp"
-        android:text="Reveal above planet"
+        android:text="Combat above planet"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reveal_fleet_button" />
+        app:layout_constraintTop_toBottomOf="@+id/first_combat_button" />
 
     <Button
         android:id="@+id/remove_fleet_button"
@@ -59,8 +59,8 @@
         android:layout_height="wrap_content"
         android:text="REGULAR FLEET 1"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/reveal_fleet_button"
-        app:layout_constraintBottom_toBottomOf="@+id/reveal_fleet_button"
+        app:layout_constraintBaseline_toBaselineOf="@+id/first_combat_button"
+        app:layout_constraintBottom_toBottomOf="@+id/first_combat_button"
         app:layout_constraintLeft_toLeftOf="@+id/groups_text"
         app:layout_constraintStart_toStartOf="@+id/groups_text" />
 </android.support.constraint.ConstraintLayout>

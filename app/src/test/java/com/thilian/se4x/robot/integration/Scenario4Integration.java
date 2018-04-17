@@ -77,7 +77,7 @@ public class Scenario4Integration {
 
         fleet = ap.getFleets().get(0);
         roller.mockRoll(9); // ShipSize
-        ap.buildFleet(fleet);
+        ap.firstCombat(fleet);
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
         assertGroups(fleet, new Group(ShipType.TRANSPORT, 1), new Group(ShipType.INFANTRY, 6), new Group(ShipType.DESTROYER, 1));
         assertCPs(16, 0, 20);
@@ -122,7 +122,7 @@ public class Scenario4Integration {
         fleet = ap.getFleets().get(0);
         roller.mockRoll(9); // ShipSize
         roller.mockRoll(100, 70); // Cloaking
-        ap.buildFleet(fleet);
+        ap.firstCombat(fleet);
         assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
         assertEquals(1, ap.getLevel(Technology.CLOAKING));
         assertGroups(fleet, new Group(ShipType.RAIDER, 2));
