@@ -1,6 +1,5 @@
 package com.thilian.se4x.robot.game.scenarios.scenario4;
 
-import static com.thilian.se4x.robot.game.enums.FleetType.DEFENSE_FLEET;
 import static com.thilian.se4x.robot.game.enums.ShipType.BASE;
 import static com.thilian.se4x.robot.game.enums.ShipType.HEAVY_INFANTRY;
 import static com.thilian.se4x.robot.game.enums.ShipType.INFANTRY;
@@ -29,10 +28,8 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
         roller.mockRoll(1);
         roller.mockRoll(1); //Max CP
         roller.mockRoll(1);
-        Fleet fleet = ((DefenseBuilder)defBuilder).buildColonyDefense(ap);
-        assertEquals(DEFENSE_FLEET, fleet.getFleetType());
-        assertEquals(2, fleet.getFleetCP());
-    }
+        assertBuiltGroups(new Group(INFANTRY, 1));    
+}
 
     @Test
     public void dontSpendMoreThanDefCP() {
@@ -40,9 +37,7 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
         roller.mockRoll(10);
         roller.mockRoll(10);//Max CP
         roller.mockRoll(1);
-        Fleet fleet = ((DefenseBuilder)defBuilder).buildColonyDefense(ap);
-        assertEquals(DEFENSE_FLEET, fleet.getFleetType());
-        assertEquals(2, fleet.getFleetCP());
+        assertBuiltGroups(new Group(INFANTRY, 1));    
     }
 
     @Test
@@ -81,7 +76,7 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
     public void buy1MineIfCantAffordBase() {
         roller.mockRoll(2);
         roller.mockRoll(3); //max cp
-        roller.mockRoll(3); //buy 2 mines
+        roller.mockRoll(5); //buy 1 base
         assertBuiltGroups(new Group(MINE, 1));
     }
 
@@ -100,6 +95,15 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
         roller.mockRoll(9); //max cp
         roller.mockRoll(6); //buy 2 mines
         assertBuiltGroups(new Group(MINE, 2), new Group(HEAVY_INFANTRY, 3));
+    }
+
+    @Test
+    public void buy2MinesAnd1InfIfCantAffordHI() {
+        ap.setLevel(GROUND_COMBAT, 2);
+        roller.mockRoll(10);
+        roller.mockRoll(2); //max cp
+        roller.mockRoll(6); //buy 2 mines
+        assertBuiltGroups(new Group(MINE, 2),new Group(INFANTRY, 1));
     }
 
     private void assertBuiltGroups(Group... expectedGroups) {

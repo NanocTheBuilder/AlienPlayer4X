@@ -51,10 +51,13 @@ public class DefenseBuilder extends com.thilian.se4x.robot.game.DefenseBuilder {
     }
 
     private void addGroundTroops(AlienPlayer ap, Fleet fleet) {
-        if(ap.getLevel(Technology.GROUND_COMBAT) > 1)
+        if(ap.getLevel(Technology.GROUND_COMBAT) > 1 
+                && fleet.getRemainingCP() >= HEAVY_INFANTRY.getCost()){
             buildGroup(fleet, HEAVY_INFANTRY);
-        else
+        }
+        else{
             buildGroup(fleet, INFANTRY);
+        }
     }
 
     private void addBasesOrMines(Fleet fleet) {
