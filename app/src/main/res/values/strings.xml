@@ -13,6 +13,18 @@
     <string name="eliminate">Eliminate</string>
     <string name="eliminated">Eliminated</string>
 
+     <string name="BASE_GAME">Base game</string>
+     <string name="SCENARIO_4">Scenario #4</string>
+     <string name="VP_SCENARIO">Solo VP scenario</string>
+
+     <string name="EASY">Easy</string>
+     <string name="NORMAL">Normal</string>
+     <string name="HARD">Hard</string>
+     <string name="HARDER">Harder</string>
+     <string name="REALLY_TOUGH">Really tough</string>
+     <string name="GOOD_LUCK">Good Luck!</string>
+
+
     <string name="REGULAR_FLEET">Regular Fleet %s</string>
     <string name="RAIDER_FLEET">Raider Fleet %s</string>
     <string name="DEFENSE_FLEET">Defense Fleet %s</string>

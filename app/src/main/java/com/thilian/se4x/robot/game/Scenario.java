@@ -1,6 +1,7 @@
 package com.thilian.se4x.robot.game;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetBuildOption;
@@ -20,7 +21,7 @@ public abstract class Scenario{
 
     public abstract AlienPlayer newPlayer(Game game, Difficulty difficulty, PlayerColor color);
 
-    public abstract Difficulty[] getDifficulties();
+    public abstract List<? extends Difficulty> getDifficulties();
 
     public Collection<Technology> getAvailableTechs() {
         return techPrices.getAvailableTechs();

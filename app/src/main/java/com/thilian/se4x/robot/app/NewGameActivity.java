@@ -1,13 +1,18 @@
 package com.thilian.se4x.robot.app;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.thilian.se4x.robot.game.Scenario;
 import com.thilian.se4x.robot.game.enums.Difficulty;
@@ -22,7 +27,7 @@ public class NewGameActivity extends Activity {
         setContentView(R.layout.activity_new_game);
 
         Spinner difficultySpinner = (Spinner) findViewById(R.id.difficultySpinner);
-        final ArrayAdapter<Difficulty> difficultyAdapter = new ArrayAdapter<Difficulty>(this, android.R.layout.simple_spinner_dropdown_item, BaseGameDifficulty.values());
+        final ArrayAdapter<Difficulty> difficultyAdapter = new ArrayAdapter<Difficulty>(this, android.R.layout.simple_spinner_dropdown_item);
         difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(difficultyAdapter);
 
@@ -34,7 +39,13 @@ public class NewGameActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 difficultyAdapter.clear();
-                difficultyAdapter.addAll(((Scenario)parent.getItemAtPosition(position)).getDifficulties());
+                try {
+                    difficultyAdapter.addAll(((Scenarios)parent.getItemAtPosition(position)).getClazz().newInstance().getDifficulties());
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
                 difficultyAdapter.notifyDataSetChanged();
             }
 

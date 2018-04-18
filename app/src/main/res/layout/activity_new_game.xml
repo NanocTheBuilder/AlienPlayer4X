@@ -7,27 +7,29 @@
     tools:context="com.thilian.se4x.robot.app.NewGameActivity">
 
     <Spinner
-        android:id="@+id/difficultySpinner"
+        android:id="@+id/scenarioSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/scenarioSpinner"
+
+        app:layout_constraintBottom_toTopOf="@+id/difficultySpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        />
 
     <Spinner
-        android:id="@+id/scenarioSpinner"
+        android:id="@+id/difficultySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-
         app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/difficultySpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/scenarioSpinner"
+        />
 
     <Button
         android:id="@+id/startButton"
@@ -38,6 +40,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scenarioSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/difficultySpinner" />
 
 </android.support.constraint.ConstraintLayout>

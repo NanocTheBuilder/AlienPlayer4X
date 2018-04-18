@@ -9,6 +9,9 @@ import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4TechnologyBuyer;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4TechnologyPrices;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class VpScenario extends Scenario4 {
     @Override
     public void init(Game game) {
@@ -26,7 +29,7 @@ public class VpScenario extends Scenario4 {
     }
 
     @Override
-    public Difficulty[] getDifficulties() {
-        return VpDifficulty.values();
+    public List<? extends Difficulty> getDifficulties() {
+        return Arrays.asList(VpDifficulty.values());
     }
 }

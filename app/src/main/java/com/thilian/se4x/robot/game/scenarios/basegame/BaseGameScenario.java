@@ -10,6 +10,9 @@ import com.thilian.se4x.robot.game.Scenario;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class BaseGameScenario extends Scenario {
 
     @Override
@@ -27,8 +30,8 @@ public class BaseGameScenario extends Scenario {
     }
 
     @Override
-    public Difficulty[] getDifficulties() {
-        return BaseGameDifficulty.values();
+    public List<? extends Difficulty> getDifficulties() {
+        return Arrays.asList(BaseGameDifficulty.values());
     }
 
 }
