@@ -1,11 +1,15 @@
 package com.thilian.se4x.robot.game.scenarios.basegame;
 
+import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.ShipType.BATTLECRUISER;
 import static com.thilian.se4x.robot.game.enums.ShipType.BATTLESHIP;
 import static com.thilian.se4x.robot.game.enums.ShipType.CRUISER;
 import static com.thilian.se4x.robot.game.enums.ShipType.DESTROYER;
+import static com.thilian.se4x.robot.game.enums.ShipType.RAIDER;
 import static com.thilian.se4x.robot.game.enums.ShipType.SCOUT;
 import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
+import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
+import static com.thilian.se4x.robot.game.enums.Technology.MOVE;
 import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static org.junit.Assert.assertEquals;
@@ -112,7 +116,7 @@ public class AlienPlayerTest extends BasegameFixture {
     }
 
     @Test
-    public void launchCarrierFleetThenBuildLargestShips(){
+    public void launchRegularFleetThenCarrierWithLargestShips(){
         sheet.setFleetCP(65);
         sheet.setTechCP(20);
         setLevel(SHIP_SIZE, 2);
@@ -138,6 +142,55 @@ public class AlienPlayerTest extends BasegameFixture {
         assertRoller();
         assertGroups(new Group(ShipType.CARRIER, 2), new Group(ShipType.FIGHTER, 6), new Group(DESTROYER, 2));
         assertCPs(3, 0, 10);
+    }
+
+    @Test
+    public void launchRegularBuildRaider(){
+        sheet.setFleetCP(60);
+        sheet.setTechCP(45);
+        setLevel(SHIP_SIZE, 4);
+        setLevel(ATTACK, 1);
+        mock2Fleet1Tech1DefRoll();
+        roller.mockRoll(3); //fleet launch
+        roller.mockRoll(7); //move tech
+        fleet = ap.makeEconRoll(10);
+        assertCPs(0, 50, 10);
+        assertEquals(70, fleet.getFleetCP());
+        assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
+        assertRoller();
+        roller.mockRoll(5); //Ship size
+        roller.mockRoll(10,6); //Cloak
+        ap.firstCombat(fleet);
+        assertLevel(SHIP_SIZE, 5);
+        assertLevel(CLOAKING, 1);
+        assertRoller();
+        assertGroups(new Group(RAIDER, 5));
+        assertEquals(RAIDER_FLEET, fleet.getFleetType());
+        assertCPs(10, 0,10);
+    }
+
+    @Test
+    public void launchRaiderBuyTechs(){
+        sheet.setFleetCP(12);
+        sheet.setTechCP(45);
+        setLevel(SHIP_SIZE, 4);
+        setLevel(ATTACK, 1);
+        setLevel(CLOAKING, 1);
+        mock2Fleet1Tech1DefRoll();
+        roller.mockRoll(7); //fleet launch
+        roller.mockRoll(4); //move tech
+        fleet = ap.makeEconRoll(10);
+        assertCPs(10, 30, 10);
+        assertLevel(MOVE, 2);
+        assertGroups(new Group(RAIDER, 1));
+        assertEquals(RAIDER_FLEET, fleet.getFleetType());
+        assertRoller();
+
+        roller.mockRoll(6); //Ship size
+        roller.mockRoll(6); //next cloak
+        ap.firstCombat(fleet);
+        assertLevel(CLOAKING, 2);
+        assertCPs(10, 0, 10);
     }
 
     private void launchRegularFleet() {
