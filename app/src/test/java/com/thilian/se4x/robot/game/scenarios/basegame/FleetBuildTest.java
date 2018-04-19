@@ -73,6 +73,14 @@ public class FleetBuildTest extends BasegameFixture{
     }
 
     @Test
+    public void dontBuildCarrierFleetIfNotSeenPDAndFEnemyIsNPA() {
+        ap.setLevel(FIGHTERS, 1);
+        game.setSeenLevel(POINT_DEFENSE, 0);
+        Fleet fleet = new Fleet(ap, REGULAR_FLEET, 27);
+        assertBuiltGroups(fleet, new Group(CARRIER, 1), new Group(FIGHTER, 3));
+    }
+
+    @Test
     public void buildCarrierFleetIfSeenPDAndPassedRoll() {
         ap.setLevel(FIGHTERS, 1);
         game.setSeenLevel(POINT_DEFENSE, 1);

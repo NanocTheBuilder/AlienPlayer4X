@@ -26,7 +26,7 @@ public class FleetBuilder extends com.thilian.se4x.robot.game.FleetBuilder {
             buildOneFullyLoadedTransport(fleet, options);
             buyBoardingShips(fleet);
             buyScoutsIfSeenMines(fleet);
-            buyFullCarriers(fleet);
+            buyFullCarriers(fleet, options);
             buildFlagship(fleet);
             buildPossibleDD(fleet);
             buildRemainderFleet(fleet);

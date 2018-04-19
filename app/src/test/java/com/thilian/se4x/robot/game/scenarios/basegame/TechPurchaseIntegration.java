@@ -2,6 +2,9 @@ package com.thilian.se4x.robot.game.scenarios.basegame;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import com.thilian.se4x.robot.game.AlienEconomicSheet;
@@ -68,8 +71,8 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
             }
 
             @Override
-            public Difficulty[] getDifficulties() {
-                return new Difficulty[0];
+            public List<? extends Difficulty> getDifficulties() {
+                return new ArrayList<>();
             }
         }, BaseGameDifficulty.NORMAL);
     }

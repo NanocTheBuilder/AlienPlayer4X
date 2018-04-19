@@ -30,7 +30,7 @@ public class FleetBuilder extends GroupBuilder {
         if (fleet.getFleetType().equals(RAIDER_FLEET)) {
             buildRaiderFleet(fleet);
         } else {
-            buyFullCarriers(fleet);
+            buyFullCarriers(fleet, options);
             if (shouldBuildRaiderFleet(fleet, options)) {
                 buildRaiderFleet(fleet);
             } else {
@@ -68,8 +68,8 @@ public class FleetBuilder extends GroupBuilder {
         }
     }
 
-    protected void buyFullCarriers(Fleet fleet) {
-        if (shouldBuildCarrierFleet(fleet)) {
+    protected void buyFullCarriers(Fleet fleet, FleetBuildOption... options) {
+        if (shouldBuildCarrierFleet(fleet, options)) {
             buildCarrierFleet(fleet);
         }
     }
@@ -122,9 +122,15 @@ public class FleetBuilder extends GroupBuilder {
         }
     }
 
-    protected boolean shouldBuildCarrierFleet(Fleet fleet) {
-        return fleet.getFleetCP() >= 27 && fleet.getAp().getLevel(FIGHTERS) > 0
-                && (game.getSeenLevel(POINT_DEFENSE) == 0 || game.roller.roll() < 5);
+    protected boolean shouldBuildCarrierFleet(Fleet fleet, FleetBuildOption...options) {
+        if(fleet.getFleetCP() < 27 || fleet.getAp().getLevel(FIGHTERS) == 0)
+            return false;
+        if(game.getSeenLevel(POINT_DEFENSE) == 0
+                && !FleetBuildOption.isOption(FleetBuildOption.COMBAT_WITH_NPAS, options))
+            return true;
+        if(game.getSeenLevel(POINT_DEFENSE) != 0 && game.roller.roll() < 5)
+            return true;
+        return false;
     }
 
     protected boolean shouldBuildRaiderFleet(Fleet fleet, FleetBuildOption... options) {
