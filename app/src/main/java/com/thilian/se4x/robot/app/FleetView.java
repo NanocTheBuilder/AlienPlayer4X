@@ -23,6 +23,7 @@ public class FleetView extends RelativeLayout{
 
     public FleetView(final Context context, final Fleet fleet, final FleetRevealListener fleetRevealListener){
         super(context);
+        this.setId(7133700 + fleet.getIndex());
         this.fleet = fleet;
         this.fleetRevealListener = fleetRevealListener;
 
@@ -34,9 +35,14 @@ public class FleetView extends RelativeLayout{
         firstCombatButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                fleet.getAp().firstCombat(fleet);
-                update();
-                fleetRevealListener.onFleetRevealed(fleet);
+                if(fleet.getAp() instanceof Scenario4Player){
+                    FirstCombatDialog.newInstance(fleet, getId()).show(((FleetsActivity)context).getFragmentManager(), "firstCombat");
+                }
+                else {
+                    fleet.getAp().firstCombat(fleet);
+                    update();
+                    fleetRevealListener.onFleetRevealed(fleet);
+                }
             }
         });
 
@@ -52,18 +58,6 @@ public class FleetView extends RelativeLayout{
             }
         });
 
-        if(fleet.getAp() instanceof Scenario4Player){
-            Button firstCombatAbovePlanetButton = findViewById(R.id.first_combat_above_planet_button);
-            firstCombatAbovePlanetButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    fleet.getAp().firstCombat(fleet, FleetBuildOption.COMBAT_IS_ABOVE_PLANET);
-                    update();
-                    fleetRevealListener.onFleetRevealed(fleet);
-                }
-            });
-        }
-
         update();
     }
 
@@ -73,26 +67,23 @@ public class FleetView extends RelativeLayout{
         fleetNameText.setText(getResources().getString(sid, fleet.getName()));
 
         TextView groupsText = findViewById(R.id.groups_text);
-        StringBuilder sb = new StringBuilder();
-        for(Group group : fleet.getGroups()){
-            sid = getResources().getIdentifier(group.getShipType().toString(), "string", getContext().getPackageName());
-            sb.append(getResources().getString(sid, group.getSize()));
+        if(fleet.getGroups().isEmpty()){
+            groupsText.setText(getResources().getString(R.string.fleetCp, fleet.getFleetCP()));
         }
-        groupsText.setText(sb.toString());
+        else {
+            StringBuilder sb = new StringBuilder();
+            for (Group group : fleet.getGroups()) {
+                sid = getResources().getIdentifier(group.getShipType().toString(), "string", getContext().getPackageName());
+                sb.append(getResources().getString(sid, group.getSize()));
+            }
+            groupsText.setText(sb.toString());
+        }
 
-        Button revealFleetButton = findViewById(R.id.first_combat_button);
-        revealFleetButton.setVisibility(fleet.hadFirstCombat() ? INVISIBLE : VISIBLE);
+        Button firstCombatButton = findViewById(R.id.first_combat_button);
+        firstCombatButton.setVisibility(fleet.hadFirstCombat() ? INVISIBLE : VISIBLE);
 
         Button removeFleetButton = findViewById(R.id.remove_fleet_button);
         removeFleetButton.setVisibility(fleet.hadFirstCombat() ? VISIBLE : INVISIBLE);
-
-        if(fleet.getAp() instanceof Scenario4Player){
-            Button revealAbovePlanetButton = findViewById(R.id.first_combat_above_planet_button);
-            revealAbovePlanetButton.setVisibility(fleet.hadFirstCombat() ? INVISIBLE : VISIBLE);
-        }
-        else{
-            findViewById(R.id.first_combat_above_planet_button).setVisibility(GONE);
-        }
     }
 
     public interface FleetRevealListener{

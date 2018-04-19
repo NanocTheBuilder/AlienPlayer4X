@@ -107,6 +107,10 @@ public class Fleet {
         return sum;
     }
 
+    public int getIndex(){
+        return getAp().getFleets().indexOf(this);
+    }
+
     public boolean hadFirstCombat() {
         return hadFirstCombat;
     }

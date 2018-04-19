@@ -4,17 +4,24 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.Game;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class FleetsActivity extends Activity implements FleetView.FleetRevealListener{
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_WITH_NPAS;
+
+public class FleetsActivity extends Activity implements FleetView.FleetRevealListener, FirstCombatDialog.FirstCombatListener{
     private AlienPlayer alienPlayer;
 
     @Override
@@ -103,5 +110,17 @@ public class FleetsActivity extends Activity implements FleetView.FleetRevealLis
     public void onFleetRevealed(Fleet fleet) {
         PlayerView playerView = findViewById(R.id.player_view);
         playerView.update();
+    }
+
+
+    @Override
+    public void firstCombatPushed(int index, int viewId, boolean abovePlanet, boolean enemyNPA) {
+        Fleet fleet = alienPlayer.getFleets().get(index);
+        List<FleetBuildOption> options = new ArrayList<>();
+        if(abovePlanet) options.add(COMBAT_IS_ABOVE_PLANET);
+        if(enemyNPA) options.add(COMBAT_WITH_NPAS);
+        alienPlayer.firstCombat(fleet, options.toArray(new FleetBuildOption[options.size()]));
+        ((FleetView)findViewById(viewId)).update();
+        onFleetRevealed(fleet);
     }
 }

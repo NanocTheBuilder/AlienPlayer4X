@@ -13,6 +13,8 @@
     <string name="eliminate">Eliminate</string>
     <string name="eliminated">Eliminated</string>
 
+    <string name="fleetCp">FleetCP: %d</string>
+
      <string name="BASE_GAME">Base game</string>
      <string name="SCENARIO_4">Scenario #4</string>
      <string name="VP_SCENARIO">Solo VP scenario</string>
@@ -71,4 +73,11 @@
     <string name="BOARDING_SHIP">%d BD;</string>
 
     <string name="setSeenLevels">Set Seen Technology</string>
+
+    <string name="first_combat">First Combat</string>
+
+    <string-array name="first_combat_options">
+        <item>Combat above planet</item>
+        <item>Enemy is NPA</item>
+    </string-array>
 </resources>

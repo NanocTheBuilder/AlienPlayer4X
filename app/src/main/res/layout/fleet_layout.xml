@@ -22,24 +22,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="14dp"
         android:layout_marginRight="14dp"
-        android:text="First combat"
+        android:text="@string/first_combat"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/first_combat_above_planet_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginRight="14dp"
-        android:text="Combat above planet"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/first_combat_button" />
 
     <Button
         android:id="@+id/remove_fleet_button"
