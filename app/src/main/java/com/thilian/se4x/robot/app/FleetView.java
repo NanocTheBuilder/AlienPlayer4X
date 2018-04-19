@@ -39,9 +39,7 @@ public class FleetView extends RelativeLayout{
                     FirstCombatDialog.newInstance(fleet, getId()).show(((FleetsActivity)context).getFragmentManager(), "firstCombat");
                 }
                 else {
-                    fleet.getAp().firstCombat(fleet);
-                    update();
-                    fleetRevealListener.onFleetRevealed(fleet);
+                    ((FirstCombatDialog.FirstCombatListener)context).firstCombatPushed(fleet.getIndex(), getId(), false, false);
                 }
             }
         });
