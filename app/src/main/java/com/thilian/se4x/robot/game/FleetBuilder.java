@@ -19,6 +19,8 @@ import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 
 public class FleetBuilder extends GroupBuilder {
+    private static int FULL_CP_COST = CARRIER.getCost() + FIGHTER.getCost() * 3;
+
 
     protected Game game;
 
@@ -76,8 +78,7 @@ public class FleetBuilder extends GroupBuilder {
 
     protected void buildCarrierFleet(Fleet fleet) {
         int fleetCP = fleet.getFleetCP();
-        int cost = CARRIER.getCost() + FIGHTER.getCost() * 3;
-        int shipsToBuild = fleetCP / cost;
+        int shipsToBuild = fleetCP / FULL_CP_COST;
         fleet.addGroup(new Group(CARRIER, shipsToBuild));
         fleet.addGroup(new Group(FIGHTER, shipsToBuild * 3));
     }
@@ -102,7 +103,7 @@ public class FleetBuilder extends GroupBuilder {
     }
 
     protected void buildPossibleDD(Fleet fleet) {
-        if (fleet.getRemainingCP() >= 9) {
+        if (fleet.getRemainingCP() >= RAIDER.getCost()) {
             AlienPlayer ap = fleet.getAp();
             if (DESTROYER.canBeBuilt(fleet.getRemainingCP(), ap.getLevel(SHIP_SIZE))
                     && game.getSeenLevel(CLOAKING) <= ap.getLevel(SCANNER) && fleet.findGroup(DESTROYER) == null)
@@ -123,14 +124,13 @@ public class FleetBuilder extends GroupBuilder {
     }
 
     protected boolean shouldBuildCarrierFleet(Fleet fleet, FleetBuildOption...options) {
-        if(fleet.getFleetCP() < 27 || fleet.getAp().getLevel(FIGHTERS) == 0)
+        if(fleet.getFleetCP() < FULL_CP_COST 
+                || fleet.getAp().getLevel(FIGHTERS) == 0
+                || FleetBuildOption.isOption(FleetBuildOption.COMBAT_WITH_NPAS, options)
+                )
             return false;
-        if(game.getSeenLevel(POINT_DEFENSE) == 0
-                && !FleetBuildOption.isOption(FleetBuildOption.COMBAT_WITH_NPAS, options))
-            return true;
-        if(game.getSeenLevel(POINT_DEFENSE) != 0 && game.roller.roll() < 5)
-            return true;
-        return false;
+        return game.getSeenLevel(POINT_DEFENSE) == 0 && !game.isSeenThing(Seeable.MINES)
+            || game.roller.roll() < 5;
     }
 
     protected boolean shouldBuildRaiderFleet(Fleet fleet, FleetBuildOption... options) {

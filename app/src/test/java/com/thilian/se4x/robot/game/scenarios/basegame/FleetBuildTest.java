@@ -73,11 +73,24 @@ public class FleetBuildTest extends BasegameFixture{
     }
 
     @Test
-    public void dontBuildCarrierFleetIfNotSeenPDAndFEnemyIsNPA() {
+    public void dontBuildCarrierFleetIfSeenMinesAndFailedRoll() {
         ap.setLevel(FIGHTERS, 1);
-        game.setSeenLevel(POINT_DEFENSE, 0);
-        Fleet fleet = new Fleet(ap, REGULAR_FLEET, 27);
-        assertBuiltGroups(fleet, new Group(CARRIER, 1), new Group(FIGHTER, 3));
+        game.addSeenThing(Seeable.MINES);
+        roller.mockRoll(5);
+        assertBuiltFleet(1, 27, new Group(SCOUT, 4));
+    }
+
+    @Test
+    public void dontBuildCarrierFleetIfNotSeenPDAndEnemyIsNPA() {
+        ap.setLevel(FIGHTERS, 1);
+        assertBuiltFleet(1, 27, new FleetBuildOption[]{FleetBuildOption.COMBAT_WITH_NPAS}, new Group(SCOUT, 4));
+    }
+    
+    @Test
+    public void dontBuildCarrierFleetIfSeenPDAndEnemyIsNPA() {
+        ap.setLevel(FIGHTERS, 1);
+        game.setSeenLevel(POINT_DEFENSE, 1);
+        assertBuiltFleet(1, 27, new FleetBuildOption[]{FleetBuildOption.COMBAT_WITH_NPAS}, new Group(SCOUT, 4));
     }
 
     @Test
@@ -279,9 +292,13 @@ public class FleetBuildTest extends BasegameFixture{
     }
 
     private void assertBuiltFleet(int fleetTypeRoll, int fleetCP, Group... expectedGroups) {
+        assertBuiltFleet(fleetTypeRoll, fleetCP, new FleetBuildOption[0],  expectedGroups);
+    }
+
+    private void assertBuiltFleet(int fleetTypeRoll, int fleetCP, FleetBuildOption[] options, Group... expectedGroups) {
         roller.mockRoll(fleetTypeRoll);
         Fleet fleet = new Fleet(ap, REGULAR_FLEET, fleetCP);
-        assertBuiltGroups(fleet, expectedGroups);
+        assertBuiltGroups(fleet, options, expectedGroups);
     }
 
     private void assertBuiltGroups(Fleet fleet, Group... expectedGroups) {
