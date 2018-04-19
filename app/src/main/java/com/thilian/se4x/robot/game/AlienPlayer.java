@@ -87,6 +87,7 @@ public class AlienPlayer {
         if (economicSheet.getDefCP() >= ShipType.MINE.getCost()) {
             fleet = game.scenario.buildHomeDefense(this);
             economicSheet.spendDefCP(fleet.getBuildCost());
+            fleet.setFirstCombat(true);
             newFleets.add(fleet);
         }
         return newFleets;
