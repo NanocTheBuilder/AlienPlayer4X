@@ -2,10 +2,12 @@ package com.thilian.se4x.robot.game;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+
 import org.junit.After;
 import org.junit.Before;
 
-import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
+import com.thilian.se4x.robot.game.enums.Technology;
 
 public abstract class Fixture {
     protected Game game;
@@ -34,12 +36,35 @@ public abstract class Fixture {
 
     @After
     public void assertAllRollsUsed() {
-        assertEquals(0, roller.rolls.size());
+        assertRoller();
     }
     
     private void setupRoller(Game game) {
         roller = new MockRoller();
         game.roller = roller;
     }
+    
+    protected void setLevel(Technology technology, int level){
+        ap.setLevel(technology, level);
+    }
+
+    protected void assertLevel(Technology technology, int expected) {
+        assertEquals(expected, ap.getLevel(technology));
+    }
+
+    protected void assertGroups(Fleet fleet, Group... expectedGroups) {
+        assertEquals(Arrays.asList(expectedGroups), fleet.getGroups());
+    }
+
+    protected void assertRoller(){
+        assertEquals(0, roller.rolls.size());
+    }
+    
+
+    protected void assertCPs(int fleetCP, int techCP, int defCP) {
+       assertEquals(fleetCP, sheet.getFleetCP());
+       assertEquals(techCP, sheet.getTechCP());
+       assertEquals(defCP, sheet.getDefCP());
+   }
 
 }

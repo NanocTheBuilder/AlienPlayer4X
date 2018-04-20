@@ -14,7 +14,6 @@ import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -250,30 +249,7 @@ public class AlienPlayerTest extends BasegameFixture {
         assertRoller();
     }
 
-    public void assertRoller() {
-        assertEquals(0, roller.rolls.size());
-    }
-
-    public void assertCPs(int fleetCP, int techCP, int defCP) {
-        assertEquals(fleetCP, sheet.getFleetCP());
-        assertEquals(techCP, sheet.getTechCP());
-        assertEquals(defCP, sheet.getDefCP());
-    }
-
-    public void assertGroups(Group... expectedGroups) {
+    private void assertGroups(Group... expectedGroups) {
         assertGroups(fleet, expectedGroups);
-    }
-    
-    public void assertGroups(Fleet fleetParam, Group... expectedGroups) {
-        assertEquals(Arrays.asList(expectedGroups), fleetParam.getGroups());
-    }
-
-
-    private void assertLevel(Technology technology, int expected) {
-        assertEquals(expected, ap.getLevel(technology));
-    }
-
-    private void setLevel(Technology technology, int level) {
-        ap.setLevel(technology, level);
     }
 }
