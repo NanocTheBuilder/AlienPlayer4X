@@ -1,22 +1,34 @@
 package com.thilian.se4x.robot.game.scenarios.vpscenario;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import com.thilian.se4x.robot.game.scenarios.vpscenario.VpDifficulties.Vp2pDifficulty;
+import com.thilian.se4x.robot.game.scenarios.vpscenario.VpDifficulties.Vp3pDifficulty;
+import com.thilian.se4x.robot.game.scenarios.vpscenario.VpDifficulties.VpSoloDifficulty;
 
 public class VpDefenseBankTest {
 
     @Test
     public void testStartingBank(){
-        Assert.assertEquals(0, new VpEconomicSheet(VpDifficulty.EASY).getBank());
-        Assert.assertEquals(100, new VpEconomicSheet(VpDifficulty.NORMAL).getBank());
-        Assert.assertEquals(100, new VpEconomicSheet(VpDifficulty.HARD).getBank());
-    }
+        Assert.assertEquals(0, new VpEconomicSheet(VpSoloDifficulty.EASY).getBank());
+        Assert.assertEquals(100, new VpEconomicSheet(VpSoloDifficulty.NORMAL).getBank());
+        Assert.assertEquals(100, new VpEconomicSheet(VpSoloDifficulty.HARD).getBank());
+
+        Assert.assertEquals(150, new VpEconomicSheet(Vp2pDifficulty.EASY).getBank());
+        Assert.assertEquals(150, new VpEconomicSheet(Vp2pDifficulty.NORMAL).getBank());
+        Assert.assertEquals(150, new VpEconomicSheet(Vp2pDifficulty.HARD).getBank());
+
+        Assert.assertEquals(200, new VpEconomicSheet(Vp3pDifficulty.EASY).getBank());
+        Assert.assertEquals(200, new VpEconomicSheet(Vp3pDifficulty.NORMAL).getBank());
+        Assert.assertEquals(200, new VpEconomicSheet(Vp3pDifficulty.HARD).getBank());
+}
 
     @Test
     public void getDefenseCPAddsBankIfAvailable(){
-        VpEconomicSheet sheet = new VpEconomicSheet(VpDifficulty.NORMAL);
+        VpEconomicSheet sheet = new VpEconomicSheet(VpSoloDifficulty.NORMAL);
         assertEquals(100, sheet.getDefCP());
 
         sheet.setBank(25);
@@ -29,7 +41,7 @@ public class VpDefenseBankTest {
 
     @Test
     public void spendDefCPFromBankIfAble(){
-        VpEconomicSheet sheet = new VpEconomicSheet(VpDifficulty.NORMAL);
+        VpEconomicSheet sheet = new VpEconomicSheet(VpSoloDifficulty.NORMAL);
         sheet.setDefCP(50);
         assertEquals(150, sheet.getDefCP());
         assertEquals(100, sheet.getBank());

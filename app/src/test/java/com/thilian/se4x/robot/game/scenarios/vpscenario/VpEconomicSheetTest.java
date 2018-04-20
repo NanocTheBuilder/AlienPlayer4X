@@ -7,6 +7,7 @@ import com.thilian.se4x.robot.game.AlienEconomicSheet;
 import com.thilian.se4x.robot.game.EconomicRollTest;
 import com.thilian.se4x.robot.game.MockRoller;
 import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.scenarios.vpscenario.VpDifficulties.VpSoloDifficulty;
 
 public class VpEconomicSheetTest extends EconomicRollTest{
 
@@ -36,7 +37,7 @@ public class VpEconomicSheetTest extends EconomicRollTest{
 
     @Test
     public void testMaxDefense(){
-        VpEconomicSheet sheet = new VpEconomicSheet(VpDifficulty.EASY);
+        VpEconomicSheet sheet = new VpEconomicSheet(VpSoloDifficulty.EASY);
         sheet.setDefCP(49);
         makeRoll(sheet, 3, 10);
         Assert.assertEquals(50, sheet.getDefCP());
@@ -44,7 +45,7 @@ public class VpEconomicSheetTest extends EconomicRollTest{
 
     @Test
     public void testIsMaxDefense(){
-        VpEconomicSheet sheet = new VpEconomicSheet(VpDifficulty.EASY);
+        VpEconomicSheet sheet = new VpEconomicSheet(VpSoloDifficulty.EASY);
         Assert.assertEquals(false, sheet.isMaxDefCP());
         sheet.setDefCP(50);
         Assert.assertEquals(true, sheet.isMaxDefCP());
@@ -52,7 +53,7 @@ public class VpEconomicSheetTest extends EconomicRollTest{
 
     @Test
     public void rerollDefIfIsMaxDefense(){
-        VpEconomicSheet sheet = new VpEconomicSheet(VpDifficulty.EASY);
+        VpEconomicSheet sheet = new VpEconomicSheet(VpSoloDifficulty.EASY);
         sheet.setDefCP(50);
         
         MockRoller roller = new MockRoller();
@@ -64,7 +65,7 @@ public class VpEconomicSheetTest extends EconomicRollTest{
     
     @Override
     protected Difficulty[] getDifficulties() {
-        return VpDifficulty.values();
+        return VpSoloDifficulty.values();
     }
     
     @Override
@@ -83,7 +84,7 @@ public class VpEconomicSheetTest extends EconomicRollTest{
     
     @Override
     protected AlienEconomicSheet getEconomicSheet() {
-        return getEconomicSheet(VpDifficulty.EASY);
+        return getEconomicSheet(VpSoloDifficulty.EASY);
     }
     
     @Override
