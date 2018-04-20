@@ -5,6 +5,6 @@ import com.thilian.se4x.robot.game.Fixture;
 public class VpScenarioFixture extends Fixture{
     @Override
     protected void createGame() {
-        game.createGame(new VpScenario(), VpDifficulty.NORMAL);
+        game.createGame(new VpSoloScenario(), VpDifficulty.NORMAL);
     }
 }

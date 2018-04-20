@@ -13,7 +13,7 @@ import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Technology;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
-import com.thilian.se4x.robot.game.scenarios.vpscenario.VpScenario;
+import com.thilian.se4x.robot.game.scenarios.vpscenario.VpSoloScenario;
 
 /**
  * TODO: document your custom view class.
@@ -65,7 +65,7 @@ public class PlayerView extends LinearLayout {
             findViewById(R.id.security_forces_text).setVisibility(GONE);
             findViewById(R.id.military_academy_text).setVisibility(GONE);
         }
-        if(!(game.scenario instanceof VpScenario)){
+        if(!(game.scenario instanceof VpSoloScenario)){
             findViewById(R.id.colonies_text).setVisibility(INVISIBLE);
             findViewById(R.id.colonies_spinner).setVisibility(INVISIBLE);
         }
