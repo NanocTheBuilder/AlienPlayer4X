@@ -15,6 +15,7 @@ import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -193,6 +194,30 @@ public class AlienPlayerTest extends BasegameFixture {
         assertCPs(10, 0, 10);
     }
 
+
+    @Test
+    public void buildHomeDefenseNoRaiderFleetNoMineSweep(){
+        sheet.setFleetCP(70);
+        sheet.setTechCP(50);
+        sheet.setDefCP(30);
+        setLevel(SHIP_SIZE, 4);
+        setLevel(ATTACK, 2);
+        roller.mockRoll(5); //Ship size
+        roller.mockRoll(9,6); //Cloak
+        roller.mockRoll(4); //balanced fleet
+        roller.mockRoll(7); //bases, then mines
+        List<Fleet> fleets = ap.buildHomeDefense();
+        assertEquals(FleetType.REGULAR_FLEET, fleets.get(0).getFleetType());
+        assertGroups(fleets.get(0), new Group(BATTLESHIP, 1), new Group(DESTROYER, 1), new Group(BATTLECRUISER, 1), new Group(CRUISER, 2));
+        assertEquals(FleetType.DEFENSE_FLEET, fleets.get(1).getFleetType());
+        assertGroups(fleets.get(1), new Group(ShipType.BASE, 2), new Group(ShipType.MINE, 1));
+        assertRoller();
+        assertCPs(2, 0, 1);
+        assertLevel(SHIP_SIZE, 5);
+        assertLevel(CLOAKING, 1);
+    }
+
+    
     private void launchRegularFleet() {
         sheet.setFleetCP(60);
         sheet.setTechCP(45);
@@ -236,7 +261,11 @@ public class AlienPlayerTest extends BasegameFixture {
     }
 
     public void assertGroups(Group... expectedGroups) {
-        assertEquals(Arrays.asList(expectedGroups), fleet.getGroups());
+        assertGroups(fleet, expectedGroups);
+    }
+    
+    public void assertGroups(Fleet fleetParam, Group... expectedGroups) {
+        assertEquals(Arrays.asList(expectedGroups), fleetParam.getGroups());
     }
 
 
