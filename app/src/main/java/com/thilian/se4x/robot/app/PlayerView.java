@@ -66,8 +66,8 @@ public class PlayerView extends LinearLayout {
             findViewById(R.id.military_academy_text).setVisibility(GONE);
         }
         if(!(game.scenario instanceof VpSoloScenario)){
-            findViewById(R.id.colonies_text).setVisibility(INVISIBLE);
-            findViewById(R.id.colonies_spinner).setVisibility(INVISIBLE);
+            findViewById(R.id.colonies_text).setVisibility(GONE);
+            findViewById(R.id.colonies_edit).setVisibility(GONE);
         }
         findViewById(R.id.eliminate_button).setEnabled(true);
     }

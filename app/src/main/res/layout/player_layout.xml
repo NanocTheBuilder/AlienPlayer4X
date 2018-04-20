@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
     tools:layout_editor_absoluteY="81dp"
     tools:padding="8dp">
 
@@ -14,26 +15,25 @@
         android:maxLines="1"
         android:text="Move: 1"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tactics_text"
-        app:layout_constraintEnd_toStartOf="@+id/attack_text"
+        app:layout_constraintEnd_toStartOf="@+id/ship_size_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/ship_size_text" />
 
     <TextView
         android:id="@+id/attack_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:text="Attack : 0"
         android:textSize="18sp"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintBottom_toTopOf="@+id/fighters_text"
         app:layout_constraintEnd_toStartOf="@+id/defense_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/move_text"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/defense_text" />
 
     <TextView
         android:id="@+id/defense_text"
@@ -41,37 +41,38 @@
         android:layout_height="wrap_content"
         android:text="Defense: 0"
         android:textSize="18sp"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintBottom_toTopOf="@+id/point_defense_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cloaking_text"
+        app:layout_constraintEnd_toStartOf="@+id/tactics_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/attack_text"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ship_size_text" />
 
     <TextView
         android:id="@+id/tactics_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:text="Tactics: 0"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/mine_sweeper_text"
-        app:layout_constraintEnd_toStartOf="@+id/fighters_text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/move_text" />
+        app:layout_constraintStart_toEndOf="@+id/defense_text"
+        app:layout_constraintTop_toTopOf="@+id/defense_text" />
 
     <TextView
         android:id="@+id/fighters_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:text="Fighters: 0"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/cloaking_text"
-        app:layout_constraintEnd_toStartOf="@+id/point_defense_text"
+        app:layout_constraintEnd_toStartOf="@+id/cloaking_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tactics_text"
-        app:layout_constraintTop_toBottomOf="@+id/attack_text" />
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cloaking_text" />
 
     <TextView
         android:id="@+id/point_defense_text"
@@ -79,11 +80,12 @@
         android:layout_height="wrap_content"
         android:text="Point Defense: 0"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/scanner_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/boarding_text"
+        app:layout_constraintEnd_toStartOf="@+id/mine_sweeper_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/fighters_text"
-        app:layout_constraintTop_toBottomOf="@+id/defense_text" />
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cloaking_text" />
 
     <TextView
         android:id="@+id/mine_sweeper_text"
@@ -91,12 +93,10 @@
         android:layout_height="wrap_content"
         android:text="Mine Sweep: 0"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/ground_combat_text"
-        app:layout_constraintEnd_toStartOf="@+id/cloaking_text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tactics_text" />
+        app:layout_constraintStart_toEndOf="@+id/point_defense_text"
+        app:layout_constraintTop_toTopOf="@+id/point_defense_text" />
 
     <TextView
         android:id="@+id/cloaking_text"
@@ -104,37 +104,39 @@
         android:layout_height="wrap_content"
         android:text="Cloaking: 0"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/ground_combat_text"
+        app:layout_constraintBottom_toTopOf="@+id/point_defense_text"
         app:layout_constraintEnd_toStartOf="@+id/scanner_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/mine_sweeper_text"
-        app:layout_constraintTop_toBottomOf="@+id/fighters_text" />
+        app:layout_constraintStart_toEndOf="@+id/fighters_text"
+        app:layout_constraintTop_toBottomOf="@+id/defense_text" />
 
     <TextView
         android:id="@+id/scanner_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:text="Scanners: 0"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/security_forces_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cloaking_text"
-        app:layout_constraintTop_toBottomOf="@+id/point_defense_text" />
+        app:layout_constraintTop_toTopOf="@+id/cloaking_text" />
 
 
     <TextView
         android:id="@+id/ground_combat_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:text="Ground: 0"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/military_academy_text"
         app:layout_constraintEnd_toStartOf="@+id/boarding_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mine_sweeper_text" />
+        app:layout_constraintTop_toTopOf="@+id/boarding_text" />
 
     <TextView
         android:id="@+id/boarding_text"
@@ -146,29 +148,33 @@
         app:layout_constraintEnd_toStartOf="@+id/security_forces_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ground_combat_text"
-        app:layout_constraintTop_toBottomOf="@+id/cloaking_text" />
+        app:layout_constraintTop_toBottomOf="@+id/point_defense_text" />
 
     <TextView
         android:id="@+id/security_forces_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:text="Security: 0"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/military_academy_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/boarding_text"
-        app:layout_constraintTop_toBottomOf="@+id/scanner_text" />
+        app:layout_constraintTop_toTopOf="@+id/boarding_text" />
 
     <TextView
         android:id="@+id/military_academy_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:text="Military academy: 0"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/fleets_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/eliminate_button"
+        app:layout_constraintEnd_toStartOf="@+id/colonies_text"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boarding_text" />
 
@@ -176,9 +182,12 @@
         android:id="@+id/eliminate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/eliminate"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/fleets_text"
+        app:layout_constraintEnd_toStartOf="@+id/fleets_text"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/military_academy_text" />
@@ -187,33 +196,52 @@
         android:id="@+id/fleets_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="0 fleets"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/colonies_text"
-        app:layout_constraintStart_toEndOf="@id/eliminate_button"
-        app:layout_constraintTop_toBottomOf="@+id/military_academy_text" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/eliminate_button"
+        app:layout_constraintTop_toTopOf="@+id/eliminate_button" />
 
 
     <TextView
         android:id="@+id/colonies_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Colonies:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/colonies_spinner"
-        app:layout_constraintStart_toStartOf="@id/fleets_text"
-        app:layout_constraintTop_toBottomOf="@+id/military_academy_text" />
+        app:layout_constraintEnd_toStartOf="@+id/colonies_edit"
+        app:layout_constraintStart_toEndOf="@+id/military_academy_text"
+        app:layout_constraintTop_toTopOf="@+id/military_academy_text" />
 
-    <Spinner
-        android:id="@+id/colonies_spinner"
+    <TextView
+        android:id="@+id/ship_size_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
+        android:text="Ship Size: 1"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/defense_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/colonies_text"
-        app:layout_constraintTop_toBottomOf="@+id/military_academy_text" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/move_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <EditText
+        android:id="@+id/colonies_edit"
+        android:layout_width="42dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/colonies_text" />
 
 
 </android.support.constraint.ConstraintLayout>
