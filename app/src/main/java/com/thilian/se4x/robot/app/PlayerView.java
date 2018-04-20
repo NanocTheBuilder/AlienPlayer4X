@@ -2,10 +2,14 @@ package com.thilian.se4x.robot.app;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.preference.EditTextPreference;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +17,7 @@ import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Technology;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
+import com.thilian.se4x.robot.game.scenarios.vpscenario.VpAlienPlayer;
 import com.thilian.se4x.robot.game.scenarios.vpscenario.VpSoloScenario;
 
 /**
@@ -69,6 +74,31 @@ public class PlayerView extends LinearLayout {
             findViewById(R.id.colonies_text).setVisibility(GONE);
             findViewById(R.id.colonies_edit).setVisibility(GONE);
         }
+        else{
+            EditText coloniesEdit = (EditText) findViewById(R.id.colonies_edit);
+            if(getContext() instanceof FleetsActivity) {
+                coloniesEdit.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        String str = editable.toString();
+                        int colonies = "".equals(str) ? 0 : Integer.parseInt(str);
+                        ((VpAlienPlayer) alienPlayer).setColonies(colonies);
+                    }
+                });
+            }
+            else{
+                coloniesEdit.setEnabled(false);
+            }
+        }
         findViewById(R.id.eliminate_button).setEnabled(true);
     }
 
@@ -94,6 +124,11 @@ public class PlayerView extends LinearLayout {
             else{
                 System.out.println(String.format("Not found <%s>", name));
             }
+        }
+
+        EditText coloniesEdit = (EditText) findViewById(R.id.colonies_edit);
+        if(coloniesEdit.getVisibility() == VISIBLE){
+            coloniesEdit.setText(String.valueOf(((VpAlienPlayer)alienPlayer).getColonies()));
         }
 
         TextView fleets = findViewById(R.id.fleets_text);
