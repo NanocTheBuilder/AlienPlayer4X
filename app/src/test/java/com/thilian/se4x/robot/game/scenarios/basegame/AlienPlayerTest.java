@@ -57,8 +57,7 @@ public class AlienPlayerTest extends BasegameFixture {
 
     @Test
     public void launchCarrierFleetThenBuildLargestFleet(){
-        sheet.setFleetCP(65);
-        sheet.setTechCP(45);
+        setCPs(65, 45, 0);
         setLevel(SHIP_SIZE, 2);
         setLevel(ATTACK, 1);
         setLevel(Technology.FIGHTERS, 1);
@@ -87,8 +86,7 @@ public class AlienPlayerTest extends BasegameFixture {
 
     @Test
     public void launchCarrierFleetThenBuildBalancedFleet(){
-        sheet.setFleetCP(65);
-        sheet.setTechCP(20);
+        setCPs(65, 20, 0);
         setLevel(SHIP_SIZE, 2);
         setLevel(ATTACK, 1);
         setLevel(Technology.FIGHTERS, 2);
@@ -117,8 +115,7 @@ public class AlienPlayerTest extends BasegameFixture {
 
     @Test
     public void launchRegularFleetThenCarrierWithLargestShips(){
-        sheet.setFleetCP(65);
-        sheet.setTechCP(20);
+        setCPs(65, 20, 0);
         setLevel(SHIP_SIZE, 2);
         setLevel(ATTACK, 1);
         setLevel(Technology.FIGHTERS, 0);
@@ -146,8 +143,7 @@ public class AlienPlayerTest extends BasegameFixture {
 
     @Test
     public void launchRegularBuildRaider(){
-        sheet.setFleetCP(60);
-        sheet.setTechCP(45);
+        setCPs(60, 45, 0);
         setLevel(SHIP_SIZE, 4);
         setLevel(ATTACK, 1);
         mock2Fleet1Tech1DefRoll();
@@ -171,8 +167,7 @@ public class AlienPlayerTest extends BasegameFixture {
 
     @Test
     public void launchRaiderBuyTechs(){
-        sheet.setFleetCP(12);
-        sheet.setTechCP(45);
+        setCPs(12, 45, 0);
         setLevel(SHIP_SIZE, 4);
         setLevel(ATTACK, 1);
         setLevel(CLOAKING, 1);
@@ -196,9 +191,7 @@ public class AlienPlayerTest extends BasegameFixture {
 
     @Test
     public void buildHomeDefenseNoRaiderFleetNoMineSweep(){
-        sheet.setFleetCP(70);
-        sheet.setTechCP(50);
-        sheet.setDefCP(30);
+        setCPs(70, 50, 30);
         setLevel(SHIP_SIZE, 4);
         setLevel(ATTACK, 2);
         roller.mockRoll(5); //Ship size
@@ -214,12 +207,13 @@ public class AlienPlayerTest extends BasegameFixture {
         assertCPs(2, 0, 1);
         assertLevel(SHIP_SIZE, 5);
         assertLevel(CLOAKING, 1);
+        assertEquals(true, fleets.get(0).hadFirstCombat());
+        assertEquals(true, fleets.get(1).hadFirstCombat());
     }
 
     
     private void launchRegularFleet() {
-        sheet.setFleetCP(60);
-        sheet.setTechCP(45);
+        setCPs(60, 45, 0);
         setLevel(SHIP_SIZE, 4);
         setLevel(ATTACK, 1);
         mock2Fleet1Tech1DefRoll();

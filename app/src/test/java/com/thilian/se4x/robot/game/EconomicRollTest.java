@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
-import com.thilian.se4x.robot.game.scenarios.vpscenario.VpDifficulty;
 
 public class EconomicRollTest {
 

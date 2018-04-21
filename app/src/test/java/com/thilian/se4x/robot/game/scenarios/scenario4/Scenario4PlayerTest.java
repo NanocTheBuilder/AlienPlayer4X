@@ -22,9 +22,7 @@ public class Scenario4PlayerTest extends Scenario4Fixture {
 
     @Test
     public void buildHomeDefenseWithMinesAndGround2(){
-        sheet.setFleetCP(70);
-        sheet.setTechCP(60);
-        sheet.setDefCP(30);
+        setCPs(70, 60, 30);
         setLevel(SHIP_SIZE, 4);
         setLevel(ATTACK, 2);
         setLevel(Technology.GROUND_COMBAT, 1);
@@ -47,5 +45,37 @@ public class Scenario4PlayerTest extends Scenario4Fixture {
         assertLevel(SHIP_SIZE, 5);
         assertLevel(Technology.GROUND_COMBAT, 2);
         assertLevel(Technology.CLOAKING, 1);
+    }
+
+    @Test
+    public void buildColonyDefenseWithBaseAndGround1(){
+        setCPs(70, 60, 30);
+        setLevel(Technology.GROUND_COMBAT, 1);
+        roller.mockRoll(9); //max spending
+        roller.mockRoll(7);
+        roller.mockRoll(5); //buy 1 base
+        List<Fleet> fleets = ((Scenario4Player)ap).buildColonyDefense();
+        assertEquals(FleetType.DEFENSE_FLEET, fleets.get(0).getFleetType());
+        assertGroups(fleets.get(0),
+                new Group(ShipType.BASE, 1), new Group(ShipType.INFANTRY, 2));
+        assertCPs(70, 60, 14);
+        assertEquals(true, fleets.get(0).hadFirstCombat());
+        
+    }
+
+
+    @Test
+    public void buildColonyDefenseWith2MinesAndGround2(){
+        setCPs(70, 60, 30);
+        setLevel(Technology.GROUND_COMBAT, 2);
+        roller.mockRoll(9); //max spending
+        roller.mockRoll(7);
+        roller.mockRoll(6); //buy 2 mines
+        List<Fleet> fleets = ((Scenario4Player)ap).buildColonyDefense();
+        assertEquals(FleetType.DEFENSE_FLEET, fleets.get(0).getFleetType());
+        assertGroups(fleets.get(0),
+                new Group(ShipType.MINE, 2), new Group(ShipType.HEAVY_INFANTRY, 2));
+        assertCPs(70, 60, 14);
+        assertEquals(true, fleets.get(0).hadFirstCombat());
     }
 }

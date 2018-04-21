@@ -59,7 +59,12 @@ public abstract class Fixture {
     protected void assertRoller(){
         assertEquals(0, roller.rolls.size());
     }
-    
+
+    protected void setCPs(int fleetCP, int techCP, int defCP) {
+       sheet.setFleetCP(fleetCP);
+       sheet.setTechCP(techCP);
+       sheet.setDefCP(defCP);
+   }
 
     protected void assertCPs(int fleetCP, int techCP, int defCP) {
        assertEquals(fleetCP, sheet.getFleetCP());

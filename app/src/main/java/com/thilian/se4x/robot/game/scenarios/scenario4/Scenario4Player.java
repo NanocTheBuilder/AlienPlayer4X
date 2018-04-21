@@ -19,6 +19,7 @@ public class Scenario4Player extends AlienPlayer {
         Fleet fleet = ((Scenario4) game.scenario).buildColonyDefense(this);
         if(!fleet.getGroups().isEmpty()){
             economicSheet.spendDefCP(fleet.getBuildCost());
+            fleet.setFirstCombat(true);
             newFleets.add(fleet);
         }
         return newFleets;

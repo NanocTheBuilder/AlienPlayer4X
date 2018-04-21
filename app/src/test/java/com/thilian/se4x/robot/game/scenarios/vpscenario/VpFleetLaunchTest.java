@@ -9,8 +9,8 @@ import static com.thilian.se4x.robot.game.enums.FleetType.EXPANSION_FLEET;
 import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET;
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class VpFleetLaunchTest extends VpScenarioFixture{
 
