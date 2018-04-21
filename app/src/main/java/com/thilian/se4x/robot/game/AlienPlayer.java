@@ -2,20 +2,20 @@ package com.thilian.se4x.robot.game;
 
 //import android.support.annotation.Nullable;
 //import android.util.Log;
-import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
-import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
-import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
+
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
+import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.PlayerColor;
+import com.thilian.se4x.robot.game.enums.Technology;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.thilian.se4x.robot.game.enums.FleetBuildOption;
-import com.thilian.se4x.robot.game.enums.FleetType;
-import com.thilian.se4x.robot.game.enums.PlayerColor;
-import com.thilian.se4x.robot.game.enums.ShipType;
-import com.thilian.se4x.robot.game.enums.Technology;
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
+import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
+import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 
 public class AlienPlayer {
 
@@ -85,8 +85,8 @@ public class AlienPlayer {
             newFleets.add(fleet);
         }
 
-        if (economicSheet.getDefCP() >= ShipType.MINE.getCost()) {
-            fleet = game.scenario.buildHomeDefense(this);
+        fleet = game.scenario.buildHomeDefense(this);
+        if (fleet != null) {
             economicSheet.spendDefCP(fleet.getBuildCost());
             fleet.setFirstCombat(true);
             newFleets.add(fleet);

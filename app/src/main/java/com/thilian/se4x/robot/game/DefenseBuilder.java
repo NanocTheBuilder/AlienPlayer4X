@@ -1,9 +1,10 @@
 package com.thilian.se4x.robot.game;
 
+import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.ShipType;
+
 import static com.thilian.se4x.robot.game.enums.ShipType.BASE;
 import static com.thilian.se4x.robot.game.enums.ShipType.MINE;
-
-import com.thilian.se4x.robot.game.enums.FleetType;
 
 public class DefenseBuilder extends GroupBuilder{
 
@@ -14,9 +15,13 @@ public class DefenseBuilder extends GroupBuilder{
     }
 
     public Fleet buildHomeDefense(AlienPlayer ap) {
-        Fleet fleet = new Fleet(ap, FleetType.DEFENSE_FLEET, ap.getEconomicSheet().getDefCP());
-        buyHomeDefenseUnits(fleet);
-        return fleet;
+        if(ap.getEconomicSheet().getDefCP() >= ShipType.MINE.getCost()) {
+            Fleet fleet = new Fleet(ap, FleetType.DEFENSE_FLEET, ap.getEconomicSheet().getDefCP());
+            buyHomeDefenseUnits(fleet);
+            return fleet;
+        }
+        else
+            return null;
     }
     
     protected void buyHomeDefenseUnits(Fleet fleet) {

@@ -3,8 +3,8 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="econPhase">Economic Phase %d</string>
-    <string name="buildHomeDefense">Build Home Defense</string>
-    <string name="buildColonyDefense">Build Colony Defense</string>
+    <string name="buildHomeDefense">Home Defense</string>
+    <string name="buildColonyDefense">Colony Defense</string>
     <string name="newFleets">New Fleets</string>
     <string name="areYouSure">Are You Sure?</string>
     <string name="gameOver">...</string>
@@ -25,7 +25,6 @@
      <string name="HARDER">Harder</string>
      <string name="REALLY_TOUGH">Really tough</string>
      <string name="GOOD_LUCK">Good Luck!</string>
-
 
     <string name="REGULAR_FLEET">Regular Fleet %s</string>
     <string name="RAIDER_FLEET">Raider Fleet %s</string>

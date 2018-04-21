@@ -1,20 +1,22 @@
 package com.thilian.se4x.robot.game.scenarios.basegame;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-
-import org.junit.Test;
-
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.ShipType;
 
+import org.junit.Test;
+
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 public class DefenseBuildTest extends BasegameFixture{
     @Test
     public void spendNoDefenseCPBuildNothings() {
-        assertBuiltGroups(0, 1);
+        sheet.setDefCP(0);
+        assertNull(defBuilder.buildHomeDefense(ap));
     }
 
     @Test

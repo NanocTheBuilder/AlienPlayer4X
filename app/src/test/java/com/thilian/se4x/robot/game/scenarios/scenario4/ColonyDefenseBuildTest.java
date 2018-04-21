@@ -1,5 +1,14 @@
 package com.thilian.se4x.robot.game.scenarios.scenario4;
 
+import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.Group;
+import com.thilian.se4x.robot.game.enums.FleetType;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Arrays;
+
 import static com.thilian.se4x.robot.game.enums.ShipType.BASE;
 import static com.thilian.se4x.robot.game.enums.ShipType.HEAVY_INFANTRY;
 import static com.thilian.se4x.robot.game.enums.ShipType.INFANTRY;
@@ -7,20 +16,17 @@ import static com.thilian.se4x.robot.game.enums.ShipType.MINE;
 import static com.thilian.se4x.robot.game.enums.Technology.GROUND_COMBAT;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import com.thilian.se4x.robot.game.Fleet;
-import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.enums.FleetType;
-
 public class ColonyDefenseBuildTest extends Scenario4Fixture{
 
     @Before
     public void setUp() {
         sheet.setDefCP(100);
+    }
+
+    @Test
+    public void noCPbuildsNull(){
+        sheet.setDefCP(1);
+        assertEquals(0, ((Scenario4Player)ap).buildColonyDefense().size());
     }
     
     @Test
