@@ -2,6 +2,7 @@ package com.thilian.se4x.robot.game.scenarios.vpscenario;
 
 import com.thilian.se4x.robot.game.AlienEconomicSheet;
 import com.thilian.se4x.robot.game.DiceRoller;
+import com.thilian.se4x.robot.game.EconRollResult;
 
 public class VpEconomicSheet extends AlienEconomicSheet {
 
@@ -45,7 +46,8 @@ public class VpEconomicSheet extends AlienEconomicSheet {
     //@formatter:on
 
     @Override
-    public void makeRoll(int turn, DiceRoller roller) {
+    public EconRollResult makeRoll(int turn, DiceRoller roller) {
+        EconRollResult result = new EconRollResult();
         int limit = 10;
         if(defCP == ((VpDifficulty)difficulty).getMaxDefenseCp()
                 && requiredRoll(turn, RESULT_DEF) != 99)
@@ -53,18 +55,26 @@ public class VpEconomicSheet extends AlienEconomicSheet {
             limit = requiredRoll(turn, RESULT_DEF) - 1;
         }
 
-        int result = roller.roll(limit);
-        if (result >= requiredRoll(turn, RESULT_DEF))
-            defCP += 2 * difficulty.getCPPerEcon();
-        else if (result >= requiredRoll(turn, RESULT_TECH))
-            techCP += difficulty.getCPPerEcon();
-        else
-            fleetCP += difficulty.getCPPerEcon();
+        int roll = roller.roll(limit);
+        if (roll >= requiredRoll(turn, RESULT_DEF)) {
+            int defCP = 2 * difficulty.getCPPerEcon();
+            this.defCP += defCP;
+            result.setDefCP(defCP);
+        }
+        else if (roll >= requiredRoll(turn, RESULT_TECH)) {
+            int techCP = difficulty.getCPPerEcon();
+            this.techCP += techCP;
+        }
+        else {
+            int fleetCP = difficulty.getCPPerEcon();
+            this.fleetCP += fleetCP;
+        }
 
         int maxDefenseCp = ((VpDifficulty)difficulty).getMaxDefenseCp();
         if(defCP > maxDefenseCp){
             defCP = maxDefenseCp;
         }
+        return result;
     }
 
     @Override

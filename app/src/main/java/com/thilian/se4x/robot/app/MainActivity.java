@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
+import com.thilian.se4x.robot.game.EconPhaseResult;
 import com.thilian.se4x.robot.game.Fleet;
 
 import java.util.List;
@@ -45,9 +46,9 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 final SE4XApplication app = (SE4XApplication) getApplication();
-                List<Fleet> newFleets = app.getGame().doEconomicPhase();
-                if(newFleets.size() != 0) {
-                    app.showNewFleets(MainActivity.this, newFleets);
+                List<EconPhaseResult> results = app.getGame().doEconomicPhase();
+                if(results.size() != 0) {
+                    app.showNewFleets(MainActivity.this, results);
                     LinearLayout players = (LinearLayout) findViewById(R.id.players);
                     for (int i = 0; i < players.getChildCount(); i++) {
                         ((PlayerView) players.getChildAt(i)).update();

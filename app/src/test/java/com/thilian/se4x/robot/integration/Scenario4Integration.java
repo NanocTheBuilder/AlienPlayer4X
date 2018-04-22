@@ -7,6 +7,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import com.thilian.se4x.robot.game.AlienEconomicSheet;
+import com.thilian.se4x.robot.game.EconPhaseResult;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
@@ -21,6 +22,8 @@ import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 public class Scenario4Integration {
 
     private AlienEconomicSheet sheet;
+    Scenario4Player ap;
+    private Fleet fleet;
 
     @Test
     public void economyRollStartsNewFleet() {
@@ -28,20 +31,20 @@ public class Scenario4Integration {
         Game game = new Game();
         game.createGame(new Scenario4(), BaseGameDifficulty.NORMAL);
         game.roller = roller;
-        
-        Scenario4Player ap = (Scenario4Player) game.aliens.get(0);
+
+        ap = (Scenario4Player) game.aliens.get(0);
         sheet = ap.getEconomicSheet();
 
         roller.mockRoll(1); //extra exon
         roller.mockRoll(1); //launch
-        assertEquals(null, ap.makeEconRoll(1));
+        assertNoFleetLaunch(ap.makeEconRoll(1));
         assertEquals(1, sheet.getExtraEcon(4));
         assertCPs(0, 0, 0);
         assertEquals(0, roller.rolls.size());
 
         roller.mockRoll(5);
         roller.mockRoll(1); //launch
-        assertEquals(null, ap.makeEconRoll(2));
+        assertNoFleetLaunch(ap.makeEconRoll(2));
         assertCPs(0, 5, 0);
         assertEquals(0, roller.rolls.size());
 
@@ -49,10 +52,9 @@ public class Scenario4Integration {
         roller.mockRoll(3);
         roller.mockRoll(2);
         roller.mockRoll(7);
-        Fleet fleet = ap.makeEconRoll(3);
-        assertEquals(10, fleet.getFleetCP());
-        assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
-        assertEquals(fleet, ap.getFleets().get(0));
+        EconPhaseResult result = ap.makeEconRoll(3);
+        assertRegularFleetLaunch(result, 10);
+        assertEquals(result.getFleet(), ap.getFleets().get(0));
         assertEquals(1, ap.getLevel(Technology.MOVE));
         assertCPs(0, 5, 0);
         assertEquals(0, roller.rolls.size());
@@ -61,8 +63,8 @@ public class Scenario4Integration {
         roller.mockRoll(3);
         roller.mockRoll(3);
         roller.mockRoll(6);
-        fleet = ap.makeEconRoll(4);
-        assertEquals(null, fleet);
+        result = ap.makeEconRoll(4);
+        assertNoFleetLaunch(result);
         assertCPs(15, 5, 0);
         assertEquals(0, roller.rolls.size());
 
@@ -70,8 +72,8 @@ public class Scenario4Integration {
         roller.mockRoll(10);
         roller.mockRoll(10);
         roller.mockRoll(10);
-        fleet = ap.makeEconRoll(5);
-        assertEquals(null, fleet);
+        result = ap.makeEconRoll(5);
+        assertNoFleetLaunch(result);
         assertCPs(15, 10, 20);
         assertEquals(0, roller.rolls.size());
 
@@ -91,7 +93,7 @@ public class Scenario4Integration {
         roller.mockRoll(9);
         roller.mockRoll(7);
         roller.mockRoll(5);
-        fleet = ap.makeEconRoll(6);
+        result = ap.makeEconRoll(6);
         assertCPs(26, 10, 20);
         assertEquals(0, roller.rolls.size());
 
@@ -101,10 +103,9 @@ public class Scenario4Integration {
         roller.mockRoll(3);
         roller.mockRoll(4);
         roller.mockRoll(8);
-        fleet = ap.makeEconRoll(7);
-        assertEquals(31, fleet.getFleetCP());
-        assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
-        assertEquals(fleet, ap.getFleets().get(0));
+        result = ap.makeEconRoll(7);
+        assertRegularFleetLaunch(result,31);
+        assertEquals(result.getFleet(), ap.getFleets().get(0));
         assertEquals(1, ap.getLevel(Technology.MOVE));
         assertCPs(0, 25, 20);
         assertEquals(0, roller.rolls.size());
@@ -114,8 +115,8 @@ public class Scenario4Integration {
         roller.mockRoll(7);
         roller.mockRoll(9);
         roller.mockRoll(7);
-        fleet = ap.makeEconRoll(8);
-        assertEquals(null, fleet);
+        result = ap.makeEconRoll(8);
+        assertNoFleetLaunch(result);
         assertCPs(10, 35, 20);
         assertEquals(0, roller.rolls.size());
 
@@ -135,8 +136,8 @@ public class Scenario4Integration {
         roller.mockRoll(7);
         roller.mockRoll(7);
         roller.mockRoll(8);
-        fleet = ap.makeEconRoll(9);
-        assertEquals(null, fleet);
+        result = ap.makeEconRoll(9);
+        assertNoFleetLaunch(result);
         assertCPs(22, 20, 20);
         assertEquals(0, roller.rolls.size());
 
@@ -164,8 +165,8 @@ public class Scenario4Integration {
         roller.mockRoll(7);
         roller.mockRoll(10);
         roller.mockRoll(8);
-        fleet = ap.makeEconRoll(10);
-        assertEquals(null, fleet);
+        result = ap.makeEconRoll(10);
+        assertNoFleetLaunch(result);
         assertCPs(6, 10, 23);
         assertEquals(0, roller.rolls.size());
 
@@ -177,6 +178,16 @@ public class Scenario4Integration {
         assertEquals(FleetType.DEFENSE_FLEET, ap.getFleets().get(3).getFleetType());
         assertCPs(6, 10, 11); //spend 12 on 1 base
         assertEquals(0, roller.rolls.size());
+    }
+
+    public void assertNoFleetLaunch(EconPhaseResult result) {
+        assertEquals(null, result.getFleet());
+    }
+
+    public void assertRegularFleetLaunch(EconPhaseResult result, int fleetCP) {
+        assertEquals(fleetCP, result.getFleet().getFleetCP());
+        assertEquals(FleetType.REGULAR_FLEET, result.getFleet().getFleetType());
+        assertEquals(result.getFleet(), ap.getFleets().get(0));
     }
 
     public void assertCPs(int fleetCP, int techCP, int defCP) {

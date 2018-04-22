@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.content.DialogInterface;
 
+import com.thilian.se4x.robot.game.EconPhaseResult;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.RealDiceRoller;
@@ -30,9 +31,10 @@ public class SE4XApplication extends Application {
         return game;
     }
 
-    public void showNewFleets(Activity activity, List<Fleet> newFleets) {
+    public void showNewFleets(Activity activity, List<EconPhaseResult> newFleets) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         StringBuilder message = new StringBuilder();
+        /*
         for(Fleet fleet : newFleets){
             int sid = getResources().getIdentifier(fleet.getFleetType().toString(), "string", getPackageName());
             message.append(String.format("[%s] %s\n", fleet.getAp().getColor(), getResources().getString(sid, fleet.getName())));
@@ -43,7 +45,7 @@ public class SE4XApplication extends Application {
             public void onClick(DialogInterface dialogInterface, int i) {
             }
         });
-
+        */
         AlertDialog dialog = builder.create();
         dialog.show();
     }

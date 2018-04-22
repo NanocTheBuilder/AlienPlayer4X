@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.thilian.se4x.robot.game.EconPhaseResult;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.FleetType;
@@ -27,7 +28,7 @@ import com.thilian.se4x.robot.game.enums.Technology;
 
 public class AlienPlayerTest extends BasegameFixture {
 
-    private Fleet fleet;
+    private EconPhaseResult result;
 
     @Test
     public void launchRegularFleetThenBuildLargestFleet(){
@@ -65,23 +66,27 @@ public class AlienPlayerTest extends BasegameFixture {
         mock2Fleet1Tech1DefRoll();
         roller.mockRoll(7); //fleet launch
         roller.mockRoll(7); //move tech
-        fleet = ap.makeEconRoll(10);
+        result = ap.makeEconRoll(10);
+        assertRegularFleetLaunch(75);
         assertCPs(0, 50, 10);
-        assertEquals(75, fleet.getFleetCP());
-        assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
         assertRoller();
         
         roller.mockRoll(8); //Ship size
         roller.mockRoll(6); //Buy next fighter level
         roller.mockRoll(7,5); //Fighters (no attack & cloak)
         roller.mockRoll(3); //fleet composition
-        ap.firstCombat(fleet);
+        ap.firstCombat(result.getFleet());
         assertLevel(SHIP_SIZE, 2);
         assertLevel(ATTACK, 1);
         assertLevel(Technology.FIGHTERS, 3);
         assertRoller();
         assertGroups(new Group(ShipType.CARRIER, 2), new Group(ShipType.FIGHTER, 6), new Group(DESTROYER, 1), new Group(SCOUT, 2));
         assertCPs(0, 0, 10);
+    }
+
+    public void assertRegularFleetLaunch(int fleetCP) {
+        assertEquals(fleetCP, result.getFleet().getFleetCP());
+        assertEquals(FleetType.REGULAR_FLEET, result.getFleet().getFleetType());
     }
 
     @Test
@@ -94,17 +99,16 @@ public class AlienPlayerTest extends BasegameFixture {
         mock2Fleet1Tech1DefRoll();
         roller.mockRoll(7); //fleet launch
         roller.mockRoll(7); //move tech
-        fleet = ap.makeEconRoll(10);
+        result = ap.makeEconRoll(10);
+        assertRegularFleetLaunch(75);
         assertCPs(0, 25, 10);
-        assertEquals(75, fleet.getFleetCP());
-        assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
         assertRoller();
         
         roller.mockRoll(8); //Ship size
         roller.mockRoll(7, 5); //Fighters (no attack & cloak)
         roller.mockRoll(4); //Has seen PD, but buy only full cariers
         roller.mockRoll(6); //fleet composition
-        ap.firstCombat(fleet);
+        ap.firstCombat(result.getFleet());
         assertLevel(SHIP_SIZE, 2);
         assertLevel(ATTACK, 1);
         assertLevel(Technology.FIGHTERS, 3);
@@ -123,16 +127,15 @@ public class AlienPlayerTest extends BasegameFixture {
         mock2Fleet1Tech1DefRoll();
         roller.mockRoll(5); //fleet launch
         roller.mockRoll(7); //move tech
-        fleet = ap.makeEconRoll(10);
+        result = ap.makeEconRoll(10);
+        assertRegularFleetLaunch(75);
         assertCPs(0, 25, 10);
-        assertEquals(75, fleet.getFleetCP());
-        assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
         assertRoller();
         
         roller.mockRoll(8); //Ship size
         roller.mockRoll(7,5); //Fighters (no attack & cloak)
         roller.mockRoll(8); //fleet composition
-        ap.firstCombat(fleet);
+        ap.firstCombat(result.getFleet());
         assertLevel(SHIP_SIZE, 2);
         assertLevel(ATTACK, 1);
         assertLevel(Technology.FIGHTERS, 1);
@@ -149,19 +152,18 @@ public class AlienPlayerTest extends BasegameFixture {
         mock2Fleet1Tech1DefRoll();
         roller.mockRoll(3); //fleet launch
         roller.mockRoll(7); //move tech
-        fleet = ap.makeEconRoll(10);
+        result = ap.makeEconRoll(10);
+        assertRegularFleetLaunch(70);
         assertCPs(0, 50, 10);
-        assertEquals(70, fleet.getFleetCP());
-        assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
         assertRoller();
         roller.mockRoll(5); //Ship size
         roller.mockRoll(10,6); //Cloak
-        ap.firstCombat(fleet);
+        ap.firstCombat(result.getFleet());
         assertLevel(SHIP_SIZE, 5);
         assertLevel(CLOAKING, 1);
         assertRoller();
         assertGroups(new Group(RAIDER, 5));
-        assertEquals(RAIDER_FLEET, fleet.getFleetType());
+        assertEquals(RAIDER_FLEET, result.getFleet().getFleetType());
         assertCPs(10, 0,10);
     }
 
@@ -174,16 +176,16 @@ public class AlienPlayerTest extends BasegameFixture {
         mock2Fleet1Tech1DefRoll();
         roller.mockRoll(7); //fleet launch
         roller.mockRoll(4); //move tech
-        fleet = ap.makeEconRoll(10);
+        result = ap.makeEconRoll(10);
+        assertEquals(RAIDER_FLEET, result.getFleet().getFleetType());
         assertCPs(10, 30, 10);
         assertLevel(MOVE, 2);
         assertGroups(new Group(RAIDER, 1));
-        assertEquals(RAIDER_FLEET, fleet.getFleetType());
         assertRoller();
 
         roller.mockRoll(6); //Ship size
         roller.mockRoll(6); //next cloak
-        ap.firstCombat(fleet);
+        ap.firstCombat(result.getFleet());
         assertLevel(CLOAKING, 2);
         assertCPs(10, 0, 10);
     }
@@ -219,10 +221,12 @@ public class AlienPlayerTest extends BasegameFixture {
         mock2Fleet1Tech1DefRoll();
         roller.mockRoll(3); //fleet launch
         roller.mockRoll(7); //move tech
-        fleet = ap.makeEconRoll(10);
+        result = ap.makeEconRoll(10);
+        assertRegularFleetLaunch(70);
+        assertEquals(10, result.getFleetCP());
+        assertEquals(5, result.getTechCP());
+        assertEquals(10, result.getDefCP());
         assertCPs(0, 50, 10);
-        assertEquals(70, fleet.getFleetCP());
-        assertEquals(FleetType.REGULAR_FLEET, fleet.getFleetType());
         assertRoller();
     }
 
@@ -237,13 +241,13 @@ public class AlienPlayerTest extends BasegameFixture {
         roller.mockRoll(5); //Ship size
         roller.mockRoll(10,1); //Attack
         roller.mockRoll(fleetCompositionRoll); //fleet composition
-        ap.firstCombat(fleet);
+        ap.firstCombat(result.getFleet());
         assertLevel(SHIP_SIZE, 5);
         assertLevel(ATTACK, 2);
         assertRoller();
     }
 
     private void assertGroups(Group... expectedGroups) {
-        assertGroups(fleet, expectedGroups);
+        assertGroups(result.getFleet(), expectedGroups);
     }
 }

@@ -44,15 +44,19 @@ public class AlienPlayer {
         return this.economicSheet;
     }
 
-    public Fleet makeEconRoll(int turn) {
+    public EconPhaseResult makeEconRoll(int turn) {
+        EconPhaseResult result = new EconPhaseResult();
         int econRolls = economicSheet.getEconRolls(turn) + getExtraEconRoll(turn);
-        for (int i = 0; i < econRolls; i++)
-            economicSheet.makeRoll(turn, game.roller);
+        for (int i = 0; i < econRolls; i++) {
+            EconRollResult rollResult = economicSheet.makeRoll(turn, game.roller);
+            result.add(rollResult);
+        }
         Fleet newFleet = game.scenario.rollFleetLaunch(this, turn);
         if (newFleet != null) {
+            result.setFleet(newFleet);
             buyNextMoveLevel();
         }
-        return newFleet;
+        return result;
     }
 
     protected int getExtraEconRoll(int turn) {

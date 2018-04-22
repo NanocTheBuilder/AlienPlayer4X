@@ -49,18 +49,30 @@ public class AlienEconomicSheet {
         this.difficulty = difficulty;
     }
 
-    public void makeRoll(int turn, DiceRoller roller) {
-        int result = roller.roll();
-        if (result >= requiredRoll(turn, RESULT_DEF))
-            defCP += 2 * difficulty.getCPPerEcon();
-        else if (result >= requiredRoll(turn, RESULT_TECH))
-            techCP += difficulty.getCPPerEcon();
-        else if (result >= requiredRoll(turn, RESULT_FLEET))
-            fleetCP += difficulty.getCPPerEcon();
+    public EconRollResult makeRoll(int turn, DiceRoller roller) {
+        EconRollResult result = new EconRollResult();
+        int roll = roller.roll();
+        if (roll >= requiredRoll(turn, RESULT_DEF)) {
+            int defCP = 2 * difficulty.getCPPerEcon();
+            this.defCP += defCP;
+            result.setDefCP(defCP);
+        }
+        else if (roll >= requiredRoll(turn, RESULT_TECH)) {
+            int techCP = difficulty.getCPPerEcon();
+            this.techCP += techCP;
+            result.setTechCP(techCP);
+        }
+        else if (roll >= requiredRoll(turn, RESULT_FLEET)) {
+            int fleetCP = difficulty.getCPPerEcon();
+            this.fleetCP += fleetCP;
+            result.setFleetCP(fleetCP);
+        }
         else {
             for (int i = turn + 3; i < 21; i++)
                 extraEcon[i] += 1;
+            result.setExtraEcon(1);
         }
+        return result;
     }
 
     protected int requiredRoll(int turn, int result) {

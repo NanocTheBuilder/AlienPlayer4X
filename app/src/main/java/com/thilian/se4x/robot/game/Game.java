@@ -42,17 +42,15 @@ public class Game {
         }
     }
 
-    public List<Fleet> doEconomicPhase() {
-        List<Fleet> newFleets = new ArrayList<>();
+    public List<EconPhaseResult> doEconomicPhase() {
+        List<EconPhaseResult> results = new ArrayList<>();
         for (AlienPlayer ap : aliens) {
             if(!ap.isEliminated()){
-                Fleet fleet = ap.makeEconRoll(currentTurn);
-                if (fleet != null)
-                    newFleets.add(fleet);
+                results.add(ap.makeEconRoll(currentTurn));
             }
         }
         currentTurn++;
-        return newFleets;
+        return results;
     }
 
     public Integer getSeenLevel(Technology technology) {
