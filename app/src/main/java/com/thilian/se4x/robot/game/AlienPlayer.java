@@ -45,7 +45,7 @@ public class AlienPlayer {
     }
 
     public EconPhaseResult makeEconRoll(int turn) {
-        EconPhaseResult result = new EconPhaseResult();
+        EconPhaseResult result = new EconPhaseResult(this);
         int econRolls = economicSheet.getEconRolls(turn) + getExtraEconRoll(turn);
         for (int i = 0; i < econRolls; i++) {
             EconRollResult rollResult = economicSheet.makeRoll(turn, game.roller);

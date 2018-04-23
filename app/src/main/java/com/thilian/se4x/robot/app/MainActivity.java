@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
                 final SE4XApplication app = (SE4XApplication) getApplication();
                 List<EconPhaseResult> results = app.getGame().doEconomicPhase();
                 if(results.size() != 0) {
-                    app.showNewFleets(MainActivity.this, results);
+                    app.showEconPhaseResult(MainActivity.this, results);
                     LinearLayout players = (LinearLayout) findViewById(R.id.players);
                     for (int i = 0; i < players.getChildCount(); i++) {
                         ((PlayerView) players.getChildAt(i)).update();

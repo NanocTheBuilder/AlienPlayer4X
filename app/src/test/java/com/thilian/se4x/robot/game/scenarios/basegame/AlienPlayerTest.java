@@ -85,6 +85,7 @@ public class AlienPlayerTest extends BasegameFixture {
     }
 
     public void assertRegularFleetLaunch(int fleetCP) {
+        assertEquals(ap, result.getAlienPlayer());
         assertEquals(fleetCP, result.getFleet().getFleetCP());
         assertEquals(FleetType.REGULAR_FLEET, result.getFleet().getFleetType());
     }
@@ -226,6 +227,7 @@ public class AlienPlayerTest extends BasegameFixture {
         assertEquals(10, result.getFleetCP());
         assertEquals(5, result.getTechCP());
         assertEquals(10, result.getDefCP());
+        assertEquals(ap.getFleets().get(0), result.getFleet());
         assertCPs(0, 50, 10);
         assertRoller();
     }

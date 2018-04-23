@@ -64,10 +64,12 @@ public class VpEconomicSheet extends AlienEconomicSheet {
         else if (roll >= requiredRoll(turn, RESULT_TECH)) {
             int techCP = difficulty.getCPPerEcon();
             this.techCP += techCP;
+            result.setTechCP(techCP);
         }
         else {
             int fleetCP = difficulty.getCPPerEcon();
             this.fleetCP += fleetCP;
+            result.setFleetCP(fleetCP);
         }
 
         int maxDefenseCp = ((VpDifficulty)difficulty).getMaxDefenseCp();
@@ -84,7 +86,7 @@ public class VpEconomicSheet extends AlienEconomicSheet {
 
     @Override
     public int getExtraEcon(int turn) {
-        throw new UnsupportedOperationException();
+        return 0;
     }
 
     @Override
