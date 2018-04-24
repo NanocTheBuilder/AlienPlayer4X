@@ -26,7 +26,7 @@ public class ColonyDefenseBuildTest extends Scenario4Fixture{
     @Test
     public void noCPbuildsNull(){
         sheet.setDefCP(1);
-        assertEquals(0, ((Scenario4Player)ap).buildColonyDefense().size());
+        assertEquals(0, ((Scenario4Player)ap).buildColonyDefense().getNewFleets().size());
     }
     
     @Test

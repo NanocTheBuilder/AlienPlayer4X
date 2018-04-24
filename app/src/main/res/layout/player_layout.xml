@@ -221,14 +221,13 @@
         android:id="@+id/ship_size_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Ship Size: 1"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/defense_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/move_text"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tech_cp_text"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
@@ -242,6 +241,49 @@
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/colonies_text" />
+
+    <TextView
+        android:id="@+id/fleet_cp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fleetCp"
+        app:layout_constraintEnd_toStartOf="@+id/tech_cp_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tech_cp_text" />
+
+    <TextView
+        android:id="@+id/tech_cp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/techCp"
+        app:layout_constraintBottom_toTopOf="@+id/ship_size_text"
+        app:layout_constraintEnd_toStartOf="@+id/def_cp_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fleet_cp_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/def_cp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defCp"
+        app:layout_constraintEnd_toStartOf="@+id/bank_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tech_cp_text"
+        app:layout_constraintTop_toTopOf="@+id/tech_cp_text" />
+
+    <TextView
+        android:id="@+id/bank_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bank"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/def_cp_text"
+        app:layout_constraintTop_toTopOf="@+id/tech_cp_text" />
 
 
 </android.support.constraint.ConstraintLayout>

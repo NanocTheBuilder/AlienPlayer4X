@@ -41,7 +41,7 @@ public class DefenseBuilder extends com.thilian.se4x.robot.game.DefenseBuilder {
     }
 
     public Fleet buildColonyDefense(AlienPlayer ap) {
-        int defCP = ap.getEconomicSheet().getDefCP();
+        int defCP = getDefCp(ap);
         if(defCP >= INFANTRY.getCost()) {
             int maxCP = game.roller.roll() + game.roller.roll();
             maxCP = maxCP < defCP ? maxCP : defCP;

@@ -4,7 +4,6 @@ import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
-import com.thilian.se4x.robot.game.scenarios.scenario4.DefenseBuilder;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4TechnologyBuyer;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4TechnologyPrices;

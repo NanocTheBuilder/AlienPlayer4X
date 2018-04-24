@@ -21,7 +21,7 @@ import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 import static org.junit.Assert.assertEquals;
 
 //TODO THIS WHOLE CLASS IS A DUPLICATE
-public class RemainingTechPurchase extends Scenario4TechnologyBuyerTestBase {
+public class RemainingTechPurchaseTest extends Scenario4TechnologyBuyerTestBase {
 //    private HashMap<Technology, Integer> rollMap = new HashMap<>();
 //    {
 //        rollMap.put(ATTACK, 20);

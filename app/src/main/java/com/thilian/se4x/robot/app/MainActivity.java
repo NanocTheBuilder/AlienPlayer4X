@@ -15,7 +15,7 @@ import com.thilian.se4x.robot.game.Fleet;
 
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends SE4XActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +24,9 @@ public class MainActivity extends Activity {
 
         LinearLayout players = (LinearLayout) findViewById(R.id.players);
 
-        final SE4XApplication app = (SE4XApplication) getApplication();
-        for (int i = 0; i < app.getGame().aliens.size(); i++) {
-            AlienPlayer ap = app.getGame().aliens.get(i);
-            PlayerView playerView = new PlayerView(this, app.getGame(), ap);
+        for (int i = 0; i < getGame().aliens.size(); i++) {
+            AlienPlayer ap = getGame().aliens.get(i);
+            PlayerView playerView = new PlayerView(this, getGame(), ap);
             final int finalI = i;
             playerView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -41,20 +40,20 @@ public class MainActivity extends Activity {
         }
 
         final Button econButton = (Button) findViewById(R.id.econPhase);
-        econButton.setText(getString(R.string.econPhase, app.getGame().currentTurn));
+        econButton.setText(getString(R.string.econPhase, getGame().currentTurn));
         econButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final SE4XApplication app = (SE4XApplication) getApplication();
-                List<EconPhaseResult> results = app.getGame().doEconomicPhase();
+                List<EconPhaseResult> results = getGame().doEconomicPhase();
                 if(results.size() != 0) {
-                    app.showEconPhaseResult(MainActivity.this, results);
+                    showEconPhaseResult(results);
                     LinearLayout players = (LinearLayout) findViewById(R.id.players);
                     for (int i = 0; i < players.getChildCount(); i++) {
                         ((PlayerView) players.getChildAt(i)).update();
                     }
                 }
-                if(app.getGame().currentTurn  <= 20)
+                if(getGame().currentTurn  <= 20)
                     econButton.setText(getString(R.string.econPhase, app.getGame().currentTurn));
                 else {
                     econButton.setText(getString(R.string.gameOver));

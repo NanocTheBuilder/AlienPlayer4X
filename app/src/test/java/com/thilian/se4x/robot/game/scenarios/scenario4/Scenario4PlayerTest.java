@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.FleetBuildResult;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.ShipType;
@@ -31,7 +32,8 @@ public class Scenario4PlayerTest extends Scenario4Fixture {
         roller.mockRoll(4); //balanced fleet
         roller.mockRoll(4); //number of HI
         roller.mockRoll(3); //bases, then mines
-        List<Fleet> fleets = ap.buildHomeDefense();
+        FleetBuildResult result = ap.buildHomeDefense();
+        List<Fleet> fleets = result.getNewFleets();
         assertEquals(FleetType.REGULAR_FLEET, fleets.get(0).getFleetType());
         assertGroups(fleets.get(0),
                 new Group(ShipType.TRANSPORT, 1), new Group (ShipType.MARINE, 5), new Group (ShipType.HEAVY_INFANTRY, 1),
@@ -54,7 +56,9 @@ public class Scenario4PlayerTest extends Scenario4Fixture {
         roller.mockRoll(9); //max spending
         roller.mockRoll(7);
         roller.mockRoll(5); //buy 1 base
-        List<Fleet> fleets = ((Scenario4Player)ap).buildColonyDefense();
+        FleetBuildResult result = ((Scenario4Player)ap).buildColonyDefense();
+        List<Fleet> fleets = result.getNewFleets();
+
         assertEquals(FleetType.DEFENSE_FLEET, fleets.get(0).getFleetType());
         assertGroups(fleets.get(0),
                 new Group(ShipType.BASE, 1), new Group(ShipType.INFANTRY, 2));
@@ -71,7 +75,8 @@ public class Scenario4PlayerTest extends Scenario4Fixture {
         roller.mockRoll(9); //max spending
         roller.mockRoll(7);
         roller.mockRoll(6); //buy 2 mines
-        List<Fleet> fleets = ((Scenario4Player)ap).buildColonyDefense();
+        FleetBuildResult result = ((Scenario4Player)ap).buildColonyDefense();
+        List<Fleet> fleets = result.getNewFleets();
         assertEquals(FleetType.DEFENSE_FLEET, fleets.get(0).getFleetType());
         assertGroups(fleets.get(0),
                 new Group(ShipType.MINE, 2), new Group(ShipType.HEAVY_INFANTRY, 2));

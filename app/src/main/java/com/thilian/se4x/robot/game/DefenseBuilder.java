@@ -14,9 +14,13 @@ public class DefenseBuilder extends GroupBuilder{
         this.game = game;
     }
 
+    protected int getDefCp(AlienPlayer ap){
+        return ap.getEconomicSheet().getDefCP();
+    }
+
     public Fleet buildHomeDefense(AlienPlayer ap) {
-        if(ap.getEconomicSheet().getDefCP() >= ShipType.MINE.getCost()) {
-            Fleet fleet = new Fleet(ap, FleetType.DEFENSE_FLEET, ap.getEconomicSheet().getDefCP());
+        if(getDefCp(ap) >= ShipType.MINE.getCost()) {
+            Fleet fleet = new Fleet(ap, FleetType.DEFENSE_FLEET, getDefCp(ap));
             buyHomeDefenseUnits(fleet);
             return fleet;
         }

@@ -68,34 +68,52 @@ public class AlienPlayer {
         game.scenario.buyTechs(fleet, options);
     }
 
-    public void firstCombat(Fleet fleet, FleetBuildOption... options) {
+    public FleetBuildResult firstCombat(Fleet fleet, FleetBuildOption... options) {
+        FleetBuildResult result = new FleetBuildResult(this);
+
+        Map<Technology, Integer> oldTechValues = new HashMap<>();
+        for(Technology technology : game.scenario.getAvailableTechs()){
+            oldTechValues.put(technology, getLevel(technology));
+        }
+
         buyTechs(fleet, options);
         if(!RAIDER_FLEET.equals(fleet.getFleetType())) {
             game.scenario.buildFleet(fleet, options);
             economicSheet.addFleetCP(fleet.getFleetCP() - fleet.getBuildCost());
+            result.addNewFleet(fleet);
         }
         fleet.setFirstCombat(true);
+
+        for(Technology technology : game.scenario.getAvailableTechs()){
+            if(!oldTechValues.get(technology).equals(getLevel(technology))){
+                result.addNewTech(technology, getLevel(technology));
+            }
+        }
+
+        return result;
     }
 
     public void removeFleet(Fleet fleet) {
         fleets.remove(fleet);
     }
 
-    public List<Fleet> buildHomeDefense() {
-        List<Fleet> newFleets = new ArrayList<>();
+    public FleetBuildResult buildHomeDefense() {
+        FleetBuildResult result;
         Fleet fleet = game.scenario.fleetLauncher.launchFleet(this, game.currentTurn, HOME_DEFENSE);
         if(fleet != null) {
-            firstCombat(fleet, HOME_DEFENSE, COMBAT_IS_ABOVE_PLANET);
-            newFleets.add(fleet);
+            result = firstCombat(fleet, HOME_DEFENSE, COMBAT_IS_ABOVE_PLANET);
+        }
+        else{
+            result = new FleetBuildResult(this);
         }
 
         fleet = game.scenario.buildHomeDefense(this);
         if (fleet != null) {
             economicSheet.spendDefCP(fleet.getBuildCost());
             fleet.setFirstCombat(true);
-            newFleets.add(fleet);
+            result.addNewFleet(fleet);
         }
-        return newFleets;
+        return result;
     }
 
     public void buyNextMoveLevel() {

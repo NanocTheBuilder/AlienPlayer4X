@@ -5,7 +5,7 @@
     <string name="econPhase">Economic Phase %d</string>
     <string name="buildHomeDefense">Home Defense</string>
     <string name="buildColonyDefense">Colony Defense</string>
-    <string name="newFleets">New Fleets</string>
+    <string name="newFleets">New Fleets / Technologies</string>
     <string name="areYouSure">Are You Sure?</string>
     <string name="gameOver">...</string>
     <string name="start">Start</string>
@@ -14,6 +14,9 @@
     <string name="eliminated">Eliminated</string>
 
     <string name="fleetCp">Fleet CP: %d</string>
+    <string name="techCp">Tech. CP: %d</string>
+    <string name="defCp">Def. CP: %d</string>
+    <string name="bank">Bank: %d</string>
 
     <string name="fleet_cp_result">Fleet CP: +%d</string>
     <string name="tech_cp_result">Technology CP: +%d</string>

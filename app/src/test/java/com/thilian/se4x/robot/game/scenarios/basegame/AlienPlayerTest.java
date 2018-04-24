@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import com.thilian.se4x.robot.game.EconPhaseResult;
 import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.FleetBuildResult;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Seeable;
@@ -201,7 +202,8 @@ public class AlienPlayerTest extends BasegameFixture {
         roller.mockRoll(9,6); //Cloak
         roller.mockRoll(4); //balanced fleet
         roller.mockRoll(7); //bases, then mines
-        List<Fleet> fleets = ap.buildHomeDefense();
+        FleetBuildResult result = ap.buildHomeDefense();
+        List<Fleet> fleets = result.getNewFleets();
         assertEquals(FleetType.REGULAR_FLEET, fleets.get(0).getFleetType());
         assertGroups(fleets.get(0), new Group(BATTLESHIP, 1), new Group(DESTROYER, 1), new Group(BATTLECRUISER, 1), new Group(CRUISER, 2));
         assertEquals(FleetType.DEFENSE_FLEET, fleets.get(1).getFleetType());

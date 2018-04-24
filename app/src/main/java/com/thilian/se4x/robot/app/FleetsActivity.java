@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.FleetBuildResult;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
@@ -21,7 +22,7 @@ import java.util.List;
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_WITH_NPAS;
 
-public class FleetsActivity extends Activity implements FleetView.FleetRevealListener, FirstCombatDialog.FirstCombatListener{
+public class FleetsActivity extends SE4XActivity implements FleetView.FleetRevealListener, FirstCombatDialog.FirstCombatListener{
     private AlienPlayer alienPlayer;
 
     @Override
@@ -61,12 +62,11 @@ public class FleetsActivity extends Activity implements FleetView.FleetRevealLis
         super.onStart();
         int index = getIntent().getIntExtra(Intent.EXTRA_INDEX, -1);
 
-        SE4XApplication app = (SE4XApplication) this.getApplication();
-        alienPlayer = app.getGame().aliens.get(index);
+        alienPlayer = getGame().aliens.get(index);
 
         PlayerView playerView = findViewById(R.id.player_view);
         playerView.setAlienPlayer(alienPlayer);
-        playerView.setGame(app.getGame());
+        playerView.setGame(getGame());
         playerView.initTexts();
         playerView.setBackgroundColor();
         playerView.update();
@@ -82,28 +82,23 @@ public class FleetsActivity extends Activity implements FleetView.FleetRevealLis
     }
 
     private void buildHomeDefenseButtonClicked(){
+        FleetBuildResult result = alienPlayer.buildHomeDefense();
         LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
-        List<Fleet> newFleets = alienPlayer.buildHomeDefense();
-        if(newFleets.size() != 0) {
-            SE4XApplication app = (SE4XApplication) this.getApplication();
-            app.showNewFleets(this, newFleets);
-            for (Fleet fleet : newFleets) {
-                fleets.addView(new FleetView(this, fleet, this));
-            }
-            onFleetRevealed(null);
+        for (Fleet fleet : result.getNewFleets()) {
+            fleets.addView(new FleetView(this, fleet, this));
         }
+        onFleetRevealed(null);
+        showFleetBuildResult(result);
     }
+
     private void buildColonyDefenseButtonClicked(){
+        FleetBuildResult result = ((Scenario4Player)alienPlayer).buildColonyDefense();
         LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
-        List<Fleet> newFleets = ((Scenario4Player)alienPlayer).buildColonyDefense();
-        if(newFleets.size() != 0) {
-            SE4XApplication app = (SE4XApplication) this.getApplication();
-            app.showNewFleets(this, newFleets);
-            for (Fleet fleet : newFleets) {
-                fleets.addView(new FleetView(this, fleet, this));
-            }
-            onFleetRevealed(null);
+        for (Fleet fleet : result.getNewFleets()) {
+            fleets.addView(new FleetView(this, fleet, this));
         }
+        onFleetRevealed(null);
+        showFleetBuildResult(result);
     }
 
     @Override
@@ -119,8 +114,9 @@ public class FleetsActivity extends Activity implements FleetView.FleetRevealLis
         List<FleetBuildOption> options = new ArrayList<>();
         if(abovePlanet) options.add(COMBAT_IS_ABOVE_PLANET);
         if(enemyNPA) options.add(COMBAT_WITH_NPAS);
-        alienPlayer.firstCombat(fleet, options.toArray(new FleetBuildOption[options.size()]));
+        FleetBuildResult result = alienPlayer.firstCombat(fleet, options.toArray(new FleetBuildOption[options.size()]));
         ((FleetView)findViewById(viewId)).update();
         onFleetRevealed(fleet);
+        showFleetBuildResult(result);
     }
 }

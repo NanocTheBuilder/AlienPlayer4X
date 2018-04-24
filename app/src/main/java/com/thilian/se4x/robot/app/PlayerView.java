@@ -18,6 +18,7 @@ import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Technology;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
 import com.thilian.se4x.robot.game.scenarios.vpscenario.VpAlienPlayer;
+import com.thilian.se4x.robot.game.scenarios.vpscenario.VpEconomicSheet;
 import com.thilian.se4x.robot.game.scenarios.vpscenario.VpSoloScenario;
 
 /**
@@ -107,6 +108,17 @@ public class PlayerView extends LinearLayout {
     }
 
     public void update(){
+        ((TextView)findViewById(R.id.fleet_cp_text)).setText(getResources().getString(R.string.fleetCp, alienPlayer.getEconomicSheet().getFleetCP()));
+        ((TextView)findViewById(R.id.tech_cp_text)).setText(getResources().getString(R.string.techCp, alienPlayer.getEconomicSheet().getTechCP()));
+        ((TextView)findViewById(R.id.def_cp_text)).setText(getResources().getString(R.string.defCp, alienPlayer.getEconomicSheet().getDefCP()));
+        if(alienPlayer instanceof VpAlienPlayer){
+            ((TextView)findViewById(R.id.bank_text)).setText(getResources().getString(R.string.bank,
+                    ((VpEconomicSheet)alienPlayer.getEconomicSheet()).getBank()));
+        }
+        else{
+            ((TextView)findViewById(R.id.bank_text)).setVisibility(GONE);
+        }
+
         TextView textView;
         int id,sid;
         for(Technology technology : game.scenario.techPrices.getAvailableTechs()){

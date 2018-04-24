@@ -26,28 +26,13 @@ public class VpDefenseBankTest {
         Assert.assertEquals(200, new VpEconomicSheet(Vp3pDifficulty.HARD).getBank());
 }
 
-    @Test
-    public void getDefenseCPAddsBankIfAvailable(){
-        VpEconomicSheet sheet = new VpEconomicSheet(VpSoloDifficulty.NORMAL);
-        assertEquals(100, sheet.getDefCP());
-
-        sheet.setBank(25);
-        assertEquals(25, sheet.getDefCP());
-
-        sheet.setBank(0);
-        sheet.setDefCP(20);
-        assertEquals(20, sheet.getDefCP());
-    }
-
-    @Test
     public void spendDefCPFromBankIfAble(){
         VpEconomicSheet sheet = new VpEconomicSheet(VpSoloDifficulty.NORMAL);
         sheet.setDefCP(50);
-        assertEquals(150, sheet.getDefCP());
         assertEquals(100, sheet.getBank());
 
         sheet.spendDefCP(50);
-        assertEquals(100, sheet.getDefCP());
+        assertEquals(50, sheet.getDefCP());
         assertEquals(50, sheet.getBank());
 
         sheet.setBank(25);

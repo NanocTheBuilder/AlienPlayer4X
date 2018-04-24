@@ -60,22 +60,12 @@ public class FleetView extends RelativeLayout{
     }
 
     public void update(){
+        FleetsActivity activity = (FleetsActivity) getContext();
         TextView fleetNameText = findViewById(R.id.fleet_name_text);
-        int sid = getResources().getIdentifier(fleet.getFleetType().toString(), "string", getContext().getPackageName());
-        fleetNameText.setText(getResources().getString(sid, fleet.getName()));
+        fleetNameText.setText(activity.getFleetName(fleet));
 
         TextView groupsText = findViewById(R.id.groups_text);
-        if(fleet.getGroups().isEmpty()){
-            groupsText.setText(getResources().getString(R.string.fleetCp, fleet.getFleetCP()));
-        }
-        else {
-            StringBuilder sb = new StringBuilder();
-            for (Group group : fleet.getGroups()) {
-                sid = getResources().getIdentifier(group.getShipType().toString(), "string", getContext().getPackageName());
-                sb.append(getResources().getString(sid, group.getSize()));
-            }
-            groupsText.setText(sb.toString());
-        }
+        groupsText.setText(activity.getFleetDetails(fleet));
 
         Button firstCombatButton = findViewById(R.id.first_combat_button);
         firstCombatButton.setVisibility(fleet.hadFirstCombat() ? INVISIBLE : VISIBLE);

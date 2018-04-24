@@ -116,11 +116,6 @@ public class VpEconomicSheet extends AlienEconomicSheet {
     }
 
     @Override
-    public int getDefCP() {
-        return defCP + bank;
-    }
-
-    @Override
     public void spendDefCP(int amount) {
         defCP -= amount > bank ? amount - bank : 0;
         bank -= amount > bank ? bank : amount;
