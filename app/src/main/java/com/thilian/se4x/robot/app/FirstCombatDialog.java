@@ -52,9 +52,9 @@ public class FirstCombatDialog extends DialogFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        listener = (FirstCombatListener) context;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        listener = (FirstCombatListener) activity;
     }
 
     public interface FirstCombatListener{
