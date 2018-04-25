@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,8 +19,11 @@ import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.Technology;
 
+import java.lang.reflect.GenericArrayType;
 import java.util.List;
 import java.util.Map;
+
+import static com.thilian.se4x.robot.game.enums.ShipType.TRANSPORT;
 
 public class SE4XActivity extends Activity {
 
@@ -28,15 +32,23 @@ public class SE4XActivity extends Activity {
     }
 
     protected String getFleetDetails(Fleet fleet){
-        if(fleet.getGroups().isEmpty()){
+        List<Group> groups = fleet.getGroups();
+        if(groups.isEmpty()){
             return getResources().getString(R.string.fleetCp, fleet.getFleetCP());
         }
         else {
-            StringBuilder sb = new StringBuilder();
             int sid;
-            for (Group group : fleet.getGroups()) {
+            Group group;
+            StringBuilder sb = new StringBuilder();
+            boolean hasFullTransport = TRANSPORT.equals(groups.get(0).getShipType());
+            for (int i = 0; i < groups.size(); i++) {
+                group = groups.get(i);
                 sid = getResources().getIdentifier(group.getShipType().toString(), "string", getPackageName());
                 sb.append(getResources().getString(sid, group.getSize()));
+                if(hasFullTransport && i == 2)
+                    sb.append("\n");
+                else if(i < groups.size() - 1)
+                    sb.append(" ");
             }
             return sb.toString();
         }
@@ -53,6 +65,7 @@ public class SE4XActivity extends Activity {
 
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(8, 8, 8, 8);
         for(EconPhaseResult result : results){
             ConstraintLayout playerResultView = new ConstraintLayout(this);
             li.inflate(R.layout.econ_phase_result, playerResultView, true);
@@ -63,6 +76,7 @@ public class SE4XActivity extends Activity {
             setResultText(playerResultView, R.id.tech_cp_text, R.string.tech_cp_result, result.getTechCP());
             setResultText(playerResultView, R.id.def_cp_text, R.string.def_cp_result, result.getDefCP());
             setResultText(playerResultView, R.id.extra_econ_roll_text, R.string.extra_econ_result, result.getExtraEcon());
+            setResultText(playerResultView, R.id.move_text, R.string.new_move, result.getAlienPlayer().getLevel(Technology.MOVE), result.isMoveTechRolled());
 
             TextView fleetView = (TextView) playerResultView.findViewById(R.id.new_fleet_text);
             if(result.getFleet() != null){
@@ -85,8 +99,12 @@ public class SE4XActivity extends Activity {
                 .show();
     }
 
-    private void setResultText(ConstraintLayout view, int rid, int sid, int value) {
-        if(value != 0) {
+    private void setResultText(ConstraintLayout view, int rid, int sid, int value){
+        setResultText(view, rid, sid, value, value != 0);
+    }
+
+    private void setResultText(ConstraintLayout view, int rid, int sid, int value, boolean isVisible) {
+        if(isVisible) {
             ((TextView)view.findViewById(rid)).setText(getResources().getString(sid, value));
         }
         else
@@ -94,34 +112,36 @@ public class SE4XActivity extends Activity {
     }
 
     public void showFleetBuildResult(FleetBuildResult result) {
-        StringBuilder message = new StringBuilder();
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(8, 8, 8, 8);
+        layout.setBackgroundColor(Color.parseColor(result.getAlienPlayer().getColor().toString()));
+
         for (Map.Entry<Technology, Integer> entry : result.getNewTechs().entrySet()) {
             int sid = getResources().getIdentifier(entry.getKey().toString(), "string", getPackageName());
-            message.append(getResources().getString(sid, entry.getValue())).append("\n");
+            TextView textView = new TextView(this);
+            textView.setTextSize(18);
+            textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            textView.setText(getResources().getString(sid, entry.getValue()));
+            layout.addView(textView);
         }
 
         for(Fleet fleet : result.getNewFleets()){
             int sid = getResources().getIdentifier(fleet.getFleetType().toString(), "string", getPackageName());
-            message.append(getFleetName(fleet)).append("\n");
-            message.append(getFleetDetails(fleet)).append("\n");
+            TextView textView = new TextView(this);
+            textView.setTextSize(18);
+            textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            textView.setText(getFleetName(fleet)+"\n"+getFleetDetails(fleet));
+            layout.addView(textView);
         }
 
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        TextView textView = new TextView(this);
-        textView.setBackgroundColor(Color.parseColor(result.getAlienPlayer().getColor().toString()));
-        textView.setText(message);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.newFleets).setMessage(message.toString());
-        builder.setView(layout);
-
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        builder.setView(layout)
+            .setTitle(R.string.newFleets)
+            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                }
+            }).show();
     }
 }

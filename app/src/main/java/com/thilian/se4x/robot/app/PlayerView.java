@@ -3,6 +3,7 @@ package com.thilian.se4x.robot.app;
 import android.content.Context;
 import android.graphics.Color;
 import android.preference.EditTextPreference;
+import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -24,7 +25,7 @@ import com.thilian.se4x.robot.game.scenarios.vpscenario.VpSoloScenario;
 /**
  * TODO: document your custom view class.
  */
-public class PlayerView extends LinearLayout {
+public class PlayerView extends ConstraintLayout {
 
     private Game game;
     private AlienPlayer alienPlayer;

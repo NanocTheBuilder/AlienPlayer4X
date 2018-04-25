@@ -54,7 +54,8 @@ public class AlienPlayer {
         Fleet newFleet = game.scenario.rollFleetLaunch(this, turn);
         if (newFleet != null) {
             result.setFleet(newFleet);
-            buyNextMoveLevel();
+            boolean nextMoveLevel = buyNextMoveLevel();
+            result.setMoveTechRolled(nextMoveLevel);
         }
         return result;
     }
@@ -116,10 +117,12 @@ public class AlienPlayer {
         return result;
     }
 
-    public void buyNextMoveLevel() {
+    public boolean buyNextMoveLevel() {
+        int oldLevel = getLevel(Technology.MOVE);
         if (game.roller.roll() <= 4) {
             game.scenario.buyNextLevel(this, Technology.MOVE);
         }
+        return getLevel(Technology.MOVE) != oldLevel;
     }
 
     public List<Fleet> getFleets() {

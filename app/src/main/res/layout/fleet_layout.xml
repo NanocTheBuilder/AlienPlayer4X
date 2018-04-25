@@ -9,14 +9,15 @@
         android:id="@+id/groups_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:text="1 DD; 2 SC;"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/remove_fleet_button" />
+        app:layout_constraintTop_toBottomOf="@+id/fleet_name_text" />
 
     <Button
         android:id="@+id/first_combat_button"

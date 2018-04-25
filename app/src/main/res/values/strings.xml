@@ -23,6 +23,8 @@
     <string name="def_cp_result">Defense CP: +%d</string>
     <string name="extra_econ_result">Extra econ rolls: +%d</string>
 
+    <string name="new_move">New Move Technology: %d</string>
+
     <string name="BASE_GAME">Base game</string>
     <string name="SCENARIO_4">Scenario #4</string>
     <string name="VP_SCENARIO">Solo VP scenario</string>
@@ -52,17 +54,17 @@
     <string name="POINT_DEFENSE">Point Defense: %d</string>
     <string name="MINE_SWEEPER">Mine Sweep: %d</string>
 
-    <string name="RAIDER">%d R;</string>
-    <string name="CARRIER">%d CV;</string>
-    <string name="FIGHTER">%d F;</string>
-    <string name="BASE">%d Base;</string>
-    <string name="MINE">%d Mines;</string>
-    <string name="SCOUT">%d SC;</string>
-    <string name="DESTROYER">%d DD;</string>
-    <string name="CRUISER">%d CA;</string>
-    <string name="BATTLECRUISER">%d BC;</string>
-    <string name="BATTLESHIP">%d BB;</string>
-    <string name="DREADNAUGHT">%d DN;</string>
+    <string name="RAIDER">[%d R]</string>
+    <string name="CARRIER">[%d CV]</string>
+    <string name="FIGHTER">[%d F]</string>
+    <string name="BASE">[%d Base]</string>
+    <string name="MINE">[%d Mine]</string>
+    <string name="SCOUT">[%d SC]</string>
+    <string name="DESTROYER">[%d DD]</string>
+    <string name="CRUISER">[%d CA]</string>
+    <string name="BATTLECRUISER">[%d BC]</string>
+    <string name="BATTLESHIP">[%d BB]</string>
+    <string name="DREADNAUGHT">[%d DN]</string>
 
     <!-- Scenari 4 -->
 
@@ -71,13 +73,13 @@
     <string name="BOARDING">Boarding: %d</string>
     <string name="GROUND_COMBAT">Ground :%d</string>
 
-    <string name="TITAN">%d Titan;</string>
-    <string name="TRANSPORT">%d T;</string>
-    <string name="INFANTRY">%d Inf;</string>
-    <string name="MARINE">%d Mar;</string>
-    <string name="HEAVY_INFANTRY">%d HI;</string>
-    <string name="GRAV_ARMOR">%d Grav;</string>
-    <string name="BOARDING_SHIP">%d BD;</string>
+    <string name="TITAN">[%d Titan]</string>
+    <string name="TRANSPORT">[%d T]</string>
+    <string name="INFANTRY">[%d Inf]</string>
+    <string name="MARINE">[%d Mar]</string>
+    <string name="HEAVY_INFANTRY">[%d HI]</string>
+    <string name="GRAV_ARMOR">[%d Grav]</string>
+    <string name="BOARDING_SHIP">[%d BD]</string>
 
     <string name="setSeenLevels">Set Seen Technology</string>
 

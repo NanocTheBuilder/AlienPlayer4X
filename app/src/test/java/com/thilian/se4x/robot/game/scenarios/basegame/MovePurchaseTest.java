@@ -40,7 +40,8 @@ public class MovePurchaseTest extends BasegameFixture{
         ap.setLevel(Technology.MOVE, level);
         sheet.setTechCP(techCP);
         roller.mockRoll(1);
-        ap.buyNextMoveLevel();
+        boolean result = ap.buyNextMoveLevel();
+        assertEquals(level != newLevel, result);
         assertEquals(newLevel, ap.getLevel(Technology.MOVE));
         assertEquals(newTechCP, sheet.getTechCP());
     }

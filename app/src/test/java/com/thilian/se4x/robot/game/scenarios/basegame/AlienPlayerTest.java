@@ -182,6 +182,7 @@ public class AlienPlayerTest extends BasegameFixture {
         assertEquals(RAIDER_FLEET, result.getFleet().getFleetType());
         assertCPs(10, 30, 10);
         assertLevel(MOVE, 2);
+        assertEquals(true, result.getMoveTechRolled());
         assertGroups(new Group(RAIDER, 1));
         assertRoller();
 
