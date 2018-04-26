@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,7 +21,6 @@ import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.enums.Technology;
 
-import java.lang.reflect.GenericArrayType;
 import java.util.List;
 import java.util.Map;
 
@@ -31,10 +32,18 @@ public class SE4XActivity extends Activity {
         return ((SE4XApplication)getApplication()).getGame();
     }
 
+    protected boolean isShowDetails(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPref.getBoolean("pref_show_details", false);
+    }
+
     protected String getFleetDetails(Fleet fleet){
         List<Group> groups = fleet.getGroups();
         if(groups.isEmpty()){
-            return getResources().getString(R.string.fleetCp, fleet.getFleetCP());
+            if(isShowDetails())
+                return getResources().getString(R.string.fleet_fleet_cp, fleet.getFleetCP());
+            else
+                return "";
         }
         else {
             int sid;
@@ -81,7 +90,11 @@ public class SE4XActivity extends Activity {
             TextView fleetView = (TextView) playerResultView.findViewById(R.id.new_fleet_text);
             if(result.getFleet() != null){
                 Fleet fleet = result.getFleet();
-                fleetView.setText(String.format("%s (%s)", getFleetName(fleet), getFleetDetails(fleet)));
+                String fleetDetails = getFleetDetails(fleet);
+                if("".equals(fleetDetails))
+                    fleetView.setText(getFleetName(fleet));
+                else
+                    fleetView.setText(String.format("%s (%s)", getFleetName(fleet), getFleetDetails(fleet)));
             }
             else{
                 fleetView.setVisibility(View.GONE);

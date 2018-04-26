@@ -29,6 +29,7 @@ public class PlayerView extends ConstraintLayout {
 
     private Game game;
     private AlienPlayer alienPlayer;
+    private boolean showDetails;
 
     public PlayerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -49,6 +50,8 @@ public class PlayerView extends ConstraintLayout {
         this(context, null);
         this.game = game;
         this.alienPlayer = alienPlayer;
+        this.showDetails = ((SE4XActivity) getContext()).isShowDetails();
+
         initTexts();
 
         ((Button)findViewById(R.id.eliminate_button)).setOnClickListener(
@@ -66,6 +69,12 @@ public class PlayerView extends ConstraintLayout {
     }
 
     public void initTexts() {
+        if(!showDetails){
+            findViewById(R.id.fleet_cp_text).setVisibility(GONE);
+            findViewById(R.id.tech_cp_text).setVisibility(GONE);
+            findViewById(R.id.def_cp_text).setVisibility(GONE);
+            findViewById(R.id.bank_text).setVisibility(GONE);
+        }
         if(!(game.scenario instanceof Scenario4)){
             findViewById(R.id.ground_combat_text).setVisibility(GONE);
             findViewById(R.id.boarding_text).setVisibility(GONE);
@@ -109,15 +118,13 @@ public class PlayerView extends ConstraintLayout {
     }
 
     public void update(){
-        ((TextView)findViewById(R.id.fleet_cp_text)).setText(getResources().getString(R.string.fleetCp, alienPlayer.getEconomicSheet().getFleetCP()));
-        ((TextView)findViewById(R.id.tech_cp_text)).setText(getResources().getString(R.string.techCp, alienPlayer.getEconomicSheet().getTechCP()));
-        ((TextView)findViewById(R.id.def_cp_text)).setText(getResources().getString(R.string.defCp, alienPlayer.getEconomicSheet().getDefCP()));
-        if(alienPlayer instanceof VpAlienPlayer){
-            ((TextView)findViewById(R.id.bank_text)).setText(getResources().getString(R.string.bank,
-                    ((VpEconomicSheet)alienPlayer.getEconomicSheet()).getBank()));
-        }
-        else{
-            ((TextView)findViewById(R.id.bank_text)).setVisibility(GONE);
+        if(showDetails) {
+            ((TextView) findViewById(R.id.fleet_cp_text)).setText(getResources().getString(R.string.fleetCp, alienPlayer.getEconomicSheet().getFleetCP()));
+            ((TextView) findViewById(R.id.tech_cp_text)).setText(getResources().getString(R.string.techCp, alienPlayer.getEconomicSheet().getTechCP()));
+            ((TextView) findViewById(R.id.def_cp_text)).setText(getResources().getString(R.string.defCp, alienPlayer.getEconomicSheet().getDefCP()));
+            if (alienPlayer instanceof VpAlienPlayer)
+                ((TextView) findViewById(R.id.bank_text)).setText(getResources().getString(R.string.bank,
+                        ((VpEconomicSheet) alienPlayer.getEconomicSheet()).getBank()));
         }
 
         TextView textView;
