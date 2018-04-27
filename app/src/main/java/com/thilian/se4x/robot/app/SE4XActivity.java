@@ -75,10 +75,10 @@ public class SE4XActivity extends Activity {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(8, 8, 8, 8);
+        boolean noNewFleet = true;
         for(EconPhaseResult result : results){
             ConstraintLayout playerResultView = new ConstraintLayout(this);
             li.inflate(R.layout.econ_phase_result, playerResultView, true);
-
             playerResultView.setBackgroundColor(Color.parseColor(result.getAlienPlayer().getColor().toString()));
 
             setResultText(playerResultView, R.id.fleet_cp_text, R.string.fleet_cp_result, result.getFleetCP());
@@ -87,8 +87,9 @@ public class SE4XActivity extends Activity {
             setResultText(playerResultView, R.id.extra_econ_roll_text, R.string.extra_econ_result, result.getExtraEcon());
             setResultText(playerResultView, R.id.move_text, R.string.new_move, result.getAlienPlayer().getLevel(Technology.MOVE), result.isMoveTechRolled());
 
-            TextView fleetView = (TextView) playerResultView.findViewById(R.id.new_fleet_text);
+            TextView fleetView = playerResultView.findViewById(R.id.new_fleet_text);
             if(result.getFleet() != null){
+                noNewFleet = false;
                 Fleet fleet = result.getFleet();
                 String fleetDetails = getFleetDetails(fleet);
                 if("".equals(fleetDetails))
@@ -102,8 +103,13 @@ public class SE4XActivity extends Activity {
             layout.addView(playerResultView);
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(layout)
-                .setTitle(getResources().getString(R.string.econPhase, getGame().currentTurn - 1))
+        if(!isShowDetails() && noNewFleet){
+            builder.setMessage(R.string.no_new_fleets);
+        }
+        else {
+            builder.setView(layout);
+        }
+        builder.setTitle(getResources().getString(R.string.econPhase, getGame().currentTurn - 1))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -113,7 +119,7 @@ public class SE4XActivity extends Activity {
     }
 
     private void setResultText(ConstraintLayout view, int rid, int sid, int value){
-        setResultText(view, rid, sid, value, value != 0);
+        setResultText(view, rid, sid, value, value != 0 && isShowDetails());
     }
 
     private void setResultText(ConstraintLayout view, int rid, int sid, int value, boolean isVisible) {

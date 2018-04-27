@@ -1,6 +1,5 @@
 package com.thilian.se4x.robot.app;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.widget.LinearLayout;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
-import com.thilian.se4x.robot.game.Fleet;
 
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class MainActivity extends SE4XActivity {
                     showEconPhaseResult(results);
                     LinearLayout players = (LinearLayout) findViewById(R.id.players);
                     for (int i = 0; i < players.getChildCount(); i++) {
-                        ((PlayerView) players.getChildAt(i)).update();
+                        ((PlayerView) players.getChildAt(i)).update(isShowDetails());
                     }
                 }
                 if(getGame().currentTurn  <= 20)
@@ -79,25 +77,26 @@ public class MainActivity extends SE4XActivity {
         PlayerView view;
         for(int i = 0; i < players.getChildCount(); i++){
             view = (PlayerView) players.getChildAt(i);
-            view.update();
+            view.update(isShowDetails());
         }
     }
 
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.areYouSure);
-        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                MainActivity.super.onBackPressed();
-            }
-        });
-        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-            }
-        });
-        builder.create().show();
+        builder.setTitle(R.string.areYouSure)
+            .setMessage(R.string.finish_game)
+            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    MainActivity.super.onBackPressed();
+                }
+            })
+            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                }
+            })
+            .show();
     }
 }

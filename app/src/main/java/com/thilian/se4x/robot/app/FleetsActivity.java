@@ -1,10 +1,8 @@
 package com.thilian.se4x.robot.app;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -12,7 +10,6 @@ import android.widget.LinearLayout;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuildResult;
-import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 
@@ -65,11 +62,11 @@ public class FleetsActivity extends SE4XActivity implements FleetView.FleetRevea
         alienPlayer = getGame().aliens.get(index);
 
         PlayerView playerView = findViewById(R.id.player_view);
-        playerView.setAlienPlayer(alienPlayer);
         playerView.setGame(getGame());
-        playerView.initTexts();
+        playerView.setAlienPlayer(alienPlayer);
+        playerView.initTexts(isShowDetails());
         playerView.setBackgroundColor();
-        playerView.update();
+        playerView.update(isShowDetails());
 
         findViewById(R.id.build_colony_defense_button).setVisibility(alienPlayer instanceof Scenario4Player ? View.VISIBLE : View.GONE);
 
@@ -104,7 +101,7 @@ public class FleetsActivity extends SE4XActivity implements FleetView.FleetRevea
     @Override
     public void onFleetRevealed(Fleet fleet) {
         PlayerView playerView = findViewById(R.id.player_view);
-        playerView.update();
+        playerView.update(isShowDetails());
     }
 
 

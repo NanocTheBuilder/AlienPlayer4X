@@ -2,7 +2,6 @@ package com.thilian.se4x.robot.app;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.preference.EditTextPreference;
 import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
@@ -29,7 +27,6 @@ public class PlayerView extends ConstraintLayout {
 
     private Game game;
     private AlienPlayer alienPlayer;
-    private boolean showDetails;
 
     public PlayerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -50,9 +47,9 @@ public class PlayerView extends ConstraintLayout {
         this(context, null);
         this.game = game;
         this.alienPlayer = alienPlayer;
-        this.showDetails = ((SE4XActivity) getContext()).isShowDetails();
+        boolean showDetails = ((SE4XActivity) getContext()).isShowDetails();
 
-        initTexts();
+        initTexts(showDetails);
 
         ((Button)findViewById(R.id.eliminate_button)).setOnClickListener(
                 new OnClickListener() {
@@ -65,10 +62,10 @@ public class PlayerView extends ConstraintLayout {
         );
 
         setBackgroundColor();
-        update();
+        update(showDetails);
     }
 
-    public void initTexts() {
+    public void initTexts(boolean showDetails) {
         if(!showDetails){
             findViewById(R.id.fleet_cp_text).setVisibility(GONE);
             findViewById(R.id.tech_cp_text).setVisibility(GONE);
@@ -82,6 +79,7 @@ public class PlayerView extends ConstraintLayout {
             findViewById(R.id.military_academy_text).setVisibility(GONE);
         }
         if(!(game.scenario instanceof VpSoloScenario)){
+            findViewById(R.id.bank_text).setVisibility(GONE);
             findViewById(R.id.colonies_text).setVisibility(GONE);
             findViewById(R.id.colonies_edit).setVisibility(GONE);
         }
@@ -117,7 +115,7 @@ public class PlayerView extends ConstraintLayout {
         setBackgroundColor(Color.parseColor(alienPlayer.getColor().toString()));
     }
 
-    public void update(){
+    public void update(boolean showDetails){
         if(showDetails) {
             ((TextView) findViewById(R.id.fleet_cp_text)).setText(getResources().getString(R.string.fleetCp, alienPlayer.getEconomicSheet().getFleetCP()));
             ((TextView) findViewById(R.id.tech_cp_text)).setText(getResources().getString(R.string.techCp, alienPlayer.getEconomicSheet().getTechCP()));
@@ -127,23 +125,8 @@ public class PlayerView extends ConstraintLayout {
                         ((VpEconomicSheet) alienPlayer.getEconomicSheet()).getBank()));
         }
 
-        TextView textView;
-        int id,sid;
         for(Technology technology : game.scenario.techPrices.getAvailableTechs()){
-            String name = technology.toString().toLowerCase() + "_text";
-            id = getResources().getIdentifier(name, "id", getContext().getPackageName());
-            if(id != 0){
-                textView = findViewById(id);
-                sid = getResources().getIdentifier(technology.toString(), "string", getContext().getPackageName());
-                int level = alienPlayer.getLevel(technology);
-                textView.setText(getResources().getString(sid, level));
-                if(level != game.scenario.techPrices.getStartingLevel(technology)){
-                    textView.setTypeface(textView.getTypeface(), 1);
-                }
-            }
-            else{
-                System.out.println(String.format("Not found <%s>", name));
-            }
+            updateTechnologyText(technology);
         }
 
         EditText coloniesEdit = (EditText) findViewById(R.id.colonies_edit);
@@ -153,5 +136,22 @@ public class PlayerView extends ConstraintLayout {
 
         TextView fleets = findViewById(R.id.fleets_text);
         fleets.setText(String.format("%d fleets.", alienPlayer.getFleets().size()));
+    }
+
+    public void updateTechnologyText(Technology technology) {
+        String name = technology.toString().toLowerCase() + "_text";
+        int id = getResources().getIdentifier(name, "id", getContext().getPackageName());
+        if(id != 0){
+            TextView textView = findViewById(id);
+            int sid = getResources().getIdentifier(technology.toString(), "string", getContext().getPackageName());
+            int level = alienPlayer.getLevel(technology);
+            textView.setText(getResources().getString(sid, level));
+            if(level != game.scenario.techPrices.getStartingLevel(technology)){
+                textView.setTypeface(textView.getTypeface(), 1);
+            }
+        }
+        else{
+            System.out.println(String.format("Not found <%s>", name));
+        }
     }
 }

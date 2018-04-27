@@ -7,6 +7,7 @@
     <string name="buildColonyDefense">Colony Defense</string>
     <string name="newFleets">New Fleets / Technologies</string>
     <string name="areYouSure">Are You Sure?</string>
+    <string name="finish_game">Do you want to finish the current game?</string>
     <string name="gameOver">...</string>
     <string name="start">Start</string>
 
@@ -86,8 +87,10 @@
 
     <string name="first_combat">First Combat</string>
     <string name="pref_show_details">Show details</string>
-    <string name="pref_show_details_summ">Show details like cp values</string>
+    <string name="pref_show_details_summ">Show cp values and unbuilt fleet sizes</string>
     <string name="action_settings">Settings</string>
+    <string name="no_new_fleets">No new fleets</string>
+    <string name="no_new_techs">No new technologies</string>
 
     <string-array name="first_combat_options">
         <item>Combat above planet</item>
