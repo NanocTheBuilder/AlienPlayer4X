@@ -1,20 +1,25 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="SE4XAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">18dp</item>
+        <item name="android:spinnerStyle">@style/SE4XAppSpinner</item>
+        <item name="android:spinnerItemStyle">@style/SE4XAppSpinnerItem</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SE4XAppSpinnerDropdownItem</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="SE4XAppSpinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/abc_spinner_mtrl_am_alpha</item>
+        <item name="overlapAnchor">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="SE4XAppSpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="SE4XAppSpinnerDropdownItem" parent="Base.Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+    </style>
 
 </resources>

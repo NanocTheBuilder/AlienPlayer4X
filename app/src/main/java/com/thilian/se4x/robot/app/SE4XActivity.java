@@ -12,8 +12,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuildResult;
@@ -162,5 +164,56 @@ public class SE4XActivity extends Activity {
                 public void onClick(DialogInterface dialogInterface, int i) {
                 }
             }).show();
+    }
+
+    public void showLevelPickerDialog(final AlienPlayer alienPlayer, final Technology technology, final PlayerView playerView){
+        String sid = String.format("%s_label", technology.toString());
+        showPickerDialog(
+                getResources().getIdentifier(sid, "string", getPackageName()),
+                getGame().scenario.getStartingLevel(technology),
+                getGame().scenario.getMaxLevel(technology),
+                alienPlayer.getLevel(technology),
+                new PickerClickAction() {
+                    @Override
+                    public void action(int value) {
+                        alienPlayer.setLevel(technology, value);
+                        playerView.update(isShowDetails());
+                    }
+                });
+    }
+
+    public void showPickerDialog(int labelString, int minValue, int maxValue, int value, final PickerClickAction action) {
+        String service = Context.LAYOUT_INFLATER_SERVICE;
+        LayoutInflater li = (LayoutInflater) getSystemService(service);
+        ConstraintLayout levelPickerView = new ConstraintLayout(this);
+        li.inflate(R.layout.level_picker_dialog, levelPickerView, true);
+
+        TextView label = levelPickerView.findViewById(R.id.technology_label);
+        label.setText(labelString);
+
+        final NumberPicker picker = levelPickerView.findViewById(R.id.level_picker);
+        picker.setMinValue(minValue);
+        picker.setMaxValue(maxValue);
+        picker.setValue(value);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select value")
+                .setView(levelPickerView)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        action.action(picker.getValue());
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .show();
+    }
+
+    public interface PickerClickAction{
+        void action(int value);
     }
 }

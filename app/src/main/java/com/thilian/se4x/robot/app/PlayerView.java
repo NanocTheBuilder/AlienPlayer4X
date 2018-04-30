@@ -3,13 +3,10 @@ package com.thilian.se4x.robot.app;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
@@ -50,65 +47,112 @@ public class PlayerView extends ConstraintLayout {
         boolean showDetails = ((SE4XActivity) getContext()).isShowDetails();
 
         initTexts(showDetails);
-
-        ((Button)findViewById(R.id.eliminate_button)).setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alienPlayer.setEliminated(true);
-                        view.setEnabled(false);
-                    }
-                }
-        );
-
         setBackgroundColor();
         update(showDetails);
     }
 
+    public void initEliminateButton(final AlienPlayer alienPlayer) {
+        Button eliminateButton = findViewById(R.id.eliminate_button);
+        eliminateButton.setVisibility(VISIBLE);
+        if(alienPlayer.isEliminated()){
+            eliminateButton.setText(R.string.eliminated);
+            eliminateButton.setEnabled(false);
+        }
+        else {
+            eliminateButton.setOnClickListener(
+                    new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            alienPlayer.setEliminated(true);
+                            ((Button)view).setText(R.string.eliminated);
+                            view.setEnabled(false);
+                        }
+                    }
+            );
+        }
+    }
+
     public void initTexts(boolean showDetails) {
+        initLongClick(Technology.MOVE);
+        initLongClick(Technology.SHIP_SIZE);
+        initLongClick(Technology.ATTACK);
+        initLongClick(Technology.DEFENSE);
+        initLongClick(Technology.TACTICS);
+        initLongClick(Technology.FIGHTERS);
+        initLongClick(Technology.POINT_DEFENSE);
+        initLongClick(Technology.CLOAKING);
+        initLongClick(Technology.SCANNER);
+        initLongClick(Technology.MINE_SWEEPER);
+
         if(!showDetails){
             findViewById(R.id.fleet_cp_text).setVisibility(GONE);
             findViewById(R.id.tech_cp_text).setVisibility(GONE);
             findViewById(R.id.def_cp_text).setVisibility(GONE);
             findViewById(R.id.bank_text).setVisibility(GONE);
         }
-        if(!(game.scenario instanceof Scenario4)){
+
+        if(game.scenario instanceof Scenario4) {
+            initLongClick(Technology.GROUND_COMBAT);
+            initLongClick(Technology.BOARDING);
+            initLongClick(Technology.SECURITY_FORCES);
+            initLongClick(Technology.MILITARY_ACADEMY);
+        }
+        else{
             findViewById(R.id.ground_combat_text).setVisibility(GONE);
             findViewById(R.id.boarding_text).setVisibility(GONE);
             findViewById(R.id.security_forces_text).setVisibility(GONE);
             findViewById(R.id.military_academy_text).setVisibility(GONE);
         }
-        if(!(game.scenario instanceof VpSoloScenario)){
-            findViewById(R.id.bank_text).setVisibility(GONE);
-            findViewById(R.id.colonies_text).setVisibility(GONE);
-            findViewById(R.id.colonies_edit).setVisibility(GONE);
+
+        if(game.scenario instanceof VpSoloScenario) {
+            initColoniesLongClick();
         }
         else{
-            EditText coloniesEdit = (EditText) findViewById(R.id.colonies_edit);
-            if(getContext() instanceof FleetsActivity) {
-                coloniesEdit.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                        String str = editable.toString();
-                        int colonies = "".equals(str) ? 0 : Integer.parseInt(str);
-                        ((VpAlienPlayer) alienPlayer).setColonies(colonies);
-                    }
-                });
-            }
-            else{
-                coloniesEdit.setEnabled(false);
-            }
+            findViewById(R.id.bank_text).setVisibility(GONE);
+            findViewById(R.id.colonies_text).setVisibility(GONE);
         }
-        findViewById(R.id.eliminate_button).setEnabled(true);
+    }
+
+    public void initLongClick(final Technology technology) {
+        if(getContext() instanceof FleetsActivity && alienPlayer instanceof VpAlienPlayer) {
+            String sid = String.format("%s_text", technology.toString().toLowerCase());
+            int id = getResources().getIdentifier(sid, "id", getContext().getPackageName());
+            View view = findViewById(id);
+            view.setLongClickable(true);
+            view.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    ((SE4XActivity) getContext()).showLevelPickerDialog(alienPlayer, technology, PlayerView.this);
+                    return true;
+                }
+            });
+        }
+    }
+
+    public void initColoniesLongClick() {
+        if(getContext() instanceof FleetsActivity) {
+            final SE4XActivity activity = (SE4XActivity) getContext();
+            final VpAlienPlayer vpAlienPlayer = (VpAlienPlayer) this.alienPlayer;
+
+            View view = findViewById(R.id.colonies_text);
+            view.setLongClickable(true);
+            view.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    activity.showPickerDialog(
+                            R.string.colonies_label,
+                            0, 9, vpAlienPlayer.getColonies(),
+                            new SE4XActivity.PickerClickAction() {
+                                @Override
+                                public void action(int value) {
+                                    vpAlienPlayer.setColonies(value);
+                                    update(activity.isShowDetails());
+                                }
+                            });
+                    return true;
+                };
+            });
+        }
     }
 
     public void setBackgroundColor(){
@@ -129,9 +173,9 @@ public class PlayerView extends ConstraintLayout {
             updateTechnologyText(technology);
         }
 
-        EditText coloniesEdit = (EditText) findViewById(R.id.colonies_edit);
-        if(coloniesEdit.getVisibility() == VISIBLE){
-            coloniesEdit.setText(String.valueOf(((VpAlienPlayer)alienPlayer).getColonies()));
+        if(alienPlayer instanceof VpAlienPlayer){
+            ((TextView) findViewById(R.id.colonies_text)).setText(getResources().getString(R.string.colonies, ((VpAlienPlayer)alienPlayer).getColonies()));
+
         }
 
         TextView fleets = findViewById(R.id.fleets_text);
@@ -139,7 +183,7 @@ public class PlayerView extends ConstraintLayout {
     }
 
     public void updateTechnologyText(Technology technology) {
-        String name = technology.toString().toLowerCase() + "_text";
+        String name = String.format("%s_text", technology.toString().toLowerCase());
         int id = getResources().getIdentifier(name, "id", getContext().getPackageName());
         if(id != 0){
             TextView textView = findViewById(id);

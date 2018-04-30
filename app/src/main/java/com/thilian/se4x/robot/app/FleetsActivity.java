@@ -65,6 +65,7 @@ public class FleetsActivity extends SE4XActivity implements FleetView.FleetRevea
         playerView.setGame(getGame());
         playerView.setAlienPlayer(alienPlayer);
         playerView.initTexts(isShowDetails());
+        playerView.initEliminateButton(alienPlayer);
         playerView.setBackgroundColor();
         playerView.update(isShowDetails());
 

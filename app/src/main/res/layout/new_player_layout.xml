@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
+    android:theme="@style/SE4XAppTheme">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33333" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66666" />
+
+    <TextView
+        android:id="@+id/fleet_cp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/fleetCp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/movement_label"
+        app:layout_constraintEnd_toStartOf="@+id/tech_cp_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tech_cp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/techCp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fleet_cp_text"
+        app:layout_constraintEnd_toStartOf="@+id/def_cp_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fleet_cp_text" />
+
+    <TextView
+        android:id="@+id/def_cp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defCp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fleet_cp_text"
+        app:layout_constraintEnd_toStartOf="@+id/bank_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tech_cp_text" />
+
+    <TextView
+        android:id="@+id/bank_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/bank"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fleet_cp_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/def_cp_text" />
+
+    <TextView
+        android:id="@+id/movement_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/MOVE_label"
+        app:layout_constraintBottom_toTopOf="@+id/attack_label"
+        app:layout_constraintEnd_toStartOf="@+id/move_spin"
+        app:layout_constraintTop_toBottomOf="@+id/fleet_cp_text" />
+
+    <Spinner
+        android:id="@+id/move_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/movement_label"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_2" />
+
+    <TextView
+        android:id="@+id/ship_size_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SHIP_SIZE_label"
+        app:layout_constraintBottom_toBottomOf="@+id/ship_size_spin"
+        app:layout_constraintEnd_toStartOf="@+id/ship_size_spin" />
+
+    <Spinner
+        android:id="@+id/ship_size_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/movement_label"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/attack_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/ATTACK_label"
+        app:layout_constraintBottom_toTopOf="@+id/fighters_label"
+        app:layout_constraintEnd_toStartOf="@+id/attack_spin"
+        app:layout_constraintTop_toBottomOf="@+id/movement_label" />
+
+    <Spinner
+        android:id="@+id/attack_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/attack_label"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_1" />
+
+    <TextView
+        android:id="@+id/defense_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/defense_spin"
+        app:layout_constraintEnd_toStartOf="@+id/defense_spin"
+        tools:text="@string/DEFENSE_label" />
+
+    <Spinner
+        android:id="@+id/defense_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/attack_label"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_3" />
+
+    <Spinner
+        android:id="@+id/tactics_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/attack_label"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tactics_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TACTICS_label"
+        app:layout_constraintBottom_toBottomOf="@+id/tactics_spin"
+        app:layout_constraintEnd_toStartOf="@+id/tactics_spin" />
+
+    <TextView
+        android:id="@+id/fighters_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/FIGHTERS_label"
+        app:layout_constraintBottom_toTopOf="@+id/point_defense_label"
+        app:layout_constraintEnd_toStartOf="@+id/fighters_spin"
+        app:layout_constraintTop_toBottomOf="@+id/attack_label" />
+
+    <Spinner
+        android:id="@+id/fighters_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/fighters_label"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_1" />
+
+    <TextView
+        android:id="@+id/cloaking_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/CLOAKING_label"
+        app:layout_constraintBottom_toBottomOf="@+id/cloaking_spin"
+        app:layout_constraintEnd_toStartOf="@+id/cloaking_spin" />
+
+    <Spinner
+        android:id="@+id/cloaking_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/fighters_label"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_3" />
+
+    <TextView
+        android:id="@+id/scanner_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SCANNER_label"
+        app:layout_constraintBottom_toBottomOf="@+id/scanner_spin"
+        app:layout_constraintEnd_toStartOf="@+id/scanner_spin" />
+
+    <Spinner
+        android:id="@+id/scanner_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/fighters_label"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/point_defense_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/POINT_DEFENSE_label"
+        app:layout_constraintBottom_toTopOf="@+id/ground_combat_label"
+        app:layout_constraintEnd_toStartOf="@+id/point_defense_spin"
+        app:layout_constraintTop_toBottomOf="@+id/fighters_label" />
+
+    <Spinner
+        android:id="@+id/point_defense_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/point_defense_label"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_2" />
+
+    <TextView
+        android:id="@+id/mine_sweeper_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/MINE_SWEEPER_label"
+        app:layout_constraintBottom_toBottomOf="@+id/mine_sweeper_spinner"
+        app:layout_constraintEnd_toStartOf="@+id/mine_sweeper_spinner" />
+
+    <Spinner
+        android:id="@+id/mine_sweeper_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/point_defense_label"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/ground_combat_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/GROUND_COMBAT_label"
+        app:layout_constraintBottom_toTopOf="@+id/military_academy_label"
+        app:layout_constraintEnd_toStartOf="@+id/ground_combat_spin"
+        app:layout_constraintTop_toBottomOf="@+id/point_defense_label" />
+
+    <Spinner
+        android:id="@+id/ground_combat_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/ground_combat_label"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_1" />
+
+    <TextView
+        android:id="@+id/boarding_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BOARDING_label"
+        app:layout_constraintBottom_toBottomOf="@+id/boarding_spin"
+        app:layout_constraintEnd_toStartOf="@+id/boarding_spin" />
+
+    <Spinner
+        android:id="@+id/boarding_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/ground_combat_label"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_3" />
+
+    <TextView
+        android:id="@+id/security_forces_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SECURITY_FORCES_label"
+        app:layout_constraintBottom_toBottomOf="@+id/security_forces_spin"
+        app:layout_constraintEnd_toStartOf="@+id/security_forces_spin" />
+
+    <Spinner
+        android:id="@+id/security_forces_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/ground_combat_spin"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/military_academy_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/MILITARY_ACADEMY_label"
+        app:layout_constraintBottom_toTopOf="@+id/eliminate_button"
+        app:layout_constraintEnd_toStartOf="@+id/military_academy_spin"
+        app:layout_constraintTop_toBottomOf="@+id/ground_combat_label" />
+
+    <Spinner
+        android:id="@+id/military_academy_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/military_academy_label"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_2" />
+
+    <TextView
+        android:id="@+id/colonies_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/colonies_label"
+        app:layout_constraintBottom_toBottomOf="@+id/colonies_spin"
+        app:layout_constraintEnd_toStartOf="@+id/colonies_spin" />
+
+    <Spinner
+        android:id="@+id/colonies_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:entries="@array/dummy_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/military_academy_label"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/eliminate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/eliminate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_2"
+        app:layout_constraintTop_toBottomOf="@+id/military_academy_label" />
+
+    <TextView
+        android:id="@+id/fleets_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:text="@string/fleets_label"
+        app:layout_constraintBottom_toBottomOf="@+id/eliminate_button"
+        app:layout_constraintStart_toStartOf="@+id/guideline_2" />
+
+</android.support.constraint.ConstraintLayout>

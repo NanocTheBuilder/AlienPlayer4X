@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusableInTouchMode="true"
-    tools:layout_editor_absoluteY="81dp"
-    tools:padding="8dp">
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/move_text"
@@ -25,13 +26,11 @@
         android:id="@+id/attack_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
         android:text="Attack : 0"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/defense_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/defense_text" />
 
@@ -51,8 +50,6 @@
         android:id="@+id/tactics_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:text="Tactics: 0"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,13 +61,11 @@
         android:id="@+id/fighters_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
         android:text="Fighters: 0"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/cloaking_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cloaking_text" />
 
@@ -114,8 +109,6 @@
         android:id="@+id/scanner_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:text="Scanners: 0"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,13 +121,11 @@
         android:id="@+id/ground_combat_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
         android:text="Ground: 0"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/boarding_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/boarding_text" />
 
@@ -154,8 +145,6 @@
         android:id="@+id/security_forces_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:text="Security: 0"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -167,14 +156,12 @@
         android:id="@+id/military_academy_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
         android:text="Military academy: 0"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/eliminate_button"
         app:layout_constraintEnd_toStartOf="@+id/colonies_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boarding_text" />
 
@@ -182,9 +169,10 @@
         android:id="@+id/eliminate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginTop="8dp"
+
         android:text="@string/eliminate"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fleets_text"
         app:layout_constraintHorizontal_bias="0.5"
@@ -209,11 +197,9 @@
         android:id="@+id/colonies_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Colonies:"
+        android:text="@string/colonies"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/colonies_edit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/military_academy_text"
         app:layout_constraintTop_toTopOf="@+id/military_academy_text" />
 
@@ -230,26 +216,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tech_cp_text"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <EditText
-        android:id="@+id/colonies_edit"
-        android:layout_width="42dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:ems="10"
-        android:inputType="number"
-        android:text="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/colonies_text" />
-
     <TextView
         android:id="@+id/fleet_cp_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/fleetCp"
         app:layout_constraintEnd_toStartOf="@+id/tech_cp_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tech_cp_text" />
 
@@ -257,7 +233,6 @@
         android:id="@+id/tech_cp_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/techCp"
         app:layout_constraintBottom_toTopOf="@+id/ship_size_text"
         app:layout_constraintEnd_toStartOf="@+id/def_cp_text"
@@ -279,6 +254,8 @@
         android:id="@+id/bank_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/bank"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
