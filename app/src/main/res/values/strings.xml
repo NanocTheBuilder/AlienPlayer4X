@@ -112,7 +112,11 @@
     <string name="no_new_techs">No new technologies</string>
     <string name="fleets_label">%d fleets</string>
 
-    <string-array name="first_combat_options">
+    <string-array name="first_combat_options_s4">
+        <item>Combat above planet</item>
+    </string-array>
+
+    <string-array name="first_combat_options_vp">
         <item>Combat above planet</item>
         <item>Enemy is NPA</item>
     </string-array>

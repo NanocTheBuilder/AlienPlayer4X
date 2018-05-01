@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuildResult;
@@ -107,13 +108,12 @@ public class FleetsActivity extends SE4XActivity implements FleetView.FleetRevea
 
 
     @Override
-    public void firstCombatPushed(int index, int viewId, boolean abovePlanet, boolean enemyNPA) {
-        Fleet fleet = alienPlayer.getFleets().get(index);
+    public void firstCombatPushed(Fleet fleet, FleetView fleetView, boolean abovePlanet, boolean enemyNPA) {
         List<FleetBuildOption> options = new ArrayList<>();
         if(abovePlanet) options.add(COMBAT_IS_ABOVE_PLANET);
         if(enemyNPA) options.add(COMBAT_WITH_NPAS);
         FleetBuildResult result = alienPlayer.firstCombat(fleet, options.toArray(new FleetBuildOption[options.size()]));
-        ((FleetView)findViewById(viewId)).update();
+        fleetView.update();
         onFleetRevealed(fleet);
         showFleetBuildResult(result);
     }

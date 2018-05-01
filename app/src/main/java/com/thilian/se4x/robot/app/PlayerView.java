@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.thilian.se4x.robot.app.dialogs.PickerDialog;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -142,7 +143,7 @@ public class PlayerView extends ConstraintLayout {
                     activity.showPickerDialog(
                             R.string.colonies_label,
                             0, 9, vpAlienPlayer.getColonies(),
-                            new SE4XActivity.PickerClickAction() {
+                            new PickerDialog.PickerClickAction() {
                                 @Override
                                 public void action(int value) {
                                     vpAlienPlayer.setColonies(value);

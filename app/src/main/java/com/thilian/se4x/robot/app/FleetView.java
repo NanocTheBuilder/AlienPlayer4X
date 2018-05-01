@@ -8,9 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.game.Fleet;
-import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 
 /**
@@ -31,15 +30,16 @@ public class FleetView extends RelativeLayout{
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(service);
         li.inflate(R.layout.fleet_layout, this, true);
 
+        final FirstCombatDialog.FirstCombatListener listener = (FirstCombatDialog.FirstCombatListener) context;
         Button firstCombatButton = findViewById(R.id.first_combat_button);
         firstCombatButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(fleet.getAp() instanceof Scenario4Player){
-                    FirstCombatDialog.newInstance(fleet, getId()).show(((FleetsActivity)context).getFragmentManager(), "firstCombat");
+                    ((SE4XActivity)context).showFirstCombatDialog(fleet, FleetView.this, listener);
                 }
                 else {
-                    ((FirstCombatDialog.FirstCombatListener)context).firstCombatPushed(fleet.getIndex(), getId(), false, false);
+                    listener.firstCombatPushed(fleet, FleetView.this, false, false);
                 }
             }
         });
