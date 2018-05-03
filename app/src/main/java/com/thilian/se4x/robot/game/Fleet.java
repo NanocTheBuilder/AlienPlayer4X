@@ -118,4 +118,8 @@ public class Fleet {
     public void setFirstCombat(boolean hadFirstCombat) {
         this.hadFirstCombat = hadFirstCombat;
     }
+
+    public void setAlienPlayer(AlienPlayer alienPlayer) {
+        this.ap = alienPlayer;
+    }
 }

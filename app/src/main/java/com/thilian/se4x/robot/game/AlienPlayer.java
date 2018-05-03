@@ -173,4 +173,8 @@ public class AlienPlayer {
     public void setEliminated(boolean eliminated) {
         this.eliminated = eliminated;
     }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }
