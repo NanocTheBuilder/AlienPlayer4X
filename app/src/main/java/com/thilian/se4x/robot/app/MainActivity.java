@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
+import com.thilian.se4x.robot.game.Game;
 
 import java.util.List;
 
@@ -20,11 +21,12 @@ public class MainActivity extends SE4XActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinearLayout players = (LinearLayout) findViewById(R.id.players);
+        LinearLayout players = findViewById(R.id.players);
 
-        for (int i = 0; i < getGame().aliens.size(); i++) {
-            AlienPlayer ap = getGame().aliens.get(i);
-            PlayerView playerView = new PlayerView(this, getGame(), ap);
+        final Game game = getGame();
+        for (int i = 0; i < game.aliens.size(); i++) {
+            AlienPlayer ap = game.aliens.get(i);
+            PlayerView playerView = new PlayerView(this, game, ap);
             final int finalI = i;
             playerView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -38,21 +40,21 @@ public class MainActivity extends SE4XActivity {
         }
 
         final Button econButton = (Button) findViewById(R.id.econPhase);
-        econButton.setText(getString(R.string.econPhase, getGame().currentTurn));
+        econButton.setText(getString(R.string.econPhase, game.currentTurn));
         econButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final SE4XApplication app = (SE4XApplication) getApplication();
-                List<EconPhaseResult> results = getGame().doEconomicPhase();
+                List<EconPhaseResult> results = game.doEconomicPhase();
+                saveGame();
                 if(results.size() != 0) {
                     showEconPhaseResult(results);
-                    LinearLayout players = (LinearLayout) findViewById(R.id.players);
+                    LinearLayout players = findViewById(R.id.players);
                     for (int i = 0; i < players.getChildCount(); i++) {
                         ((PlayerView) players.getChildAt(i)).update(isShowDetails());
                     }
                 }
-                if(getGame().currentTurn  <= 20)
-                    econButton.setText(getString(R.string.econPhase, app.getGame().currentTurn));
+                if(game.currentTurn  <= 20)
+                    econButton.setText(getString(R.string.econPhase, game.currentTurn));
                 else {
                     econButton.setText(getString(R.string.gameOver));
                     econButton.setEnabled(false);
@@ -73,7 +75,7 @@ public class MainActivity extends SE4XActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        LinearLayout players = (LinearLayout) findViewById(R.id.players);
+        LinearLayout players = findViewById(R.id.players);
         PlayerView view;
         for(int i = 0; i < players.getChildCount(); i++){
             view = (PlayerView) players.getChildAt(i);
@@ -89,6 +91,7 @@ public class MainActivity extends SE4XActivity {
             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    deleteGame();
                     MainActivity.super.onBackPressed();
                 }
             })

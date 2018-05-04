@@ -11,6 +11,7 @@ import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuildResult;
+import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 
@@ -82,7 +83,8 @@ public class FleetsActivity extends SE4XActivity implements FleetView.FleetRevea
 
     private void buildHomeDefenseButtonClicked(){
         FleetBuildResult result = alienPlayer.buildHomeDefense();
-        LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
+        saveGame();
+        LinearLayout fleets = findViewById(R.id.fleets);
         for (Fleet fleet : result.getNewFleets()) {
             fleets.addView(new FleetView(this, fleet, this));
         }
@@ -92,7 +94,8 @@ public class FleetsActivity extends SE4XActivity implements FleetView.FleetRevea
 
     private void buildColonyDefenseButtonClicked(){
         FleetBuildResult result = ((Scenario4Player)alienPlayer).buildColonyDefense();
-        LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
+        saveGame();
+        LinearLayout fleets = findViewById(R.id.fleets);
         for (Fleet fleet : result.getNewFleets()) {
             fleets.addView(new FleetView(this, fleet, this));
         }
@@ -113,6 +116,7 @@ public class FleetsActivity extends SE4XActivity implements FleetView.FleetRevea
         if(abovePlanet) options.add(COMBAT_IS_ABOVE_PLANET);
         if(enemyNPA) options.add(COMBAT_WITH_NPAS);
         FleetBuildResult result = alienPlayer.firstCombat(fleet, options.toArray(new FleetBuildOption[options.size()]));
+        saveGame();
         fleetView.update();
         onFleetRevealed(fleet);
         showFleetBuildResult(result);

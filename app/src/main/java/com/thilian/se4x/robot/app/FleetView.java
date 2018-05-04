@@ -49,6 +49,7 @@ public class FleetView extends RelativeLayout{
             @Override
             public void onClick(View view) {
                 fleet.getAp().removeFleet(fleet);
+                ((SE4XActivity)context).saveGame();
                 FleetsActivity activity = (FleetsActivity) getContext();
                 LinearLayout layout = activity.findViewById(R.id.fleets);
                 layout.removeView(FleetView.this);

@@ -13,8 +13,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.thilian.se4x.robot.app.parser.JsonParser;
+import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.Scenarios;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class NewGameActivity extends AppCompatActivity {
     @Override
@@ -93,11 +100,20 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(new GameSaver().loadGame(this) != null){
+            startMainActivity();
+        }
+    }
+
     public void createGame() throws IllegalAccessException, InstantiationException {
-        final SE4XApplication app = (SE4XApplication) this.getApplication();
         Difficulty difficulty = (Difficulty)(((Spinner) findViewById(R.id.difficultySpinner)).getSelectedItem());
         Scenarios scenario = (Scenarios)(((Spinner)findViewById(R.id.scenarioSpinner)).getSelectedItem());
-        app.getGame().createGame(scenario.getClazz().newInstance(), difficulty);
+        Game game = new Game();
+        game.createGame(scenario.getClazz().newInstance(), difficulty);
+        new GameSaver().saveGame(game, this);
     }
 
     private void startMainActivity(){

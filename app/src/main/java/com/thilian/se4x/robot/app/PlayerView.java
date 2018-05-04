@@ -65,6 +65,7 @@ public class PlayerView extends ConstraintLayout {
                         @Override
                         public void onClick(View view) {
                             alienPlayer.setEliminated(true);
+                            ((SE4XActivity)getContext()).saveGame();
                             ((Button)view).setText(R.string.eliminated);
                             view.setEnabled(false);
                         }
@@ -147,6 +148,7 @@ public class PlayerView extends ConstraintLayout {
                                 @Override
                                 public void action(int value) {
                                     vpAlienPlayer.setColonies(value);
+                                    activity.saveGame();
                                     update(activity.isShowDetails());
                                 }
                             });

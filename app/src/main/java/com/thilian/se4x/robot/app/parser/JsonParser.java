@@ -66,8 +66,10 @@ public class JsonParser {
     private Gson createGson() {
         RuntimeTypeAdapterFactory<AlienPlayer> alienPlayerAdapterFactory
                 = RuntimeTypeAdapterFactory.of(AlienPlayer.class)
+                    .registerSubtype(AlienPlayer.class)
                     .registerSubtype(Scenario4Player.class)
                     .registerSubtype(VpAlienPlayer.class);
+
         RuntimeTypeAdapterFactory<AlienEconomicSheet> economicSheetAdapterFactory
                 = RuntimeTypeAdapterFactory.of(AlienEconomicSheet.class)
                     .registerSubtype(AlienEconomicSheet.class)
@@ -106,7 +108,6 @@ public class JsonParser {
             typeMap.put(clazz.getSimpleName(), clazz);
         }
 
-
         @Override
         public Scenario deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             try {
@@ -125,7 +126,6 @@ public class JsonParser {
         }
     }
 
-
     static class DifficultyTypeAdapter extends TypeAdapter<Difficulty>{
         private static Map<String, Class> typeMap = new HashMap<>();
         static {
@@ -141,28 +141,14 @@ public class JsonParser {
 
         @Override
         public void write(JsonWriter out, Difficulty value) throws IOException {
-            out.beginObject();
-            out.name("type").value(value.getClass().getSimpleName());
-            out.name("value").value(value.toString());
-            out.endObject();
+            String json = String.format("%s.%s", value.getClass().getSimpleName(), value.toString());
+            out.value(json);
         }
 
         @Override
         public Difficulty read(JsonReader in) throws IOException {
-            String type = null, value = null;
-            in.beginObject();
-            while(in.hasNext()) {
-                String name = in.nextName();
-                if ("type".equals(name)) {
-                    type = in.nextString();
-                } else if ("value".equals(name)) {
-                    value = in.nextString();
-                } else {
-                    in.skipValue();
-                }
-            }
-            in.endObject();
-            return (Difficulty) Enum.valueOf(typeMap.get(type), value);
+            String[] typeAndValue = in.nextString().split("\\.");
+            return (Difficulty) Enum.valueOf(typeMap.get(typeAndValue[0]), typeAndValue[1]);
         }
     }
 

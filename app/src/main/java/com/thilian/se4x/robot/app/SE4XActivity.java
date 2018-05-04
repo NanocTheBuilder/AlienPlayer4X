@@ -21,9 +21,27 @@ import java.util.List;
 import static com.thilian.se4x.robot.game.enums.ShipType.TRANSPORT;
 
 public class SE4XActivity extends Activity {
+    final GameSaver gameSaver = new GameSaver();
+
+    private Game game;
 
     public Game getGame() {
-        return ((SE4XApplication)getApplication()).getGame();
+        if(game == null){
+            game = loadGame();
+        }
+        return game;
+    }
+
+    public Game loadGame(){
+        return gameSaver.loadGame(this);
+    }
+
+    public void saveGame(){
+        gameSaver.saveGame(game, this);
+    }
+
+    public void deleteGame(){
+        gameSaver.deleteGame(this);
     }
 
     public boolean isShowDetails(){
