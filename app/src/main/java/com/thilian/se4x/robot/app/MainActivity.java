@@ -15,6 +15,7 @@ import java.util.List;
 
 public class MainActivity extends SE4XActivity {
     private static final String tag = SE4XActivity.class.getSimpleName();
+    private boolean exitGame = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ public class MainActivity extends SE4XActivity {
             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    deleteGame();
+                    exitGame = true;
                     MainActivity.super.onBackPressed();
                 }
             })
@@ -99,5 +100,13 @@ public class MainActivity extends SE4XActivity {
                 }
             })
             .show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(exitGame){
+            deleteGame();
+        }
     }
 }

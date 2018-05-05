@@ -69,8 +69,8 @@ public class GameSaver {
     public void deleteGame(Context context){
         File file = new File(context.getFilesDir(), GAME_FILE);
         try {
-            new PrintWriter(file).close();
-        } catch (FileNotFoundException e) {
+            new FileWriter(file, false).close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
