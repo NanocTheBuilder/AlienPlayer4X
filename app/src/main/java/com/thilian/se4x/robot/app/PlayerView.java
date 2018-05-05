@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.thilian.se4x.robot.app.dialogs.PickerDialog;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -23,9 +22,6 @@ import com.thilian.se4x.robot.game.scenarios.vpscenario.VpSoloScenario;
  */
 public class PlayerView extends ConstraintLayout {
 
-    private Game game;
-    private AlienPlayer alienPlayer;
-
     public PlayerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         String service = Context.LAYOUT_INFLATER_SERVICE;
@@ -33,26 +29,15 @@ public class PlayerView extends ConstraintLayout {
         li.inflate(R.layout.player_layout, this, true);
     }
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public void setAlienPlayer(AlienPlayer alienPlayer) {
-        this.alienPlayer = alienPlayer;
-    }
-
     public PlayerView(Context context, Game game, final AlienPlayer alienPlayer) {
         this(context, null);
-        this.game = game;
-        this.alienPlayer = alienPlayer;
         boolean showDetails = ((SE4XActivity) getContext()).isShowDetails();
-
-        initTexts(showDetails);
-        setBackgroundColor();
-        update(showDetails);
+        initTextVisibilities(game, showDetails);
+        setBackgroundColor(alienPlayer);
+        update(game, alienPlayer, showDetails);
     }
 
-    public void initEliminateButton(final AlienPlayer alienPlayer) {
+    public void initEliminateButton(final AlienPlayer alienPlayer, final PlayerEliminationListener listener) {
         Button eliminateButton = findViewById(R.id.eliminate_button);
         eliminateButton.setVisibility(VISIBLE);
         if(alienPlayer.isEliminated()){
@@ -61,31 +46,21 @@ public class PlayerView extends ConstraintLayout {
         }
         else {
             eliminateButton.setOnClickListener(
-                    new OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            alienPlayer.setEliminated(true);
-                            ((SE4XActivity)getContext()).saveGame();
-                            ((Button)view).setText(R.string.eliminated);
-                            view.setEnabled(false);
-                        }
+                new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onPlayerEliminated(alienPlayer);
                     }
+                }
             );
         }
     }
 
-    public void initTexts(boolean showDetails) {
-        initLongClick(Technology.MOVE);
-        initLongClick(Technology.SHIP_SIZE);
-        initLongClick(Technology.ATTACK);
-        initLongClick(Technology.DEFENSE);
-        initLongClick(Technology.TACTICS);
-        initLongClick(Technology.FIGHTERS);
-        initLongClick(Technology.POINT_DEFENSE);
-        initLongClick(Technology.CLOAKING);
-        initLongClick(Technology.SCANNER);
-        initLongClick(Technology.MINE_SWEEPER);
+    public interface PlayerEliminationListener{
+        void onPlayerEliminated(AlienPlayer alienPlayer);
+    }
 
+    public void initTextVisibilities(Game game, boolean showDetails) {
         if(!showDetails){
             findViewById(R.id.fleet_cp_text).setVisibility(GONE);
             findViewById(R.id.tech_cp_text).setVisibility(GONE);
@@ -93,76 +68,24 @@ public class PlayerView extends ConstraintLayout {
             findViewById(R.id.bank_text).setVisibility(GONE);
         }
 
-        if(game.scenario instanceof Scenario4) {
-            initLongClick(Technology.GROUND_COMBAT);
-            initLongClick(Technology.BOARDING);
-            initLongClick(Technology.SECURITY_FORCES);
-            initLongClick(Technology.MILITARY_ACADEMY);
-        }
-        else{
+        if(!(game.scenario instanceof Scenario4)) {
             findViewById(R.id.ground_combat_text).setVisibility(GONE);
             findViewById(R.id.boarding_text).setVisibility(GONE);
             findViewById(R.id.security_forces_text).setVisibility(GONE);
             findViewById(R.id.military_academy_text).setVisibility(GONE);
         }
 
-        if(game.scenario instanceof VpSoloScenario) {
-            initColoniesLongClick();
-        }
-        else{
+        if(!(game.scenario instanceof VpSoloScenario)) {
             findViewById(R.id.bank_text).setVisibility(GONE);
             findViewById(R.id.colonies_text).setVisibility(GONE);
         }
     }
 
-    public void initLongClick(final Technology technology) {
-        if(getContext() instanceof FleetsActivity && alienPlayer instanceof VpAlienPlayer) {
-            String sid = String.format("%s_text", technology.toString().toLowerCase());
-            int id = getResources().getIdentifier(sid, "id", getContext().getPackageName());
-            View view = findViewById(id);
-            view.setLongClickable(true);
-            view.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    ((SE4XActivity) getContext()).showLevelPickerDialog(alienPlayer, technology, PlayerView.this);
-                    return true;
-                }
-            });
-        }
-    }
-
-    public void initColoniesLongClick() {
-        if(getContext() instanceof FleetsActivity) {
-            final SE4XActivity activity = (SE4XActivity) getContext();
-            final VpAlienPlayer vpAlienPlayer = (VpAlienPlayer) this.alienPlayer;
-
-            View view = findViewById(R.id.colonies_text);
-            view.setLongClickable(true);
-            view.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    activity.showPickerDialog(
-                            R.string.colonies_label,
-                            0, 9, vpAlienPlayer.getColonies(),
-                            new PickerDialog.PickerClickAction() {
-                                @Override
-                                public void action(int value) {
-                                    vpAlienPlayer.setColonies(value);
-                                    activity.saveGame();
-                                    update(activity.isShowDetails());
-                                }
-                            });
-                    return true;
-                };
-            });
-        }
-    }
-
-    public void setBackgroundColor(){
+    public void setBackgroundColor(AlienPlayer alienPlayer){
         setBackgroundColor(Color.parseColor(alienPlayer.getColor().toString()));
     }
 
-    public void update(boolean showDetails){
+    public void update(Game game, AlienPlayer alienPlayer, boolean showDetails){
         if(showDetails) {
             ((TextView) findViewById(R.id.fleet_cp_text)).setText(getResources().getString(R.string.fleetCp, alienPlayer.getEconomicSheet().getFleetCP()));
             ((TextView) findViewById(R.id.tech_cp_text)).setText(getResources().getString(R.string.techCp, alienPlayer.getEconomicSheet().getTechCP()));
@@ -173,7 +96,7 @@ public class PlayerView extends ConstraintLayout {
         }
 
         for(Technology technology : game.scenario.techPrices.getAvailableTechs()){
-            updateTechnologyText(technology);
+            updateTechnologyText(game, alienPlayer, technology);
         }
 
         if(alienPlayer instanceof VpAlienPlayer){
@@ -185,7 +108,7 @@ public class PlayerView extends ConstraintLayout {
         fleets.setText(String.format("%d fleets.", alienPlayer.getFleets().size()));
     }
 
-    public void updateTechnologyText(Technology technology) {
+    public void updateTechnologyText(Game game, AlienPlayer alienPlayer, Technology technology) {
         String name = String.format("%s_text", technology.toString().toLowerCase());
         int id = getResources().getIdentifier(name, "id", getContext().getPackageName());
         if(id != 0){

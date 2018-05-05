@@ -3,7 +3,7 @@ package com.thilian.se4x.robot.game.enums;
 public enum Technology {
     MOVE,
     SHIP_SIZE,
-    MINES,
+    //MINES,
 
     ATTACK,
     DEFENSE,

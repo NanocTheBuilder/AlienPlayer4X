@@ -21,20 +21,14 @@ public class PickerDialog {
         this.activity = activity;
     }
 
-    public void showLevelPickerDialog(final AlienPlayer alienPlayer, final Technology technology, final PlayerView playerView){
+    public void showLevelPickerDialog(final AlienPlayer alienPlayer, final Technology technology, PickerClickAction action){
         String sid = String.format("%s_label", technology.toString());
         show(
                 activity.getResources().getIdentifier(sid, "string", activity.getPackageName()),
                 activity.getGame().scenario.getStartingLevel(technology),
                 activity.getGame().scenario.getMaxLevel(technology),
                 alienPlayer.getLevel(technology),
-                new PickerClickAction() {
-                    @Override
-                    public void action(int value) {
-                        alienPlayer.setLevel(technology, value);
-                        playerView.update(activity.isShowDetails());
-                    }
-                });
+                action);
     }
 
     public void show(int labelString, int minValue, int maxValue, int value, final PickerClickAction action) {

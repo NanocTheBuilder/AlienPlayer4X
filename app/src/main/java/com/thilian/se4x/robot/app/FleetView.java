@@ -18,42 +18,37 @@ import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 public class FleetView extends RelativeLayout{
 
     private Fleet fleet;
-    private FleetRevealListener fleetRevealListener;
 
-    public FleetView(final Context context, final Fleet fleet, final FleetRevealListener fleetRevealListener){
+    public FleetView(final Context context, final Fleet fleet){
         super(context);
         this.setId(7133700 + fleet.getIndex());
         this.fleet = fleet;
-        this.fleetRevealListener = fleetRevealListener;
 
         String service = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(service);
         li.inflate(R.layout.fleet_layout, this, true);
 
-        final FirstCombatDialog.FirstCombatListener listener = (FirstCombatDialog.FirstCombatListener) context;
+        final FirstCombatDialog.FirstCombatListener firstCombatListener
+                = (FirstCombatDialog.FirstCombatListener)context;
         Button firstCombatButton = findViewById(R.id.first_combat_button);
         firstCombatButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(fleet.getAp() instanceof Scenario4Player){
-                    ((SE4XActivity)context).showFirstCombatDialog(fleet, FleetView.this, listener);
+                    ((SE4XActivity)context).showFirstCombatDialog(fleet, FleetView.this, firstCombatListener);
                 }
                 else {
-                    listener.firstCombatPushed(fleet, FleetView.this, false, false);
+                    firstCombatListener.firstCombatPushed(fleet, FleetView.this, false, false);
                 }
             }
         });
 
+        final FleetRemoveListener fleetRemoveListener = (FleetRemoveListener)context;
         Button removeFleetButton = findViewById(R.id.remove_fleet_button);
         removeFleetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                fleet.getAp().removeFleet(fleet);
-                ((SE4XActivity)context).saveGame();
-                FleetsActivity activity = (FleetsActivity) getContext();
-                LinearLayout layout = activity.findViewById(R.id.fleets);
-                layout.removeView(FleetView.this);
-                fleetRevealListener.onFleetRevealed(null);
+                fleetRemoveListener.onFleetRemoved(fleet.getIndex(), FleetView.this);
             }
         });
 
@@ -61,7 +56,7 @@ public class FleetView extends RelativeLayout{
     }
 
     public void update(){
-        FleetsActivity activity = (FleetsActivity) getContext();
+        SE4XActivity activity = (SE4XActivity) getContext();
         TextView fleetNameText = findViewById(R.id.fleet_name_text);
         fleetNameText.setText(activity.getFleetName(fleet));
 
@@ -75,7 +70,7 @@ public class FleetView extends RelativeLayout{
         removeFleetButton.setVisibility(fleet.hadFirstCombat() ? VISIBLE : INVISIBLE);
     }
 
-    public interface FleetRevealListener{
-        public void onFleetRevealed(Fleet fleet);
+    public interface FleetRemoveListener{
+        void onFleetRemoved(int index, FleetView view);
     }
 }

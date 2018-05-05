@@ -18,10 +18,8 @@ public class GameSaver {
     static final String GAME_FILE = "saved.game";
     JsonParser jsonParser = new JsonParser();
 
-    public GameSaver() {
-    }
-
     public Game loadGame(Context context) {
+        //Log.i(getClass().getSimpleName(), "LOAD_GAME");
         Game game = null;
         BufferedReader reader = null;
         File file = new File(context.getFilesDir(), GAME_FILE);
@@ -29,7 +27,7 @@ public class GameSaver {
             try {
                 reader = new BufferedReader(new FileReader(file));
                 String json = reader.readLine();
-                if (!json.isEmpty())
+                if (json != null && !json.isEmpty())
                     game = jsonParser.fromJson(json);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -49,6 +47,7 @@ public class GameSaver {
     }
 
     public void saveGame(Game game, Context context) {
+        //Log.i(getClass().getSimpleName(), "SAVE_GAME");
         File file = new File(context.getFilesDir(), GAME_FILE);
         BufferedWriter writer = null;
         try {
@@ -74,5 +73,10 @@ public class GameSaver {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public long getGameDate(Context context){
+        File file = new File(context.getFilesDir(), GAME_FILE);
+        return file.lastModified();
     }
 }

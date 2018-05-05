@@ -114,10 +114,7 @@ public class SeenTechnologyActivity extends SE4XActivity{
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Integer level = (Integer) parent.getItemAtPosition(position);
-            if(!getGame().getSeenLevel(technology).equals(level)) {
-                getGame().setSeenLevel(technology, level);
-                saveGame();
-            }
+            getGame().setSeenLevel(technology, level);
         }
 
         @Override
@@ -143,7 +140,6 @@ public class SeenTechnologyActivity extends SE4XActivity{
             else{
                 getGame().removeSeenThing(seeable);
             }
-            saveGame();
         }
     }
 }

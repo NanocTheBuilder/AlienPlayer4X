@@ -24,23 +24,27 @@ public class SE4XActivity extends Activity {
     final GameSaver gameSaver = new GameSaver();
 
     private Game game;
+    private long gameDate;
 
     public Game getGame() {
-        if(game == null){
+        if(game == null || gameDate != gameSaver.getGameDate(this)){
             game = loadGame();
         }
         return game;
     }
 
-    public Game loadGame(){
-        return gameSaver.loadGame(this);
+    protected Game loadGame(){
+        game = gameSaver.loadGame(this);
+        gameDate = gameSaver.getGameDate(this);
+        return game;
     }
 
-    public void saveGame(){
+    protected void saveGame(){
         gameSaver.saveGame(game, this);
+        gameDate = gameSaver.getGameDate(this);
     }
 
-    public void deleteGame(){
+    protected void deleteGame(){
         gameSaver.deleteGame(this);
     }
 
@@ -80,23 +84,68 @@ public class SE4XActivity extends Activity {
         return getResources().getString(sid, fleet.getName());
     }
 
-    public void showEconPhaseResult(List<EconPhaseResult> results){
+    protected void showEconPhaseResult(List<EconPhaseResult> results){
         new EconPhaseResultDialog(this).show(results);
     }
 
-    public void showFleetBuildResult(FleetBuildResult result) {
+    protected void showFleetBuildResult(FleetBuildResult result) {
         new FleetBuildResultDialog(this).show(result);
     }
 
-    public void showPickerDialog(int labelString, int minValue, int maxValue, int value, final PickerDialog.PickerClickAction action) {
+    protected void showPickerDialog(int labelString, int minValue, int maxValue, int value, final PickerDialog.PickerClickAction action) {
         new PickerDialog(this).show(labelString, minValue, maxValue, value, action);
     }
 
-    public void showLevelPickerDialog(final AlienPlayer alienPlayer, final Technology technology, final PlayerView playerView){
-        new PickerDialog(this).showLevelPickerDialog(alienPlayer, technology, playerView);
+    protected void showLevelPickerDialog(final AlienPlayer alienPlayer, final Technology technology, PickerDialog.PickerClickAction action){
+        new PickerDialog(this).showLevelPickerDialog(alienPlayer, technology, action);
     }
 
-    public void showFirstCombatDialog(final Fleet fleet, final FleetView fleetView, FirstCombatDialog.FirstCombatListener listener){
+    protected void showFirstCombatDialog(final Fleet fleet, final FleetView fleetView, FirstCombatDialog.FirstCombatListener listener){
         new FirstCombatDialog(this).show(fleet, fleetView, listener);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveGame();
+//        Log.i(getClass().getSimpleName(), "ON_PAUSE");
+    }
+
+    /*
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i(getClass().getSimpleName(), "ON_CREATE");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(getClass().getSimpleName(), "ON_START");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(getClass().getSimpleName(), "ON_RESTART");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(getClass().getSimpleName(), "ON_RESUME");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(getClass().getSimpleName(), "ON_STOP");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(getClass().getSimpleName(), "ON_DESTROY");
+    }
+    */
 }
