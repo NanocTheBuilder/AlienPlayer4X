@@ -10,6 +10,10 @@
     <string name="finish_game">Do you want to finish the current game?</string>
     <string name="gameOver">...</string>
     <string name="start">Start</string>
+    <string name="resume">Resume</string>
+
+    <string name="saved_game_found_text">Saved Game</string>
+    <string name="new_game_text">New Game</string>
 
     <string name="eliminate">Eliminate</string>
     <string name="eliminated">Eliminated</string>
@@ -27,9 +31,16 @@
 
     <string name="new_move">New Move Technology: %d</string>
 
-    <string name="BASE_GAME">Base game</string>
-    <string name="SCENARIO_4">Scenario #4</string>
-    <string name="VP_SCENARIO">Solo VP scenario</string>
+    <string name="BASE_GAME">1 Player Alien Empire</string>
+    <string name="BaseGame">1 Player Alien Empire</string>
+    <string name="SCENARIO_4">Space Empires Solitaire Scenario #4</string>
+    <string name="Scenario4">Space Empires Solitaire Scenario #4</string>
+    <string name="VP_SOLO_SCENARIO">Alien Player VP Rules (Solitaire)</string>
+    <string name="VpSoloScenario">Alien Player VP Rules (Solitaire)</string>
+    <string name="VP_2P_SCENARIO">Alien Player Co-op (2 Players)</string>
+    <string name="Vp2pScenario">Alien Player Co-op (2 Players)</string>
+    <string name="VP_3P_SCENARIO">Alien Player Co-op (2 Players)</string>
+    <string name="Vp3pScenario">Alien Player Co-op (2 Players)</string>
 
     <string name="EASY">Easy</string>
     <string name="NORMAL">Normal</string>
@@ -37,6 +48,8 @@
     <string name="HARDER">Harder</string>
     <string name="REALLY_TOUGH">Really tough</string>
     <string name="GOOD_LUCK">Good Luck!</string>
+
+    <string name="saved_game_details_text">%s\n%s difficulty, Turn %d</string>
 
     <string name="REGULAR_FLEET">Regular Fleet %s</string>
     <string name="RAIDER_FLEET">Raider Fleet %s</string>

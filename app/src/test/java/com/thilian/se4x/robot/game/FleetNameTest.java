@@ -17,8 +17,7 @@ public class FleetNameTest {
 
     @Before
     public void setUp(){
-        Game game = new Game();
-        game.createGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL);
+        Game game = Game.newGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL);
         ap = game.aliens.get(0);
     }
 

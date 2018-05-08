@@ -28,8 +28,7 @@ public class Scenario4Integration {
     @Test
     public void economyRollStartsNewFleet() {
         MockRoller roller = new MockRoller();
-        Game game = new Game();
-        game.createGame(new Scenario4(), BaseGameDifficulty.NORMAL);
+        Game game = Game.newGame(new Scenario4(), BaseGameDifficulty.NORMAL);
         game.roller = roller;
 
         ap = (Scenario4Player) game.aliens.get(0);

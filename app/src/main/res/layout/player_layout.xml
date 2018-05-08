@@ -8,6 +8,7 @@
     android:padding="8dp"
     android:paddingBottom="8dp"
     android:paddingTop="8dp"
+    android:theme="@style/SE4XAppTheme"
     tools:layout_editor_absoluteY="81dp">
 
     <TextView
@@ -16,7 +17,6 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:text="Move: 1"
-        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/ship_size_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -28,7 +28,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Attack : 0"
-        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/defense_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -40,7 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Defense: 0"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/cloaking_text"
         app:layout_constraintEnd_toStartOf="@+id/tactics_text"
         app:layout_constraintHorizontal_bias="0.5"
@@ -52,7 +50,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tactics: 0"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/defense_text"
@@ -63,7 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fighters: 0"
-        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/cloaking_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -75,7 +71,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Point Defense: 0"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/boarding_text"
         app:layout_constraintEnd_toStartOf="@+id/mine_sweeper_text"
         app:layout_constraintHorizontal_bias="0.5"
@@ -88,7 +83,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mine Sweep: 0"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/point_defense_text"
@@ -99,7 +93,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cloaking: 0"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/point_defense_text"
         app:layout_constraintEnd_toStartOf="@+id/scanner_text"
         app:layout_constraintHorizontal_bias="0.5"
@@ -111,7 +104,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scanners: 0"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cloaking_text"
@@ -123,7 +115,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ground: 0"
-        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/boarding_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -135,7 +126,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Boarding: 0"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/military_academy_text"
         app:layout_constraintEnd_toStartOf="@+id/security_forces_text"
         app:layout_constraintHorizontal_bias="0.5"
@@ -147,7 +137,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Security: 0"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/boarding_text"
@@ -158,7 +147,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Military academy: 0"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/eliminate_button"
         app:layout_constraintEnd_toStartOf="@+id/colonies_text"
         app:layout_constraintHorizontal_bias="0.5"
@@ -187,7 +175,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="0 fleets"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/eliminate_button"
@@ -199,7 +186,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/colonies"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/military_academy_text"
         app:layout_constraintTop_toTopOf="@+id/military_academy_text" />
@@ -209,7 +195,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ship Size: 1"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/defense_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -219,6 +204,7 @@
 
     <TextView
         android:id="@+id/fleet_cp_text"
+        style="@style/SmallerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fleetCp"
@@ -230,6 +216,7 @@
 
     <TextView
         android:id="@+id/tech_cp_text"
+        style="@style/SmallerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/techCp"
@@ -241,6 +228,7 @@
 
     <TextView
         android:id="@+id/def_cp_text"
+        style="@style/SmallerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/defCp"
@@ -251,6 +239,7 @@
 
     <TextView
         android:id="@+id/bank_text"
+        style="@style/SmallerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bank"

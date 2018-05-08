@@ -22,7 +22,7 @@ public enum Scenarios {
 
     private Class<? extends Scenario> clazz;
 
-    private Scenarios(Class<? extends Scenario> clazz){
+    Scenarios(Class<? extends Scenario> clazz){
         this.clazz = clazz;
     }
 }

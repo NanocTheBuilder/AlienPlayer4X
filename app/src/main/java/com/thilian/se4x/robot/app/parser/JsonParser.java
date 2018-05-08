@@ -51,12 +51,14 @@ public class JsonParser {
 
     public Game fromJson(String json) {
         Game game = gson.fromJson(json, Game.class);
-        game.roller = new RealDiceRoller();
-        game.scenario.init(game);
-        for(AlienPlayer ap : game.aliens){
-            ap.setGame(game);
-            for(Fleet fleet : ap.getFleets()){
-                fleet.setAlienPlayer(ap);
+        if(game != null) {
+            game.roller = new RealDiceRoller();
+            game.scenario.init(game);
+            for (AlienPlayer ap : game.aliens) {
+                ap.setGame(game);
+                for (Fleet fleet : ap.getFleets()) {
+                    fleet.setAlienPlayer(ap);
+                }
             }
         }
         return game;

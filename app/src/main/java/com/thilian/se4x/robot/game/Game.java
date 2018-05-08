@@ -19,18 +19,22 @@ public class Game {
     private Map<Technology, Integer> seenLevels;
     private Set<Seeable> seenThings;
     public int currentTurn;
+    private Difficulty difficulty;
 
-    public void createGame(Scenario scenario, Difficulty difficulty) {
-        scenario.init(this);
-        this.scenario = scenario;
-        this.aliens = new ArrayList<>();
+    public static Game newGame(Scenario scenario, Difficulty difficulty) {
+        Game game = new Game();
+        game.difficulty = difficulty;
+        game.scenario = scenario;
+        scenario.init(game);
+        game.aliens = new ArrayList<>();
         for (int i = 0; i < difficulty.getNumberOfAlienPlayers(); i++) {
-            aliens.add(scenario.newPlayer(this, difficulty, PlayerColor.values()[i]));
+            game.aliens.add(scenario.newPlayer(game, difficulty, PlayerColor.values()[i]));
         }
 
-        resetSeenLevels();
+        game.resetSeenLevels();
 
-        currentTurn = 1;
+        game.currentTurn = 1;
+        return game;
     }
 
     public void resetSeenLevels() {
@@ -71,5 +75,9 @@ public class Game {
 
     public boolean isSeenThing(Seeable seeable) {
         return seenThings.contains(seeable);
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 }

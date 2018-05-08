@@ -21,9 +21,8 @@ public abstract class Fixture {
 
     @Before
     public void setUpFixture() {
-        game = new Game();
+        game = createGame();
         setupRoller(game);
-        createGame();
         defBuilder = game.scenario.defenseBuilder;
         fleetBuilder = game.scenario.fleetBuilder;
         fleetLauncher = game.scenario.fleetLauncher;
@@ -32,7 +31,7 @@ public abstract class Fixture {
         sheet = ap.getEconomicSheet();
     }
 
-    protected abstract void createGame();
+    protected abstract Game createGame();
 
     @After
     public void assertAllRollsUsed() {

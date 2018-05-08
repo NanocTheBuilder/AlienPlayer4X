@@ -1,5 +1,6 @@
 package com.thilian.se4x.robot.game.scenarios.basegame;
 
+import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.TechnologyBuyerTestBase;
 
 /**
@@ -9,7 +10,7 @@ import com.thilian.se4x.robot.game.TechnologyBuyerTestBase;
 public class BasegameTechnologyBuyerTestBase extends TechnologyBuyerTestBase {
 
     @Override
-    protected void createGame() {
-        game.createGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL);
+    protected Game createGame() {
+        return Game.newGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL);
     }
 }

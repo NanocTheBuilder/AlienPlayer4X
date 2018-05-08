@@ -45,7 +45,7 @@ public class SE4XActivity extends Activity {
     }
 
     protected void deleteGame(){
-        gameSaver.deleteGame(this);
+        game = null;
     }
 
     public boolean isShowDetails(){

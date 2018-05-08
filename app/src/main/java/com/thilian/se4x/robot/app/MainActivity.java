@@ -90,7 +90,7 @@ public class MainActivity extends SE4XActivity {
             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    exitGame = true;
+                    deleteGame();
                     MainActivity.super.onBackPressed();
                 }
             })

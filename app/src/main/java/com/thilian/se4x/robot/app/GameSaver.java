@@ -66,15 +66,6 @@ public class GameSaver {
         }
     }
 
-    public void deleteGame(Context context){
-        File file = new File(context.getFilesDir(), GAME_FILE);
-        try {
-            new FileWriter(file, false).close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public long getGameDate(Context context){
         File file = new File(context.getFilesDir(), GAME_FILE);
         return file.lastModified();

@@ -51,8 +51,8 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
     }
 
     @Override
-    protected void createGame(){
-        game.createGame(new Scenario(){
+    protected Game createGame(){
+        return Game.newGame(new Scenario(){
             @Override
             public void init(Game game) {
                 defenseBuilder = new DefenseBuilder(game);

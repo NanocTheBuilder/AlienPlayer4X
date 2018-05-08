@@ -28,8 +28,7 @@ public class BaseGameIntegration {
     @Test
     public void economyRollStartsNewFleet() {
         MockRoller roller = new MockRoller();
-        Game game = new Game();
-        game.createGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL);
+        Game game = Game.newGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL);
         game.roller = roller;
         ap = game.aliens.get(0);
         sheet = ap.getEconomicSheet();
