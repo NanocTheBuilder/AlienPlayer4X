@@ -4,122 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:theme="@style/SE4XAppTheme"
     tools:context="com.thilian.se4x.robot.app.SeenTechnologyActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/cloaking_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Cloaking"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/cloaking_spinner"
+        android:layout_marginBottom="8dp"
+        android:text="Cloaking: 0"
+        app:layout_constraintBottom_toTopOf="@+id/fighters_checkbox"
+        app:layout_constraintEnd_toStartOf="@+id/scanner_text"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
-
-    <Spinner
-        android:id="@+id/cloaking_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/scanner_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Scanner"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/scanner_spinner"
+        android:text="Scanner: 0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/cloaking_text"
+        app:layout_constraintTop_toTopOf="@+id/cloaking_text" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/point_defense_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Point Defense"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/point_defense_spinner"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-
-    <Spinner
-        android:id="@+id/scanner_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:text="Point Defense: 0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@id/cloaking_spinner" />
+        app:layout_constraintStart_toEndOf="@+id/fighters_checkbox"
+        app:layout_constraintTop_toTopOf="@+id/fighters_checkbox" />
 
-    <Spinner
-        android:id="@+id/point_defense_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@id/scanner_spinner" />
 
     <CheckBox
         android:id="@+id/fighters_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Fighters"
-        app:layout_constraintEnd_toStartOf="@+id/mines_checkbox"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/boarding_checkbox"
+        app:layout_constraintEnd_toStartOf="@+id/point_defense_text"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/cloaking_text" />
 
     <CheckBox
         android:id="@+id/mines_checkbox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="29dp"
         android:text="Mines"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fighters_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/veterans_checkbox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boarding_checkbox" />
 
     <CheckBox
         android:id="@+id/boarding_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Boarding Ships"
-        app:layout_constraintEnd_toStartOf="@+id/veterans_checkbox"
+        app:layout_constraintBottom_toTopOf="@+id/mines_checkbox"
+        app:layout_constraintEnd_toStartOf="@+id/size3_checkbox"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fighters_checkbox" />
 
@@ -127,35 +82,20 @@
         android:id="@+id/veterans_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         android:text="Veterans"
-        app:layout_constraintEnd_toStartOf="@+id/size3_checkbox"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/boarding_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/fighters_checkbox" />
+        app:layout_constraintStart_toEndOf="@+id/mines_checkbox"
+        app:layout_constraintTop_toTopOf="@+id/mines_checkbox" />
 
     <CheckBox
         android:id="@+id/size3_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Size 3 Ships"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/veterans_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/fighters_checkbox" />
+        app:layout_constraintStart_toEndOf="@+id/boarding_checkbox"
+        app:layout_constraintTop_toTopOf="@+id/boarding_checkbox" />
 
-    <Button
-        android:id="@+id/ok_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@android:string/ok"
-        app:layout_constraintBottom_toBottomOf="parent  "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/veterans_checkbox" />
 </android.support.constraint.ConstraintLayout>

@@ -49,7 +49,7 @@ public class PlayerView extends ConstraintLayout {
                 new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        listener.onPlayerEliminated(alienPlayer);
+                        listener.onPlayerEliminationClicked(alienPlayer);
                     }
                 }
             );
@@ -57,7 +57,7 @@ public class PlayerView extends ConstraintLayout {
     }
 
     public interface PlayerEliminationListener{
-        void onPlayerEliminated(AlienPlayer alienPlayer);
+        void onPlayerEliminationClicked(AlienPlayer alienPlayer);
     }
 
     public void initTextVisibilities(Game game, boolean showDetails) {
@@ -109,10 +109,10 @@ public class PlayerView extends ConstraintLayout {
     }
 
     public void updateTechnologyText(Game game, AlienPlayer alienPlayer, Technology technology) {
-        String name = String.format("%s_text", technology.toString().toLowerCase());
-        int id = getResources().getIdentifier(name, "id", getContext().getPackageName());
-        if(id != 0){
-            TextView textView = findViewById(id);
+        String textViewName = String.format("%s_text", technology.toString().toLowerCase());
+        int textViewId = getResources().getIdentifier(textViewName, "id", getContext().getPackageName());
+        if(textViewId != 0){
+            TextView textView = findViewById(textViewId);
             int sid = getResources().getIdentifier(technology.toString(), "string", getContext().getPackageName());
             int level = alienPlayer.getLevel(technology);
             textView.setText(getResources().getString(sid, level));
@@ -121,7 +121,7 @@ public class PlayerView extends ConstraintLayout {
             }
         }
         else{
-            System.out.println(String.format("Not found <%s>", name));
+            System.out.println(String.format("Not found <%s>", textViewName));
         }
     }
 }

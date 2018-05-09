@@ -1,18 +1,27 @@
 <resources>
 
     <style name="SE4XAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">18dp</item>
+        <item name="android:textViewStyle">@style/NormalText</item>
+        <item name="android:checkboxStyle">@style/SE4XAppCheckBox</item>
         <item name="android:spinnerStyle">@style/SE4XAppSpinner</item>
         <item name="android:spinnerItemStyle">@style/SE4XAppSpinnerItem</item>
         <item name="android:spinnerDropDownItemStyle">@style/SE4XAppSpinnerDropdownItem</item>
     </style>
 
     <style name="SmallerText" parent="SE4XAppTheme">
-        <item name="android:textSize">14dp</item>
-
+        <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="NormalText" parent="SE4XAppTheme">
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="LargerText" parent="SE4XAppTheme">
-        <item name="android:textSize">22dp</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="SE4XAppCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="SE4XAppSpinner" parent="Widget.AppCompat.Spinner">

@@ -7,7 +7,7 @@
     <string name="buildColonyDefense">Colony Defense</string>
     <string name="newFleets">New Fleets / Technologies</string>
     <string name="areYouSure">Are You Sure?</string>
-    <string name="finish_game">Do you want to finish the current game?</string>
+    <string name="finish_game">Do you want to finish the current game?\nYour progress will be lost!</string>
     <string name="gameOver">...</string>
     <string name="start">Start</string>
     <string name="resume">Resume</string>
@@ -32,15 +32,15 @@
     <string name="new_move">New Move Technology: %d</string>
 
     <string name="BASE_GAME">1 Player Alien Empire</string>
-    <string name="BaseGame">1 Player Alien Empire</string>
+    <string name="BaseGameScenario">1 Player Alien Empire</string>
     <string name="SCENARIO_4">Space Empires Solitaire Scenario #4</string>
     <string name="Scenario4">Space Empires Solitaire Scenario #4</string>
     <string name="VP_SOLO_SCENARIO">Alien Player VP Rules (Solitaire)</string>
     <string name="VpSoloScenario">Alien Player VP Rules (Solitaire)</string>
     <string name="VP_2P_SCENARIO">Alien Player Co-op (2 Players)</string>
     <string name="Vp2pScenario">Alien Player Co-op (2 Players)</string>
-    <string name="VP_3P_SCENARIO">Alien Player Co-op (2 Players)</string>
-    <string name="Vp3pScenario">Alien Player Co-op (2 Players)</string>
+    <string name="VP_3P_SCENARIO">Alien Player Co-op (3 Players)</string>
+    <string name="Vp3pScenario">Alien Player Co-op (3 Players)</string>
 
     <string name="EASY">Easy</string>
     <string name="NORMAL">Normal</string>
@@ -124,6 +124,7 @@
     <string name="no_new_fleets">No new fleets</string>
     <string name="no_new_techs">No new technologies</string>
     <string name="fleets_label">%d fleets</string>
+    <string name="eliminate_player">Do you want to eliminate player %s</string>
 
     <string-array name="first_combat_options_s4">
         <item>Combat above planet</item>

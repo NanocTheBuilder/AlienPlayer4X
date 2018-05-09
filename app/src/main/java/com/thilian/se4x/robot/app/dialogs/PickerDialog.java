@@ -12,6 +12,7 @@ import com.thilian.se4x.robot.app.PlayerView;
 import com.thilian.se4x.robot.app.R;
 import com.thilian.se4x.robot.app.SE4XActivity;
 import com.thilian.se4x.robot.game.AlienPlayer;
+import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class PickerDialog {
@@ -28,6 +29,16 @@ public class PickerDialog {
                 activity.getGame().scenario.getStartingLevel(technology),
                 activity.getGame().scenario.getMaxLevel(technology),
                 alienPlayer.getLevel(technology),
+                action);
+    }
+
+    public void showSeenLevelPickerDialog(Technology technology, PickerClickAction action){
+        String sid = String.format("%s_label", technology.toString());
+        show(
+                activity.getResources().getIdentifier(sid, "string", activity.getPackageName()),
+                activity.getGame().scenario.getStartingLevel(technology),
+                activity.getGame().scenario.getMaxLevel(technology),
+                activity.getGame().getSeenLevel(technology),
                 action);
     }
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.thilian.se4x.robot.app.dialogs.SeenTechnologyDialog;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
 
@@ -39,7 +40,7 @@ public class MainActivity extends SE4XActivity {
             players.addView(playerView);
         }
 
-        final Button econButton = (Button) findViewById(R.id.econPhase);
+        final Button econButton = findViewById(R.id.econPhase);
         econButton.setText(getString(R.string.econPhase, getGame().currentTurn));
         econButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +62,9 @@ public class MainActivity extends SE4XActivity {
         setSeenLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SeenTechnologyActivity.class);
-                startActivity(intent);
+                new SeenTechnologyDialog().show(getFragmentManager(), "seenLevels");
+                //Intent intent = new Intent(MainActivity.this, SeenTechnologyActivity.class);
+                //startActivity(intent);
             }
         });
     }
