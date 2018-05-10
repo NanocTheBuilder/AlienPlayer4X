@@ -8,7 +8,7 @@
     tools:context="com.thilian.se4x.robot.app.NewGameActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/background_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
@@ -19,14 +19,14 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@android:color/white"
-        android:padding="64dp"
-        android:visibility="invisible"
+        android:background="#44000000"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/bottom_space"
         app:layout_constraintEnd_toEndOf="@+id/end_space"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/start_space"
         app:layout_constraintTop_toTopOf="@+id/top_space"
-        tools:alpha="0.5" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -51,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/saved_game_found_text"
+        android:textColor="@android:color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/saved_game_details_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,38 +59,23 @@
         app:layout_constraintTop_toBottomOf="@id/top_space"
         app:layout_constraintVertical_chainStyle="spread" />
 
-    <Space
-        android:id="@+id/start_space"
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/saved_game_details_text"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="@id/saved_game_details_text"
-        tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="228dp" />
-
     <TextView
         android:id="@+id/saved_game_details_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:gravity="center_horizontal"
         android:text="Base Game, Normal, Turn 6"
+        android:textColor="@android:color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/resume_button"
-        app:layout_constraintEnd_toStartOf="@id/end_space"
-        app:layout_constraintStart_toEndOf="@id/start_space"
-        app:layout_constraintTop_toBottomOf="@+id/saved_game_found_text" />
-
-    <Space
-        android:id="@+id/end_space"
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/saved_game_details_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/saved_game_details_text"
-         />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saved_game_found_text" />
 
     <Button
         android:id="@+id/resume_button"
@@ -110,6 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_game_text"
+        android:textColor="@android:color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/scenario_spinner"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,15 +104,36 @@
         app:layout_constraintTop_toBottomOf="@id/resume_button" />
 
 
+    <Space
+        android:id="@+id/start_space"
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/scenario_spinner"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scenario_spinner" />
+
     <Spinner
         android:id="@+id/scenario_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/difficulty_spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/end_space"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/start_space"
         app:layout_constraintTop_toBottomOf="@+id/new_game_text" />
+
+
+    <Space
+        android:id="@+id/end_space"
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/scenario_spinner"
+        app:layout_constraintTop_toTopOf="@+id/scenario_spinner" />
 
     <Spinner
         android:id="@+id/difficulty_spinner"
@@ -146,9 +154,9 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/start"
+        app:layout_constraintBottom_toTopOf="@id/bottom_space"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_space"
         app:layout_constraintTop_toBottomOf="@+id/difficulty_spinner" />
 
     <Space
@@ -157,6 +165,6 @@
         android:layout_height="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/start_button"
-        app:layout_constraintTop_toBottomOf="@id/start_button"/>
+        app:layout_constraintTop_toBottomOf="@id/start_button" />
 
 </android.support.constraint.ConstraintLayout>

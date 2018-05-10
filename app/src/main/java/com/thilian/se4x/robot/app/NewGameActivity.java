@@ -15,9 +15,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.Scenarios;
@@ -53,13 +55,16 @@ public class NewGameActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ImageView background = findViewById(R.id.background_image);
+        Glide.with(this).load(R.drawable.ngc_7635_2560).into(background);
+
         Spinner difficultySpinner = findViewById(R.id.difficulty_spinner);
-        final ArrayAdapter<Difficulty> difficultyAdapter = new ToStringArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);
+        final ArrayAdapter<Difficulty> difficultyAdapter = new ToStringArrayAdapter<>(this,R.layout.white_spinner_item);
         difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(difficultyAdapter);
 
         Spinner scenarioSpinner = findViewById(R.id.scenario_spinner);
-        ArrayAdapter<Scenarios> scenarioAdapter = new ToStringArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, Scenarios.values());
+        ArrayAdapter<Scenarios> scenarioAdapter = new ToStringArrayAdapter<>(this, R.layout.white_spinner_item, Scenarios.values());
         scenarioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         scenarioSpinner.setAdapter(scenarioAdapter);
         scenarioSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -153,11 +158,12 @@ public class NewGameActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return getView(position, convertView, parent, android.R.layout.simple_spinner_item);
+            return getView(position, convertView, parent, R.layout.white_spinner_item);
         }
 
         @Override
         public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            int simple_spinner_item = android.R.layout.simple_spinner_item;
             return getView(position, convertView, parent, android.R.layout.simple_spinner_dropdown_item);
         }
 
