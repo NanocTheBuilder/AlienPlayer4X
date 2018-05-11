@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AlienPlayer4X</string>
+    <string name="app_name">Alien Player 4X</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="econPhase">Economic Phase %d</string>

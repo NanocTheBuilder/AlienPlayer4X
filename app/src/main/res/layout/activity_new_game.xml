@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/background_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:background="#44000000"
         android:visibility="visible"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -119,6 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/spinner_background"
         app:layout_constraintBottom_toTopOf="@+id/difficulty_spinner"
         app:layout_constraintEnd_toStartOf="@+id/end_space"
         app:layout_constraintHorizontal_bias="0.5"
@@ -140,6 +142,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/spinner_background"
         app:layout_constraintBottom_toTopOf="@+id/start_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

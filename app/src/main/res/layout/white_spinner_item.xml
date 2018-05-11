@@ -7,5 +7,4 @@
     android:ellipsize="marquee"
     android:theme="@style/SE4XAppTheme"
     android:textColor="#FFFFFF"
-    android:gravity="center"
     />

@@ -3,7 +3,9 @@ package com.thilian.se4x.robot.app;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.thilian.se4x.robot.app.dialogs.EconPhaseResultDialog;
 import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.app.dialogs.FleetBuildResultDialog;
@@ -102,6 +104,11 @@ public class SE4XActivity extends Activity {
 
     protected void showFirstCombatDialog(final Fleet fleet, final FleetView fleetView, FirstCombatDialog.FirstCombatListener listener){
         new FirstCombatDialog(this).show(fleet, fleetView, listener);
+    }
+
+    protected void loadBackgroundImage() {
+        ImageView background = findViewById(R.id.background_image);
+        Glide.with(this).load(R.drawable.ngc_7635_2560).into(background);
     }
 
     @Override

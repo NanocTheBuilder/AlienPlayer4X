@@ -53,6 +53,7 @@ public class NewGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
         ImageView background = findViewById(R.id.background_image);
@@ -60,7 +61,7 @@ public class NewGameActivity extends AppCompatActivity {
 
         Spinner difficultySpinner = findViewById(R.id.difficulty_spinner);
         final ArrayAdapter<Difficulty> difficultyAdapter = new ToStringArrayAdapter<>(this,R.layout.white_spinner_item);
-        difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(difficultyAdapter);
 
         Spinner scenarioSpinner = findViewById(R.id.scenario_spinner);
@@ -163,7 +164,6 @@ public class NewGameActivity extends AppCompatActivity {
 
         @Override
         public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            int simple_spinner_item = android.R.layout.simple_spinner_item;
             return getView(position, convertView, parent, android.R.layout.simple_spinner_dropdown_item);
         }
 

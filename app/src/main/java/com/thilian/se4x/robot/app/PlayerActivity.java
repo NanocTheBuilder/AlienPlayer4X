@@ -7,8 +7,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.app.dialogs.PickerDialog;
 import com.thilian.se4x.robot.game.AlienPlayer;
@@ -38,6 +40,8 @@ public class PlayerActivity extends SE4XActivity implements FirstCombatDialog.Fi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
+
+        loadBackgroundImage();
 
         Button okButton = findViewById(R.id.close_fleets_button);
         okButton.setOnClickListener(new View.OnClickListener() {

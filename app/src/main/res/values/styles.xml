@@ -3,7 +3,7 @@
     <style name="SE4XAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textViewStyle">@style/NormalText</item>
         <item name="android:checkboxStyle">@style/SE4XAppCheckBox</item>
-        <item name="android:spinnerStyle">@style/SE4XAppSpinner</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
     <style name="SmallerText" parent="SE4XAppTheme">
@@ -22,9 +22,4 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="SE4XAppSpinner" parent="Widget.AppCompat.Spinner">
-        <item name="android:dropDownSelector">@drawable/abc_list_selector_holo_light</item>
-        <item name="android:background">@drawable/abc_spinner_mtrl_am_alpha</item>
-        <item name="overlapAnchor">true</item>
-    </style>
 </resources>
