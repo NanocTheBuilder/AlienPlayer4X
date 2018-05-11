@@ -3,7 +3,6 @@
     <style name="SE4XAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textViewStyle">@style/NormalText</item>
         <item name="android:checkboxStyle">@style/SE4XAppCheckBox</item>
-        <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
     <style name="SmallerText" parent="SE4XAppTheme">
