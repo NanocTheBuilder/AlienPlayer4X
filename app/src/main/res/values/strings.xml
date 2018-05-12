@@ -77,7 +77,7 @@
     <string name="DEFENSE_label">Defense:</string>
     <string name="TACTICS_label">Tactics:</string>
     <string name="CLOAKING_label">Cloaking:</string>
-    <string name="SCANNER_label">Scanners:</string>
+    <string name="SCANNER_label">Scanner:</string>
     <string name="FIGHTERS_label">Fighters:</string>
     <string name="POINT_DEFENSE_label">Point Defense:</string>
     <string name="MINE_SWEEPER_label">Mine Sweeper:</string>

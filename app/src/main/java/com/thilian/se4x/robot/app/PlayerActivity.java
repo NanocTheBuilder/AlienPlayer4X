@@ -7,10 +7,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.app.dialogs.PickerDialog;
 import com.thilian.se4x.robot.game.AlienPlayer;
@@ -77,6 +76,7 @@ public class PlayerActivity extends SE4XActivity implements FirstCombatDialog.Fi
         PlayerView playerView = findViewById(R.id.player_view);
         playerView.setBackgroundColor(getAlienPlayer());
         playerView.initTextVisibilities(getGame(), isShowDetails());
+        initTextClicks();
         playerView.initEliminateButton(getAlienPlayer(), this);
     }
 
@@ -89,7 +89,6 @@ public class PlayerActivity extends SE4XActivity implements FirstCombatDialog.Fi
         PlayerView playerView = findViewById(R.id.player_view);
         playerView.update(getGame(), alienPlayer, isShowDetails());
         playerView.initEliminateButton(alienPlayer, this);
-        initTextLongClicks();
 
         findViewById(R.id.build_colony_defense_button).setVisibility(alienPlayer instanceof Scenario4Player ? View.VISIBLE : View.GONE);
 
@@ -147,24 +146,25 @@ public class PlayerActivity extends SE4XActivity implements FirstCombatDialog.Fi
         showFleetBuildResult(result);
     }
 
-    public void initTextLongClicks() {
+    public void initTextClicks() {
         PlayerView playerView = findViewById(R.id.player_view);
         if(getGame().scenario instanceof VpSoloScenario) {
             for(Technology technology : getGame().scenario.getAvailableTechs()) {
-                initTechnologyLongClick(playerView, technology);
+                initTechnologyClick(playerView, technology);
             }
-            initColoniesLongClick();
+            initColoniesClick();
         }
     }
 
-    public void initTechnologyLongClick(final PlayerView playerView, final Technology technology) {
+    public void initTechnologyClick(final PlayerView playerView, final Technology technology) {
             String sid = String.format("%s_text", technology.toString().toLowerCase());
             int id = getResources().getIdentifier(sid, "id", getPackageName());
-            View view = playerView.findViewById(id);
-            view.setLongClickable(true);
-            view.setOnLongClickListener(new View.OnLongClickListener() {
+            TextView view = playerView.findViewById(id);
+            view.setBackgroundResource(R.drawable.editable_text_background);
+            view.setClickable(true);
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View view) {
+                public void onClick(View view) {
                     final AlienPlayer alienPlayer = getAlienPlayer();
                     showLevelPickerDialog(alienPlayer, technology,
                             new PickerDialog.PickerClickAction() {
@@ -175,19 +175,19 @@ public class PlayerActivity extends SE4XActivity implements FirstCombatDialog.Fi
                                 }
                             }
                         );
-                    return true;
                 }
             });
     }
 
-    public void initColoniesLongClick() {
+    public void initColoniesClick() {
         final VpAlienPlayer vpAlienPlayer = (VpAlienPlayer) getAlienPlayer();
 
         View view = findViewById(R.id.colonies_text);
-        view.setLongClickable(true);
-        view.setOnLongClickListener(new View.OnLongClickListener() {
+        view.setClickable(true);
+        view.setBackgroundResource(R.drawable.editable_text_background);
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
+            public void onClick(View view) {
                 showPickerDialog(
                         R.string.colonies_label,
                         0, 9, vpAlienPlayer.getColonies(),
@@ -198,7 +198,6 @@ public class PlayerActivity extends SE4XActivity implements FirstCombatDialog.Fi
                                 updatePlayerView();
                             }
                         });
-                return true;
             };
         });
     }

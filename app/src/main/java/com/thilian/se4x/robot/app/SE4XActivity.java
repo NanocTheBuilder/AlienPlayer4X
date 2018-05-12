@@ -118,7 +118,7 @@ public class SE4XActivity extends Activity {
 
     protected void loadBackgroundImage() {
         ImageView background = findViewById(R.id.background_image);
-        Glide.with(this).load(R.drawable.ngc_7635_2560).into(background);
+        Glide.with(this).load(R.drawable.smc_wing_full_2560).into(background);
     }
 
     @Override

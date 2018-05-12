@@ -57,7 +57,7 @@ public class NewGameActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ImageView background = findViewById(R.id.background_image);
-        Glide.with(this).load(R.drawable.ngc_7635_2560).into(background);
+        Glide.with(this).load(R.drawable.smc_wing_full_2560).into(background);
 
         Spinner difficultySpinner = findViewById(R.id.difficulty_spinner);
         final ArrayAdapter<Difficulty> difficultyAdapter = new ToStringArrayAdapter<>(this,R.layout.white_spinner_item);
