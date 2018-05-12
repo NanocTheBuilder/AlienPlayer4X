@@ -20,6 +20,8 @@ import com.thilian.se4x.robot.game.enums.Technology;
 
 import java.util.List;
 
+import static com.thilian.se4x.robot.game.enums.ShipType.GRAV_ARMOR;
+import static com.thilian.se4x.robot.game.enums.ShipType.HEAVY_INFANTRY;
 import static com.thilian.se4x.robot.game.enums.ShipType.TRANSPORT;
 
 public class SE4XActivity extends Activity {
@@ -65,14 +67,22 @@ public class SE4XActivity extends Activity {
         }
         else {
             int sid;
-            Group group;
             StringBuilder sb = new StringBuilder();
-            boolean hasFullTransport = TRANSPORT.equals(groups.get(0).getShipType());
+            int lineBreak = -1;
+            if(TRANSPORT.equals(groups.get(0).getShipType())){
+                if(groups.size() > 4 && GRAV_ARMOR.equals(groups.get(3).getShipType()))
+                    lineBreak = 3;
+                else if(groups.size() > 3 && HEAVY_INFANTRY.equals(groups.get(2).getShipType()))
+                    lineBreak = 2;
+                else
+                    lineBreak = 1;
+            }
+            Group group;
             for (int i = 0; i < groups.size(); i++) {
                 group = groups.get(i);
                 sid = getResources().getIdentifier(group.getShipType().toString(), "string", getPackageName());
                 sb.append(getResources().getString(sid, group.getSize()));
-                if(hasFullTransport && i == 2)
+                if(i == lineBreak)
                     sb.append("\n");
                 else if(i < groups.size() - 1)
                     sb.append(" ");
