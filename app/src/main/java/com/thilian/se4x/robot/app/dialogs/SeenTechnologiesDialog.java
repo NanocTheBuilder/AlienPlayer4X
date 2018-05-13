@@ -18,7 +18,7 @@ import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
 
-public class SeenTechnologyDialog extends DialogFragment{
+public class SeenTechnologiesDialog extends DialogFragment{
     ConstraintLayout dialogView;
 
     private SE4XActivity getSe4xActivity(){
@@ -31,7 +31,7 @@ public class SeenTechnologyDialog extends DialogFragment{
         LayoutInflater li = (LayoutInflater) getActivity().getSystemService(service);
 
         dialogView = new ConstraintLayout(getActivity());
-        li.inflate(R.layout.activity_seen_technology, dialogView, true);
+        li.inflate(R.layout.seen_technologies_activity, dialogView, true);
 
         createTechnologyText(dialogView, Technology.CLOAKING);
         createTechnologyText(dialogView, Technology.SCANNER);

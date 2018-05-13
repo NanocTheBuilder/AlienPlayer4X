@@ -18,10 +18,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.Scenarios;
 
 public class NewGameActivity extends AppCompatActivity {
@@ -51,7 +53,7 @@ public class NewGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_game);
+        setContentView(R.layout.new_game_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
@@ -61,12 +63,22 @@ public class NewGameActivity extends AppCompatActivity {
 
         Spinner difficultySpinner = findViewById(R.id.difficulty_spinner);
         final ArrayAdapter<Difficulty> difficultyAdapter = new ToStringArrayAdapter<>(this,R.layout.white_spinner_item);
-        //difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(difficultyAdapter);
+        difficultySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Difficulty difficulty = (Difficulty) parent.getItemAtPosition(position);
+                initPlayerColors(difficulty);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         Spinner scenarioSpinner = findViewById(R.id.scenario_spinner);
         ArrayAdapter<Scenarios> scenarioAdapter = new ToStringArrayAdapter<>(this, R.layout.white_spinner_item, Scenarios.values());
-        scenarioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         scenarioSpinner.setAdapter(scenarioAdapter);
         scenarioSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -136,6 +148,17 @@ public class NewGameActivity extends AppCompatActivity {
         }
     }
 
+
+    private void initPlayerColors(Difficulty difficulty){
+        int players = difficulty.getNumberOfAlienPlayers();
+        PlayerColor[] colors = PlayerColor.values();
+        ToggleButton button;
+        for(int i = 0; i < 4; i ++){
+            int id = getResources().getIdentifier(String.format("color_button_%s", colors[i]), "id", getPackageName());
+            button = findViewById(id);
+            button.setChecked(i < players);
+        }
+    }
     public void createGame() throws IllegalAccessException, InstantiationException {
         Difficulty difficulty = (Difficulty)(((Spinner) findViewById(R.id.difficulty_spinner)).getSelectedItem());
         Scenarios scenario = (Scenarios)(((Spinner)findViewById(R.id.scenario_spinner)).getSelectedItem());

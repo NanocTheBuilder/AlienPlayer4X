@@ -5,5 +5,5 @@ package com.thilian.se4x.robot.game.enums;
  */
 
 public enum PlayerColor {
-    GREEN, YELLOW, RED
+    GREEN, YELLOW, RED, BLUE
 }

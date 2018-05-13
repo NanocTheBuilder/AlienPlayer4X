@@ -32,8 +32,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         android:background="#44000000"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         android:visibility="visible"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_space"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <TextView
         android:id="@+id/saved_game_details_text"
@@ -143,10 +143,74 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:background="@drawable/spinner_background"
-        app:layout_constraintBottom_toTopOf="@+id/start_button"
+        app:layout_constraintBottom_toTopOf="@+id/color_button_GREEN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scenario_spinner" />
+
+
+    <ToggleButton
+        android:id="@+id/color_button_GREEN"
+        android:background="@drawable/player_color_btn_green"
+        android:textOff=""
+        android:textOn=""
+        android:layout_width="48dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@id/difficulty_spinner"
+        app:layout_constraintEnd_toStartOf="@+id/color_button_YELLOW"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_button" />
+
+    <ToggleButton
+        android:id="@+id/color_button_YELLOW"
+        android:background="@drawable/player_color_btn_yellow"
+        android:textOff=""
+        android:textOn=""
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/color_button_RED"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/color_button_GREEN"
+        app:layout_constraintTop_toTopOf="@id/color_button_GREEN"
+        tools:layout_editor_absoluteY="478dp" />
+
+    <ToggleButton
+        android:id="@+id/color_button_RED"
+        android:background="@drawable/player_color_btn_red"
+        android:textOff=""
+        android:textOn=""
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/color_button_BLUE"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/color_button_YELLOW"
+        app:layout_constraintTop_toTopOf="@id/color_button_GREEN"
+        tools:layout_editor_absoluteY="478dp" />
+
+    <ToggleButton
+        android:id="@+id/color_button_BLUE"
+        android:background="@drawable/player_color_btn_blue"
+        android:textOff=""
+        android:textOn=""
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/color_button_RED"
+        app:layout_constraintTop_toTopOf="@id/color_button_GREEN"
+        tools:layout_editor_absoluteY="478dp" />
 
     <Button
         android:id="@+id/start_button"
@@ -160,7 +224,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_space"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/difficulty_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/color_button_GREEN" />
 
     <Space
         android:id="@+id/bottom_space"
@@ -169,5 +233,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/start_button"
         app:layout_constraintTop_toBottomOf="@id/start_button" />
+
+
 
 </android.support.constraint.ConstraintLayout>

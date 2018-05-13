@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
-import com.thilian.se4x.robot.app.dialogs.SeenTechnologyDialog;
+import com.thilian.se4x.robot.app.dialogs.SeenTechnologiesDialog;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
 
@@ -23,7 +21,7 @@ public class MainActivity extends SE4XActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
 
         loadBackgroundImage();
 
@@ -66,7 +64,7 @@ public class MainActivity extends SE4XActivity {
         setSeenLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SeenTechnologyDialog().show(getFragmentManager(), "seenLevels");
+                new SeenTechnologiesDialog().show(getFragmentManager(), "seenLevels");
                 //Intent intent = new Intent(MainActivity.this, SeenTechnologyActivity.class);
                 //startActivity(intent);
             }
