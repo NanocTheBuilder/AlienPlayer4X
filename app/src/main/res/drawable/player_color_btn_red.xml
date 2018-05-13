@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:constantSize="true">
-    <item android:state_checked="true">
-        <nine-patch android:src="@drawable/player_color_bgd_red"/>
-    </item>
-    <item android:state_checked="false">
-        <layer-list>
-            <item android:drawable="@drawable/player_color_bgd_red"/>
-            <item android:drawable="@drawable/player_color_bgd_unchecked"/>
-        </layer-list>
-    </item>
+    <item android:state_checked="true" android:drawable="@drawable/player_color_bgd_red"/>
+    <item android:drawable="@drawable/player_color_bgd_red_unckecked" android:state_checked="false"></item>
 </selector>
