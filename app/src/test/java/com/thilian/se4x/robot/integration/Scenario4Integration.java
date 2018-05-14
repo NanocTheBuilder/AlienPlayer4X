@@ -13,6 +13,7 @@ import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.Group;
 import com.thilian.se4x.robot.game.MockRoller;
 import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
@@ -28,7 +29,7 @@ public class Scenario4Integration {
     @Test
     public void economyRollStartsNewFleet() {
         MockRoller roller = new MockRoller();
-        Game game = Game.newGame(new Scenario4(), BaseGameDifficulty.NORMAL);
+        Game game = Game.newGame(new Scenario4(), BaseGameDifficulty.NORMAL, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.RED);
         game.roller = roller;
 
         ap = (Scenario4Player) game.aliens.get(0);

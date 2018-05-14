@@ -74,6 +74,6 @@ public class TechPurchaseIntegration extends BasegameTechnologyBuyerTestBase {
             public List<? extends Difficulty> getDifficulties() {
                 return new ArrayList<>();
             }
-        }, BaseGameDifficulty.NORMAL);
+        }, BaseGameDifficulty.NORMAL, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.RED);
     }
 }

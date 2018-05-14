@@ -74,7 +74,7 @@ public class PlayerActivity extends SE4XActivity implements FirstCombatDialog.Fi
         super.onStart();
         alienIndex = getIntent().getIntExtra(Intent.EXTRA_INDEX, -1);
         PlayerView playerView = findViewById(R.id.player_view);
-        playerView.setBackgroundColor(getAlienPlayer());
+        playerView.setBackgroundColor(getColor(getAlienPlayer()));
         playerView.initTextVisibilities(getGame(), isShowDetails());
         initTextClicks();
         playerView.initEliminateButton(getAlienPlayer(), this);
@@ -93,7 +93,7 @@ public class PlayerActivity extends SE4XActivity implements FirstCombatDialog.Fi
         findViewById(R.id.build_colony_defense_button).setVisibility(alienPlayer instanceof Scenario4Player ? View.VISIBLE : View.GONE);
 
         LinearLayout fleets = (LinearLayout) findViewById(R.id.fleets);
-        fleets.setBackgroundColor(Color.parseColor(alienPlayer.getColor().toString()));
+        fleets.setBackgroundColor(getColor(alienPlayer));
         fleets.removeAllViews();
         for(Fleet fleet : alienPlayer.getFleets()){
             fleets.addView(new FleetView(this, fleet));

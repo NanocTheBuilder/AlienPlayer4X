@@ -37,7 +37,7 @@ public class EconPhaseResultDialog {
         for(EconPhaseResult result : results){
             ConstraintLayout playerResultView = new ConstraintLayout(activity);
             li.inflate(R.layout.econ_phase_result, playerResultView, true);
-            playerResultView.setBackgroundColor(Color.parseColor(result.getAlienPlayer().getColor().toString()));
+            playerResultView.setBackgroundColor(activity.getColor(result.getAlienPlayer()));
 
             setResultText(playerResultView, R.id.fleet_cp_text, R.string.fleet_cp_result, result.getFleetCP());
             setResultText(playerResultView, R.id.tech_cp_text, R.string.tech_cp_result, result.getTechCP());

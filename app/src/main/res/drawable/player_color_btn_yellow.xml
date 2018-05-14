@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:constantSize="true">
-    <item android:state_checked="true" android:drawable="@drawable/player_color_bgd_yellow"/>
-    <item android:drawable="@drawable/player_color_bgd_yellow_unckecked" android:state_checked="false"></item>
+    <item android:state_checked="true" android:drawable="@drawable/button_bkg_yellow"/>
+    <item android:state_checked="false">
+        <layer-list>
+            <item android:drawable="@drawable/button_bkg_yellow"/>
+            <item android:drawable="@drawable/button_bkg_unchecked"/>
+        </layer-list>
+    </item>
 </selector>

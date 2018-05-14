@@ -2,6 +2,7 @@ package com.thilian.se4x.robot.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,7 +28,10 @@ import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.Scenarios;
 
-public class NewGameActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class NewGameActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -61,14 +66,14 @@ public class NewGameActivity extends AppCompatActivity {
         ImageView background = findViewById(R.id.background_image);
         Glide.with(this).load(R.drawable.smc_wing_full_2560).into(background);
 
-        Spinner difficultySpinner = findViewById(R.id.difficulty_spinner);
+        final Spinner difficultySpinner = findViewById(R.id.difficulty_spinner);
         final ArrayAdapter<Difficulty> difficultyAdapter = new ToStringArrayAdapter<>(this,R.layout.white_spinner_item);
+        difficultyAdapter.setNotifyOnChange(true);
         difficultySpinner.setAdapter(difficultyAdapter);
         difficultySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Difficulty difficulty = (Difficulty) parent.getItemAtPosition(position);
-                initPlayerColors(difficulty);
+                initPlayerColors();
             }
 
             @Override
@@ -91,7 +96,8 @@ public class NewGameActivity extends AppCompatActivity {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-                difficultyAdapter.notifyDataSetChanged();
+                difficultySpinner.setSelection(0);
+                initPlayerColors();
             }
 
             @Override
@@ -99,6 +105,23 @@ public class NewGameActivity extends AppCompatActivity {
 
             }
         });
+
+        for(PlayerColor color : PlayerColor.values()){
+            ToggleButton colorButton = findColorButton(color);
+            colorButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int selectedPlayers = 0;
+                    for(PlayerColor playerColor : PlayerColor.values()){
+                        if(findColorButton(playerColor).isChecked())
+                            selectedPlayers++;
+                    }
+                    Button  startButton = findViewById(R.id.start_button);
+                    Difficulty difficulty = (Difficulty)(((Spinner) findViewById(R.id.difficulty_spinner)).getSelectedItem());
+                    startButton.setEnabled(selectedPlayers == difficulty.getNumberOfAlienPlayers());
+                }
+            });
+        }
 
         Button  startButton = findViewById(R.id.start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +148,17 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
+    private ToggleButton findColorButton(PlayerColor playerColor) {
+        int id = getResources().getIdentifier(String.format("color_button_%s", playerColor), "id", getPackageName());
+        return findViewById(id);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -149,7 +183,8 @@ public class NewGameActivity extends AppCompatActivity {
     }
 
 
-    private void initPlayerColors(Difficulty difficulty){
+    private void initPlayerColors(){
+        Difficulty difficulty = (Difficulty)(((Spinner) findViewById(R.id.difficulty_spinner)).getSelectedItem());
         int players = difficulty.getNumberOfAlienPlayers();
         PlayerColor[] colors = PlayerColor.values();
         ToggleButton button;
@@ -162,7 +197,12 @@ public class NewGameActivity extends AppCompatActivity {
     public void createGame() throws IllegalAccessException, InstantiationException {
         Difficulty difficulty = (Difficulty)(((Spinner) findViewById(R.id.difficulty_spinner)).getSelectedItem());
         Scenarios scenario = (Scenarios)(((Spinner)findViewById(R.id.scenario_spinner)).getSelectedItem());
-        Game game = Game.newGame(scenario.getClazz().newInstance(), difficulty);
+        List<PlayerColor> selectedColors = new ArrayList<>();
+        for(PlayerColor playerColor : PlayerColor.values()){
+            if(findColorButton(playerColor).isChecked())
+                selectedColors.add(playerColor);
+        }
+        Game game = Game.newGame(scenario.getClazz().newInstance(), difficulty, selectedColors.toArray(new PlayerColor[selectedColors.size()]));
         new GameSaver().saveGame(game, this);
     }
 

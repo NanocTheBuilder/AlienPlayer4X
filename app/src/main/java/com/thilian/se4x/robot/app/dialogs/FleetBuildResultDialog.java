@@ -27,7 +27,7 @@ public class FleetBuildResultDialog {
         LinearLayout layout = new LinearLayout(activity);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(8, 8, 8, 8);
-        layout.setBackgroundColor(Color.parseColor(result.getAlienPlayer().getColor().toString()));
+        layout.setBackgroundColor(activity.getColor(result.getAlienPlayer()));
 
         String packageName = activity.getPackageName();
         Resources resources = activity.getResources();

@@ -121,6 +121,11 @@ public class SE4XActivity extends Activity {
         Glide.with(this).load(R.drawable.smc_wing_full_2560).into(background);
     }
 
+    public int getColor(AlienPlayer alienPlayer){
+        int cid = getResources().getIdentifier(alienPlayer.getColor().name(), "color", getPackageName());
+        return getResources().getColor(cid);
+    }
+
     @Override
     protected void onPause() {
         super.onPause();

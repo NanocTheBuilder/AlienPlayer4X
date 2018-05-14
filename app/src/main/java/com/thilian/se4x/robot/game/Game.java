@@ -21,14 +21,14 @@ public class Game {
     public int currentTurn;
     private Difficulty difficulty;
 
-    public static Game newGame(Scenario scenario, Difficulty difficulty) {
+    public static Game newGame(Scenario scenario, Difficulty difficulty, PlayerColor... playerColors) {
         Game game = new Game();
         game.difficulty = difficulty;
         game.scenario = scenario;
         scenario.init(game);
         game.aliens = new ArrayList<>();
         for (int i = 0; i < difficulty.getNumberOfAlienPlayers(); i++) {
-            game.aliens.add(scenario.newPlayer(game, difficulty, PlayerColor.values()[i]));
+            game.aliens.add(scenario.newPlayer(game, difficulty, playerColors[i]));
         }
 
         game.resetSeenLevels();

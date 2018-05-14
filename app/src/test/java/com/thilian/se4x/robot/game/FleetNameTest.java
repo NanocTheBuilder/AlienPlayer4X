@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameScenario;
 import com.thilian.se4x.robot.game.enums.FleetType;
@@ -17,7 +18,7 @@ public class FleetNameTest {
 
     @Before
     public void setUp(){
-        Game game = Game.newGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL);
+        Game game = Game.newGame(new BaseGameScenario(), BaseGameDifficulty.NORMAL, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.RED);
         ap = game.aliens.get(0);
     }
 

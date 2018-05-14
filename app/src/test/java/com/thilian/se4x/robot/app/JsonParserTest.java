@@ -5,6 +5,7 @@ import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.MockRoller;
 import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameScenario;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
@@ -19,7 +20,7 @@ public class JsonParserTest {
     public void testScenario() {
         //There are no asserts in this test. I use it by setting a breakpoint at the end, and check the values in a debugger
         JsonParser parser = new JsonParser();
-        Game game = Game.newGame(new BaseGameScenario(), BaseGameDifficulty.GOOD_LUCK);
+        Game game = Game.newGame(new BaseGameScenario(), BaseGameDifficulty.GOOD_LUCK, PlayerColor.GREEN, PlayerColor.YELLOW, PlayerColor.RED);
         MockRoller roller = new MockRoller();
         game.roller = roller;
         Fleet fleet = new Fleet(game.aliens.get(0), FleetType.REGULAR_FLEET, 50);

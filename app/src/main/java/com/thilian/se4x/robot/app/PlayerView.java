@@ -31,9 +31,10 @@ public class PlayerView extends ConstraintLayout {
 
     public PlayerView(Context context, Game game, final AlienPlayer alienPlayer) {
         this(context, null);
-        boolean showDetails = ((SE4XActivity) getContext()).isShowDetails();
+        SE4XActivity activity = (SE4XActivity) getContext();
+        boolean showDetails = activity.isShowDetails();
         initTextVisibilities(game, showDetails);
-        setBackgroundColor(alienPlayer);
+        setBackgroundColor(activity.getColor(alienPlayer));
         update(game, alienPlayer, showDetails);
     }
 
@@ -79,10 +80,6 @@ public class PlayerView extends ConstraintLayout {
             findViewById(R.id.bank_text).setVisibility(GONE);
             findViewById(R.id.colonies_text).setVisibility(GONE);
         }
-    }
-
-    public void setBackgroundColor(AlienPlayer alienPlayer){
-        setBackgroundColor(Color.parseColor(alienPlayer.getColor().toString()));
     }
 
     public void update(Game game, AlienPlayer alienPlayer, boolean showDetails){
