@@ -154,12 +154,6 @@ public class NewGameActivity extends AppCompatActivity{
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         Game game = new GameSaver().loadGame(this);
@@ -181,7 +175,6 @@ public class NewGameActivity extends AppCompatActivity{
             gameDetails.setText(text);
         }
     }
-
 
     private void initPlayerColors(){
         Difficulty difficulty = (Difficulty)(((Spinner) findViewById(R.id.difficulty_spinner)).getSelectedItem());
