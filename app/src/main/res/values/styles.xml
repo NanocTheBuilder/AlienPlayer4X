@@ -17,6 +17,12 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <style name="MainMenuItem" parent="LargerText">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
     <style name="SE4XAppCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:textSize">18sp</item>
     </style>

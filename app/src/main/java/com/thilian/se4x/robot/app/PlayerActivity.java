@@ -3,7 +3,6 @@ package com.thilian.se4x.robot.app;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +26,7 @@ import java.util.List;
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_WITH_NPAS;
 
-public class PlayerActivity extends SE4XActivity implements FirstCombatDialog.FirstCombatListener, PlayerView.PlayerEliminationListener, FleetView.FleetRemoveListener{
+public class PlayerActivity extends SE4XGameActivity implements FirstCombatDialog.FirstCombatListener, PlayerView.PlayerEliminationListener, FleetView.FleetRemoveListener{
 
     private int alienIndex;
 

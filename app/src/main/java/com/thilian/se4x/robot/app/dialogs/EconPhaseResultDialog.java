@@ -3,7 +3,6 @@ package com.thilian.se4x.robot.app.dialogs;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.thilian.se4x.robot.app.R;
-import com.thilian.se4x.robot.app.SE4XActivity;
+import com.thilian.se4x.robot.app.SE4XGameActivity;
 import com.thilian.se4x.robot.game.EconPhaseResult;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -20,9 +19,9 @@ import java.util.List;
 
 public class EconPhaseResultDialog {
 
-    private SE4XActivity activity;
+    private SE4XGameActivity activity;
 
-    public EconPhaseResultDialog(SE4XActivity activity){
+    public EconPhaseResultDialog(SE4XGameActivity activity){
         this.activity = activity;
     }
 

@@ -14,8 +14,8 @@ import com.thilian.se4x.robot.game.EconPhaseResult;
 
 import java.util.List;
 
-public class MainActivity extends SE4XActivity {
-    private static final String tag = SE4XActivity.class.getSimpleName();
+public class MainActivity extends SE4XGameActivity {
+    private static final String tag = SE4XGameActivity.class.getSimpleName();
     private boolean exitGame = false;
 
     @Override
@@ -95,7 +95,7 @@ public class MainActivity extends SE4XActivity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     deleteGame();
-                    MainActivity.super.onBackPressed();
+                    MainActivity.super.finish();
                 }
             })
             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

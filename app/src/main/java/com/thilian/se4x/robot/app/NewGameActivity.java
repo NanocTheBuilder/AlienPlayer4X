@@ -31,40 +31,13 @@ import com.thilian.se4x.robot.game.enums.Scenarios;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewGameActivity extends AppCompatActivity{
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch(item.getItemId())
-        {
-            case R.id.action_settings:
-            {
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
+public class NewGameActivity extends SE4XActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_game_activity);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-        setSupportActionBar(toolbar);
 
-        ImageView background = findViewById(R.id.background_image);
-        Glide.with(this).load(R.drawable.smc_wing_full_2560).into(background);
+        loadBackgroundImage();
 
         final Spinner difficultySpinner = findViewById(R.id.difficulty_spinner);
         final ArrayAdapter<Difficulty> difficultyAdapter = new ToStringArrayAdapter<>(this,R.layout.white_spinner_item);
@@ -106,6 +79,7 @@ public class NewGameActivity extends AppCompatActivity{
             }
         });
 
+
         for(PlayerColor color : PlayerColor.values()){
             ToggleButton colorButton = findColorButton(color);
             colorButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -138,42 +112,11 @@ public class NewGameActivity extends AppCompatActivity{
                 }
             }
         });
-
-        Button resumeButton = findViewById(R.id.resume_button);
-        resumeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startMainActivity();
-            }
-        });
     }
 
     private ToggleButton findColorButton(PlayerColor playerColor) {
         int id = getResources().getIdentifier(String.format("color_button_%s", playerColor), "id", getPackageName());
         return findViewById(id);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Game game = new GameSaver().loadGame(this);
-        initResumeButton(game);
-    }
-
-    public void initResumeButton(Game game){
-        int visibility = game == null ? View.GONE : View.VISIBLE;
-        findViewById(R.id.saved_game_found_text).setVisibility(visibility);
-        findViewById(R.id.saved_game_details_text).setVisibility(visibility);
-        findViewById(R.id.resume_button).setVisibility(visibility);
-        if(game != null){
-            TextView gameDetails = findViewById(R.id.saved_game_details_text);
-            int scenarioId = getResources().getIdentifier(game.scenario.getClass().getSimpleName(), "string", getPackageName());
-            String scenarioName = getResources().getString(scenarioId);
-            int diffId = getResources().getIdentifier(game.getDifficulty().getName(), "string", getPackageName());
-            String diffName = getResources().getString(diffId);
-            String text = getResources().getString(R.string.saved_game_details_text, scenarioName, diffName, game.currentTurn);
-            gameDetails.setText(text);
-        }
     }
 
     private void initPlayerColors(){
@@ -230,16 +173,16 @@ public class NewGameActivity extends AppCompatActivity{
             }
 
             T item = getItem(position);
-            String string = NewGameActivity.this.getString(item);
+            String string = getString(item);
             ((TextView) convertView.findViewById(android.R.id.text1))
                     .setText(string);
             return convertView;
         }
-    }
 
-    @NonNull
-    public String getString(Object item) {
-        int sid = getResources().getIdentifier(item.toString(), "string", getPackageName());
-        return getResources().getString(sid);
+        @NonNull
+        public String getString(Object item) {
+            int sid = getResources().getIdentifier(item.toString(), "string", getPackageName());
+            return getResources().getString(sid);
+        }
     }
 }

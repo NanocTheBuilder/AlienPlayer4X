@@ -27,6 +27,7 @@ public class JsonParserTest {
         //((VpEconomicSheet)game.aliens.get(0).getEconomicSheet()).spendBank(50);
         roller.mockRoll(5);
         game.scenario.buildFleet(fleet);
+        game = null;
         String json = parser.toJson(game);
         Game actual = parser.fromJson(json);
     }

@@ -12,7 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class GameSaver {
     static final String GAME_FILE = "saved.game";
@@ -69,5 +68,10 @@ public class GameSaver {
     public long getGameDate(Context context){
         File file = new File(context.getFilesDir(), GAME_FILE);
         return file.lastModified();
+    }
+
+    public boolean isSaveExists(Context context){
+        File file = new File(context.getFilesDir(), GAME_FILE);
+        return file.exists() && file.length() != 4; //"null"
     }
 }

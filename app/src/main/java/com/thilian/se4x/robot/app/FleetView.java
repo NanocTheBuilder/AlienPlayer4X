@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,7 +34,7 @@ public class FleetView extends RelativeLayout{
             @Override
             public void onClick(View view) {
                 if(fleet.getAp() instanceof Scenario4Player){
-                    ((SE4XActivity)context).showFirstCombatDialog(fleet, FleetView.this, firstCombatListener);
+                    ((SE4XGameActivity)context).showFirstCombatDialog(fleet, FleetView.this, firstCombatListener);
                 }
                 else {
                     firstCombatListener.firstCombatPushed(fleet, FleetView.this, false, false);
@@ -56,7 +55,7 @@ public class FleetView extends RelativeLayout{
     }
 
     public void update(){
-        SE4XActivity activity = (SE4XActivity) getContext();
+        SE4XGameActivity activity = (SE4XGameActivity) getContext();
         TextView fleetNameText = findViewById(R.id.fleet_name_text);
         fleetNameText.setText(activity.getFleetName(fleet));
 

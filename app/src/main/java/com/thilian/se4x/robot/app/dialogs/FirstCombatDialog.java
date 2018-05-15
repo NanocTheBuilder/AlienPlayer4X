@@ -5,14 +5,14 @@ import android.content.DialogInterface;
 
 import com.thilian.se4x.robot.app.FleetView;
 import com.thilian.se4x.robot.app.R;
-import com.thilian.se4x.robot.app.SE4XActivity;
+import com.thilian.se4x.robot.app.SE4XGameActivity;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.scenarios.vpscenario.VpSoloScenario;
 
 public class FirstCombatDialog{
-    SE4XActivity activity;
+    SE4XGameActivity activity;
 
-    public FirstCombatDialog(SE4XActivity activity) {
+    public FirstCombatDialog(SE4XGameActivity activity) {
         this.activity = activity;
     }
 

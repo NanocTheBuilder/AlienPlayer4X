@@ -13,7 +13,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.thilian.se4x.robot.app.R;
-import com.thilian.se4x.robot.app.SE4XActivity;
+import com.thilian.se4x.robot.app.SE4XGameActivity;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
@@ -21,8 +21,8 @@ import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4;
 public class SeenTechnologiesDialog extends DialogFragment{
     ConstraintLayout dialogView;
 
-    private SE4XActivity getSe4xActivity(){
-        return (SE4XActivity) getActivity();
+    private SE4XGameActivity getSe4xActivity(){
+        return (SE4XGameActivity) getActivity();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SeenTechnologiesDialog extends DialogFragment{
     public void onResume() {
         super.onResume();
 
-        SE4XActivity activity = getSe4xActivity();
+        SE4XGameActivity activity = getSe4xActivity();
 
         initTechnologyText(Technology.CLOAKING);
         initTechnologyText(Technology.SCANNER);
@@ -81,7 +81,7 @@ public class SeenTechnologiesDialog extends DialogFragment{
     }
 
     public void initTechnologyText(Technology technology) {
-        SE4XActivity activity = getSe4xActivity();
+        SE4XGameActivity activity = getSe4xActivity();
         String textViewName = String.format("%s_text", technology.toString().toLowerCase());
         int textViewId = activity.getResources().getIdentifier(textViewName, "id", activity.getPackageName());
         if (textViewId != 0) {
@@ -112,7 +112,7 @@ public class SeenTechnologiesDialog extends DialogFragment{
     }
 
     private void showPickerDialog(final Technology technology) {
-        final SE4XActivity activity = getSe4xActivity();
+        final SE4XGameActivity activity = getSe4xActivity();
         new PickerDialog(activity).showSeenLevelPickerDialog(technology, new PickerDialog.PickerClickAction() {
             @Override
             public void action(int value) {
@@ -128,7 +128,7 @@ public class SeenTechnologiesDialog extends DialogFragment{
     }
 
     private void initCheckbox(int id, Seeable seeable) {
-        final SE4XActivity activity = getSe4xActivity();
+        final SE4XGameActivity activity = getSe4xActivity();
         CheckBox checkBox = dialogView.findViewById(id);
         checkBox.setVisibility(View.VISIBLE);
         checkBox.setChecked(activity.getGame().isSeenThing(seeable));
@@ -144,7 +144,7 @@ public class SeenTechnologiesDialog extends DialogFragment{
 
         @Override
         public void onClick(View view) {
-        final SE4XActivity activity = getSe4xActivity();
+        final SE4XGameActivity activity = getSe4xActivity();
             boolean checked = ((CheckBox) view).isChecked();
             if (checked) {
                 activity.getGame().addSeenThing(seeable);

@@ -3,13 +3,12 @@ package com.thilian.se4x.robot.app.dialogs;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.thilian.se4x.robot.app.R;
-import com.thilian.se4x.robot.app.SE4XActivity;
+import com.thilian.se4x.robot.app.SE4XGameActivity;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuildResult;
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -17,9 +16,9 @@ import com.thilian.se4x.robot.game.enums.Technology;
 import java.util.Map;
 
 public class FleetBuildResultDialog {
-    private SE4XActivity activity;
+    private SE4XGameActivity activity;
 
-    public FleetBuildResultDialog(SE4XActivity activity) {
+    public FleetBuildResultDialog(SE4XGameActivity activity) {
         this.activity = activity;
     }
 

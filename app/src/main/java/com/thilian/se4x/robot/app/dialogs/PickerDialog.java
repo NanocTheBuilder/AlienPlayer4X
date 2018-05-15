@@ -8,17 +8,15 @@ import android.view.LayoutInflater;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import com.thilian.se4x.robot.app.PlayerView;
 import com.thilian.se4x.robot.app.R;
-import com.thilian.se4x.robot.app.SE4XActivity;
+import com.thilian.se4x.robot.app.SE4XGameActivity;
 import com.thilian.se4x.robot.game.AlienPlayer;
-import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 public class PickerDialog {
-    SE4XActivity activity;
+    SE4XGameActivity activity;
 
-    public PickerDialog(SE4XActivity activity) {
+    public PickerDialog(SE4XGameActivity activity) {
         this.activity = activity;
     }
 

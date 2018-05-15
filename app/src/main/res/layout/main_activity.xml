@@ -38,6 +38,9 @@
             android:id="@+id/players"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:showDividers="middle"
+            android:divider="@android:drawable/divider_horizontal_dark"
+            android:dividerPadding="8dp"
             android:orientation="vertical" />
     </ScrollView>
 

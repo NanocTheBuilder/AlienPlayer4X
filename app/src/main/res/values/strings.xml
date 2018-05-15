@@ -11,9 +11,11 @@
     <string name="gameOver">...</string>
     <string name="start">Start</string>
     <string name="resume">Resume</string>
+    <string name="new_game_text">New Game</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
 
     <string name="saved_game_found_text">Saved Game</string>
-    <string name="new_game_text">New Game</string>
 
     <string name="eliminate">Eliminate</string>
     <string name="eliminated">Eliminated</string>

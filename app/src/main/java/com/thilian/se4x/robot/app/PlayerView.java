@@ -1,7 +1,6 @@
 package com.thilian.se4x.robot.app;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -31,7 +30,7 @@ public class PlayerView extends ConstraintLayout {
 
     public PlayerView(Context context, Game game, final AlienPlayer alienPlayer) {
         this(context, null);
-        SE4XActivity activity = (SE4XActivity) getContext();
+        SE4XGameActivity activity = (SE4XGameActivity) getContext();
         boolean showDetails = activity.isShowDetails();
         initTextVisibilities(game, showDetails);
         setBackgroundColor(activity.getColor(alienPlayer));
