@@ -70,7 +70,7 @@
     <string name="FIGHTERS">Fighters: %d</string>
     <string name="POINT_DEFENSE">Point Defense: %d</string>
     <string name="MINE_SWEEPER">Mine Sweep: %d</string>
-    <string name="colonies">Colonies: %d</string>
+    <string name="colonies">Colonies:%d </string>
 
     <string name="MOVE_label">Move:</string>
     <string name="SHIP_SIZE_label">Ship Size:</string>

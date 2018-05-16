@@ -3,6 +3,7 @@ package com.thilian.se4x.robot.app.dialogs;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import com.thilian.se4x.robot.app.SE4XGameActivity;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuildResult;
 import com.thilian.se4x.robot.game.enums.Technology;
+
+import org.w3c.dom.Text;
 
 import java.util.Map;
 
@@ -33,19 +36,17 @@ public class FleetBuildResultDialog {
 
         for (Map.Entry<Technology, Integer> entry : result.getNewTechs().entrySet()) {
             int sid = resources.getIdentifier(entry.getKey().toString(), "string", packageName);
-            TextView textView = new TextView(activity);
-            textView.setTextSize(18);
-            textView.setGravity(Gravity.CENTER_HORIZONTAL);
-            textView.setText(resources.getString(sid, entry.getValue()));
+            TextView textView = newTextView(resources.getString(sid, entry.getValue()));
             layout.addView(textView);
         }
 
         for(Fleet fleet : result.getNewFleets()){
-            int sid = resources.getIdentifier(fleet.getFleetType().toString(), "string", packageName);
-            TextView textView = new TextView(activity);
-            textView.setTextSize(18);
-            textView.setGravity(Gravity.CENTER_HORIZONTAL);
-            textView.setText(activity.getFleetName(fleet)+"\n"+activity.getFleetDetails(fleet));
+            TextView textView = newTextView(activity.getFleetName(fleet) + "\n" + activity.getFleetDetails(fleet));
+            layout.addView(textView);
+        }
+
+        if(result.getNewFleets().isEmpty() && result.getNewTechs().isEmpty()){
+            TextView textView = newTextView(R.string.no_new_fleets);
             layout.addView(textView);
         }
 
@@ -58,5 +59,26 @@ public class FleetBuildResultDialog {
                     }
                 }).show();
     }
+
+    private TextView newTextView(String text){
+        TextView textView = newTextView();
+        textView.setText(text);
+        return  textView;
+    }
+
+    private TextView newTextView(int textId){
+        TextView textView = newTextView();
+        textView.setText(textId);
+        return  textView;
+    }
+
+    @NonNull
+    private TextView newTextView() {
+        TextView textView = new TextView(activity);
+        textView.setTextSize(18);
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+        return textView;
+    }
+
 
 }
