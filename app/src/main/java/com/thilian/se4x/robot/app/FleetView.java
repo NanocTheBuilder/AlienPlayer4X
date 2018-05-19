@@ -37,8 +37,8 @@ public class FleetView extends RelativeLayout{
 
     private Fleet fleet;
 
-    public FleetView(final Context context, final Fleet fleet){
-        super(context);
+    public FleetView(final PlayerFragment fragment, final Fleet fleet){
+        super(fragment.gameActivity);
         this.setId(7133700 + fleet.getIndex());
         this.fleet = fleet;
 
@@ -46,27 +46,24 @@ public class FleetView extends RelativeLayout{
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(service);
         li.inflate(R.layout.fleet_layout, this, true);
 
-        final FirstCombatDialog.FirstCombatListener firstCombatListener
-                = (FirstCombatDialog.FirstCombatListener)context;
         Button firstCombatButton = findViewById(R.id.first_combat_button);
         firstCombatButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(fleet.getAp() instanceof Scenario4Player){
-                    ((SE4XGameActivity)context).showFirstCombatDialog(fleet, FleetView.this, firstCombatListener);
+                    fragment.gameActivity.showFirstCombatDialog(fleet, FleetView.this, fragment);
                 }
                 else {
-                    firstCombatListener.firstCombatPushed(fleet, FleetView.this, false, false);
+                    fragment.firstCombatPushed(fleet, FleetView.this, false, false);
                 }
             }
         });
 
-        final FleetRemoveListener fleetRemoveListener = (FleetRemoveListener)context;
         Button removeFleetButton = findViewById(R.id.remove_fleet_button);
         removeFleetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                fleetRemoveListener.onFleetRemoved(fleet.getIndex(), FleetView.this);
+                fragment.onFleetRemoved(fleet.getIndex(), FleetView.this);
             }
         });
 

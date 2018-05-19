@@ -24,7 +24,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/SE4XAppTheme"
-    tools:context="com.thilian.se4x.robot.app.PlayerActivity">
+    tools:context="com.thilian.se4x.robot.app.portrait.PlayerActivity">
 
     <ImageView
         android:id="@+id/background_image"
@@ -34,70 +34,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.thilian.se4x.robot.app.PlayerView
-        android:id="@+id/player_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/build_home_defense_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
-
-    <Button
-        android:id="@+id/build_home_defense_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/buildHomeDefense"
-        app:layout_constraintTop_toBottomOf="@+id/player_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/scroll_view"
-        app:layout_constraintEnd_toStartOf="@+id/build_colony_defense_button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        />
-
-    <Button
-        android:id="@+id/build_colony_defense_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/buildColonyDefense"
-        app:layout_constraintTop_toBottomOf="@+id/player_view"
-        app:layout_constraintStart_toEndOf="@+id/build_home_defense_button"
-        app:layout_constraintBottom_toTopOf="@+id/scroll_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        />
-
-    <ScrollView
-        android:id="@+id/scroll_view"
+    <fragment
+        android:id="@+id/player_fragment"
+        android:name="com.thilian.se4x.robot.app.PlayerFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/close_fleets_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/build_home_defense_button">
-
-        <LinearLayout
-            android:id="@+id/fleets"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
-
-    </ScrollView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/close_fleets_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@android:string/ok"
-        app:layout_constraintTop_toBottomOf="@+id/scroll_view"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-    />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -26,7 +26,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
-import com.thilian.se4x.robot.game.Game;
+import com.thilian.se4x.robot.app.portrait.MainActivity;
 
 public class MainMenuActivity extends SE4XActivity {
 

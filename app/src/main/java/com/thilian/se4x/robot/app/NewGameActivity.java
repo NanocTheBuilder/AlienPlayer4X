@@ -21,27 +21,20 @@ package com.thilian.se4x.robot.app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.bumptech.glide.Glide;
+import com.thilian.se4x.robot.app.portrait.MainActivity;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
