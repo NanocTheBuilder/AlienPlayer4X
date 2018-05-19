@@ -1,193 +1,213 @@
+/*
+ * Copyright (C) 2018 Balázs Péter
+ *
+ * This file is part of Alien Player 4X.
+ *
+ * Alien Player 4X is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Alien Player 4X is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.thilian.se4x.robot.game.scenarios.basegame;
-
-import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
 
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.enums.FleetType;
 import com.thilian.se4x.robot.game.enums.Seeable;
 import com.thilian.se4x.robot.game.enums.Technology;
 
-public class OptionalTechPurchaseTest  extends BasegameTechnologyBuyerTestBase {
+import org.junit.Test;
 
-	@Test
-	public void buyOptionalPontDefense() {
-		assertDontBuyPD(1);
-		game.addSeenThing(Seeable.FIGHTERS);
-		assertBuyPD(1);
-		assertDontBuyPD(2);
-	}
+import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
+import static org.junit.Assert.assertEquals;
 
-	private void assertBuyPD(int expectedLevel) {
-		assertBuyOptional(expectedLevel, Technology.POINT_DEFENSE, new BuyAction(){
-			@Override
-			protected void buy(AlienPlayer ap) {
-				techBuyer.buyPointDefenseIfNeeded(ap);
-			}
-		});
-	}
+public class OptionalTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
 
-	private void assertDontBuyPD(int expectedLevel) {
-		assertDontBuyOptional(expectedLevel, Technology.POINT_DEFENSE, new BuyAction(){
-			@Override
-			protected void buy(AlienPlayer ap) {
-				techBuyer.buyPointDefenseIfNeeded(ap);
-			}
-		});
-	}
+    @Test
+    public void buyOptionalPontDefense() {
+        assertDontBuyPD(1);
+        game.addSeenThing(Seeable.FIGHTERS);
+        assertBuyPD(1);
+        assertDontBuyPD(2);
+    }
 
-	@Test
-	public void buyOptionalMineSweep() {
-		assertDontBuyMS(1);
-		game.addSeenThing(Seeable.MINES);
-		assertBuyMS(1);
-		assertDontBuyMS(2);
-	}
+    private void assertBuyPD(int expectedLevel) {
+        assertBuyOptional(expectedLevel, Technology.POINT_DEFENSE, new BuyAction() {
+            @Override
+            protected void buy(AlienPlayer ap) {
+                techBuyer.buyPointDefenseIfNeeded(ap);
+            }
+        });
+    }
 
-	private void assertBuyMS(int expectedLevel) {
-		assertBuyOptional(expectedLevel, Technology.MINE_SWEEPER, new BuyAction(){
-			@Override
-			protected void buy(AlienPlayer ap) {
-				techBuyer.buyMineSweepIfNeeded(ap);
-			}
-		});
-	}
+    private void assertDontBuyPD(int expectedLevel) {
+        assertDontBuyOptional(expectedLevel, Technology.POINT_DEFENSE, new BuyAction() {
+            @Override
+            protected void buy(AlienPlayer ap) {
+                techBuyer.buyPointDefenseIfNeeded(ap);
+            }
+        });
+    }
 
-	private void assertDontBuyMS(int expectedLevel) {
-		assertDontBuyOptional(expectedLevel, Technology.MINE_SWEEPER,  new BuyAction(){
-			@Override
-			protected void buy(AlienPlayer ap) {
-				techBuyer.buyMineSweepIfNeeded(ap);
-			}
-		});
-	}
+    @Test
+    public void buyOptionalMineSweep() {
+        assertDontBuyMS(1);
+        game.addSeenThing(Seeable.MINES);
+        assertBuyMS(1);
+        assertDontBuyMS(2);
+    }
 
-	@Test
-	public void buyOptionalScan() {
-		game.setSeenLevel(CLOAKING, 1);
-		roller.mockRoll(4);
-		assertBuyScanner(1);
-		assertDontBuyScanner(2);
+    private void assertBuyMS(int expectedLevel) {
+        assertBuyOptional(expectedLevel, Technology.MINE_SWEEPER, new BuyAction() {
+            @Override
+            protected void buy(AlienPlayer ap) {
+                techBuyer.buyMineSweepIfNeeded(ap);
+            }
+        });
+    }
 
-		game.setSeenLevel(CLOAKING, 2);
-		roller.mockRoll(5);
-		assertDontBuyScanner(2);
+    private void assertDontBuyMS(int expectedLevel) {
+        assertDontBuyOptional(expectedLevel, Technology.MINE_SWEEPER, new BuyAction() {
+            @Override
+            protected void buy(AlienPlayer ap) {
+                techBuyer.buyMineSweepIfNeeded(ap);
+            }
+        });
+    }
 
-		roller.mockRoll(4);
-		assertBuyScanner(2);
+    @Test
+    public void buyOptionalScan() {
+        game.setSeenLevel(CLOAKING, 1);
+        roller.mockRoll(4);
+        assertBuyScanner(1);
+        assertDontBuyScanner(2);
 
-		game.setSeenLevel(CLOAKING, 2);
-		ap.setLevel(Technology.SCANNER, 0);
-		roller.mockRoll(4);
-		assertOptionalBuy(
-				Technology.SCANNER,
-				2,
-				60,
-				new BuyAction(){
-					@Override
-					protected void buy(AlienPlayer ap) {
-						techBuyer.buyScannerIfNeeded(ap);
-					}
-				});
-	}
+        game.setSeenLevel(CLOAKING, 2);
+        roller.mockRoll(5);
+        assertDontBuyScanner(2);
 
-	private void assertBuyScanner(int expectedLevel) {
-		assertBuyOptional(expectedLevel, Technology.SCANNER, new BuyAction(){
-			@Override
-			protected void buy(AlienPlayer ap) {
-				techBuyer.buyScannerIfNeeded(ap);
-			}
-		});
-	}
+        roller.mockRoll(4);
+        assertBuyScanner(2);
 
-	private void assertDontBuyScanner(int expectedLevel) {
-		assertDontBuyOptional(expectedLevel, Technology.SCANNER, new BuyAction(){
-			@Override
-			protected void buy(AlienPlayer ap) {
-				techBuyer.buyScannerIfNeeded(ap);
-			}
-		});
-	}
+        game.setSeenLevel(CLOAKING, 2);
+        ap.setLevel(Technology.SCANNER, 0);
+        roller.mockRoll(4);
+        assertOptionalBuy(
+                Technology.SCANNER,
+                2,
+                60,
+                new BuyAction() {
+                    @Override
+                    protected void buy(AlienPlayer ap) {
+                        techBuyer.buyScannerIfNeeded(ap);
+                    }
+                });
+    }
 
-	@Test
-	public void buyOptionalShipSize() {
-		roller.mockRoll(10);
-		assertBuyShipSize(2);
+    private void assertBuyScanner(int expectedLevel) {
+        assertBuyOptional(expectedLevel, Technology.SCANNER, new BuyAction() {
+            @Override
+            protected void buy(AlienPlayer ap) {
+                techBuyer.buyScannerIfNeeded(ap);
+            }
+        });
+    }
 
-		assertBuyShipSize(3, 7);
-		assertBuyShipSize(4, 6);
-		assertBuyShipSize(5, 5);
-		assertBuyShipSize(6, 3);
+    private void assertDontBuyScanner(int expectedLevel) {
+        assertDontBuyOptional(expectedLevel, Technology.SCANNER, new BuyAction() {
+            @Override
+            protected void buy(AlienPlayer ap) {
+                techBuyer.buyScannerIfNeeded(ap);
+            }
+        });
+    }
 
-		assertDontBuyShipSize(7);
-	}
+    @Test
+    public void buyOptionalShipSize() {
+        roller.mockRoll(10);
+        assertBuyShipSize(2);
 
-	@Test
-	public void buyOptionalFighterLevel() {
-		game.setSeenLevel(Technology.POINT_DEFENSE, 0);
-		assertDontBuyFighters(1);
+        assertBuyShipSize(3, 7);
+        assertBuyShipSize(4, 6);
+        assertBuyShipSize(5, 5);
+        assertBuyShipSize(6, 3);
 
-		ap.setLevel(Technology.FIGHTERS, 1);
-		roller.mockRoll(6);
-		assertBuyFighters(2);
+        assertDontBuyShipSize(7);
+    }
 
-		game.setSeenLevel(Technology.POINT_DEFENSE, 1);
-		assertDontBuyFighters(3);
+    @Test
+    public void buyOptionalFighterLevel() {
+        game.setSeenLevel(Technology.POINT_DEFENSE, 0);
+        assertDontBuyFighters(1);
 
-		game.setSeenLevel(Technology.POINT_DEFENSE, 0);
-		roller.mockRoll(7);
-		assertDontBuyFighters(3);
+        ap.setLevel(Technology.FIGHTERS, 1);
+        roller.mockRoll(6);
+        assertBuyFighters(2);
 
-		roller.mockRoll(6);
-		assertBuyFighters(3);
-	}
+        game.setSeenLevel(Technology.POINT_DEFENSE, 1);
+        assertDontBuyFighters(3);
 
-	private void assertBuyFighters(int expectedLevel) {
-		assertBuyOptional(expectedLevel, Technology.FIGHTERS, new BuyAction(){
-			@Override
-			protected void buy(AlienPlayer ap) {
-				techBuyer.buyFightersIfNeeded(ap);
-			}
-		});
-	}
+        game.setSeenLevel(Technology.POINT_DEFENSE, 0);
+        roller.mockRoll(7);
+        assertDontBuyFighters(3);
 
-	private void assertDontBuyFighters(int expectedLevel) {
-		assertDontBuyOptional(expectedLevel, Technology.FIGHTERS, new BuyAction(){
-			@Override
-			protected void buy(AlienPlayer ap) {
-				techBuyer.buyFightersIfNeeded(ap);
-			}
-		});
-	}
+        roller.mockRoll(6);
+        assertBuyFighters(3);
+    }
 
-	@Test
-	public void buyOptionalCloak() {
-		fleet.setFleetType(FleetType.RAIDER_FLEET);;
-		ap.setLevel(CLOAKING, 1);
-		roller.mockRoll(7);
-		assertDontBuyCloaking(2);
+    private void assertBuyFighters(int expectedLevel) {
+        assertBuyOptional(expectedLevel, Technology.FIGHTERS, new BuyAction() {
+            @Override
+            protected void buy(AlienPlayer ap) {
+                techBuyer.buyFightersIfNeeded(ap);
+            }
+        });
+    }
 
-		roller.mockRoll(6);
-		assertBuyCloaking(2);
+    private void assertDontBuyFighters(int expectedLevel) {
+        assertDontBuyOptional(expectedLevel, Technology.FIGHTERS, new BuyAction() {
+            @Override
+            protected void buy(AlienPlayer ap) {
+                techBuyer.buyFightersIfNeeded(ap);
+            }
+        });
+    }
 
-		ap.setLevel(CLOAKING, 1);
-		fleet.setFleetType(FleetType.REGULAR_FLEET);
-		assertDontBuyCloaking(2);
-	}
+    @Test
+    public void buyOptionalCloak() {
+        fleet.setFleetType(FleetType.RAIDER_FLEET);
+        ;
+        ap.setLevel(CLOAKING, 1);
+        roller.mockRoll(7);
+        assertDontBuyCloaking(2);
 
-	private void assertBuyCloaking(int expectedLevel) {
-		sheet.setTechCP(100);
-		techBuyer.buyCloakingIfNeeded(fleet);
-		assertLevel(CLOAKING, expectedLevel);
-		assertEquals(100 - game.scenario.getCost(CLOAKING, expectedLevel), sheet.getTechCP());
-	}
+        roller.mockRoll(6);
+        assertBuyCloaking(2);
 
-	private void assertDontBuyCloaking(int expectedLevel) {
-		sheet.setTechCP(100);
-		techBuyer.buyCloakingIfNeeded(fleet);
-		assertLevel(CLOAKING, expectedLevel - 1);
-		assertEquals(100, sheet.getTechCP());
-	}
+        ap.setLevel(CLOAKING, 1);
+        fleet.setFleetType(FleetType.REGULAR_FLEET);
+        assertDontBuyCloaking(2);
+    }
+
+    private void assertBuyCloaking(int expectedLevel) {
+        sheet.setTechCP(100);
+        techBuyer.buyCloakingIfNeeded(fleet);
+        assertLevel(CLOAKING, expectedLevel);
+        assertEquals(100 - game.scenario.getCost(CLOAKING, expectedLevel), sheet.getTechCP());
+    }
+
+    private void assertDontBuyCloaking(int expectedLevel) {
+        sheet.setTechCP(100);
+        techBuyer.buyCloakingIfNeeded(fleet);
+        assertLevel(CLOAKING, expectedLevel - 1);
+        assertEquals(100, sheet.getTechCP());
+    }
 }

@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2018 Balázs Péter
+ *
+ * This file is part of Alien Player 4X.
+ *
+ * Alien Player 4X is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Alien Player 4X is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.thilian.se4x.robot.game.scenarios.scenario4;
 
 import com.thilian.se4x.robot.game.enums.Technology;
@@ -22,21 +41,6 @@ import static org.junit.Assert.assertEquals;
 
 //TODO THIS WHOLE CLASS IS A DUPLICATE
 public class RemainingTechPurchaseTest extends Scenario4TechnologyBuyerTestBase {
-//    private HashMap<Technology, Integer> rollMap = new HashMap<>();
-//    {
-//        rollMap.put(ATTACK, 20);
-//        rollMap.put(DEFENSE, 20);
-//        rollMap.put(FIGHTERS, 8);
-//        rollMap.put(SCANNER, 2);
-//        rollMap.put(MINE_SWEEPER, 5);
-//        rollMap.put(TACTICS, 12);
-//        rollMap.put(SECURITY_FORCES, 3);
-//        rollMap.put(MILITARY_ACADEMY, 4);
-//        rollMap.put(POINT_DEFENSE, 3);
-//        rollMap.put(CLOAKING, 3);
-//        rollMap.put(BOARDING, 4);
-//        rollMap.put(SHIP_SIZE, 16);
-//    }
 
     @Test
     public void expansionsTechnologiesAvailable() {
