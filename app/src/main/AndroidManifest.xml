@@ -35,8 +35,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewGameActivity" android:noHistory="true"/>
-        <activity android:name=".portrait.MainActivity" />
-        <activity android:name=".portrait.PlayerActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".PlayerDetailsActivity" />
         <activity android:name=".SettingsActivity"/>
     </application>
 

@@ -45,23 +45,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="0dp"
+    <fragment
+        android:id="@+id/player_fragment_0"
+        android:name="com.thilian.se4x.robot.app.PlayerFragment"
+        android:layout_width="@dimen/fragment_width"
         android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/econPhase"
+        app:layout_constraintEnd_toStartOf="@+id/player_fragment_1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/background_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_seen_levels_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <fragment
+        android:id="@+id/player_fragment_1"
+        android:name="com.thilian.se4x.robot.app.PlayerFragment"
+        android:layout_width="@dimen/fragment_width"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/econPhase"
+        app:layout_constraintEnd_toStartOf="@+id/player_fragment_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/player_fragment_0"
+        app:layout_constraintTop_toBottomOf="@+id/set_seen_levels_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <fragment
+        android:id="@+id/player_fragment_2"
+        android:name="com.thilian.se4x.robot.app.PlayerFragment"
+        android:layout_width="@dimen/fragment_width"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/econPhase"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_seen_levels_button">
-
-        <LinearLayout
-            android:id="@+id/players"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:showDividers="middle"
-            android:divider="@android:drawable/divider_horizontal_dark"
-            android:dividerPadding="8dp"
-            android:orientation="vertical" />
-    </ScrollView>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/player_fragment_1"
+        app:layout_constraintTop_toBottomOf="@+id/set_seen_levels_button"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/econPhase"
@@ -73,4 +101,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@string/econPhase" />
+
 </android.support.constraint.ConstraintLayout>

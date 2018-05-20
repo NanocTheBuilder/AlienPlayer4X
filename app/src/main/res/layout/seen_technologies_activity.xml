@@ -24,11 +24,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
-    android:theme="@style/SE4XAppTheme"
-    tools:context="com.thilian.se4x.robot.app.SeenTechnologyActivity">
+    android:theme="@style/SE4XAppTheme">
 
     <TextView
         android:id="@+id/cloaking_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -43,6 +43,7 @@
 
     <TextView
         android:id="@+id/scanner_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/editable_text_background"
@@ -54,6 +55,7 @@
 
     <TextView
         android:id="@+id/point_defense_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
@@ -67,6 +69,7 @@
 
     <CheckBox
         android:id="@+id/fighters_checkbox"
+        style="@style/SE4XAppCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -79,8 +82,9 @@
 
     <CheckBox
         android:id="@+id/mines_checkbox"
+        style="@style/SE4XAppCheckBox"
         android:layout_width="wrap_content"
-        android:layout_height="29dp"
+        android:layout_height="wrap_content"
         android:text="Mines"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/veterans_checkbox"
@@ -90,6 +94,7 @@
 
     <CheckBox
         android:id="@+id/boarding_checkbox"
+        style="@style/SE4XAppCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -102,6 +107,7 @@
 
     <CheckBox
         android:id="@+id/veterans_checkbox"
+        style="@style/SE4XAppCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Veterans"
@@ -112,6 +118,7 @@
 
     <CheckBox
         android:id="@+id/size3_checkbox"
+        style="@style/SE4XAppCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Size 3 Ships"

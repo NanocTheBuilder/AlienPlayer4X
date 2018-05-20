@@ -34,7 +34,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.thilian.se4x.robot.app.portrait.MainActivity;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.PlayerColor;

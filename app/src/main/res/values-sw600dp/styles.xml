@@ -19,30 +19,20 @@
 
 <resources>
 
-    <style name="SE4XAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:checkboxStyle">@style/SE4XAppCheckBox</item>
-    </style>
-
     <style name="SmallerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="NormalText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">28sp</item>
     </style>
 
     <style name="LargerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">22sp</item>
-    </style>
-
-    <style name="MainMenuItem" parent="LargerText">
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">36sp</item>
     </style>
 
     <style name="SE4XAppCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">28sp</item>
     </style>
 
 </resources>

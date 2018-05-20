@@ -17,18 +17,14 @@
  * along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.thilian.se4x.robot.app.portrait;
+package com.thilian.se4x.robot.app;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.thilian.se4x.robot.app.PlayerFragment;
-import com.thilian.se4x.robot.app.R;
-import com.thilian.se4x.robot.app.SE4XGameActivity;
-
-public class PlayerActivity extends SE4XGameActivity {
+public class PlayerDetailsActivity extends SE4XGameActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +37,7 @@ public class PlayerActivity extends SE4XGameActivity {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PlayerActivity.this.onBackPressed();
+                PlayerDetailsActivity.this.onBackPressed();
             }
         });
 

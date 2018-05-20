@@ -32,9 +32,9 @@
 
     <TextView
         android:id="@+id/move_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="1"
         android:text="Move: 1"
         app:layout_constraintEnd_toStartOf="@+id/ship_size_text"
         app:layout_constraintHorizontal_bias="0.5"
@@ -44,6 +44,7 @@
 
     <TextView
         android:id="@+id/attack_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Attack : 0"
@@ -55,6 +56,7 @@
 
     <TextView
         android:id="@+id/defense_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Defense: 0"
@@ -66,6 +68,7 @@
 
     <TextView
         android:id="@+id/tactics_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tactics: 0"
@@ -76,6 +79,7 @@
 
     <TextView
         android:id="@+id/fighters_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fighters: 0"
@@ -87,6 +91,7 @@
 
     <TextView
         android:id="@+id/point_defense_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Point Defense: 0"
@@ -99,6 +104,7 @@
 
     <TextView
         android:id="@+id/mine_sweeper_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mine Sweep: 0"
@@ -109,6 +115,7 @@
 
     <TextView
         android:id="@+id/cloaking_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cloaking: 0"
@@ -120,6 +127,7 @@
 
     <TextView
         android:id="@+id/scanner_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scanners: 0"
@@ -131,6 +139,7 @@
 
     <TextView
         android:id="@+id/ground_combat_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ground: 0"
@@ -142,6 +151,7 @@
 
     <TextView
         android:id="@+id/boarding_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Boarding: 0"
@@ -153,6 +163,7 @@
 
     <TextView
         android:id="@+id/security_forces_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Security: 0"
@@ -163,6 +174,7 @@
 
     <TextView
         android:id="@+id/military_academy_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Military academy: 0"
@@ -190,6 +202,7 @@
 
     <TextView
         android:id="@+id/fleets_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -202,6 +215,7 @@
 
     <TextView
         android:id="@+id/colonies_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/colonies"
@@ -211,6 +225,7 @@
 
     <TextView
         android:id="@+id/ship_size_text"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ship Size: 1"

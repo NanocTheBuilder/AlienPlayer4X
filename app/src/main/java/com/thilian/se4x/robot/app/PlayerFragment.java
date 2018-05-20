@@ -104,20 +104,8 @@ public class PlayerFragment extends Fragment implements FirstCombatDialog.FirstC
     public void onResume() {
         super.onResume();
 
-        AlienPlayer alienPlayer = getAlienPlayer();
-
-        PlayerView playerView = getView().findViewById(R.id.player_view);
-        playerView.update(gameActivity.getGame(), alienPlayer, gameActivity.isShowDetails());
-        playerView.initEliminateButton(alienPlayer, this);
-
-        getView().findViewById(R.id.build_colony_defense_button).setVisibility(alienPlayer instanceof Scenario4Player ? View.VISIBLE : View.GONE);
-
-        LinearLayout fleets = (LinearLayout) gameActivity.findViewById(R.id.fleets);
-        fleets.setBackgroundColor(gameActivity.getColor(alienPlayer));
-        fleets.removeAllViews();
-        for(Fleet fleet : alienPlayer.getFleets()){
-            fleets.addView(new FleetView(this, fleet));
-        }
+        updatePlayerView();
+        updateFleetViews();
     }
 
 
@@ -196,9 +184,27 @@ public class PlayerFragment extends Fragment implements FirstCombatDialog.FirstC
         gameActivity.showFleetBuildResult(result);
     }
 
-    public void updatePlayerView() {
+    public void updateViews(){
+        updatePlayerView();
+        updateFleetViews();
+    }
+
+    private void updatePlayerView() {
+        AlienPlayer alienPlayer = getAlienPlayer();
         PlayerView playerView = getView().findViewById(R.id.player_view);
-        playerView.update(gameActivity.getGame(), getAlienPlayer(), gameActivity.isShowDetails());
+        playerView.update(gameActivity.getGame(), alienPlayer, gameActivity.isShowDetails());
+        playerView.initEliminateButton(alienPlayer, this);
+    }
+
+    private void updateFleetViews() {
+        AlienPlayer alienPlayer = getAlienPlayer();
+        getView().findViewById(R.id.build_colony_defense_button).setVisibility(alienPlayer instanceof Scenario4Player ? View.VISIBLE : View.GONE);
+        LinearLayout fleets = getView().findViewById(R.id.fleets);
+        fleets.setBackgroundColor(gameActivity.getColor(alienPlayer));
+        fleets.removeAllViews();
+        for(Fleet fleet : alienPlayer.getFleets()){
+            fleets.addView(new FleetView(this, fleet));
+        }
     }
 
     @Override

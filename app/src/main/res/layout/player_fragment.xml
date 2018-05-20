@@ -21,22 +21,15 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/fragment_width"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
     android:theme="@style/SE4XAppTheme"
-    tools:context="com.thilian.se4x.robot.app.portrait.PlayerActivity">
-
-    <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context="com.thilian.se4x.robot.app.PlayerDetailsActivity">
 
     <com.thilian.se4x.robot.app.PlayerView
         android:id="@+id/player_view"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/build_home_defense_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,6 +65,7 @@
         android:id="@+id/scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +77,8 @@
             android:id="@+id/fleets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical" />
+
 
     </ScrollView>
 
