@@ -25,7 +25,7 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:theme="@style/SE4XAppTheme"
-    tools:context="com.thilian.se4x.robot.app.MainActivity">
+    tools:context="com.thilian.se4x.robot.app.activities.MainActivity">
 
     <ImageView
         android:id="@+id/background_image"

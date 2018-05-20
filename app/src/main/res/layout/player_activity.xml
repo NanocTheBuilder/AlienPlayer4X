@@ -24,7 +24,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/SE4XAppTheme"
-    tools:context="com.thilian.se4x.robot.app.PlayerDetailsActivity">
+    tools:context="com.thilian.se4x.robot.app.activities.PlayerDetailsActivity">
 
     <ImageView
         android:id="@+id/background_image"
@@ -36,13 +36,15 @@
 
     <fragment
         android:id="@+id/player_fragment"
-        android:name="com.thilian.se4x.robot.app.PlayerFragment"
+        android:name="com.thilian.se4x.robot.app.fragments.PlayerFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/close_fleets_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/player_fragment"
+        />
 
     <Button
         android:id="@+id/close_fleets_button"

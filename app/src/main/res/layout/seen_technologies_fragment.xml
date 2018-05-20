@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 Balázs Péter
+  ~
+  ~ This file is part of Alien Player 4X.
+  ~
+  ~ Alien Player 4X is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Alien Player 4X is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:theme="@style/SE4XAppTheme">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#44000000"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/cloaking_text"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/editable_text_background"
+        android:text="Cloaking: 0"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/fighters_checkbox"
+        app:layout_constraintEnd_toStartOf="@+id/scanner_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/scanner_text"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/editable_text_background"
+        android:text="Scanner: 0"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cloaking_text"
+        app:layout_constraintTop_toTopOf="@+id/cloaking_text" />
+
+    <TextView
+        android:id="@+id/point_defense_text"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/editable_text_background"
+        android:text="Point Defense: 0"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fighters_checkbox"
+        app:layout_constraintTop_toTopOf="@+id/fighters_checkbox" />
+
+
+    <CheckBox
+        android:id="@+id/fighters_checkbox"
+        style="@style/SE4XAppCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Fighters"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/boarding_checkbox"
+        app:layout_constraintEnd_toStartOf="@+id/point_defense_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cloaking_text" />
+
+    <CheckBox
+        android:id="@+id/mines_checkbox"
+        style="@style/SE4XAppCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mines"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/veterans_checkbox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boarding_checkbox" />
+
+    <CheckBox
+        android:id="@+id/boarding_checkbox"
+        style="@style/SE4XAppCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Boarding Ships"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/mines_checkbox"
+        app:layout_constraintEnd_toStartOf="@+id/size3_checkbox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fighters_checkbox" />
+
+    <CheckBox
+        android:id="@+id/veterans_checkbox"
+        style="@style/SE4XAppCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Veterans"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mines_checkbox"
+        app:layout_constraintTop_toTopOf="@+id/mines_checkbox" />
+
+    <CheckBox
+        android:id="@+id/size3_checkbox"
+        style="@style/SE4XAppCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Size 3 Ships"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/boarding_checkbox"
+        app:layout_constraintTop_toTopOf="@+id/boarding_checkbox" />
+
+</android.support.constraint.ConstraintLayout>

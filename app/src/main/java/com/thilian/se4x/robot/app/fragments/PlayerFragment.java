@@ -17,7 +17,7 @@
  * along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.thilian.se4x.robot.app;
+package com.thilian.se4x.robot.app.fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -32,8 +32,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.thilian.se4x.robot.app.R;
+import com.thilian.se4x.robot.app.SE4XGameActivity;
 import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.app.dialogs.PickerDialog;
+import com.thilian.se4x.robot.app.views.FleetView;
+import com.thilian.se4x.robot.app.views.PlayerView;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuildResult;

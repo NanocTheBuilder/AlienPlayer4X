@@ -17,12 +17,16 @@
  * along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.thilian.se4x.robot.app;
+package com.thilian.se4x.robot.app.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.thilian.se4x.robot.app.R;
+import com.thilian.se4x.robot.app.SE4XGameActivity;
+import com.thilian.se4x.robot.app.fragments.PlayerFragment;
 
 public class PlayerDetailsActivity extends SE4XGameActivity {
 

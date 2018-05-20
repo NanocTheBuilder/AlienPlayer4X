@@ -22,7 +22,7 @@ package com.thilian.se4x.robot.app.dialogs;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-import com.thilian.se4x.robot.app.FleetView;
+import com.thilian.se4x.robot.app.views.FleetView;
 import com.thilian.se4x.robot.app.R;
 import com.thilian.se4x.robot.app.SE4XGameActivity;
 import com.thilian.se4x.robot.game.Fleet;

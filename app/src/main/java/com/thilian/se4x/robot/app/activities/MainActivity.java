@@ -17,7 +17,7 @@
  * along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.thilian.se4x.robot.app;
+package com.thilian.se4x.robot.app.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -28,7 +28,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.thilian.se4x.robot.app.dialogs.SeenTechnologiesDialog;
+import com.thilian.se4x.robot.app.R;
+import com.thilian.se4x.robot.app.SE4XGameActivity;
+import com.thilian.se4x.robot.app.fragments.SeenTechnologiesFragment;
+import com.thilian.se4x.robot.app.fragments.PlayerFragment;
+import com.thilian.se4x.robot.app.views.PlayerView;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
 
@@ -72,9 +76,8 @@ public class MainActivity extends SE4XGameActivity {
         setSeenLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SeenTechnologiesDialog().show(getFragmentManager(), "seenLevels");
-                //Intent intent = new Intent(MainActivity.this, SeenTechnologyActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, SeenTechnologiesActivity.class);
+                startActivity(intent);
             }
         });
     }

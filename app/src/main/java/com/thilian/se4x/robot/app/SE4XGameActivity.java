@@ -26,6 +26,7 @@ import com.thilian.se4x.robot.app.dialogs.EconPhaseResultDialog;
 import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.app.dialogs.FleetBuildResultDialog;
 import com.thilian.se4x.robot.app.dialogs.PickerDialog;
+import com.thilian.se4x.robot.app.views.FleetView;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
 import com.thilian.se4x.robot.game.Fleet;
@@ -116,19 +117,19 @@ public abstract class SE4XGameActivity extends SE4XActivity {
         new EconPhaseResultDialog(this).show(results);
     }
 
-    protected void showFleetBuildResult(FleetBuildResult result) {
+    public void showFleetBuildResult(FleetBuildResult result) {
         new FleetBuildResultDialog(this).show(result);
     }
 
-    protected void showPickerDialog(int labelString, int minValue, int maxValue, int value, final PickerDialog.PickerClickAction action) {
+    public void showPickerDialog(int labelString, int minValue, int maxValue, int value, final PickerDialog.PickerClickAction action) {
         new PickerDialog(this).show(labelString, minValue, maxValue, value, action);
     }
 
-    protected void showLevelPickerDialog(final AlienPlayer alienPlayer, final Technology technology, PickerDialog.PickerClickAction action){
+    public void showLevelPickerDialog(final AlienPlayer alienPlayer, final Technology technology, PickerDialog.PickerClickAction action){
         new PickerDialog(this).showLevelPickerDialog(alienPlayer, technology, action);
     }
 
-    protected void showFirstCombatDialog(final Fleet fleet, final FleetView fleetView, FirstCombatDialog.FirstCombatListener listener){
+    public void showFirstCombatDialog(final Fleet fleet, final FleetView fleetView, FirstCombatDialog.FirstCombatListener listener){
         new FirstCombatDialog(this).show(fleet, fleetView, listener);
     }
 

@@ -24,7 +24,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/SE4XAppTheme"
-    tools:context="com.thilian.se4x.robot.app.NewGameActivity">
+    tools:context="com.thilian.se4x.robot.app.activities.NewGameActivity">
 
     <ImageView
         android:id="@+id/background_image"

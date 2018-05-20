@@ -25,9 +25,9 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:theme="@style/SE4XAppTheme"
-    tools:context="com.thilian.se4x.robot.app.PlayerDetailsActivity">
+    tools:context="com.thilian.se4x.robot.app.activities.PlayerDetailsActivity">
 
-    <com.thilian.se4x.robot.app.PlayerView
+    <com.thilian.se4x.robot.app.views.PlayerView
         android:id="@+id/player_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -22,109 +22,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:theme="@style/SE4XAppTheme">
+    android:layout_height="match_parent"
+    android:theme="@style/SE4XAppTheme"
+    tools:context="com.thilian.se4x.robot.app.activities.PlayerDetailsActivity">
 
-    <TextView
-        android:id="@+id/cloaking_text"
-        style="@style/NormalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/editable_text_background"
-        android:text="Cloaking: 0"
-        app:layout_constraintBottom_toTopOf="@+id/fighters_checkbox"
-        app:layout_constraintEnd_toStartOf="@+id/scanner_text"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/scanner_text"
-        style="@style/NormalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/editable_text_background"
-        android:text="Scanner: 0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cloaking_text"
-        app:layout_constraintTop_toTopOf="@+id/cloaking_text" />
-
-    <TextView
-        android:id="@+id/point_defense_text"
-        style="@style/NormalText"
-        android:layout_width="wrap_content"
+    <fragment
+        android:id="@+id/seen_technologies_fragment"
+        android:name="com.thilian.se4x.robot.app.fragments.SeenTechnologiesFragment"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/editable_text_background"
-        android:text="Point Defense: 0"
+        app:layout_constraintBottom_toTopOf="@android:id/closeButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/fighters_checkbox"
-        app:layout_constraintTop_toTopOf="@+id/fighters_checkbox" />
-
-
-    <CheckBox
-        android:id="@+id/fighters_checkbox"
-        style="@style/SE4XAppCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Fighters"
-        app:layout_constraintBottom_toTopOf="@+id/boarding_checkbox"
-        app:layout_constraintEnd_toStartOf="@+id/point_defense_text"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cloaking_text" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/seen_technologies_fragment"
+        />
 
-    <CheckBox
-        android:id="@+id/mines_checkbox"
-        style="@style/SE4XAppCheckBox"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@android:id/closeButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Mines"
+        android:text="@android:string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/veterans_checkbox"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boarding_checkbox" />
-
-    <CheckBox
-        android:id="@+id/boarding_checkbox"
-        style="@style/SE4XAppCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Boarding Ships"
-        app:layout_constraintBottom_toTopOf="@+id/mines_checkbox"
-        app:layout_constraintEnd_toStartOf="@+id/size3_checkbox"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fighters_checkbox" />
-
-    <CheckBox
-        android:id="@+id/veterans_checkbox"
-        style="@style/SE4XAppCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Veterans"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/mines_checkbox"
-        app:layout_constraintTop_toTopOf="@+id/mines_checkbox" />
-
-    <CheckBox
-        android:id="@+id/size3_checkbox"
-        style="@style/SE4XAppCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Size 3 Ships"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/boarding_checkbox"
-        app:layout_constraintTop_toTopOf="@+id/boarding_checkbox" />
-
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
