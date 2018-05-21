@@ -35,42 +35,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/set_seen_levels_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/setSeenLevels"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/frameLayout1"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/frameLayout2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <fragment
+            android:id="@+id/player_fragment_0"
+            android:name="com.thilian.se4x.robot.app.fragments.PlayerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/player_fragment"
+            tools:layout_editor_absoluteY="47dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/frameLayout3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/frameLayout1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <fragment
+            android:id="@+id/player_fragment_1"
+            android:name="com.thilian.se4x.robot.app.fragments.PlayerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/player_fragment"
+            tools:layout_editor_absoluteX="300dp"
+            tools:layout_editor_absoluteY="47dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/econPhase"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_seen_levels_button">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/frameLayout2"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/players"
+        <fragment
+            android:id="@+id/seen_technologies_fragment"
+            android:name="com.thilian.se4x.robot.app.fragments.SeenTechnologiesFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:showDividers="middle"
-            android:divider="@android:drawable/divider_horizontal_dark"
-            android:dividerPadding="8dp"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:layout_height="match_parent"
+            tools:layout="@layout/seen_technologies_fragment" />
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/econPhase"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/NormalText"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout3"
         tools:text="@string/econPhase" />
+
 </android.support.constraint.ConstraintLayout>

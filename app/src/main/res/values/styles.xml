@@ -43,6 +43,7 @@
 
     <style name="SE4XAppCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:textSize">18sp</item>
+        <item name="android:button">@drawable/checkbox_blue_white</item>
     </style>
 
 </resources>

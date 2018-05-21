@@ -24,7 +24,9 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:padding="8dp"
-    android:theme="@style/SE4XAppTheme">
+    android:theme="@style/SE4XAppTheme"
+    tools:layout_width="match_parent"
+    >
 
     <View
         android:id="@+id/view"
@@ -40,12 +42,26 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
+        android:id="@+id/header_text"
+        style="@style/MainMenuItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/seen_technologies"
+        app:layout_constraintBottom_toTopOf="@id/cloaking_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
         android:id="@+id/cloaking_text"
         style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/editable_text_background"
+        android:background="@drawable/editable_text_background_white"
         android:text="Cloaking: 0"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/fighters_checkbox"
@@ -53,15 +69,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toBottomOf="@+id/header_text"
+         />
 
     <TextView
         android:id="@+id/scanner_text"
         style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/editable_text_background"
+        android:background="@drawable/editable_text_background_white"
         android:text="Scanner: 0"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
-        android:background="@drawable/editable_text_background"
+        android:background="@drawable/editable_text_background_white"
         android:text="Point Defense: 0"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:checked="false"
         android:text="Fighters"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/boarding_checkbox"
@@ -103,6 +120,7 @@
         style="@style/SE4XAppCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Mines"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"

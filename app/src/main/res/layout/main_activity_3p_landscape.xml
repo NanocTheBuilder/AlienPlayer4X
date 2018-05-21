@@ -35,10 +35,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/set_seen_levels_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/NormalText"
         android:text="@string/setSeenLevels"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -102,19 +104,19 @@
             android:name="com.thilian.se4x.robot.app.fragments.PlayerFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/player_fragment"
-            tools:layout_editor_absoluteX="308dp"
-            tools:layout_editor_absoluteY="47dp" />
+            tools:layout="@layout/player_fragment" />
     </FrameLayout>
 
     <Button
         android:id="@+id/econPhase"
+        style="@style/NormalText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@string/econPhase" />
 

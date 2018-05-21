@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2018 Balázs Péter
   ~
@@ -17,22 +18,14 @@
   ~ along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
-
-    <style name="SmallerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">13sp</item>
-    </style>
-
-    <style name="NormalText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="LargerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">22sp</item>
-    </style>
-
-    <style name="SE4XAppCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:textSize">18sp</item>
-    </style>
-
-</resources>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:constantSize="false">
+    <item android:state_checked="false" android:drawable="@drawable/checkbox_border_white"/>
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:drawable="@drawable/checkbox_checkmark_blue_white"/>
+            <item android:drawable="@drawable/checkbox_border_white"/>
+        </layer-list>
+    </item>
+    <item android:drawable="@drawable/checkbox_border_white"/>
+</selector>

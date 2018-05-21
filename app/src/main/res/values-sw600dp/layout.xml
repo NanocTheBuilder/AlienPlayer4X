@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2018 Balázs Péter
   ~
@@ -18,21 +19,6 @@
   -->
 
 <resources>
-
-    <style name="SmallerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">13sp</item>
-    </style>
-
-    <style name="NormalText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="LargerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">22sp</item>
-    </style>
-
-    <style name="SE4XAppCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:textSize">18sp</item>
-    </style>
-
+    <item name="main_activity_2p" type="layout">@layout/main_activity_2p_portrait</item>
+    <item name="main_activity_3p" type="layout">@layout/main_activity_3p_portrait</item>
 </resources>

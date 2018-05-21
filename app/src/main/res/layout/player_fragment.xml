@@ -21,11 +21,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/fragment_width"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:theme="@style/SE4XAppTheme"
-    tools:context="com.thilian.se4x.robot.app.activities.PlayerDetailsActivity">
+    tools:context="com.thilian.se4x.robot.app.activities.PlayerDetailsActivity"
+    tools:layout_width="match_parent">
 
     <com.thilian.se4x.robot.app.views.PlayerView
         android:id="@+id/player_view"
@@ -42,6 +43,7 @@
         android:id="@+id/build_home_defense_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/NormalText"
         android:text="@string/buildHomeDefense"
         app:layout_constraintBottom_toTopOf="@+id/scroll_view"
         app:layout_constraintEnd_toStartOf="@+id/build_colony_defense_button"
@@ -55,6 +57,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/buildColonyDefense"
+        style="@style/NormalText"
         app:layout_constraintBottom_toTopOf="@+id/scroll_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

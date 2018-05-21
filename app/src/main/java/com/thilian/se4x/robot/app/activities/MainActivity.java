@@ -30,7 +30,6 @@ import android.widget.LinearLayout;
 
 import com.thilian.se4x.robot.app.R;
 import com.thilian.se4x.robot.app.SE4XGameActivity;
-import com.thilian.se4x.robot.app.fragments.SeenTechnologiesFragment;
 import com.thilian.se4x.robot.app.fragments.PlayerFragment;
 import com.thilian.se4x.robot.app.views.PlayerView;
 import com.thilian.se4x.robot.game.AlienPlayer;
@@ -42,11 +41,17 @@ public class MainActivity extends SE4XGameActivity {
     private static final String tag = SE4XGameActivity.class.getSimpleName();
     private boolean exitGame = false;
     private boolean twoLevelsView;
+    private boolean seenTechnologiesFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        if(getGame().aliens.size() == 2){
+            setContentView(R.layout.main_activity_2p);
+        }
+        else {
+            setContentView(R.layout.main_activity_3p);
+        }
         twoLevelsView = findViewById(R.id.players) != null;
 
         loadBackgroundImage();
@@ -73,13 +78,15 @@ public class MainActivity extends SE4XGameActivity {
         });
 
         Button setSeenLevelButton = findViewById(R.id.set_seen_levels_button);
-        setSeenLevelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SeenTechnologiesActivity.class);
-                startActivity(intent);
-            }
-        });
+        if(setSeenLevelButton != null) {
+            setSeenLevelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, SeenTechnologiesActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void initPlayerViews() {
@@ -106,11 +113,11 @@ public class MainActivity extends SE4XGameActivity {
     @Override
     protected void onStart() {
         if (!twoLevelsView) {
-        for (int i = 0; i < getGame().aliens.size(); i++) {
-            int id = getResources().getIdentifier(String.format("player_fragment_%d", i), "id", getPackageName());
-            PlayerFragment playerFragment = (PlayerFragment) getSupportFragmentManager().findFragmentById(id);
-            playerFragment.setAlienIndex(i);
-        }
+            for (int i = 0; i < getGame().aliens.size(); i++) {
+                int id = getResources().getIdentifier(String.format("player_fragment_%d", i), "id", getPackageName());
+                PlayerFragment playerFragment = (PlayerFragment) getSupportFragmentManager().findFragmentById(id);
+                playerFragment.setAlienIndex(i);
+            }
         }
         super.onStart();
 
