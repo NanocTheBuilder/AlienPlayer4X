@@ -19,9 +19,17 @@
 
 package com.thilian.se4x.robot.app;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
 
+import com.thilian.se4x.robot.app.activities.MainActivity;
+import com.thilian.se4x.robot.app.activities.PlayerDetailsActivity;
+import com.thilian.se4x.robot.app.activities.SeenTechnologiesActivity;
 import com.thilian.se4x.robot.app.dialogs.EconPhaseResultDialog;
 import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.app.dialogs.FleetBuildResultDialog;
@@ -138,6 +146,35 @@ public abstract class SE4XGameActivity extends SE4XActivity {
         return getResources().getColor(cid);
     }
 
+    protected void onCreate(@Nullable Bundle savedInstanceState, int layoutId) {
+//        Log.i(getClass().getSimpleName(), "ON_CREATE");
+        super.onCreate(savedInstanceState);
+        setContentView(layoutId);
+
+        loadBackgroundImage();
+
+        Button okButton = findViewById(android.R.id.closeButton);
+        if(okButton != null) {
+            okButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SE4XGameActivity.this.onBackPressed();
+                }
+            });
+        }
+
+        Button setSeenLevelButton = findViewById(R.id.set_seen_levels_button);
+        if(setSeenLevelButton != null) {
+            setSeenLevelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(SE4XGameActivity.this, SeenTechnologiesActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -146,12 +183,6 @@ public abstract class SE4XGameActivity extends SE4XActivity {
     }
 
     /*
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i(getClass().getSimpleName(), "ON_CREATE");
-    }
-
     @Override
     protected void onStart() {
         super.onStart();

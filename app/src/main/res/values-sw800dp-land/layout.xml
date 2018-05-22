@@ -19,5 +19,6 @@
   -->
 
 <resources>
-    <dimen name="fragment_width">300dp</dimen>
+    <item name="main_activity_2p" type="layout">@layout/main_activity_2p_landscape</item>
+    <item name="main_activity_3p" type="layout">@layout/main_activity_3p_landscape_plus</item>
 </resources>

@@ -32,18 +32,6 @@ import com.thilian.se4x.robot.app.fragments.SeenTechnologiesFragment;
 public class SeenTechnologiesActivity extends SE4XGameActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.seen_technologies_activity);
-
-        loadBackgroundImage();
-
-        Button okButton = findViewById(android.R.id.closeButton);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SeenTechnologiesActivity.this.onBackPressed();
-            }
-        });
-
+        super.onCreate(savedInstanceState, R.layout.seen_technologies_activity);
     }
 }

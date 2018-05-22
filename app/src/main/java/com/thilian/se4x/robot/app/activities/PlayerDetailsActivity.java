@@ -32,19 +32,7 @@ public class PlayerDetailsActivity extends SE4XGameActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.player_activity);
-
-        loadBackgroundImage();
-
-        Button okButton = findViewById(R.id.close_fleets_button);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PlayerDetailsActivity.this.onBackPressed();
-            }
-        });
-
+        super.onCreate(savedInstanceState, R.layout.player_activity);
     }
 
     @Override

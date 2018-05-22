@@ -41,9 +41,9 @@
 
     <Button
         android:id="@+id/build_home_defense_button"
+        style="@style/SmallerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/NormalText"
         android:text="@string/buildHomeDefense"
         app:layout_constraintBottom_toTopOf="@+id/scroll_view"
         app:layout_constraintEnd_toStartOf="@+id/build_colony_defense_button"
@@ -54,10 +54,10 @@
 
     <Button
         android:id="@+id/build_colony_defense_button"
+        style="@style/SmallerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/buildColonyDefense"
-        style="@style/NormalText"
         app:layout_constraintBottom_toTopOf="@+id/scroll_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

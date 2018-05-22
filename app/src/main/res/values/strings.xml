@@ -136,7 +136,7 @@
     <string name="GRAV_ARMOR">[%d Grav]</string>
     <string name="BOARDING_SHIP">[%d BD]</string>
 
-    <string name="setSeenLevels">Set Seen Technology</string>
+    <string name="setSeenLevels">Set Seen Technology Levels</string>
 
     <string name="first_combat">First Combat</string>
     <string name="pref_show_details">Show details</string>

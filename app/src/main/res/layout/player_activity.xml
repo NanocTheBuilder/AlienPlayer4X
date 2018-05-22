@@ -34,20 +34,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/set_seen_levels_button"
+        style="@style/SmallerText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/setSeenLevels"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <fragment
         android:id="@+id/player_fragment"
         android:name="com.thilian.se4x.robot.app.fragments.PlayerFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/close_fleets_button"
+        app:layout_constraintBottom_toTopOf="@android:id/closeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/player_fragment"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/set_seen_levels_button"
+        tools:layout="@layout/player_fragment" />
 
     <Button
-        android:id="@+id/close_fleets_button"
+        android:id="@android:id/closeButton"
+        style="@style/SmallerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@android:string/ok"

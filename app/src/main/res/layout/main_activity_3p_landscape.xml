@@ -38,9 +38,9 @@
 
     <Button
         android:id="@+id/set_seen_levels_button"
+        style="@style/SmallerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/NormalText"
         android:text="@string/setSeenLevels"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -109,7 +109,7 @@
 
     <Button
         android:id="@+id/econPhase"
-        style="@style/NormalText"
+        style="@style/SmallerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"

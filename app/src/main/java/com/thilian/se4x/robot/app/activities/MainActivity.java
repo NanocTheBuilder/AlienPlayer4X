@@ -41,21 +41,13 @@ public class MainActivity extends SE4XGameActivity {
     private static final String tag = SE4XGameActivity.class.getSimpleName();
     private boolean exitGame = false;
     private boolean twoLevelsView;
-    private boolean seenTechnologiesFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if(getGame().aliens.size() == 2){
-            setContentView(R.layout.main_activity_2p);
-        }
-        else {
-            setContentView(R.layout.main_activity_3p);
-        }
+        int aliens = getGame().aliens.size();
+        super.onCreate(savedInstanceState, aliens == 2 ? R.layout.main_activity_2p : R.layout.main_activity_3p);
+
         twoLevelsView = findViewById(R.id.players) != null;
-
-        loadBackgroundImage();
-
         initPlayerViews();
 
         final Button econButton = findViewById(R.id.econPhase);
@@ -76,17 +68,6 @@ public class MainActivity extends SE4XGameActivity {
                 }
             }
         });
-
-        Button setSeenLevelButton = findViewById(R.id.set_seen_levels_button);
-        if(setSeenLevelButton != null) {
-            setSeenLevelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(MainActivity.this, SeenTechnologiesActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
     }
 
     private void initPlayerViews() {
@@ -123,6 +104,12 @@ public class MainActivity extends SE4XGameActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePlayerView();
+    }
+
     private void updatePlayerViews() {
         if(twoLevelsView) {
             updatePlayerView();
@@ -145,12 +132,6 @@ public class MainActivity extends SE4XGameActivity {
                 view.update(getGame(), getGame().aliens.get(i), isShowDetails());
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updatePlayerView();
     }
 
     @Override

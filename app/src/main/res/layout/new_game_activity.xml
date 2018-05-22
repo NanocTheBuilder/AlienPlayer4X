@@ -68,7 +68,7 @@
 
     <TextView
         android:id="@+id/new_game_text"
-        style="@style/LargerText"
+        style="@style/MainMenuItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -93,6 +93,7 @@
 
     <Spinner
         android:id="@+id/scenario_spinner"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -115,6 +116,7 @@
 
     <Spinner
         android:id="@+id/difficulty_spinner"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -191,6 +193,7 @@
 
     <Button
         android:id="@+id/start_button"
+        style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

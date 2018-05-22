@@ -109,9 +109,9 @@
 
     <Button
         android:id="@+id/econPhase"
+        style="@style/SmallerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/NormalText"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

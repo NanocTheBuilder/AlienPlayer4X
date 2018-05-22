@@ -35,26 +35,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/set_seen_levels_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/setSeenLevels"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/frameLayout1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/econPhase"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/frameLayout2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_seen_levels_button">
+        app:layout_constraintTop_toTopOf="parent">
 
         <fragment
             android:id="@+id/player_fragment_0"
@@ -70,11 +61,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/econPhase"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/frameLayout3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/frameLayout1"
-        app:layout_constraintTop_toBottomOf="@+id/set_seen_levels_button">
+        app:layout_constraintTop_toTopOf="parent">
 
         <fragment
             android:id="@+id/player_fragment_1"
@@ -91,31 +82,46 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/econPhase"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/frameLayout4"
         app:layout_constraintStart_toEndOf="@+id/frameLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/set_seen_levels_button">
+        app:layout_constraintTop_toTopOf="parent">
 
         <fragment
             android:id="@+id/player_fragment_2"
             android:name="com.thilian.se4x.robot.app.fragments.PlayerFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/player_fragment"
-            tools:layout_editor_absoluteX="308dp"
-            tools:layout_editor_absoluteY="47dp" />
+            tools:layout="@layout/player_fragment" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/econPhase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/frameLayout3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <fragment
+            android:id="@+id/seen_technologies_fragment"
+            android:name="com.thilian.se4x.robot.app.fragments.SeenTechnologiesFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/seen_technologies_fragment" />
     </FrameLayout>
 
     <Button
         android:id="@+id/econPhase"
+        style="@style/SmallerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/frameLayout3"
         tools:text="@string/econPhase" />
 
 </android.support.constraint.ConstraintLayout>
