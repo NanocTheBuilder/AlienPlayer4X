@@ -32,7 +32,7 @@
     </style>
 
     <style name="SE4XAppCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

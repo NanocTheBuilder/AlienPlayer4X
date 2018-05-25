@@ -39,26 +39,14 @@ public class GameSaver {
     public Game loadGame(Context context) {
         //Log.i(getClass().getSimpleName(), "LOAD_GAME");
         Game game = null;
-        BufferedReader reader = null;
         File file = new File(context.getFilesDir(), GAME_FILE);
         if(file.exists()) {
-            try {
-                reader = new BufferedReader(new FileReader(file));
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))){
                 String json = reader.readLine();
                 if (json != null && !json.isEmpty())
                     game = jsonParser.fromJson(json);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
         }
         return game;
@@ -67,20 +55,10 @@ public class GameSaver {
     public void saveGame(Game game, Context context) {
         //Log.i(getClass().getSimpleName(), "SAVE_GAME");
         File file = new File(context.getFilesDir(), GAME_FILE);
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(file, false));
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))){
             writer.write(jsonParser.toJson(game));
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 

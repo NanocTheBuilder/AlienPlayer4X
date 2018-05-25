@@ -31,6 +31,10 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="NormalWhiteText" parent="NormalText">
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
     <style name="LargerText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">22sp</item>
     </style>

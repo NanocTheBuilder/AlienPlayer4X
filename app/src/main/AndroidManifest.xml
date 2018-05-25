@@ -39,6 +39,11 @@
         <activity android:name=".activities.PlayerDetailsActivity" />
         <activity android:name=".activities.SettingsActivity"/>
         <activity android:name=".activities.SeenTechnologiesActivity"/>
+        <activity android:name=".activities.AboutActivity"/>
+        <activity android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
     </application>
 
 </manifest>

@@ -26,6 +26,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.oss.licenses.OssLicensesActivity;
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 import com.thilian.se4x.robot.app.GameSaver;
 import com.thilian.se4x.robot.app.R;
 import com.thilian.se4x.robot.app.SE4XActivity;
@@ -41,7 +43,7 @@ public class MainMenuActivity extends SE4XActivity {
         initOnClickListener(R.id.resume_text, MainActivity.class);
         initOnClickListener(R.id.new_game_text, NewGameActivity.class);
         initOnClickListener(R.id.settings_text, SettingsActivity.class);
-        //TODO initOnClickListener(R.id.about_text, AboutActivity.class);
+        initOnClickListener(R.id.about_text, AboutActivity.class);
     }
 
     @Override

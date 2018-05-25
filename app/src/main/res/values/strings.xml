@@ -148,8 +148,15 @@
     <string name="eliminate_player">Do you want to eliminate player %s</string>
     <string name="seen_technologies">Seen Technologies</string>
 
+    <string name="version">Version 1.0</string>
+    <string name="copyright">Copyright (C) 2018 Balázs Péter</string>
+    <string name="smc_credits">Image of The Small Magellanic Cloud\nCredit: NASA, ESA, CXC and the University of Potsdam, JPL-Caltech, and STScI</string>
+    <string name="license">This is a free software licensed under GPL 3.\nYou can view the license at\nhttps://www.gnu.org/licenses/gpl.txt</string>
+    <string name="source_location">You can download the source files from\nhttps://github.com/NanocTheBuilder/AlienPlayer4X</string>
+    <string name="licenses">View 3rd party licenses</string>
+    
     <string-array name="first_combat_options_s4">
-        <item>Combat above planet</item>
+        <item>Combat above planet</item>[
     </string-array>
 
     <string-array name="first_combat_options_vp">

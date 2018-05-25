@@ -19,10 +19,10 @@
 
 package com.thilian.se4x.robot.app.dialogs;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;

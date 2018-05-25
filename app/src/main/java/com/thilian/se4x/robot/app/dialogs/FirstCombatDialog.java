@@ -19,8 +19,8 @@
 
 package com.thilian.se4x.robot.app.dialogs;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 
 import com.thilian.se4x.robot.app.views.FleetView;
 import com.thilian.se4x.robot.app.R;

@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="@id/bottom_space"
         app:layout_constraintEnd_toEndOf="@id/end_space"
         app:layout_constraintStart_toStartOf="@id/start_space"
-        app:layout_constraintTop_toTopOf="@id/top_space" />>
+        app:layout_constraintTop_toTopOf="@id/top_space" />
 
     <Space
         android:id="@+id/top_space"

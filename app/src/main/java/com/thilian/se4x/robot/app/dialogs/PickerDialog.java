@@ -19,10 +19,10 @@
 
 package com.thilian.se4x.robot.app.dialogs;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.widget.NumberPicker;
 import android.widget.TextView;
