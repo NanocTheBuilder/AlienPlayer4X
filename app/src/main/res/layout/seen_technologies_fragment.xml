@@ -29,7 +29,6 @@
     >
 
     <View
-        android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#44000000"

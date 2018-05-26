@@ -118,8 +118,7 @@ public class PlayerView extends ConstraintLayout {
 
         }
 
-        TextView fleets = findViewById(R.id.fleets_text);
-        fleets.setText(String.format("%d fleets.", alienPlayer.getFleets().size()));
+        ((TextView) findViewById(R.id.fleets_text)).setText(getResources().getString(R.string.fleets, alienPlayer.getFleets().size()));
     }
 
     public void updateTechnologyText(Game game, AlienPlayer alienPlayer, Technology technology) {

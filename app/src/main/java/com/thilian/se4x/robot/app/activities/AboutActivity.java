@@ -47,6 +47,13 @@ public class AboutActivity extends SE4XActivity {
         findViewById(R.id.license_text).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gnu.org/licenses/gpl.txt")));
+            }
+        });
+
+        findViewById(R.id.view_license_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
                 String message;
                 try(BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("LICENSE.txt")))){
@@ -67,8 +74,7 @@ public class AboutActivity extends SE4XActivity {
         findViewById(R.id.source_location_text).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/NanocTheBuilder/AlienPlayer4X"));
-                startActivity(intent);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/NanocTheBuilder/AlienPlayer4X")));
             }
         });
 
