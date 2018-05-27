@@ -8,12 +8,9 @@
 /build
 /captures
 .externalNativeBuild
-build.gradle
-gradle.properties
 gradle/
-gradlew
 gradlew.bat
-settings.gradle
+gradlew
 app/src/main/java/com/google
 screenshots/
 app/release/
