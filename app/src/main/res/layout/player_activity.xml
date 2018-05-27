@@ -23,7 +23,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/SE4XAppTheme"
     tools:context="com.thilian.se4x.robot.app.activities.PlayerDetailsActivity">
 
     <ImageView
@@ -36,7 +35,7 @@
 
     <Button
         android:id="@+id/set_seen_levels_button"
-        style="@style/SmallerText"
+        style="@style/SE4XButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/setSeenLevels"
@@ -58,7 +57,7 @@
 
     <Button
         android:id="@android:id/closeButton"
-        style="@style/SmallerText"
+        style="@style/SE4XButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@android:string/ok"

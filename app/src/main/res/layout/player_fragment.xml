@@ -24,7 +24,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-    android:theme="@style/SE4XAppTheme"
     tools:context="com.thilian.se4x.robot.app.activities.PlayerDetailsActivity"
     tools:layout_width="match_parent">
 
@@ -41,6 +40,7 @@
 
     <Button
         android:id="@+id/build_home_defense_button"
+        style="@style/SE4XButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/buildHomeDefense"
@@ -53,6 +53,7 @@
 
     <Button
         android:id="@+id/build_colony_defense_button"
+        style="@style/SE4XButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/buildColonyDefense"

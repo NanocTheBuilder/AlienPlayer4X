@@ -19,19 +19,7 @@
   -->
 
 <resources>
-    <style name="SmallerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="NormalText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="LargerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">22sp</item>
-    </style>
-
-    <style name="SE4XAppCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:textSize">18sp</item>
-    </style>
+    <dimen name="SmallerTextSize">14sp</dimen>
+    <dimen name="NormalTextSize">18sp</dimen>
+    <dimen name="LargerTextSize">22sp</dimen>
 </resources>

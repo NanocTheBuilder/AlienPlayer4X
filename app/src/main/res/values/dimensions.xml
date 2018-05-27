@@ -18,12 +18,8 @@
   ~ along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
-    android:singleLine="true"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:ellipsize="marquee"
-    android:textColor="#FFFFFF"
-    android:textSize="@dimen/NormalTextSize"
-    />
+<resources>
+    <dimen name="SmallerTextSize">14sp</dimen>
+    <dimen name="NormalTextSize">18sp</dimen>
+    <dimen name="LargerTextSize">22sp</dimen>
+</resources>

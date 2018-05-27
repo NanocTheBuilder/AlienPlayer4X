@@ -16,3 +16,4 @@ gradlew.bat
 settings.gradle
 app/src/main/java/com/google
 screenshots/
+app/release/

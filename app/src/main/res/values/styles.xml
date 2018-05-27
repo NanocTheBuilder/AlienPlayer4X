@@ -19,16 +19,12 @@
 
 <resources>
 
-    <style name="SE4XAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:checkboxStyle">@style/SE4XAppCheckBox</item>
-    </style>
-
     <style name="SmallerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/SmallerTextSize</item>
     </style>
 
     <style name="NormalText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/NormalTextSize</item>
     </style>
 
     <style name="NormalWhiteText" parent="NormalText">
@@ -36,7 +32,7 @@
     </style>
 
     <style name="LargerText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">@dimen/LargerTextSize</item>
     </style>
 
     <style name="MainMenuItem" parent="LargerText">
@@ -45,9 +41,18 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="SE4XAppCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:textSize">18sp</item>
+    <style name="SE4XCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:textSize">@dimen/NormalTextSize</item>
         <item name="android:button">@drawable/checkbox_blue_white</item>
     </style>
 
+    <style name="SE4XButton" parent="Widget.AppCompat.Button">
+        <item name="background">@android:color/darker_gray</item>
+        <item name="android:textSize">@dimen/SmallerTextSize</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="StartButton" parent="SE4XButton">
+        <item name="android:textSize">@dimen/NormalTextSize</item>
+    </style>
 </resources>

@@ -22,7 +22,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/SE4XAppTheme"
     >
 
     <TextView
@@ -41,7 +40,7 @@
 
     <Button
         android:id="@+id/first_combat_button"
-        style="@style/SmallerText"
+        style="@style/SE4XButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -54,7 +53,7 @@
 
     <Button
         android:id="@+id/remove_fleet_button"
-        style="@style/SmallerText"
+        style="@style/SE4XButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
