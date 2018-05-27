@@ -58,36 +58,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/help_html"
+                style="@style/NormalWhiteText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/about_html"
-                    style="@style/NormalWhiteText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:autoLink="web"
-                    tools:text="about text" />
-
-                <Button
-                    android:id="@+id/view_license_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="View license" />
-
-                <Button
-                    android:id="@+id/licenses_button"
-                    style="@style/SmallerText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="@string/licenses" />
-            </LinearLayout>
+                tools:text="help text" />
         </ScrollView>
-
     </FrameLayout>
 
     <Button

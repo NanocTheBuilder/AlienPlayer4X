@@ -153,15 +153,7 @@ public abstract class SE4XGameActivity extends SE4XActivity {
 
         loadBackgroundImage();
 
-        Button okButton = findViewById(android.R.id.closeButton);
-        if(okButton != null) {
-            okButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SE4XGameActivity.this.onBackPressed();
-                }
-            });
-        }
+        initOkButton();
 
         Button setSeenLevelButton = findViewById(R.id.set_seen_levels_button);
         if(setSeenLevelButton != null) {

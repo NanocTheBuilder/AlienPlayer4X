@@ -20,13 +20,46 @@
 package com.thilian.se4x.robot.app;
 
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public abstract class SE4XActivity extends FragmentActivity {
     protected void loadBackgroundImage() {
         ImageView background = findViewById(R.id.background_image);
         Glide.with(this).load(R.drawable.smc_wing_full_2560).into(background);
+    }
+
+    protected String loadAssetText(String fileName) {
+        String text;
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(fileName)))){
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null){
+                sb.append(line).append("\n");
+            }
+            text = sb.toString();
+        } catch (IOException e) {
+            text = e.getLocalizedMessage();
+        }
+        return text;
+    }
+
+    protected void initOkButton() {
+        Button okButton = findViewById(android.R.id.closeButton);
+        if(okButton != null) {
+            okButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SE4XActivity.this.onBackPressed();
+                }
+            });
+        }
     }
 }

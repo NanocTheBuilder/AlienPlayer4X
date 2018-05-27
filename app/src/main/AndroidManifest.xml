@@ -36,9 +36,10 @@
         </activity>
         <activity android:name=".activities.NewGameActivity" android:noHistory="true"/>
         <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.PlayerDetailsActivity" />
+        <activity android:name=".activities.PlayerDetailsActivity"/>
         <activity android:name=".activities.SettingsActivity"/>
         <activity android:name=".activities.SeenTechnologiesActivity"/>
+        <activity android:name=".activities.HelpActivity"/>
         <activity android:name=".activities.AboutActivity"/>
         <activity android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>

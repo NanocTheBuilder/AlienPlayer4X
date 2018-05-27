@@ -43,6 +43,7 @@ public class MainMenuActivity extends SE4XActivity {
         initOnClickListener(R.id.resume_text, MainActivity.class);
         initOnClickListener(R.id.new_game_text, NewGameActivity.class);
         initOnClickListener(R.id.settings_text, SettingsActivity.class);
+        initOnClickListener(R.id.help_text, HelpActivity.class);
         initOnClickListener(R.id.about_text, AboutActivity.class);
     }
 

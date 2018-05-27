@@ -41,7 +41,6 @@
 
     <Button
         android:id="@+id/build_home_defense_button"
-        style="@style/SmallerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/buildHomeDefense"
@@ -54,7 +53,6 @@
 
     <Button
         android:id="@+id/build_colony_defense_button"
-        style="@style/SmallerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/buildColonyDefense"

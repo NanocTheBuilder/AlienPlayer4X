@@ -24,18 +24,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 import com.thilian.se4x.robot.app.R;
 import com.thilian.se4x.robot.app.SE4XActivity;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
 
 public class AboutActivity extends SE4XActivity {
     @Override
@@ -44,37 +43,18 @@ public class AboutActivity extends SE4XActivity {
         setContentView(R.layout.about_activity);
         loadBackgroundImage();
 
-        findViewById(R.id.license_text).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gnu.org/licenses/gpl.txt")));
-            }
-        });
+        TextView aboutHtmlText = findViewById(R.id.about_html);
+        String aboutString = String.format(loadAssetText("about.html"), getString(R.string.app_name), getString(R.string.version));
+        aboutHtmlText.setText(Html.fromHtml(aboutString));
 
-        findViewById(R.id.view_license_text).setOnClickListener(new View.OnClickListener() {
+        initOkButton();
+
+        findViewById(R.id.view_license_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
-                String message;
-                try(BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("LICENSE.txt")))){
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null){
-                        sb.append(line).append("\n");
-                    }
-                    message = sb.toString();
-                } catch (IOException e) {
-                    message = e.getLocalizedMessage();
-                }
-                builder.setMessage(message);
+                builder.setMessage(loadAssetText("LICENSE.txt"));
                 builder.show();
-            }
-        });
-
-        findViewById(R.id.source_location_text).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/NanocTheBuilder/AlienPlayer4X")));
             }
         });
 
@@ -85,5 +65,4 @@ public class AboutActivity extends SE4XActivity {
             }
         });
     }
-
 }
