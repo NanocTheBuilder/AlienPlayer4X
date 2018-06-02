@@ -30,14 +30,16 @@ import android.widget.LinearLayout;
 
 import com.thilian.se4x.robot.app.R;
 import com.thilian.se4x.robot.app.SE4XGameActivity;
+import com.thilian.se4x.robot.app.dialogs.ContinueAfterEconPhase20Dialog;
 import com.thilian.se4x.robot.app.fragments.PlayerFragment;
 import com.thilian.se4x.robot.app.views.PlayerView;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
+import com.thilian.se4x.robot.game.Game;
 
 import java.util.List;
 
-public class MainActivity extends SE4XGameActivity {
+public class MainActivity extends SE4XGameActivity  implements ContinueAfterEconPhase20Dialog.ContinueAfterEconPhase20Listener{
     private static final String tag = SE4XGameActivity.class.getSimpleName();
     private boolean exitGame = false;
     private boolean twoLevelsView;
@@ -55,19 +57,31 @@ public class MainActivity extends SE4XGameActivity {
         econButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<EconPhaseResult> results = getGame().doEconomicPhase();
-                if (results.size() != 0) {
-                    showEconPhaseResult(results);
-                    updatePlayerViews();
+                if(getGame().currentTurn == 21){
+                    showContinueAfterEconPhase20Dialog();
                 }
-                if (getGame().currentTurn <= 20)
-                    econButton.setText(getString(R.string.econPhase, getGame().currentTurn));
                 else {
-                    econButton.setText(getString(R.string.gameOver));
-                    econButton.setEnabled(false);
+                    handleNewEconPhase();
                 }
             }
         });
+    }
+
+    private void handleNewEconPhase() {
+        if (getGame().currentTurn < 21 || getGame().continueAfterEconPhase20) {
+            final Button econButton = findViewById(R.id.econPhase);
+            List<EconPhaseResult> results = getGame().doEconomicPhase();
+            if (results.size() != 0) {
+                showEconPhaseResult(results);
+                updatePlayerViews();
+            }
+            if (getGame().currentTurn < 100)
+                econButton.setText(getString(R.string.econPhase, getGame().currentTurn));
+            else {
+                econButton.setText(getString(R.string.gameOver));
+                econButton.setEnabled(false);
+            }
+        }
     }
 
     private void initPlayerViews() {
@@ -160,5 +174,11 @@ public class MainActivity extends SE4XGameActivity {
         if (exitGame) {
             deleteGame();
         }
+    }
+
+    @Override
+    public void continueAfterEconPhase20Clicked() {
+        getGame().continueAfterEconPhase20 = true;
+        handleNewEconPhase();
     }
 }

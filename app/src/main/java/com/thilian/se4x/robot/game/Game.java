@@ -39,9 +39,11 @@ public class Game {
     private Set<Seeable> seenThings;
     public int currentTurn;
     private Difficulty difficulty;
+    public boolean continueAfterEconPhase20;
 
     public static Game newGame(Scenario scenario, Difficulty difficulty, PlayerColor... playerColors) {
         Game game = new Game();
+        game.continueAfterEconPhase20 = false;
         game.difficulty = difficulty;
         game.scenario = scenario;
         scenario.init(game);

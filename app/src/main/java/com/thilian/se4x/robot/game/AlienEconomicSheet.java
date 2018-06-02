@@ -95,19 +95,23 @@ public class AlienEconomicSheet {
     }
 
     protected int requiredRoll(int turn, int result) {
-        return AlienEconomicSheet.resultTable[turn][result];
+        return AlienEconomicSheet.resultTable[getResultTableRow(turn)][result];
+    }
+
+    protected int getResultTableRow(int turn) {
+        return turn < 20 ?  turn :  20 - (turn % 2);
     }
 
     public int getExtraEcon(int turn) {
-        return extraEcon[turn];
+        return extraEcon[getResultTableRow(turn)];
     }
 
     public int getEconRolls(int turn) {
-        return AlienEconomicSheet.econRolls[turn];
+        return AlienEconomicSheet.econRolls[getResultTableRow(turn)];
     }
 
     public int getFleetLaunch(int turn) {
-        return AlienEconomicSheet.fleetLaunch[turn];
+        return AlienEconomicSheet.fleetLaunch[getResultTableRow(turn)];
     }
 
     public void spendFleetCP(int ammount) {

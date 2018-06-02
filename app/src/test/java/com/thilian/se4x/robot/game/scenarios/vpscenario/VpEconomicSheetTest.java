@@ -93,12 +93,12 @@ public class VpEconomicSheetTest extends EconomicRollTest{
 
     @Override
     protected int[] getEconRolls() {
-        return new int[]{ 0, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5};
+        return new int[]{ 0, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5};
     }
     
     @Override
     protected int[] getFleetLaunchValues() {
-        return new int[] { 0, -99, 10, 10, 5, 10, 4, 10, 4, 5, 6, 4, 6, 3, 10, 3, 10, 3, 10, 3, 10};
+        return new int[] { 0, -99, 10, 10, 5, 10, 4, 10, 4, 5, 6, 4, 6, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10};
     }
     
     @Override
@@ -115,6 +115,6 @@ public class VpEconomicSheetTest extends EconomicRollTest{
     
     @Override
     protected int[] getResult(int turn, int index) {
-        return resultTable[turn][index];
+        return resultTable[turn < 20 ? turn : 20 ][index];
     }
 }

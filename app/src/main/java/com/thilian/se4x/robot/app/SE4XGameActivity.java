@@ -30,6 +30,7 @@ import android.widget.Button;
 import com.thilian.se4x.robot.app.activities.MainActivity;
 import com.thilian.se4x.robot.app.activities.PlayerDetailsActivity;
 import com.thilian.se4x.robot.app.activities.SeenTechnologiesActivity;
+import com.thilian.se4x.robot.app.dialogs.ContinueAfterEconPhase20Dialog;
 import com.thilian.se4x.robot.app.dialogs.EconPhaseResultDialog;
 import com.thilian.se4x.robot.app.dialogs.FirstCombatDialog;
 import com.thilian.se4x.robot.app.dialogs.FleetBuildResultDialog;
@@ -141,6 +142,9 @@ public abstract class SE4XGameActivity extends SE4XActivity {
         new FirstCombatDialog(this).show(fleet, fleetView, listener);
     }
 
+    public void showContinueAfterEconPhase20Dialog(){
+        new ContinueAfterEconPhase20Dialog(this).show();
+    }
     public int getColor(AlienPlayer alienPlayer){
         int cid = getResources().getIdentifier(alienPlayer.getColor().name(), "color", getPackageName());
         return getResources().getColor(cid);

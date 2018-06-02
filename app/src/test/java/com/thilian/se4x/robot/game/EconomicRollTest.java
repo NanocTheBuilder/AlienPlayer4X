@@ -53,13 +53,15 @@ public class EconomicRollTest {
         {{     }, { 1, 8}, { 9, 10}, {      }},	
         {{     }, { 1, 8}, { 9, 10}, {      }},	
         {{     }, { 1, 9}, {    10}, {      }},	
-        {{     }, { 1, 9}, {    10}, {      }},	
+        {{     }, { 1, 9}, {    10}, {      }},
+        {{     }, { 1, 9}, {    10}, {      }},
+        {{     }, { 1, 9}, {    10}, {      }},
     };
     //@formatter:on
 
     @Test
     public void testCPResults() {
-        for (int turn = 1; turn < 21; turn++) {
+        for (int turn = 1; turn < 23; turn++) {
             for (Difficulty diff : getDifficulties()) {
                 assertFleetResults(turn, diff);
                 assertTechResults(turn, diff);
@@ -83,6 +85,8 @@ public class EconomicRollTest {
         assertEquals(2, sheet.getExtraEcon(6));
         makeRoll(sheet, 7, 1);
         assertEquals(2, sheet.getExtraEcon(10));
+        assertEquals(2, sheet.getExtraEcon(98));
+        assertEquals(2, sheet.getExtraEcon(99));
     }
 
     protected void makeRoll(AlienEconomicSheet sheet, int turn, int result){
@@ -94,24 +98,24 @@ public class EconomicRollTest {
     public void testEconRollsColumn() {
         int[] expected = getEconRolls();
         AlienEconomicSheet sheet = getEconomicSheet();
-        for (int turn = 1; turn < 21; turn++)
+        for (int turn = 1; turn < 23; turn++)
             assertEquals(expected[turn], sheet.getEconRolls(turn));
     }
 
     protected int[] getEconRolls() {
-        return new int[] { 0, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5 };
+        return new int[] { 0, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5 };
     }
 
     @Test
     public void testFleetLaunch() {
         int[] expected = getFleetLaunchValues();
         AlienEconomicSheet sheet = getEconomicSheet();
-        for (int turn = 1; turn < 21; turn++)
+        for (int turn = 1; turn < 23; turn++)
             assertEquals(expected[turn], sheet.getFleetLaunch(turn));
     }
 
     protected int[] getFleetLaunchValues() {
-        return new int[] { 0, -99, 10, 10, 5, 3, 4, 4, 4, 5, 5, 3, 3, 3, 10, 3, 10, 3, 10, 3, 10 };
+        return new int[] { 0, -99, 10, 10, 5, 3, 4, 4, 4, 5, 5, 3, 3, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10 };
     }
 
     private void assertFleetResults(int turn, Difficulty diff) {

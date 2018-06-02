@@ -100,7 +100,7 @@ public class VpEconomicSheet extends AlienEconomicSheet {
 
     @Override
     protected int requiredRoll(int turn, int result) {
-        return VpEconomicSheet.resultTable[turn][result];
+        return VpEconomicSheet.resultTable[getResultTableRow(turn)][result];
     }
 
     @Override
@@ -110,12 +110,12 @@ public class VpEconomicSheet extends AlienEconomicSheet {
 
     @Override
     public int getEconRolls(int turn) {
-        return econRolls[turn];
+        return econRolls[getResultTableRow(turn)];
     }
 
     @Override
     public int getFleetLaunch(int turn) {
-        return VpEconomicSheet.fleetLaunch[turn];
+        return VpEconomicSheet.fleetLaunch[getResultTableRow(turn)];
     }
 
     public boolean isMaxDefCP() {
