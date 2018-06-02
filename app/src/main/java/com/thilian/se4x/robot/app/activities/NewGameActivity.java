@@ -107,7 +107,7 @@ public class NewGameActivity extends SE4XActivity {
                     }
                     Button  startButton = findViewById(R.id.start_button);
                     Difficulty difficulty = (Difficulty)(((Spinner) findViewById(R.id.difficulty_spinner)).getSelectedItem());
-                    startButton.setEnabled(selectedPlayers == difficulty.getNumberOfAlienPlayers());
+                    startButton.setEnabled(difficulty != null && selectedPlayers == difficulty.getNumberOfAlienPlayers());
                 }
             });
         }
