@@ -68,19 +68,17 @@ public class MainActivity extends SE4XGameActivity  implements ContinueAfterEcon
     }
 
     private void handleNewEconPhase() {
-        if (getGame().currentTurn < 21 || getGame().continueAfterEconPhase20) {
-            final Button econButton = findViewById(R.id.econPhase);
-            List<EconPhaseResult> results = getGame().doEconomicPhase();
-            if (results.size() != 0) {
-                showEconPhaseResult(results);
-                updatePlayerViews();
-            }
-            if (getGame().currentTurn < 100)
-                econButton.setText(getString(R.string.econPhase, getGame().currentTurn));
-            else {
-                econButton.setText(getString(R.string.gameOver));
-                econButton.setEnabled(false);
-            }
+        final Button econButton = findViewById(R.id.econPhase);
+        List<EconPhaseResult> results = getGame().doEconomicPhase();
+        if (results.size() != 0) {
+            showEconPhaseResult(results);
+            updatePlayerViews();
+        }
+        if (getGame().currentTurn < 100)
+            econButton.setText(getString(R.string.econPhase, getGame().currentTurn));
+        else {
+            econButton.setText(getString(R.string.gameOver));
+            econButton.setEnabled(false);
         }
     }
 
@@ -178,7 +176,6 @@ public class MainActivity extends SE4XGameActivity  implements ContinueAfterEcon
 
     @Override
     public void continueAfterEconPhase20Clicked() {
-        getGame().continueAfterEconPhase20 = true;
         handleNewEconPhase();
     }
 }

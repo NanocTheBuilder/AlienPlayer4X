@@ -38,12 +38,16 @@
         android:name="com.thilian.se4x.robot.app.fragments.SeenTechnologiesFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintBottom_toTopOf="@android:id/closeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/seen_technologies_fragment"
-        />
+        tools:layout="@layout/seen_technologies_fragment" />
 
     <Button
         android:id="@android:id/closeButton"
