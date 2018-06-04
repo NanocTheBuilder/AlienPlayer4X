@@ -24,13 +24,15 @@ import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetLauncher;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.FleetBuildOption;
+import com.thilian.se4x.robot.game.enums.FleetType;
 
 import static com.thilian.se4x.robot.game.enums.FleetType.EXPANSION_FLEET;
-import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET;
+import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET_GALACTIC_CAPITAL;
+import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET_HOME_WORLD;
 import static com.thilian.se4x.robot.game.enums.FleetType.REGULAR_FLEET;
 
-public class VpFleetLauncher extends FleetLauncher {
-    public VpFleetLauncher(Game game) {
+public class VpSoloFleetLauncher extends FleetLauncher {
+    public VpSoloFleetLauncher(Game game) {
         super(game);
     }
 
@@ -62,7 +64,7 @@ public class VpFleetLauncher extends FleetLauncher {
             if (roll < 8) {
                 fleet.setFleetType(EXPANSION_FLEET);
             } else {
-                fleet.setFleetType(EXTERMINATION_FLEET);
+                fleet.setFleetType(getExterminationFleetType(turn));
             }
         }
 
@@ -70,5 +72,12 @@ public class VpFleetLauncher extends FleetLauncher {
             fleet.addFleetCp(50);
             vpSheet.spendBank(50);
         }
+    }
+
+    protected FleetType getExterminationFleetType(int turn) {
+         if (game.roller.roll(2) == 1)
+            return EXTERMINATION_FLEET_HOME_WORLD;
+        else
+            return EXTERMINATION_FLEET_GALACTIC_CAPITAL;
     }
 }

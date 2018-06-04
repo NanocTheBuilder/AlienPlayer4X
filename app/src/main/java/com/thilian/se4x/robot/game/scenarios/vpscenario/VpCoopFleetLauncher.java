@@ -19,14 +19,24 @@
 
 package com.thilian.se4x.robot.game.scenarios.vpscenario;
 
-import java.util.Arrays;
-import java.util.List;
 
-import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.Game;
+import com.thilian.se4x.robot.game.enums.FleetType;
 
-public class Vp3pScenario extends Vp2pScenario {
+import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET_GALACTIC_CAPITAL;
+import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET_HOME_WORLD;
+
+public class VpCoopFleetLauncher extends VpSoloFleetLauncher {
+    public VpCoopFleetLauncher(Game game) {
+        super(game);
+    }
+
     @Override
-    public List<? extends Difficulty> getDifficulties() {
-        return Arrays.asList(VpDifficulties.Vp3pDifficulty.values());
+    protected FleetType getExterminationFleetType(int turn) {
+        if((turn & 1) == 1){
+            return EXTERMINATION_FLEET_GALACTIC_CAPITAL;
+        }
+        else
+            return EXTERMINATION_FLEET_HOME_WORLD;
     }
 }

@@ -24,7 +24,14 @@ import static com.thilian.se4x.robot.game.enums.FleetType.FleetNameSequence.DEFE
 import static com.thilian.se4x.robot.game.enums.FleetType.FleetNameSequence.RAIDER;
 
 public enum FleetType {
-    REGULAR_FLEET(BASIC), RAIDER_FLEET(RAIDER), DEFENSE_FLEET(DEFENSE), EXPANSION_FLEET(BASIC), EXTERMINATION_FLEET(BASIC);
+    REGULAR_FLEET(BASIC),
+    RAIDER_FLEET(RAIDER),
+    DEFENSE_FLEET(DEFENSE),
+    EXPANSION_FLEET(BASIC),
+    EXTERMINATION_FLEET(BASIC), //leave it for backward compatibility (someone upgrades in the middle of a game)
+    EXTERMINATION_FLEET_GALACTIC_CAPITAL(BASIC),
+    EXTERMINATION_FLEET_HOME_WORLD(BASIC)
+    ;
 
     static enum FleetNameSequence{
         BASIC, DEFENSE, RAIDER;

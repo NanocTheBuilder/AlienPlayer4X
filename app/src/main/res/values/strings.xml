@@ -148,7 +148,7 @@
     <string name="licenses">View 3rd party licenses</string>
 
     <string name="do_you_want_to_continue_title">"Do you want to continue?"</string>
-    <string name="do_you_want_to_continue_message">The official rules don\'t go beyond Econ Phase 20. If you continue, the we will use an unofficial hose rule to determine the Alien Players\' actions.</string>
+    <string name="do_you_want_to_continue_message">The official rules don\'t go beyond Econ Phase 20. If you continue, the app will use an unofficial hose rule to determine the Alien Players\' actions.</string>
 
     <string-array name="first_combat_options_s4">
         <item>Combat above planet</item>[

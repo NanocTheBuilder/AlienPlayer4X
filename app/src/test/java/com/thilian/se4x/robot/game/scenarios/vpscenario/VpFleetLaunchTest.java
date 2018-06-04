@@ -25,7 +25,8 @@ import com.thilian.se4x.robot.game.enums.FleetType;
 import org.junit.Test;
 
 import static com.thilian.se4x.robot.game.enums.FleetType.EXPANSION_FLEET;
-import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET;
+import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET_GALACTIC_CAPITAL;
+import static com.thilian.se4x.robot.game.enums.FleetType.EXTERMINATION_FLEET_HOME_WORLD;
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
 import static org.junit.Assert.assertEquals;
@@ -94,24 +95,42 @@ public class VpFleetLaunchTest extends VpScenarioFixture{
     public void launchExterminationFleet(){
         VpEconomicSheet vpSheet = (VpEconomicSheet)sheet;
 
-        vpSheet.setFleetCP(10);
         vpSheet.setBank(60);
+
+        vpSheet.setFleetCP(10);
         roller.mockRoll(1); //launch
         roller.mockRoll(8);
-        assertFleetLaunched(EXTERMINATION_FLEET, "1", 10);
+        roller.mockRoll(2, 1);
+        assertFleetLaunched(7, EXTERMINATION_FLEET_HOME_WORLD, "1", 10);
         assertBank(60);
 
         vpSheet.setFleetCP(10);
         roller.mockRoll(1); //launch
         roller.mockRoll(6);
-        assertFleetLaunched(8, EXTERMINATION_FLEET, "2", 10);
+        roller.mockRoll(2, 1);
+        assertFleetLaunched(8, EXTERMINATION_FLEET_HOME_WORLD, "2", 10);
+        assertBank(60);
+
+        vpSheet.setFleetCP(10);
+        roller.mockRoll(1); //launch
+        roller.mockRoll(6);
+        roller.mockRoll(2, 2);
+        assertFleetLaunched(9, EXTERMINATION_FLEET_GALACTIC_CAPITAL, "3", 10);
         assertBank(60);
 
 
         vpSheet.setFleetCP(10);
         roller.mockRoll(1); //launch
+        roller.mockRoll(6);
+        roller.mockRoll(2, 2);
+        assertFleetLaunched(10, EXTERMINATION_FLEET_GALACTIC_CAPITAL, "4", 10);
+        assertBank(60);
+
+        vpSheet.setFleetCP(10);
+        roller.mockRoll(1); //launch
         roller.mockRoll(4);
-        assertFleetLaunched(11, EXTERMINATION_FLEET, "3", 10);
+        roller.mockRoll(2, 1);
+        assertFleetLaunched(11, EXTERMINATION_FLEET_HOME_WORLD, "5", 10);
         assertBank(60);
     }
 

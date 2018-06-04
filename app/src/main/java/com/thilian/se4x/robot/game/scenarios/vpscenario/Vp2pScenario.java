@@ -22,9 +22,21 @@ package com.thilian.se4x.robot.game.scenarios.vpscenario;
 import java.util.Arrays;
 import java.util.List;
 
+import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.enums.Difficulty;
+import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4TechnologyBuyer;
+import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4TechnologyPrices;
 
 public class Vp2pScenario extends VpSoloScenario {
+    @Override
+    public void init(Game game) {
+        techBuyer = new Scenario4TechnologyBuyer(game);
+        techPrices = new Scenario4TechnologyPrices();
+        fleetBuilder = new VpFleetBuilder(game);
+        defenseBuilder = new DefenseBuilder(game);
+        fleetLauncher = new VpCoopFleetLauncher(game);
+    }
+
     @Override
     public List<? extends Difficulty> getDifficulties() {
         return Arrays.asList(VpDifficulties.Vp2pDifficulty.values());
