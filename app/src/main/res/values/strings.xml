@@ -70,6 +70,8 @@
     <string name="DEFENSE_FLEET">Defense Fleet %s</string>
     <string name="EXPANSION_FLEET">Expansion Fleet %s</string>
     <string name="EXTERMINATION_FLEET">Extermination Fleet %s</string>
+    <string name="EXTERMINATION_FLEET_GALACTIC_CAPITAL">Extermination (CG) %s</string>
+    <string name="EXTERMINATION_FLEET_HOME_WORLD">Extermination (HW) %s</string>
 
     <string name="MOVE">Move: %d</string>
     <string name="SHIP_SIZE">Ship Size: %d</string>

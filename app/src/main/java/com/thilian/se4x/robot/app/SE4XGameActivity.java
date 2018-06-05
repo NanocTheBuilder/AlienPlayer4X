@@ -95,22 +95,23 @@ public abstract class SE4XGameActivity extends SE4XActivity {
             int sid;
             StringBuilder sb = new StringBuilder();
             int lineBreak = -1;
+            int size = groups.size();
             if(TRANSPORT.equals(groups.get(0).getShipType())){
-                if(groups.size() > 4 && GRAV_ARMOR.equals(groups.get(3).getShipType()))
+                if(size > 4 && GRAV_ARMOR.equals(groups.get(3).getShipType()))
                     lineBreak = 3;
-                else if(groups.size() > 3 && HEAVY_INFANTRY.equals(groups.get(2).getShipType()))
+                else if(size > 3 && HEAVY_INFANTRY.equals(groups.get(2).getShipType()))
                     lineBreak = 2;
                 else
                     lineBreak = 1;
             }
             Group group;
-            for (int i = 0; i < groups.size(); i++) {
+            for (int i = 0; i < size; i++) {
                 group = groups.get(i);
                 sid = getResources().getIdentifier(group.getShipType().toString(), "string", getPackageName());
                 sb.append(getResources().getString(sid, group.getSize()));
                 if(i == lineBreak)
                     sb.append("\n");
-                else if(i < groups.size() - 1)
+                else if(i < size - 1)
                     sb.append(" ");
             }
             return sb.toString();
