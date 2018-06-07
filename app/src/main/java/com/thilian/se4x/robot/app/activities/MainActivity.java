@@ -35,13 +35,11 @@ import com.thilian.se4x.robot.app.fragments.PlayerFragment;
 import com.thilian.se4x.robot.app.views.PlayerView;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
-import com.thilian.se4x.robot.game.Game;
 
 import java.util.List;
 
 public class MainActivity extends SE4XGameActivity  implements ContinueAfterEconPhase20Dialog.ContinueAfterEconPhase20Listener{
     private static final String tag = SE4XGameActivity.class.getSimpleName();
-    private boolean exitGame = false;
     private boolean twoLevelsView;
 
     @Override
@@ -170,14 +168,6 @@ public class MainActivity extends SE4XGameActivity  implements ContinueAfterEcon
                     }
                 })
                 .show();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (exitGame) {
-            deleteGame();
-        }
     }
 
     @Override

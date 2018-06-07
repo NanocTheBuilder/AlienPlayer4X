@@ -19,15 +19,10 @@
 
 package com.thilian.se4x.robot.app.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import com.thilian.se4x.robot.app.R;
 import com.thilian.se4x.robot.app.SE4XGameActivity;
-import com.thilian.se4x.robot.app.fragments.PlayerFragment;
-import com.thilian.se4x.robot.app.fragments.SeenTechnologiesFragment;
 
 public class SeenTechnologiesActivity extends SE4XGameActivity {
     @Override

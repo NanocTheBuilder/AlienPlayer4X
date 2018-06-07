@@ -26,8 +26,6 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.gms.oss.licenses.OssLicensesActivity;
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 import com.thilian.se4x.robot.app.GameSaver;
 import com.thilian.se4x.robot.app.R;
 import com.thilian.se4x.robot.app.SE4XActivity;

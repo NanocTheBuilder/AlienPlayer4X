@@ -33,9 +33,6 @@ import com.thilian.se4x.robot.app.SE4XGameActivity;
 import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.scenarios.scenario4.Scenario4Player;
 
-/**
- * TODO: document your custom view class.
- */
 public class FleetView extends RelativeLayout{
 
     private Fleet fleet;
