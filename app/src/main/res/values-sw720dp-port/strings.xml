@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2018 Balázs Péter
   ~
@@ -17,11 +18,8 @@
   ~ along with Alien Player 4X.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<html>
-<h3>%s</h3>
-Version %s
-<p>Copyright © 2018 Balázs Péter</p>
-<p>Image of The Small Magellanic Cloud<br/>Credit: NASA, ESA, CXC and the University of Potsdam, JPL-Caltech, and STScI.</p>
-<p>This is a free software licensed under GPL 3.<br/>You can download the license from<br/><a href="https://www.gnu.org/licenses/gpl.txt">https://www.gnu.org/licenses/gpl.txt</a><br/>or view it below.</p>
-<p>You can get the source files at<br><a href="https://github.com/NanocTheBuilder/AlienPlayer4X">https://github.com/NanocTheBuilder/AlienPlayer4X</a></p>
-</html>
+<resources>
+    <string name="EXTERMINATION_FLEET">Extermination Fleet %s</string>
+    <string name="EXTERMINATION_FLEET_GALACTIC_CAPITAL">Extermination Fleet %s&lt;br>(&lt;i>Galactic Capital&lt;/i>)</string>
+    <string name="EXTERMINATION_FLEET_HOME_WORLD">Extermination Fleet %s&lt;br>(&lt;i>Player Home World&lt;/i>)</string>
+</resources>

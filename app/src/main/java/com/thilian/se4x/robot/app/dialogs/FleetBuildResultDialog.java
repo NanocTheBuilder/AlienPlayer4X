@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,7 +61,7 @@ public class FleetBuildResultDialog {
         }
 
         for(Fleet fleet : result.getNewFleets()){
-            TextView textView = newTextView(activity.getFleetName(fleet) + "\n" + activity.getFleetDetails(fleet));
+            TextView textView = newTextView(TextUtils.concat(activity.getFleetName(fleet), "\n", activity.getFleetDetails(fleet)));
             layout.addView(textView);
         }
 
@@ -79,10 +80,10 @@ public class FleetBuildResultDialog {
                 }).show();
     }
 
-    private TextView newTextView(String text){
+    private TextView newTextView(CharSequence text){
         TextView textView = newTextView();
         textView.setText(text);
-        return  textView;
+        return textView;
     }
 
     private TextView newTextView(int textId){

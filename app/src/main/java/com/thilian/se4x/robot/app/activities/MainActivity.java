@@ -151,14 +151,20 @@ public class MainActivity extends SE4XGameActivity  implements ContinueAfterEcon
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.areYouSure)
                 .setMessage(R.string.finish_game)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteGame();
                         MainActivity.super.finish();
                     }
                 })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        MainActivity.super.finish();
+                    }
+                })
+                .setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                     }

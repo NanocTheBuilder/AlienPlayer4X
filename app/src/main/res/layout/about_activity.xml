@@ -76,7 +76,7 @@
                     style="@style/SE4XButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="View license" />
+                    android:text="@string/view_license" />
 
                 <Button
                     android:id="@+id/licenses_button"
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="@string/licenses" />
+                    android:text="@string/view_3rd_party_licenses" />
             </LinearLayout>
         </ScrollView>
 

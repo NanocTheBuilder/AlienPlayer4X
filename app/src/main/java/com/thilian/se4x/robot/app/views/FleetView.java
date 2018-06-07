@@ -20,6 +20,7 @@
 package com.thilian.se4x.robot.app.views;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;

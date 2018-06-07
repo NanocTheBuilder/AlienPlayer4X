@@ -24,11 +24,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 
-import com.thilian.se4x.robot.app.activities.MainActivity;
-import com.thilian.se4x.robot.app.activities.PlayerDetailsActivity;
 import com.thilian.se4x.robot.app.activities.SeenTechnologiesActivity;
 import com.thilian.se4x.robot.app.dialogs.ContinueAfterEconPhase20Dialog;
 import com.thilian.se4x.robot.app.dialogs.EconPhaseResultDialog;
@@ -118,9 +118,9 @@ public abstract class SE4XGameActivity extends SE4XActivity {
         }
     }
 
-    public String getFleetName(Fleet fleet){
+    public Spanned getFleetName(Fleet fleet){
         int sid = getResources().getIdentifier(fleet.getFleetType().toString(), "string", getPackageName());
-        return getResources().getString(sid, fleet.getName());
+        return Html.fromHtml(getResources().getString(sid, fleet.getName()));
     }
 
     protected void showEconPhaseResult(List<EconPhaseResult> results){
