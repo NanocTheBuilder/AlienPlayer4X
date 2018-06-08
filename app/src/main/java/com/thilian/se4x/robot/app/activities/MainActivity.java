@@ -162,7 +162,7 @@ public class MainActivity extends SE4XGameActivity  implements ContinueAfterEcon
                         MainActivity.super.finish();
                     }
                 })
-                .setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                     }

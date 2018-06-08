@@ -34,8 +34,6 @@ import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.FleetBuildResult;
 import com.thilian.se4x.robot.game.enums.Technology;
 
-import org.w3c.dom.Text;
-
 import java.util.Map;
 
 public class FleetBuildResultDialog {
@@ -56,8 +54,7 @@ public class FleetBuildResultDialog {
 
         for (Map.Entry<Technology, Integer> entry : result.getNewTechs().entrySet()) {
             int sid = resources.getIdentifier(entry.getKey().toString(), "string", packageName);
-            TextView textView = newTextView(resources.getString(sid, entry.getValue()));
-            layout.addView(textView);
+            layout.addView(newTextView(resources.getString(sid, entry.getValue())));
         }
 
         for(Fleet fleet : result.getNewFleets()){
@@ -66,14 +63,13 @@ public class FleetBuildResultDialog {
         }
 
         if(result.getNewFleets().isEmpty() && result.getNewTechs().isEmpty()){
-            TextView textView = newTextView(R.string.no_new_fleets);
-            layout.addView(textView);
+            layout.addView(newTextView(R.string.no_new_fleets));
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setView(layout)
                 .setTitle(R.string.newFleets)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                     }

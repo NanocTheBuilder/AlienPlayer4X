@@ -20,6 +20,6 @@
 
 <resources>
     <string name="EXTERMINATION_FLEET">Extermination Flt %s</string>
-    <string name="EXTERMINATION_FLEET_GALACTIC_CAPITAL">Extermination Flt %s&lt;br>(&lt;i>Galactic Capital&lt;/i>)</string>
-    <string name="EXTERMINATION_FLEET_HOME_WORLD">Extermination Flt %s&lt;br>(&lt;i>Player Home World&lt;/i>)</string>
+    <string name="EXTERMINATION_FLEET_GALACTIC_CAPITAL">Extermination Flt %s&lt;br>&lt;i>(Galactic Capital)&lt;/i></string>
+    <string name="EXTERMINATION_FLEET_HOME_WORLD">Extermination Flt %s&lt;br>&lt;i>(Player Home World)&lt;/i></string>
 </resources>

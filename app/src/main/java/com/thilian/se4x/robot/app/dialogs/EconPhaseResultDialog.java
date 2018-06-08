@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -71,7 +72,7 @@ public class EconPhaseResultDialog {
                 if("".equals(fleetDetails))
                     fleetView.setText(activity.getFleetName(fleet));
                 else
-                    fleetView.setText(String.format("%s (%s)", activity.getFleetName(fleet), activity.getFleetDetails(fleet)));
+                    fleetView.setText(TextUtils.concat(activity.getFleetName(fleet), " (", fleetDetails, ")"));
             }
             else{
                 fleetView.setVisibility(View.GONE);
@@ -86,7 +87,7 @@ public class EconPhaseResultDialog {
             builder.setView(layout);
         }
         builder.setTitle(activity.getResources().getString(R.string.econPhase, activity.getGame().currentTurn - 1))
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                     }
