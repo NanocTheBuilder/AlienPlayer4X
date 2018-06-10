@@ -7,8 +7,8 @@ android {
         applicationId "com.thilian.se4x.robot.app"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1a"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
