@@ -67,21 +67,12 @@ public abstract class TechnologyBuyer {
             if (buyable.isEmpty())
                 break;
             int roll = game.roller.roll(buyable.size());
-            buyRolledTech(ap, buyable.get(roll - 1));
+            buyNextLevel(ap, buyable.get(roll - 1));
         }
-    }
-
-    private void buyRolledTech(AlienPlayer ap, Technology technology) {
-            buyNextLevel(ap, technology);
     }
 
     public void buyNextLevel(AlienPlayer ap, Technology technology) {
-        for(TechBuyer techBuyer : techBuyerList){
-            if(techBuyer.getTechnology().equals(technology)){
-                techBuyer.buyNextLevel(ap);
-                return;
-            }
-        }
+        techBuyerMap.get(technology).buyNextLevel(ap);
     }
 
     private List<Technology> findBuyableTechs(Fleet fleet, FleetBuildOption... options) {
