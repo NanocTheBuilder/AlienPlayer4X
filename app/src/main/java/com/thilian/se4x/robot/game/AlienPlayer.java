@@ -32,6 +32,7 @@ import java.util.Map;
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
+import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
 
 public class AlienPlayer {
 
@@ -80,9 +81,10 @@ public class AlienPlayer {
         return economicSheet.getExtraEcon(turn);
     }
 
-    void buyTechs(Fleet fleet, FleetBuildOption... options) {
-        setJustPurchasedCloaking(false);
+    private void buyTechs(Fleet fleet, FleetBuildOption... options) {
+        int oldCloaking = getLevel(CLOAKING);
         game.scenario.buyTechs(fleet, options);
+        setJustPurchasedCloaking(getLevel(CLOAKING) != oldCloaking);
     }
 
     public FleetBuildResult firstCombat(Fleet fleet, FleetBuildOption... options) {

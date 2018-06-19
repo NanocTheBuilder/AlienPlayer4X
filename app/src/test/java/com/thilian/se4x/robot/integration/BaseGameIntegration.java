@@ -19,12 +19,6 @@
 
 package com.thilian.se4x.robot.integration;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-
-import org.junit.Test;
-
 import com.thilian.se4x.robot.game.AlienEconomicSheet;
 import com.thilian.se4x.robot.game.AlienPlayer;
 import com.thilian.se4x.robot.game.EconPhaseResult;
@@ -38,6 +32,12 @@ import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameDifficulty;
 import com.thilian.se4x.robot.game.scenarios.basegame.BaseGameScenario;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
 
 public class BaseGameIntegration {
 
@@ -157,6 +157,7 @@ public class BaseGameIntegration {
         result = ap.makeEconRoll(9);
         assertNoFleetLaunch(result);
         assertCPs(22, 20, 20);
+        assertEquals(2, ap.getLevel(Technology.SHIP_SIZE));
         assertEquals(0, roller.rolls.size());
 
         game.setSeenLevel(Technology.CLOAKING, 1);

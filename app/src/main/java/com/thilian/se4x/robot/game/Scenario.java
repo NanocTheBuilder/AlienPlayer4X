@@ -19,13 +19,13 @@
 
 package com.thilian.se4x.robot.game;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
 import com.thilian.se4x.robot.game.enums.Technology;
+
+import java.util.Collection;
+import java.util.List;
 
 public abstract class Scenario{
 
@@ -58,11 +58,15 @@ public abstract class Scenario{
         return defenseBuilder.buildHomeDefense(alienPlayer);
     }
 
+    public boolean canBuyNextLevel(AlienPlayer ap, Technology technology){
+        return techBuyer.canBuyNextLevel(ap, technology);
+    }
+
     public void buyNextLevel(AlienPlayer alienPlayer, Technology technology) {
         techBuyer.buyNextLevel(alienPlayer, technology);
     }
 
-    public void buyTechs(Fleet fleet, FleetBuildOption[] options) {
+    public void buyTechs(Fleet fleet, FleetBuildOption... options) {
         techBuyer.buyTechs(fleet, options);
     }
 

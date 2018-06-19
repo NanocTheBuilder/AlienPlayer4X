@@ -19,67 +19,59 @@
 
 package com.thilian.se4x.robot.game.scenarios.scenario4;
 
-import static com.thilian.se4x.robot.game.enums.FleetBuildOption.COMBAT_IS_ABOVE_PLANET;
+import com.thilian.se4x.robot.game.Game;
+import com.thilian.se4x.robot.game.TechnologyBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.AttackBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.BoardingBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.CloakingBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.DefenseBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.FightersBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.GroundBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.MilitaryAcademyBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.MineSweeperBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.MoveBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.PointDefenseBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.ScannerBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.SecurityBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.ShipSizeBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.TacticsBuyer;
+
 import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
 import static com.thilian.se4x.robot.game.enums.Technology.BOARDING;
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
 import static com.thilian.se4x.robot.game.enums.Technology.DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.FIGHTERS;
+import static com.thilian.se4x.robot.game.enums.Technology.GROUND_COMBAT;
 import static com.thilian.se4x.robot.game.enums.Technology.MILITARY_ACADEMY;
 import static com.thilian.se4x.robot.game.enums.Technology.MINE_SWEEPER;
+import static com.thilian.se4x.robot.game.enums.Technology.MOVE;
 import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
 import static com.thilian.se4x.robot.game.enums.Technology.SECURITY_FORCES;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 
-import com.thilian.se4x.robot.game.AlienPlayer;
-import com.thilian.se4x.robot.game.Fleet;
-import com.thilian.se4x.robot.game.Game;
-import com.thilian.se4x.robot.game.TechnologyBuyer;
-import com.thilian.se4x.robot.game.enums.FleetBuildOption;
-
 public class Scenario4TechnologyBuyer extends TechnologyBuyer {
-    private static int[] SHIP_SIZE_ROLL_TABLE = new int[] { 0, 10, 7, 6, 5, 3, 6 };
-
     public Scenario4TechnologyBuyer(Game game) {
         super(game);
     }
 
     @Override
-    protected void initRollTable() {
-        addToRollTable(SHIP_SIZE, 16);
-        addToRollTable(ATTACK, 20);
-        addToRollTable(DEFENSE, 20);
-        addToRollTable(TACTICS, 12);
-        addToRollTable(CLOAKING, 3);
-        addToRollTable(SCANNER, 2);
-        addToRollTable(FIGHTERS, 8);
-        addToRollTable(POINT_DEFENSE, 3);
-        addToRollTable(MINE_SWEEPER, 5);
-        addToRollTable(SECURITY_FORCES, 3);
-        addToRollTable(MILITARY_ACADEMY, 4);
-        addToRollTable(BOARDING, 4);
-    }
-
-    @Override
-    protected int[] getShipSizeRollTable() {
-        return SHIP_SIZE_ROLL_TABLE;
-    }
-
-    @Override
-    public void buyOptionalTechs(Fleet fleet, FleetBuildOption... options) {
-        AlienPlayer ap = fleet.getAp();
-        buyPointDefenseIfNeeded(ap);
-        buyMineSweepIfNeeded(ap);
-        buySecurityIfNeeded(ap);
-        buyGroundCombatIfNeeded(ap, FleetBuildOption.isOption(COMBAT_IS_ABOVE_PLANET, options));
-        buyMilitaryAcademyIfNeeded(ap);
-        buyScannerIfNeeded(ap);
-        buyBoardingIfNeeded(ap);
-        buyShipSizeIfRolled(ap);
-        buyFightersIfNeeded(ap);
-        buyCloakingIfNeeded(fleet);
+    protected void initTechBuyers() {
+        addTechBuyer(MOVE, new MoveBuyer(game), 0);
+        addTechBuyer(ATTACK, new AttackBuyer(game), 20);
+        addTechBuyer(DEFENSE, new DefenseBuyer(game), 20);
+        addTechBuyer(TACTICS, new TacticsBuyer(game), 12);
+        addTechBuyer(POINT_DEFENSE, new PointDefenseBuyer(game), 3);
+        addTechBuyer(MINE_SWEEPER, new MineSweeperBuyer(game), 5);
+        addTechBuyer(SECURITY_FORCES, new SecurityBuyer(game), 3);
+        addTechBuyer(GROUND_COMBAT, new GroundBuyer(game), 0);
+        addTechBuyer(MILITARY_ACADEMY, new MilitaryAcademyBuyer(game), 4);
+        addTechBuyer(SCANNER, new ScannerBuyer(game), 2);
+        addTechBuyer(BOARDING, new BoardingBuyer(game), 4);
+        addTechBuyer(SHIP_SIZE, new ShipSizeBuyer(game), 16);
+        addTechBuyer(FIGHTERS, new FightersBuyer(game),8);
+        addTechBuyer(CLOAKING, new CloakingBuyer(game), 3);
     }
 
 }

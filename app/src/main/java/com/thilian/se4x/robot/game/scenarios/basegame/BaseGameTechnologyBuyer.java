@@ -19,55 +19,49 @@
 
 package com.thilian.se4x.robot.game.scenarios.basegame;
 
-import com.thilian.se4x.robot.game.AlienPlayer;
-import com.thilian.se4x.robot.game.Fleet;
 import com.thilian.se4x.robot.game.Game;
 import com.thilian.se4x.robot.game.TechnologyBuyer;
-import com.thilian.se4x.robot.game.enums.FleetBuildOption;
+import com.thilian.se4x.robot.game.buyers.technology.AttackBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.CloakingBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.DefenseBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.FightersBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.MineSweeperBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.MoveBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.PointDefenseBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.ScannerBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.ShipSizeBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.TacticsBuyer;
 
 import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
 import static com.thilian.se4x.robot.game.enums.Technology.DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.FIGHTERS;
 import static com.thilian.se4x.robot.game.enums.Technology.MINE_SWEEPER;
+import static com.thilian.se4x.robot.game.enums.Technology.MOVE;
 import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
+import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 
 public class BaseGameTechnologyBuyer extends TechnologyBuyer {
-
-    private int[] SHIP_SIZE_ROLL_TABLE = new int[]{0, 10, 7, 6, 5, 3};
 
     public BaseGameTechnologyBuyer(Game game) {
         super(game);
     }
 
     @Override
-    protected void initRollTable() {
-        addToRollTable(ATTACK, 2);
-        addToRollTable(DEFENSE, 2);
-        addToRollTable(TACTICS, 1);
-        addToRollTable(CLOAKING, 1);
-        addToRollTable(SCANNER, 1);
-        addToRollTable(FIGHTERS, 1);
-        addToRollTable(POINT_DEFENSE, 1);
-        addToRollTable(MINE_SWEEPER, 1);
-    }
+    protected void initTechBuyers() {
+        addTechBuyer(MOVE, new MoveBuyer(game), 0);
+        addTechBuyer(ATTACK, new AttackBuyer(game), 2);
+        addTechBuyer(DEFENSE, new DefenseBuyer(game), 2);
+        addTechBuyer(TACTICS, new TacticsBuyer(game),1);
 
-    @Override
-    protected int[] getShipSizeRollTable() {
-        return SHIP_SIZE_ROLL_TABLE;
-    }
-
-    @Override
-    public void buyOptionalTechs(Fleet fleet, FleetBuildOption... options) {
-        AlienPlayer ap = fleet.getAp();
-        buyPointDefenseIfNeeded(ap);
-        buyMineSweepIfNeeded(ap);
-        buyScannerIfNeeded(ap);
-        buyShipSizeIfRolled(ap);
-        buyFightersIfNeeded(ap);
-        buyCloakingIfNeeded(fleet);
+        addTechBuyer(POINT_DEFENSE, new PointDefenseBuyer(game), 1);
+        addTechBuyer(MINE_SWEEPER, new MineSweeperBuyer(game), 1);
+        addTechBuyer(SCANNER, new ScannerBuyer(game),1);
+        addTechBuyer(SHIP_SIZE, new ShipSizeBuyer(game), 0);
+        addTechBuyer(FIGHTERS, new FightersBuyer(game), 1);
+        addTechBuyer(CLOAKING, new CloakingBuyer(game), 1);
     }
 
 }

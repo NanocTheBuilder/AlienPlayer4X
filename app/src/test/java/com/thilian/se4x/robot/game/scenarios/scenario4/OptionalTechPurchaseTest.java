@@ -19,11 +19,14 @@
 
 package com.thilian.se4x.robot.game.scenarios.scenario4;
 
-import org.junit.Test;
-
-import com.thilian.se4x.robot.game.AlienPlayer;
+import com.thilian.se4x.robot.game.buyers.technology.BoardingBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.GroundBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.MilitaryAcademyBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.SecurityBuyer;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.enums.Seeable;
-import com.thilian.se4x.robot.game.enums.Technology;
+
+import org.junit.Test;
 
 public class OptionalTechPurchaseTest extends Scenario4TechnologyBuyerTestBase {
 
@@ -36,43 +39,27 @@ public class OptionalTechPurchaseTest extends Scenario4TechnologyBuyerTestBase {
     }
 
     private void assertBuySecurity(int expectedLevel) {
-        assertBuyOptional(expectedLevel, Technology.SECURITY_FORCES, new BuyAction(){
-            @Override
-            protected void buy(AlienPlayer ap) {
-                techBuyer.buySecurityIfNeeded(ap);
-            }
-        });
+        assertBuyOptional(expectedLevel, new SecurityBuyer(game));
     }
 
     private void assertDontBuySecurity(int expectedLevel) {
-        assertDontBuyOptional(expectedLevel, Technology.SECURITY_FORCES,  new BuyAction(){
-            @Override
-            protected void buy(AlienPlayer ap) {
-                techBuyer.buySecurityIfNeeded(ap);
-            }
-        });
+        assertDontBuyOptional(expectedLevel, new SecurityBuyer(game));
     }
 
     @Test
     public void buyOptionalGroundCombat(){
-        assertDontBuyGroundCombat(2, false);
-        assertBuyGroundCombat(2, true);
-        assertBuyGroundCombat(3, true);
-        assertDontBuyGroundCombat(4, true);
+        assertDontBuyGroundCombat(2);
+        assertBuyGroundCombat(2, FleetBuildOption.COMBAT_IS_ABOVE_PLANET);
+        assertBuyGroundCombat(3, FleetBuildOption.COMBAT_IS_ABOVE_PLANET);
+        assertDontBuyGroundCombat(4, FleetBuildOption.COMBAT_IS_ABOVE_PLANET);
     }
 
-    private void assertBuyGroundCombat(int level, final boolean combatIsAbovePlanet) {
-        assertBuyOptional(level, Technology.GROUND_COMBAT, new BuyAction(){
-            @Override
-            protected void buy(AlienPlayer ap) { techBuyer.buyGroundCombatIfNeeded(ap, combatIsAbovePlanet);}
-        });
+    private void assertBuyGroundCombat(int level, FleetBuildOption... options) {
+        assertBuyOptional(level, new GroundBuyer(game), options);
     }
 
-    private void assertDontBuyGroundCombat(int level, final boolean combatIsAbovePlanet) {
-        assertDontBuyOptional(level, Technology.GROUND_COMBAT, new BuyAction(){
-            @Override
-            protected void buy(AlienPlayer ap) { techBuyer.buyGroundCombatIfNeeded(ap, combatIsAbovePlanet);}
-        });
+    private void assertDontBuyGroundCombat(int level, FleetBuildOption... options) {
+        assertDontBuyOptional(level, new GroundBuyer(game), options);
     }
 
     @Test
@@ -95,21 +82,11 @@ public class OptionalTechPurchaseTest extends Scenario4TechnologyBuyerTestBase {
     }
 
     private void assertBuyMilitaryAcademy(int level) {
-        assertBuyOptional(level, Technology.MILITARY_ACADEMY, new BuyAction() {
-            @Override
-            protected void buy(AlienPlayer ap) {
-                techBuyer.buyMilitaryAcademyIfNeeded(ap);
-            }
-        });
+        assertBuyOptional(level, new MilitaryAcademyBuyer(game));
     }
 
     private void assertDontBuyMilitaryAcademy(int level) {
-        assertDontBuyOptional(level, Technology.MILITARY_ACADEMY, new BuyAction() {
-            @Override
-            protected void buy(AlienPlayer ap) {
-                techBuyer.buyMilitaryAcademyIfNeeded(ap);
-            }
-        });
+        assertDontBuyOptional(level, new MilitaryAcademyBuyer(game));
     }
 
     @Test
@@ -126,21 +103,11 @@ public class OptionalTechPurchaseTest extends Scenario4TechnologyBuyerTestBase {
     }
 
     private void assertBuyOptionalBoarding(int level) {
-        assertBuyOptional(level, Technology.BOARDING, new BuyAction() {
-            @Override
-            protected void buy(AlienPlayer ap) {
-                techBuyer.buyBoardingIfNeeded(ap);
-            }
-        });
+        assertBuyOptional(level, new BoardingBuyer(game));
     }
 
     private void assertDontBuyOptionalBoarding(int level) {
-        assertDontBuyOptional(level, Technology.BOARDING, new BuyAction() {
-            @Override
-            protected void buy(AlienPlayer ap) {
-                techBuyer.buyBoardingIfNeeded(ap);
-            }
-        });
+        assertDontBuyOptional(level, new BoardingBuyer(game));
     }
 
     @Test

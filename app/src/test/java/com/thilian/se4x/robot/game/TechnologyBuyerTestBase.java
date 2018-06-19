@@ -19,12 +19,15 @@
 
 package com.thilian.se4x.robot.game;
 
-import static org.junit.Assert.assertEquals;
+import com.thilian.se4x.robot.game.buyers.TechBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.ShipSizeBuyer;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
+import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.Technology;
 
 import org.junit.Before;
 
-import com.thilian.se4x.robot.game.enums.FleetType;
-import com.thilian.se4x.robot.game.enums.Technology;
+import static org.junit.Assert.assertEquals;
 
 public abstract class TechnologyBuyerTestBase extends Fixture{
 
@@ -55,39 +58,30 @@ public abstract class TechnologyBuyerTestBase extends Fixture{
     }
 
     protected void assertBuyShipSize(int expectedLevel) {
-        assertBuyOptional(expectedLevel, Technology.SHIP_SIZE, new BuyAction() {
-            @Override
-            protected void buy(AlienPlayer ap) {
-                techBuyer.buyShipSizeIfRolled(ap);
-            }
-        });
+        assertBuyOptional(expectedLevel, new ShipSizeBuyer(game));
     }
 
     protected void assertDontBuyShipSize(int expectedLevel) {
-        assertDontBuyOptional(expectedLevel, Technology.SHIP_SIZE, new BuyAction() {
-            @Override
-            protected void buy(AlienPlayer ap) {
-                techBuyer.buyShipSizeIfRolled(ap);
-            }
-        });
+        assertDontBuyOptional(expectedLevel, new ShipSizeBuyer(game));
     }
 
-    protected void assertBuyOptional(int expectedLevel, Technology technology, BuyAction buyAction) {
-        assertOptionalBuy(technology, expectedLevel, 100 - game.scenario.getCost(technology, expectedLevel), buyAction);
+    protected void assertBuyOptional(int expectedLevel, TechBuyer techBuyer, FleetBuildOption... options) {
+        int expectedRemainingCP= 100 - game.scenario.getCost(techBuyer.getTechnology(), expectedLevel);
+        assertOptionalBuy(expectedLevel, expectedRemainingCP, techBuyer, options);
     }
 
-    protected void assertDontBuyOptional(int expectedLevel, Technology technology, BuyAction buyAction) {
-        assertOptionalBuy(technology, expectedLevel - 1, 100, buyAction);
+    protected void assertDontBuyOptional(int expectedLevel, TechBuyer techBuyer, FleetBuildOption... options) {
+        assertOptionalBuy(expectedLevel - 1, 100, techBuyer, options);
     }
 
-    protected void assertOptionalBuy(Technology technology, int newLevel, int remainingCP, BuyAction buyAction) {
+    protected void assertOptionalBuy(int newLevel, int expectedRemainingCP, TechBuyer techBuyer, FleetBuildOption... options) {
         sheet.setTechCP(100);
-        buyAction.buy(ap);
-        assertLevel(technology, newLevel);
-        assertEquals(remainingCP, sheet.getTechCP());
+        techBuyer.buyTechIfNeeded(fleet, options);
+        assertLevel(techBuyer.getTechnology(), newLevel);
+        assertEquals(expectedRemainingCP, sheet.getTechCP());
     }
 
     protected abstract class BuyAction {
-        protected abstract void buy(AlienPlayer ap);
+        protected abstract void buy();
     }
 }

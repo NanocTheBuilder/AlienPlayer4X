@@ -19,6 +19,9 @@
 
 package com.thilian.se4x.robot.game.scenarios.scenario4;
 
+import com.thilian.se4x.robot.game.buyers.technology.CloakingBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.MineSweeperBuyer;
+import com.thilian.se4x.robot.game.buyers.technology.TacticsBuyer;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 import org.junit.Test;
@@ -121,16 +124,17 @@ public class RemainingTechPurchaseTest extends Scenario4TechnologyBuyerTestBase 
 
     @Test
     public void cantBuyTacticsIfHasNoAttackAndDefense() {
+        TacticsBuyer tacticsBuyer = new TacticsBuyer(game);
         sheet.setTechCP(15);
-        assertEquals(false, techBuyer.canBuyNextLevel(ap, Technology.TACTICS));
+        assertEquals(false, tacticsBuyer.shouldBeAddedToRollTable(ap));
 
         ap.setLevel(ATTACK, 2);
-        assertEquals(false, techBuyer.canBuyNextLevel(ap, Technology.TACTICS));
+        assertEquals(false, tacticsBuyer.shouldBeAddedToRollTable(ap));
 
         ap.setLevel(ATTACK, 1);
         ap.setLevel(Technology.DEFENSE, 0);
         sheet.setTechCP(game.scenario.getCost(DEFENSE, 1));
-        assertEquals(true, techBuyer.canBuyNextLevel(ap, Technology.TACTICS));
+        assertEquals(true, tacticsBuyer.shouldBeAddedToRollTable(ap));
     }
     @Test
     public void buyTactics() {
@@ -151,7 +155,7 @@ public class RemainingTechPurchaseTest extends Scenario4TechnologyBuyerTestBase 
     public void cantBuyCloakingIfSeenScanner2() {
         game.setSeenLevel(Technology.SCANNER, 2);
         sheet.setTechCP(100);
-        assertEquals(false, techBuyer.canBuyNextLevel(ap, Technology.CLOAKING));
+        assertEquals(false, new CloakingBuyer(game).shouldBeAddedToRollTable(ap));
     }
 
     @Test
@@ -189,8 +193,8 @@ public class RemainingTechPurchaseTest extends Scenario4TechnologyBuyerTestBase 
     @Test
     public void dontBuyMineSweepForDefenseFleet() {
         sheet.setTechCP(100);
-        assertEquals(true, techBuyer.canBuyNextLevel(fleet, Technology.MINE_SWEEPER));
-        assertEquals(false, techBuyer.canBuyNextLevel(fleet, Technology.MINE_SWEEPER, HOME_DEFENSE));
+        assertEquals(true, new MineSweeperBuyer(game).shouldBeAddedToRollTable(ap));
+        assertEquals(false, new MineSweeperBuyer(game).shouldBeAddedToRollTable(ap, HOME_DEFENSE));
     }
 
     // TODO THIS IS NEW STUFF
