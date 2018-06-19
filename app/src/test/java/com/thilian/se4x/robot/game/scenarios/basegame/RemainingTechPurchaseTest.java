@@ -28,22 +28,35 @@ import org.junit.Test;
 
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.ATTACK;
+import static com.thilian.se4x.robot.game.enums.Technology.BOARDING;
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
 import static com.thilian.se4x.robot.game.enums.Technology.DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.FIGHTERS;
+import static com.thilian.se4x.robot.game.enums.Technology.GROUND_COMBAT;
+import static com.thilian.se4x.robot.game.enums.Technology.MILITARY_ACADEMY;
 import static com.thilian.se4x.robot.game.enums.Technology.MINE_SWEEPER;
 import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
+import static com.thilian.se4x.robot.game.enums.Technology.SECURITY_FORCES;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static com.thilian.se4x.robot.game.enums.Technology.TACTICS;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class RemainingTechPurchaseTest extends BasegameTechnologyBuyerTestBase {
 
     @Test
-    public void baseTechnologiesOnly(){
+    public void baseTechnologiesOnly() {
+        assertNotAvailable(BOARDING);
+        assertNotAvailable(SECURITY_FORCES);
+        assertNotAvailable(GROUND_COMBAT);
+        assertNotAvailable(MILITARY_ACADEMY);
         assertEquals(6, game.scenario.getMaxLevel(SHIP_SIZE));
         assertEquals(2, game.scenario.getMaxLevel(MINE_SWEEPER));
+    }
+
+    private void assertNotAvailable(Technology technology) {
+        assertFalse(game.scenario.getAvailableTechs().contains(technology));
     }
 
     @Test

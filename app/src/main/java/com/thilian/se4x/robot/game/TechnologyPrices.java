@@ -21,18 +21,15 @@ package com.thilian.se4x.robot.game;
 
 import com.thilian.se4x.robot.game.enums.Technology;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class TechnologyPrices {
-    private Collection<Technology> availableTechs = new ArrayList<>();
     private Map<Technology, int[]> map = new HashMap<>();
 
     protected void init(Technology technology, int... ints) {
         map.put(technology, ints);
-        availableTechs.add(technology);
     }
 
     public int getStartingLevel(Technology technology) {
@@ -48,6 +45,6 @@ public abstract class TechnologyPrices {
     }
 
     public Collection<Technology> getAvailableTechs() {
-        return availableTechs;
+        return map.keySet();
     }
 }
