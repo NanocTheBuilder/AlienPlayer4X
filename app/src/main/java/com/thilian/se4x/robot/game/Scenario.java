@@ -22,10 +22,13 @@ package com.thilian.se4x.robot.game;
 import com.thilian.se4x.robot.game.enums.Difficulty;
 import com.thilian.se4x.robot.game.enums.FleetBuildOption;
 import com.thilian.se4x.robot.game.enums.PlayerColor;
+import com.thilian.se4x.robot.game.enums.ShipType;
 import com.thilian.se4x.robot.game.enums.Technology;
 
 import java.util.Collection;
 import java.util.List;
+
+import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 
 public abstract class Scenario{
 
@@ -56,6 +59,18 @@ public abstract class Scenario{
 
     public Fleet buildHomeDefense(AlienPlayer alienPlayer) {
         return defenseBuilder.buildHomeDefense(alienPlayer);
+    }
+
+    public ShipType findBiggest(Fleet fleet) {
+        return ShipType.findBiggest(fleet.getRemainingCP(), fleet.getAp().getLevel(SHIP_SIZE));
+    }
+
+    public ShipType findCheapest(int hullSize){
+        return  ShipType.findCheapest(hullSize);
+    }
+
+    public List<ShipType> findBiggerTypesInReverse(ShipType cheapestType){
+        return ShipType.getBiggerTypesInReverse(cheapestType);
     }
 
     public boolean canBuyNextLevel(AlienPlayer ap, Technology technology){

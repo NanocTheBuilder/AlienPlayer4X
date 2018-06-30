@@ -19,115 +19,84 @@
 
 package com.thilian.se4x.robot.game;
 
+import com.thilian.se4x.robot.game.buyers.FleetCompositionModifier;
+import com.thilian.se4x.robot.game.buyers.OptionalGroupBuyer;
+import com.thilian.se4x.robot.game.buyers.fleet.ExtraScoutBuyer;
+import com.thilian.se4x.robot.game.buyers.fleet.RemainingFleetBuyer;
+import com.thilian.se4x.robot.game.buyers.fleet.optional.DestroyerBuyer;
+import com.thilian.se4x.robot.game.buyers.fleet.optional.FlagshipBuyer;
+import com.thilian.se4x.robot.game.buyers.fleet.optional.FullCarrierBuyer;
+import com.thilian.se4x.robot.game.buyers.fleet.optional.JPCRaiderFleetBuyer;
+import com.thilian.se4x.robot.game.buyers.fleet.optional.RaiderFleetBuyer;
 import com.thilian.se4x.robot.game.enums.FleetBuildOption;
-import com.thilian.se4x.robot.game.enums.Seeable;
-import com.thilian.se4x.robot.game.enums.ShipType;
-import com.thilian.se4x.robot.game.enums.Technology;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static com.thilian.se4x.robot.game.enums.FleetBuildOption.HOME_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
-import static com.thilian.se4x.robot.game.enums.ShipType.CARRIER;
-import static com.thilian.se4x.robot.game.enums.ShipType.DESTROYER;
-import static com.thilian.se4x.robot.game.enums.ShipType.FIGHTER;
 import static com.thilian.se4x.robot.game.enums.ShipType.RAIDER;
-import static com.thilian.se4x.robot.game.enums.ShipType.SCOUT;
 import static com.thilian.se4x.robot.game.enums.Technology.CLOAKING;
-import static com.thilian.se4x.robot.game.enums.Technology.FIGHTERS;
-import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
-import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 
 public class FleetBuilder extends GroupBuilder {
-    private static int FULL_CV_COST = CARRIER.getCost() + FIGHTER.getCost() * 3;
-
 
     protected Game game;
+    protected List<OptionalGroupBuyer> fleetBuyers;
+    private FleetCompositionModifier fleetCompositionModifier;
+    private ExtraScoutBuyer extraScoutBuyer;
+    RemainingFleetBuyer remainingFleetBuyer;
 
     public FleetBuilder(Game game) {
         this.game = game;
+        fleetBuyers = Arrays.asList(
+                new RaiderFleetBuyer(game),
+                new FullCarrierBuyer(game),
+                new JPCRaiderFleetBuyer(game),
+                new FlagshipBuyer(game),
+                new DestroyerBuyer(game));
+        fleetCompositionModifier = new FleetCompositionModifier(game);
+        extraScoutBuyer = new ExtraScoutBuyer(game);
+        remainingFleetBuyer = new RemainingFleetBuyer(game);
     }
 
     public void buildFleet(Fleet fleet, FleetBuildOption... options) {
-        if (fleet.getFleetType().equals(RAIDER_FLEET)) {
-            buildRaiderFleet(fleet);
-        } else {
-            buyFullCarriers(fleet, options);
-            if (shouldBuildRaiderFleet(fleet, options)) {
-                buildRaiderFleet(fleet);
-            } else {
-                buildFlagship(fleet);
-                buildPossibleDD(fleet);
-                buildRemainderFleet(fleet);
-            }
+        for(OptionalGroupBuyer buyer : fleetBuyers){
+            buyer.buyGroups(fleet, options);
+            if(RAIDER_FLEET.equals(fleet.getFleetType()) && fleet.getGroups().size() != 0)
+                break;
         }
-
+        buildRemainderFleet(fleet);
     }
 
     protected void buildRemainderFleet(Fleet fleet) {
         if (fleet.canBuyMoreShips()) {
-            AlienPlayer ap = fleet.getAp();
             int fleetCompositionRoll = game.roller.roll();
-            boolean canUsePD = ap.getLevel(Technology.POINT_DEFENSE) > 0 && game.isSeenThing(Seeable.FIGHTERS);
-            if (canUsePD){
-                fleetCompositionRoll -= 2;
-                if(fleet.findGroup(CARRIER) == null){
-                    buildGroup(fleet, SCOUT, 2);
-                }
+
+            if(fleetCompositionModifier != null){
+                fleetCompositionRoll += fleetCompositionModifier.getModifier(fleet);
+            }
+
+            if(extraScoutBuyer != null){
+                extraScoutBuyer.buyGroups(fleet, fleetCompositionRoll);
             }
 
             if (fleetCompositionRoll <= 3) {
-                buildBallanced(fleet, 1);
+                remainingFleetBuyer.buyMaxNumberOfShips(fleet);
             } else if (fleetCompositionRoll <= 6) {
-                    if (fleet.canBuyMoreShips())
-                        buildBallanced(fleet,
-                                Math.max(ap.getLevel(Technology.ATTACK), ap.getLevel(Technology.DEFENSE)));
+                remainingFleetBuyer.buyBalancedFleet(fleet);
             } else {
-                while (fleet.canBuyMoreShips()) {
-                    buildGroup(fleet, ShipType.findBiggest(fleet.getRemainingCP(), ap.getLevel(SHIP_SIZE)));
-                }
+                remainingFleetBuyer.buyLargestShipsAvailable(fleet);
             }
         }
     }
 
     protected void buyFullCarriers(Fleet fleet, FleetBuildOption... options) {
-        if (shouldBuildCarrierFleet(fleet, options)) {
-            buildCarrierFleet(fleet);
-        }
-    }
-
-    protected void buildCarrierFleet(Fleet fleet) {
-        int fleetCP = fleet.getFleetCP();
-        int shipsToBuild = fleetCP / FULL_CV_COST;
-        fleet.addGroup(new Group(CARRIER, shipsToBuild));
-        fleet.addGroup(new Group(FIGHTER, shipsToBuild * 3));
-    }
-
-    //TODO: FIND A READABLE ALGORITHM?
-    private void buildBallanced(Fleet fleet, int minHullSize) {
-        int apShipSize = fleet.getAp().getLevel(SHIP_SIZE);
-        for (int i = minHullSize; i >= 0; i--) {
-            ShipType cheapestType = ShipType.findCheapest(i);
-            if (apShipSize >= cheapestType.getRequiredShipSize()) {
-                for (ShipType biggerType : ShipType.getBiggerTypesInReverse(cheapestType)) {
-                    if (apShipSize >= biggerType.getRequiredShipSize() && fleet.getRemainingCP() >= biggerType.getCost()) {
-                        int remainder = fleet.getRemainingCP() % cheapestType.getCost();
-                        int difference = biggerType.getCost() - cheapestType.getCost();
-                        int shipType2ToBuy = remainder / difference;
-                        buildGroup(fleet, biggerType, shipType2ToBuy);
-                    }
-                }
-                buildGroup(fleet, cheapestType);
-            }
-        }
+        new FullCarrierBuyer(game).buyGroups(fleet, options);
     }
 
     protected void buildPossibleDD(Fleet fleet) {
-        if (fleet.getRemainingCP() >= RAIDER.getCost()) {
-            AlienPlayer ap = fleet.getAp();
-            if (DESTROYER.canBeBuilt(fleet.getRemainingCP(), ap.getLevel(SHIP_SIZE))
-                    && game.getSeenLevel(CLOAKING) <= ap.getLevel(SCANNER) && fleet.findGroup(DESTROYER) == null)
-                fleet.addGroup(new Group(DESTROYER, 1));
-        }
+        new DestroyerBuyer(game).buyGroups(fleet);
     }
 
     protected void buildRaiderFleet(Fleet fleet) {
@@ -136,20 +105,7 @@ public class FleetBuilder extends GroupBuilder {
     }
 
     protected void buildFlagship(Fleet fleet) {
-        if (fleet.canBuyMoreShips()) {
-            ShipType shipType = ShipType.findBiggest(fleet.getRemainingCP(), fleet.getAp().getLevel(SHIP_SIZE));
-            fleet.addGroup(new Group(shipType, 1));
-        }
-    }
-
-    protected boolean shouldBuildCarrierFleet(Fleet fleet, FleetBuildOption...options) {
-        if(fleet.getFleetCP() < FULL_CV_COST
-                || fleet.getAp().getLevel(FIGHTERS) == 0
-                || FleetBuildOption.isOption(FleetBuildOption.COMBAT_WITH_NPAS, options)
-                )
-            return false;
-        return game.getSeenLevel(POINT_DEFENSE) == 0 && !game.isSeenThing(Seeable.MINES)
-            || game.roller.roll() < 5;
+        new FlagshipBuyer(game).buyGroups(fleet);
     }
 
     protected boolean shouldBuildRaiderFleet(Fleet fleet, FleetBuildOption... options) {

@@ -19,11 +19,13 @@
 
 package com.thilian.se4x.robot.game;
 
+import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.ShipType;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thilian.se4x.robot.game.enums.FleetType;
-import com.thilian.se4x.robot.game.enums.ShipType;
+import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 
 public class Fleet {
 
@@ -61,7 +63,8 @@ public class Fleet {
     }
 
     public boolean canBuyMoreShips() {
-        return getRemainingCP() >= ShipType.SCOUT.getCost();
+        return RAIDER_FLEET.equals(fleetType) && groups.size() == 0
+                || !RAIDER_FLEET.equals(fleetType) && getRemainingCP() >= ShipType.SCOUT.getCost();
     }
 
     public FleetType getFleetType() {

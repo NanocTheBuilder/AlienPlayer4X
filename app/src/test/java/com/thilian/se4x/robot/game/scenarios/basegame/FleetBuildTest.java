@@ -19,6 +19,18 @@
 
 package com.thilian.se4x.robot.game.scenarios.basegame;
 
+import com.thilian.se4x.robot.game.Fleet;
+import com.thilian.se4x.robot.game.Group;
+import com.thilian.se4x.robot.game.enums.FleetBuildOption;
+import com.thilian.se4x.robot.game.enums.FleetType;
+import com.thilian.se4x.robot.game.enums.Seeable;
+import com.thilian.se4x.robot.game.enums.ShipType;
+import com.thilian.se4x.robot.game.enums.Technology;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+
 import static com.thilian.se4x.robot.game.enums.FleetType.RAIDER_FLEET;
 import static com.thilian.se4x.robot.game.enums.FleetType.REGULAR_FLEET;
 import static com.thilian.se4x.robot.game.enums.ShipType.BATTLECRUISER;
@@ -38,18 +50,6 @@ import static com.thilian.se4x.robot.game.enums.Technology.POINT_DEFENSE;
 import static com.thilian.se4x.robot.game.enums.Technology.SCANNER;
 import static com.thilian.se4x.robot.game.enums.Technology.SHIP_SIZE;
 import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-
-import org.junit.Test;
-
-import com.thilian.se4x.robot.game.Fleet;
-import com.thilian.se4x.robot.game.Group;
-import com.thilian.se4x.robot.game.enums.FleetBuildOption;
-import com.thilian.se4x.robot.game.enums.FleetType;
-import com.thilian.se4x.robot.game.enums.Seeable;
-import com.thilian.se4x.robot.game.enums.ShipType;
-import com.thilian.se4x.robot.game.enums.Technology;
 
 public class FleetBuildTest extends BasegameFixture{
 
@@ -262,7 +262,7 @@ public class FleetBuildTest extends BasegameFixture{
         game.addSeenThing(Seeable.FIGHTERS);
 
         ap.setLevel(SHIP_SIZE, 3);
-        assertBuiltFleet(5, 27, new Group(CRUISER, 1), new Group(SCOUT, 2));
+        assertBuiltFleet(5, 27, new Group(CRUISER, 1), new Group(DESTROYER, 1), new Group(SCOUT, 1));
     }
 
     @Test
